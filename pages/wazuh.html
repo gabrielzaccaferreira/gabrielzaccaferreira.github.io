@@ -4,52 +4,60 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wazuh SIEM/XDR | Gabriel Zacca Ferreira</title>
-
     <link rel="stylesheet" href="../style.css" />
   </head>
 
   <body>
-    <header>
-      <header class="site-header">
-        <nav class="navbar">
-          <a href="../index.html" class="logo"> GZF </a>
+    <header class="site-header">
+      <nav class="navbar">
+        <a href="../index.html" class="logo">GZF</a>
 
-          <div class="nav-links">
-            <a href="../index.html"> Home </a>
-
-            <a href="sobre.html"> Sobre </a>
-
-            <a href="jornada.html"> Jornada </a>
-
-            <a href="../index.html#labs"> Laboratórios </a>
-
-            <a href="../index.html#contato"> Contato </a>
-          </div>
-        </nav>
-      </header>
+        <div class="nav-links">
+          <a href="../index.html">Home</a>
+          <a href="sobre.html">Sobre</a>
+          <a href="jornada.html">Jornada</a>
+          <a href="../index.html#labs">Laboratórios</a>
+          <a href="../index.html#contato">Contato</a>
+        </div>
+      </nav>
     </header>
 
     <main>
       <section class="hero">
-        <p class="eyebrow">🛡️ CASE TÉCNICO</p>
-        <h1>Wazuh SIEM/XDR</h1>
-        <p class="hero-description">
-          Implementação de um laboratório completo de monitoramento e detecção
-          de ameaças utilizando Ubuntu Server, VMware Workstation e Kali Linux,
-          com foco em SIEM, análise de eventos e segurança da informação.
-        </p>
-        <div class="hero-actions">
-          <a href="#arquitetura" class="btn btn-primary"> Ver Arquitetura </a>
+        <div class="hero-content">
+          <p class="eyebrow">🛡️ Case Técnico</p>
 
-          <a
-            href="https://github.com/gabrielzaccaferreira/wazuh-lab"
-            class="btn btn-secondary"
-            target="_blank"
-          >
-            Ver GitHub
-          </a>
+          <h1>Wazuh SIEM/XDR</h1>
+
+          <p class="hero-description">
+            Implementação de um laboratório completo de monitoramento e detecção
+            de ameaças utilizando Ubuntu Server, VMware Workstation e Kali
+            Linux, com foco em SIEM, análise de eventos e segurança da
+            informação.
+          </p>
+          <div class="project-stack">
+            <span>🐧 Linux</span>
+
+            <span>🖥️ VMware</span>
+
+            <span>🛡️ SIEM</span>
+
+            <span>📊 Blue Team</span>
+          </div>
+          <div class="hero-actions">
+            <a href="#arquitetura" class="btn btn-primary">Ver Arquitetura</a>
+
+            <a
+              href="https://github.com/gabrielzaccaferreira/wazuh-lab"
+              class="btn btn-secondary"
+              target="_blank"
+            >
+              Ver GitHub
+            </a>
+          </div>
         </div>
       </section>
+
       <section id="arquitetura" class="section">
         <p class="section-label">Arquitetura</p>
 
@@ -104,62 +112,83 @@
 
         <div class="profile-tags">
           <span>Ubuntu Server</span>
-
           <span>VMware Workstation</span>
-
           <span>Wazuh</span>
-
           <span>Kali Linux</span>
-
           <span>Filebeat</span>
-
           <span>Linux</span>
         </div>
       </section>
+
       <section id="evidencias" class="section">
         <p class="section-label">Evidências</p>
 
         <h2>Resultados obtidos durante a implementação.</h2>
 
-        <figure class="evidence-image">
-          <img
-            src="../assets/images/wazuh/01-wazuh-dashboard-home.png"
-            alt="Dashboard principal do Wazuh"
-          />
-
-          <figcaption>
-            Dashboard principal do laboratório Wazuh SIEM/XDR.
-          </figcaption>
-        </figure>
-
         <p class="section-text">
-          Abaixo serão apresentadas evidências reais do laboratório,
-          demonstrando o funcionamento do ambiente e a integração entre os
-          componentes do Wazuh.
+          Abaixo estão evidências reais do laboratório Wazuh SIEM/XDR,
+          demonstrando a implementação do ambiente, a integração dos componentes
+          e o funcionamento da plataforma de monitoramento.
         </p>
 
-        <div class="cards-grid">
-          <article class="card">
-            <h3>📊 Dashboard</h3>
-            <p>Interface Web do Wazuh operacional.</p>
-          </article>
+        <div class="evidence-grid">
+          <figure class="evidence-image">
+            <img
+              src="../assets/images/wazuh/01-wazuh-dashboard-home.png"
+              alt="Dashboard principal do Wazuh"
+            />
 
-          <article class="card">
-            <h3>🖥️ Serviços</h3>
-            <p>Manager, Indexer e Dashboard em execução.</p>
-          </article>
+            <figcaption>
+              Dashboard principal do laboratório Wazuh SIEM/XDR.
+            </figcaption>
+          </figure>
 
-          <article class="card">
-            <h3>🔗 Agente</h3>
-            <p>Kali Linux registrado e comunicando com o servidor.</p>
-          </article>
+          <figure class="evidence-image">
+            <img
+              src="../assets/images/wazuh/02-wazuh-services-active.png"
+              alt="Serviços do Wazuh em execução"
+            />
 
-          <article class="card">
-            <h3>📜 Eventos</h3>
-            <p>Coleta e visualização de eventos de segurança.</p>
-          </article>
+            <figcaption>
+              Serviços do Wazuh executando corretamente no Ubuntu Server.
+            </figcaption>
+          </figure>
+
+          <figure class="evidence-image">
+            <img
+              src="../assets/images/wazuh/03-wazuh-agent-active.png"
+              alt="Agente Kali Linux ativo no Wazuh"
+            />
+
+            <figcaption>
+              Agente Kali Linux registrado e comunicando com o servidor.
+            </figcaption>
+          </figure>
+
+          <figure class="evidence-image">
+            <img
+              src="../assets/images/wazuh/04-wazuh-security-events.png"
+              alt="Eventos de segurança no Wazuh"
+            />
+
+            <figcaption>
+              Eventos de segurança coletados e apresentados pelo Dashboard.
+            </figcaption>
+          </figure>
+
+          <figure class="evidence-image">
+            <img
+              src="../assets/images/wazuh/05-wazuh-sca.png"
+              alt="Análise SCA no Wazuh"
+            />
+
+            <figcaption>
+              Resultado da análise Security Configuration Assessment (SCA).
+            </figcaption>
+          </figure>
         </div>
       </section>
+
       <section class="section">
         <p class="section-label">Aprendizados</p>
 
@@ -194,6 +223,7 @@
           </div>
         </div>
       </section>
+
       <section class="section">
         <p class="section-label">Desafios</p>
 
@@ -228,6 +258,7 @@
           </div>
         </div>
       </section>
+
       <section class="section">
         <p class="section-label">Conclusão</p>
 
@@ -257,6 +288,10 @@
       </section>
     </main>
 
-    <footer></footer>
+    <footer id="contato" class="footer">
+      <p>
+        © 2026 Gabriel Zacca Ferreira — Portfólio técnico em constante evolução.
+      </p>
+    </footer>
   </body>
 </html>

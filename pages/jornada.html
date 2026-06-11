@@ -1,52 +1,186 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Minha Jornada | Gabriel Zacca Ferreira</title>
 
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style.css" />
+  </head>
 
-</head>
-
-<body>
-
+  <body>
     <header class="site-header">
-     
-        <nav class="navbar">
-     
-            <a href="../index.html" class="logo">
+      <nav class="navbar">
+        <a href="../index.html" class="logo">GZF</a>
 
-              GZF
-
-            </a>
-        
-            <div class="nav-links">
-
-              <a href="../index.html">Home</a>
-              
-              <a href="sobre.html">Sobre</a>
-            
-              <a href="jornada.html">Jornada</a> 
-            
-              <a href="#">Laboratórios</a> 
-
-              <a href="#">Blog</a>
-
-              <a href="#">Projetos</a>
-
-              <a href="#">Contato</a>
-              
-            </div>
-
-        </nav>
-    
+        <div class="nav-links">
+          <a href="../index.html">Home</a>
+          <a href="sobre.html">Sobre</a>
+          <a href="jornada.html">Jornada</a>
+          <a href="../index.html#projetos">Projetos</a>
+          <a href="../index.html#labs">Laboratórios</a>
+          <a href="../index.html#contato">Contato</a>
+        </div>
+      </nav>
     </header>
 
-</body>
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <p class="eyebrow">Minha Jornada</p>
 
+          <h1>
+            Evolução contínua
+            <span>através da prática.</span>
+          </h1>
+
+          <p class="hero-description">
+            Esta página registra minha evolução técnica em Redes,
+            Infraestrutura, Linux, Cloud Computing e Cibersegurança através de
+            estudos, laboratórios e projetos práticos.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#timeline" class="btn btn-primary"> Ver evolução </a>
+
+            <a href="../index.html#projetos" class="btn btn-secondary">
+              Ver projetos
+            </a>
+          </div>
+        </div>
+
+        <aside class="profile-card">
+          <div class="profile-avatar">🚀</div>
+
+          <h2>Objetivo</h2>
+
+          <p>
+            Construir uma carreira sólida em Tecnologia através de aprendizado
+            contínuo, documentação técnica e experiência prática.
+          </p>
+
+          <div class="profile-tags">
+            <span>🌐 Redes</span>
+            <span>🐧 Linux</span>
+            <span>☁️ Cloud</span>
+            <span>🔒 Segurança</span>
+          </div>
+        </aside>
+      </section>
+
+      <section id="timeline" class="section">
+        <p class="section-label">Linha do Tempo</p>
+
+        <h2>Minha evolução técnica.</h2>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <span>📚 Início dos estudos</span>
+
+            <p>
+              Organização da trilha de aprendizado voltada para Redes de
+              Computadores e Infraestrutura.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <span>🖥️ VMware + Kali Linux</span>
+
+            <p>
+              Criação de ambiente virtualizado para desenvolvimento de
+              laboratórios técnicos.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <span>🛡️ Wazuh SIEM/XDR</span>
+
+            <p>
+              Implementação de ambiente completo para monitoramento, análise de
+              eventos e documentação técnica.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <span>🌐 Suricata IDS/IPS</span>
+
+            <p>
+              Estudos de monitoramento de tráfego, detecção de ameaças e regras
+              de segurança.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <span>🔥 CrowdSec</span>
+
+            <p>
+              Implementação de laboratório voltado para análise colaborativa de
+              ameaças e proteção automatizada.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <p class="section-label">Próximos Passos</p>
+
+        <h2>Roadmap de evolução.</h2>
+
+        <div class="cards-grid">
+          <article class="card">
+            <h3>✅ Redes</h3>
+
+            <p>
+              Consolidação dos fundamentos de redes, protocolos e
+              infraestrutura.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>✅ Linux</h3>
+
+            <p>
+              Administração de sistemas, automação e gerenciamento de serviços.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>🔄 Cloud</h3>
+
+            <p>
+              Aprimoramento em ambientes cloud, virtualização e infraestrutura.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>🎯 SOC / Blue Team</h3>
+
+            <p>
+              Especialização em monitoramento, resposta a incidentes e defesa
+              cibernética.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <p class="section-label">Missão</p>
+
+        <h2>Aprender fazendo.</h2>
+
+        <p class="section-text">
+          Acredito que o conhecimento técnico é fortalecido pela prática. Por
+          isso, cada estudo realizado é acompanhado por laboratórios,
+          documentação e projetos publicados neste portfólio.
+        </p>
+      </section>
+    </main>
+
+    <footer id="contato" class="footer">
+      <p>
+        © 2026 Gabriel Zacca Ferreira — Portfólio técnico em constante evolução.
+      </p>
+    </footer>
+  </body>
 </html>
