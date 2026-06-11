@@ -25,6 +25,8 @@ a {
   text-decoration: none;
 }
 
+/* HEADER / NAVBAR */
+
 .site-header {
   position: sticky;
   top: 0;
@@ -60,11 +62,44 @@ a {
   color: #38bdf8;
 }
 
+/* LAYOUT */
+
 main {
   max-width: 1180px;
   margin: 0 auto;
   padding: 0 20px;
 }
+
+.section {
+  padding: 80px 0;
+  border-top: 1px solid #1e293b;
+}
+
+.section h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+}
+
+.section-label,
+.eyebrow {
+  color: #38bdf8;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+}
+
+.section-text,
+.hero-description {
+  color: #94a3b8;
+  font-size: 18px;
+  line-height: 1.8;
+  max-width: 760px;
+}
+
+/* HERO */
 
 .hero {
   min-height: 88vh;
@@ -72,16 +107,6 @@ main {
   grid-template-columns: 1.5fr 0.8fr;
   gap: 40px;
   align-items: center;
-}
-
-.eyebrow,
-.section-label {
-  color: #38bdf8;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 13px;
-  letter-spacing: 1.5px;
-  margin-bottom: 16px;
 }
 
 .hero h1 {
@@ -95,14 +120,6 @@ main {
   color: #38bdf8;
 }
 
-.hero-description,
-.section-text {
-  color: #94a3b8;
-  font-size: 18px;
-  line-height: 1.8;
-  max-width: 760px;
-}
-
 .hero-actions {
   display: flex;
   gap: 16px;
@@ -110,12 +127,18 @@ main {
   flex-wrap: wrap;
 }
 
+/* BUTTONS */
+
 .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 14px 22px;
   border-radius: 999px;
   font-weight: 700;
   border: 1px solid #334155;
   transition: 0.2s ease;
+  line-height: 1.2;
 }
 
 .btn:hover {
@@ -132,6 +155,8 @@ main {
   color: #e5e7eb;
   background: rgba(15, 23, 42, 0.8);
 }
+
+/* PROFILE CARD */
 
 .profile-card {
   background: linear-gradient(
@@ -184,16 +209,7 @@ main {
   background: rgba(2, 6, 23, 0.5);
 }
 
-.section {
-  padding: 80px 0;
-  border-top: 1px solid #1e293b;
-}
-
-.section h2 {
-  font-size: clamp(32px, 4vw, 48px);
-  margin-bottom: 20px;
-  letter-spacing: -1px;
-}
+/* CARDS */
 
 .cards-grid {
   display: grid;
@@ -236,6 +252,61 @@ main {
   );
 }
 
+/* PROJECT CARDS */
+
+#projetos .cards-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+#projetos .card {
+  display: flex;
+  flex-direction: column;
+}
+
+#projetos .card p {
+  flex: 1;
+}
+
+#projetos .card .btn {
+  margin-top: 24px;
+  align-self: flex-start;
+  padding: 10px 18px;
+  font-size: 14px;
+  width: auto;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+/* STATS */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.stat-card {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid #1e293b;
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+}
+
+.stat-card strong {
+  display: block;
+  font-size: 48px;
+  font-weight: 800;
+  color: #38bdf8;
+}
+
+.stat-card span {
+  color: #94a3b8;
+}
+
+/* TIMELINE */
+
 .timeline {
   display: grid;
   gap: 18px;
@@ -261,6 +332,30 @@ main {
   line-height: 1.7;
 }
 
+/* EVIDENCES */
+
+.evidence-image {
+  max-width: 900px;
+  margin: 40px auto;
+}
+
+.evidence-image img {
+  width: 100%;
+  display: block;
+  border-radius: 18px;
+  border: 1px solid #1e293b;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.evidence-image figcaption {
+  margin-top: 12px;
+  color: #94a3b8;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* FOOTER */
+
 .footer {
   text-align: center;
   padding: 36px 20px;
@@ -268,13 +363,17 @@ main {
   color: #64748b;
 }
 
+/* RESPONSIVE */
+
 @media (max-width: 900px) {
   .hero {
     grid-template-columns: 1fr;
     padding: 80px 0;
   }
 
-  .cards-grid {
+  .cards-grid,
+  #projetos .cards-grid,
+  .stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -284,7 +383,9 @@ main {
 }
 
 @media (max-width: 560px) {
-  .cards-grid {
+  .cards-grid,
+  #projetos .cards-grid,
+  .stats-grid {
     grid-template-columns: 1fr;
   }
 
@@ -292,22 +393,12 @@ main {
     letter-spacing: -1px;
   }
 
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+  .btn {
+    width: 100%;
   }
 
-  .stat-card {
-    background: rgba(15, 23, 42, 0.75);
-    border: 1px solid #1e293b;
-    border-radius: 20px;
-    padding: 30px;
-    text-align: center;
-  }
-  .stat-card strong {
-    display: block;
-    font-size: 48px;
-    font-weight: 800;
+  #projetos .card .btn {
+    width: fit-content;
+    white-space: normal;
   }
 }
