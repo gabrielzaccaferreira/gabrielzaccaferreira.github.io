@@ -1,157 +1,199 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gabriel Zacca Ferreira | Portfólio Técnico</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gabriel Zacca Ferreira | Portfólio Técnico</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navbar">
+        <a href="#" class="logo">GZF</a>
 
-  <header class="site-header">
-    <nav class="navbar">
-      <a href="#" class="logo">GZF</a>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="pages/sobre.html">Sobre</a>
+          <a href="pages/jornada.html">Jornada</a>
+          <a href="#labs">Laboratórios</a>
+          <a href="#">Blog</a>
+          <a href="#">Projetos</a>
+          <a href="#contato">Contato</a>
+        </div>
+      </nav>
+    </header>
 
-      <div class="nav-links">
-        <a href="pages/sobre.html">Sobre</a>
-        <a href="#areas">Áreas</a>
-        <a href="#labs">Laboratórios</a>
-        <a href="#jornada">Jornada</a>
-        <a href="#contato">Contato</a>
-      </div>
-    </nav>
-  </header>
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <p class="eyebrow">Redes • Infraestrutura • Cloud • Cibersegurança</p>
 
-  <main>
+          <h1>
+            Gabriel Zacca Ferreira
+            <span>Redes • Infraestrutura • Cloud • Cibersegurança</span>
+          </h1>
 
-    <section class="hero">
-      <div class="hero-content">
-        <p class="eyebrow">Redes • Infraestrutura • Cloud • Cibersegurança</p>
+          <p class="hero-description">
+             Construindo conhecimento através da prática, com laboratórios reais,
+             documentação técnica e projetos voltados para Redes, Linux, Cloud,
+             Segurança da Informação e Blue Team.
+          </p>
 
-        <h1>
-          Construindo minha carreira em tecnologia através de
-          <span>laboratórios reais.</span>
-        </h1>
+          <div class="hero-actions">
+            <a href="#labs" class="btn btn-primary">🚀 Explorar Laboratórios</a>
+            <a href="pages/jornada.html" class="btn btn-secondary">👨‍💻 Conhecer Minha Jornada</a>
+          </div>
 
-        <p class="hero-description">
-          Este portfólio documenta minha evolução em Redes de Computadores,
-          Linux, Cloud Computing, Segurança da Informação e Blue Team, com foco
-          em prática, documentação técnica e aprendizado contínuo.
+        <aside class="profile-card">
+          <div class="profile-avatar">GZF</div>
+          <h2>Gabriel Zacca Ferreira</h2>
+          <p>
+            Construindo uma carreira em Redes, Infraestrutura,
+            Cloud Computing e Cibersegurança através de projetos
+            práticos e documentação técnica.
+          </p>
+
+          <div class="profile-tags">
+            
+            <span>🌐 Redes</span>
+
+            <span>🐧 Linux</span>
+
+            <span>☁️ Cloud</span>
+
+            <span>🔒 Cybersecurity</span>
+
+            <span>🖥️ Infraestrutura</span>
+          
+          </div>
+        
+        </aside>
+      
+      </section>
+
+      <section id="sobre" class="section">
+        <p class="section-label">Sobre</p>
+        <h2>Uma jornada prática em tecnologia.</h2>
+        <p class="section-text">
+          Estou construindo minha trajetória profissional em TI com foco em
+          Redes, Infraestrutura, Cloud Computing e Cibersegurança. Meu objetivo
+          é aprender através da prática, documentar cada laboratório e
+          transformar meus estudos em um portfólio técnico público e organizado.
         </p>
+      </section>
 
-        <div class="hero-actions">
-          <a href="#labs" class="btn btn-primary">Ver laboratórios</a>
-          <a href="#jornada" class="btn btn-secondary">Minha jornada</a>
+      <section id="areas" class="section">
+        <p class="section-label">Áreas de estudo</p>
+        <h2>Principais frentes de aprendizado.</h2>
+
+        <div class="cards-grid">
+          <article class="card">
+            <h3>🌐 Redes</h3>
+            <p>
+              TCP/IP, DNS, DHCP, VLANs, roteamento, switching e troubleshooting.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>🐧 Linux</h3>
+            <p>
+              Administração Linux, terminal, permissões, serviços, logs e
+              automação.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>🔒 Segurança</h3>
+            <p>
+              Blue Team, hardening, SIEM, IDS/IPS, análise de logs e
+              monitoramento.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>☁️ Cloud</h3>
+            <p>
+              Fundamentos de computação em nuvem, infraestrutura e serviços
+              cloud.
+            </p>
+          </article>
         </div>
-      </div>
+      </section>
 
-      <aside class="profile-card">
-        <div class="profile-avatar">GZF</div>
-        <h2>Gabriel Zacca Ferreira</h2>
-        <p>Estudante de Redes de Computadores</p>
+      <section id="labs" class="section">
+        <p class="section-label">Laboratórios</p>
+        <h2>Projetos práticos em construção.</h2>
 
-        <div class="profile-tags">
-          <span>Linux</span>
-          <span>VMware</span>
-          <span>SIEM</span>
-          <span>IDS/IPS</span>
-          <span>Cloud</span>
+        <div class="cards-grid">
+          <article class="card highlight">
+            <h3>Kali Linux no VMware</h3>
+            <p>
+              Ambiente de estudos para Linux, redes, segurança e testes
+              controlados.
+            </p>
+          </article>
+
+          <article class="card highlight">
+            <h3>Wazuh SIEM/XDR</h3>
+            <p>
+              Laboratório com Wazuh Manager, Dashboard, Indexer, Filebeat e
+              agente Linux.
+            </p>
+          </article>
+
+          <article class="card highlight">
+            <h3>Suricata IDS/IPS</h3>
+            <p>
+              Monitoramento de tráfego, regras de detecção e análise de eventos.
+            </p>
+          </article>
+
+          <article class="card highlight">
+            <h3>CrowdSec</h3>
+            <p>
+              Detecção colaborativa de ameaças e proteção contra ataques
+              automatizados.
+            </p>
+          </article>
         </div>
-      </aside>
-    </section>
+      </section>
 
-    <section id="sobre" class="section">
-      <p class="section-label">Sobre</p>
-      <h2>Uma jornada prática em tecnologia.</h2>
-      <p class="section-text">
-        Estou construindo minha trajetória profissional em TI com foco em Redes,
-        Infraestrutura, Cloud Computing e Cibersegurança. Meu objetivo é aprender
-        através da prática, documentar cada laboratório e transformar meus estudos
-        em um portfólio técnico público e organizado.
+      <section id="jornada" class="section">
+        <p class="section-label">Jornada</p>
+        <h2>Minha evolução técnica.</h2>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <span>2026</span>
+            <p>
+              Organização profissional dos estudos em Redes, Linux, Cloud e
+              Segurança.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <span>VMware + Kali Linux</span>
+            <p>
+              Criação de ambiente virtualizado para prática de laboratórios
+              técnicos.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <span>Wazuh SIEM/XDR</span>
+            <p>
+              Implementação de laboratório de monitoramento, agentes e análise
+              de eventos.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contato" class="footer">
+      <p>
+        © 2026 Gabriel Zacca Ferreira — Portfólio técnico em constante evolução.
       </p>
-    </section>
-
-    <section id="areas" class="section">
-      <p class="section-label">Áreas de estudo</p>
-      <h2>Principais frentes de aprendizado.</h2>
-
-      <div class="cards-grid">
-        <article class="card">
-          <h3>🌐 Redes</h3>
-          <p>TCP/IP, DNS, DHCP, VLANs, roteamento, switching e troubleshooting.</p>
-        </article>
-
-        <article class="card">
-          <h3>🐧 Linux</h3>
-          <p>Administração Linux, terminal, permissões, serviços, logs e automação.</p>
-        </article>
-
-        <article class="card">
-          <h3>🔒 Segurança</h3>
-          <p>Blue Team, hardening, SIEM, IDS/IPS, análise de logs e monitoramento.</p>
-        </article>
-
-        <article class="card">
-          <h3>☁️ Cloud</h3>
-          <p>Fundamentos de computação em nuvem, infraestrutura e serviços cloud.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="labs" class="section">
-      <p class="section-label">Laboratórios</p>
-      <h2>Projetos práticos em construção.</h2>
-
-      <div class="cards-grid">
-        <article class="card highlight">
-          <h3>Kali Linux no VMware</h3>
-          <p>Ambiente de estudos para Linux, redes, segurança e testes controlados.</p>
-        </article>
-
-        <article class="card highlight">
-          <h3>Wazuh SIEM/XDR</h3>
-          <p>Laboratório com Wazuh Manager, Dashboard, Indexer, Filebeat e agente Linux.</p>
-        </article>
-
-        <article class="card highlight">
-          <h3>Suricata IDS/IPS</h3>
-          <p>Monitoramento de tráfego, regras de detecção e análise de eventos.</p>
-        </article>
-
-        <article class="card highlight">
-          <h3>CrowdSec</h3>
-          <p>Detecção colaborativa de ameaças e proteção contra ataques automatizados.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="jornada" class="section">
-      <p class="section-label">Jornada</p>
-      <h2>Minha evolução técnica.</h2>
-
-      <div class="timeline">
-        <div class="timeline-item">
-          <span>2026</span>
-          <p>Organização profissional dos estudos em Redes, Linux, Cloud e Segurança.</p>
-        </div>
-
-        <div class="timeline-item">
-          <span>VMware + Kali Linux</span>
-          <p>Criação de ambiente virtualizado para prática de laboratórios técnicos.</p>
-        </div>
-
-        <div class="timeline-item">
-          <span>Wazuh SIEM/XDR</span>
-          <p>Implementação de laboratório de monitoramento, agentes e análise de eventos.</p>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer id="contato" class="footer">
-    <p>© 2026 Gabriel Zacca Ferreira — Portfólio técnico em constante evolução.</p>
-  </footer>
-
-</body>
+    </footer>
+  </body>
 </html>
