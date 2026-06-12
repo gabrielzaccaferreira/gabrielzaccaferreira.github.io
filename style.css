@@ -606,6 +606,35 @@ main {
 }
 
 /* =========================
+   ROADMAP PREMIUM
+========================= */
+
+.roadmap-premium {
+  position: relative;
+}
+
+.roadmap-premium .timeline {
+  max-width: 900px;
+}
+
+.roadmap-premium .timeline-item {
+  position: relative;
+  border-left-color: #38bdf8;
+}
+
+.roadmap-premium .timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -9px;
+  top: 28px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 0 6px rgba(56, 189, 248, 0.12);
+}
+
+/* =========================
    STATS
 ========================= */
 
