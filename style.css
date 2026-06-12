@@ -635,6 +635,43 @@ main {
 }
 
 /* =========================
+   CERTIFICATIONS PREMIUM
+========================= */
+
+.certifications-premium .cards-grid {
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 40px;
+}
+
+.certifications-premium .card {
+  min-height: 240px;
+  position: relative;
+  overflow: hidden;
+}
+
+.certifications-premium .card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top right,
+    rgba(56, 189, 248, 0.1),
+    transparent 55%
+  );
+  opacity: 0;
+  transition: 0.3s ease;
+}
+
+.certifications-premium .card:hover::before {
+  opacity: 1;
+}
+
+.certifications-premium h3 {
+  font-size: 26px;
+}
+
+
+/* =========================
    STATS
 ========================= */
 
@@ -777,25 +814,53 @@ main {
   color: #38bdf8;
   font-size: 22px;
 }
+/* =========================
+   CTA PREMIUM
+========================= */
 
+.cta-premium {
+  text-align: center;
+  position: relative;
+}
+
+.cta-premium h2 {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-premium .section-text {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-premium .hero-actions {
+  justify-content: center;
+}
 /* =========================
    FOOTER
 ========================= */
 
 .footer {
   text-align: center;
-  padding: 48px 20px;
+  padding: 64px 20px;
   border-top: 1px solid #1e293b;
   color: #64748b;
-  background: rgba(2, 6, 23, 0.45);
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(56, 189, 248, 0.08),
+      transparent 45%
+    ),
+    rgba(2, 6, 23, 0.55);
   backdrop-filter: blur(8px);
 }
 
 .footer-title {
   color: #e5e7eb;
   font-weight: 800;
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-size: 24px;
+  margin-bottom: 12px;
 }
 
 .footer p {
@@ -805,25 +870,33 @@ main {
 .footer-links {
   display: flex;
   justify-content: center;
-  gap: 18px;
+  gap: 14px;
   flex-wrap: wrap;
-  margin: 22px 0;
+  margin: 28px 0;
 }
 
 .footer-links a {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: #cbd5e1;
   font-weight: 700;
+  padding: 10px 16px;
+  border: 1px solid #334155;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.55);
   transition: 0.25s ease;
 }
 
 .footer-links a:hover {
   color: #38bdf8;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  border-color: #38bdf8;
 }
 
 .footer-copy {
   font-size: 14px;
+  color: #64748b;
 }
 
 /* =========================
