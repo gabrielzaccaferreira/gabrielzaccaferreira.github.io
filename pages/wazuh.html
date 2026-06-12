@@ -3,7 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Wazuh SIEM/XDR | Gabriel Zacca Ferreira</title>
+
+    <meta
+      name="description"
+      content="Case técnico do laboratório Wazuh SIEM/XDR implementado com Ubuntu Server, Kali Linux e VMware Workstation, com foco em monitoramento, análise de eventos e Blue Team."
+    />
+
+    <meta name="author" content="Gabriel Zacca Ferreira" />
+
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
     <link rel="stylesheet" href="../style.css" />
   </head>
 
@@ -15,12 +25,21 @@
         <div class="nav-links">
           <a href="../index.html">Home</a>
           <a href="sobre.html">Sobre</a>
-          <a href="jornada.html">Jornada</a>
-          <a href="roadmap.html">Roadmap</a>
-          <a href="blog.html">Blog</a>
           <a href="projetos.html">Projetos</a>
-          <a href="../index.html#labs">Laboratórios</a>
-          <a href="../index.html#contato">Contato</a>
+          <a href="blog.html">Blog</a>
+          <a href="roadmap.html">Roadmap</a>
+        </div>
+
+        <div class="nav-actions">
+          <a href="https://github.com/gabrielzaccaferreira" target="_blank">
+            GitHub
+          </a>
+
+          <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank">
+            LinkedIn
+          </a>
+
+          <a href="#" target="_blank" class="nav-cv">Currículo</a>
         </div>
       </nav>
     </header>
@@ -30,25 +49,30 @@
         <div class="hero-content">
           <p class="eyebrow">🛡️ Case Técnico</p>
 
-          <h1>Wazuh SIEM/XDR</h1>
+          <h1>
+            Wazuh
+            <span>SIEM/XDR</span>
+          </h1>
 
           <p class="hero-description">
             Implementação de um laboratório completo de monitoramento e detecção
             de ameaças utilizando Ubuntu Server, VMware Workstation e Kali
-            Linux, com foco em SIEM, análise de eventos e segurança da
-            informação.
+            Linux, com foco em SIEM, análise de eventos, Blue Team e segurança
+            da informação.
           </p>
+
           <div class="project-stack">
             <span>🐧 Linux</span>
-
             <span>🖥️ VMware</span>
-
             <span>🛡️ SIEM</span>
-
             <span>📊 Blue Team</span>
+            <span>🔍 Monitoramento</span>
           </div>
+
           <div class="hero-actions">
-            <a href="#arquitetura" class="btn btn-primary">Ver Arquitetura</a>
+            <a href="#arquitetura" class="btn btn-primary">
+              Ver Arquitetura
+            </a>
 
             <a
               href="https://github.com/gabrielzaccaferreira/wazuh-lab"
@@ -59,13 +83,16 @@
             </a>
           </div>
         </div>
+
         <aside class="architecture-card">
           <p class="section-label">Topologia</p>
 
           <h2>Fluxo do laboratório</h2>
 
           <div class="architecture-flow">
-            <span>🖥️ Host Dell</span>
+            <span>🖥️ Dell OptiPlex</span>
+            <strong>↓</strong>
+            <span>🪟 Windows 11</span>
             <strong>↓</strong>
             <span>⚙️ VMware Workstation</span>
             <strong>↓</strong>
@@ -73,7 +100,7 @@
             <strong>↓</strong>
             <span>🛡️ Wazuh SIEM/XDR</span>
             <strong>↕</strong>
-            <span>💻 Kali Agent</span>
+            <span>💻 Kali Linux Agent</span>
           </div>
         </aside>
       </section>
@@ -81,7 +108,7 @@
       <section id="arquitetura" class="section">
         <p class="section-label">Arquitetura</p>
 
-        <h2>Ambiente do laboratório</h2>
+        <h2>Ambiente do laboratório.</h2>
 
         <p class="section-text">
           O laboratório foi implementado em ambiente virtualizado utilizando
@@ -94,16 +121,16 @@
           <article class="card">
             <h3>🖥️ Host</h3>
             <p>
-              Dell OptiPlex com Windows 11, utilizado como base para
-              virtualização.
+              Dell OptiPlex com Windows 11, Intel Core i7-10700T, 32 GB de RAM e NVME 1TB
+              utilizado como base para virtualização.
             </p>
           </article>
 
           <article class="card">
             <h3>⚙️ Hypervisor</h3>
             <p>
-              VMware Workstation para criação e gerenciamento das máquinas
-              virtuais.
+              VMware Workstation utilizado para criação, isolamento e
+              gerenciamento das máquinas virtuais do laboratório.
             </p>
           </article>
 
@@ -118,8 +145,8 @@
           <article class="card">
             <h3>💻 Kali Linux</h3>
             <p>
-              Endpoint monitorado com agente Wazuh instalado e integrado ao
-              servidor.
+              Endpoint monitorado com agente Wazuh instalado, registrado e
+              integrado ao servidor.
             </p>
           </article>
         </div>
@@ -133,7 +160,9 @@
         <div class="profile-tags">
           <span>Ubuntu Server</span>
           <span>VMware Workstation</span>
-          <span>Wazuh</span>
+          <span>Wazuh Manager</span>
+          <span>Wazuh Dashboard</span>
+          <span>Wazuh Indexer</span>
           <span>Kali Linux</span>
           <span>Filebeat</span>
           <span>Linux</span>
@@ -151,11 +180,20 @@
           e o funcionamento da plataforma de monitoramento.
         </p>
 
+        <div class="profile-tags">
+          <span>✅ Dashboard ativo</span>
+          <span>✅ Serviços em execução</span>
+          <span>✅ Agente integrado</span>
+          <span>✅ Eventos coletados</span>
+          <span>✅ Análise SCA validada</span>
+        </div>
+
         <div class="evidence-grid">
           <figure class="evidence-image">
             <img
               src="../assets/images/wazuh/01-wazuh-dashboard-home.png"
               alt="Dashboard principal do Wazuh"
+              loading="lazy"
             />
 
             <figcaption>
@@ -167,6 +205,7 @@
             <img
               src="../assets/images/wazuh/02-wazuh-services-active.png"
               alt="Serviços do Wazuh em execução"
+              loading="lazy"
             />
 
             <figcaption>
@@ -178,6 +217,7 @@
             <img
               src="../assets/images/wazuh/03-wazuh-agent-active.png"
               alt="Agente Kali Linux ativo no Wazuh"
+              loading="lazy"
             />
 
             <figcaption>
@@ -189,6 +229,7 @@
             <img
               src="../assets/images/wazuh/04-wazuh-security-events.png"
               alt="Eventos de segurança no Wazuh"
+              loading="lazy"
             />
 
             <figcaption>
@@ -200,10 +241,11 @@
             <img
               src="../assets/images/wazuh/05-wazuh-sca.png"
               alt="Análise SCA no Wazuh"
+              loading="lazy"
             />
 
             <figcaption>
-              Resultado da análise Security Configuration Assessment (SCA).
+              Resultado da análise Security Configuration Assessment.
             </figcaption>
           </figure>
         </div>
@@ -217,16 +259,14 @@
         <div class="timeline">
           <div class="timeline-item">
             <span>SIEM</span>
-
             <p>
-              Compreensão do funcionamento de uma plataforma de monitoramento e
-              correlação de eventos.
+              Compreensão do funcionamento de uma plataforma de monitoramento,
+              correlação e análise de eventos.
             </p>
           </div>
 
           <div class="timeline-item">
             <span>Virtualização</span>
-
             <p>
               Implementação de ambientes utilizando VMware Workstation com
               múltiplas máquinas virtuais.
@@ -235,10 +275,25 @@
 
           <div class="timeline-item">
             <span>Linux</span>
-
             <p>
               Administração de serviços, configuração, troubleshooting e
               integração entre sistemas.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <span>Monitoramento</span>
+            <p>
+              Validação de agentes, coleta de eventos, análise de alertas e
+              acompanhamento do ambiente pelo Dashboard.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <span>Blue Team</span>
+            <p>
+              Entendimento prático de conceitos aplicados à defesa, visibilidade
+              de endpoints e análise de segurança.
             </p>
           </div>
         </div>
@@ -252,16 +307,14 @@
         <div class="timeline">
           <div class="timeline-item">
             <span>⚠️ Dashboard</span>
-
             <p>
               Diagnóstico e validação dos serviços do Wazuh até a
-              disponibilização correta da interface.
+              disponibilização correta da interface web.
             </p>
           </div>
 
           <div class="timeline-item">
             <span>⚠️ Comunicação do agente</span>
-
             <p>
               Ajustes na configuração e validação da conexão entre servidor e
               endpoint monitorado.
@@ -270,10 +323,17 @@
 
           <div class="timeline-item">
             <span>⚠️ Acesso remoto</span>
-
             <p>
               Configuração do XRDP e ambiente gráfico para administração remota
               do Kali Linux.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <span>⚠️ Troubleshooting</span>
+            <p>
+              Verificação de serviços, conectividade, status dos agentes e
+              validação dos componentes do ambiente.
             </p>
           </div>
         </div>
@@ -286,10 +346,14 @@
 
         <p class="section-text">
           Este laboratório consolidou conhecimentos práticos em SIEM, Linux,
-          virtualização, agentes de monitoramento, análise de eventos e
-          documentação técnica. O projeto representa uma etapa importante na
-          construção do meu portfólio voltado para Redes, Infraestrutura e
-          Cibersegurança.
+          virtualização, agentes de monitoramento, análise de eventos,
+          troubleshooting e documentação técnica.
+        </p>
+
+        <p class="section-text">
+          O projeto demonstra minha capacidade de implementar, documentar e
+          validar um ambiente real de monitoramento utilizando tecnologias
+          amplamente empregadas em operações de Segurança da Informação.
         </p>
 
         <div class="hero-actions">
@@ -301,8 +365,8 @@
             Ver repositório no GitHub
           </a>
 
-          <a href="../index.html" class="btn btn-secondary">
-            Voltar para Home
+          <a href="projetos.html" class="btn btn-secondary">
+            Voltar para Projetos
           </a>
         </div>
       </section>
@@ -317,18 +381,22 @@
       </p>
 
       <div class="footer-links">
-        <a href="https://github.com/gabrielzaccaferreira" target="_blank"
-          >GitHub</a
-        >
-        <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank">
-          LinkedIn
+        <a href="https://github.com/gabrielzaccaferreira" target="_blank">
+          🚀 GitHub
         </a>
-        <a href="mailto:gabrielzaccaferreira@gmail.com">E-mail</a>
-        <a href="#" target="_blank">Currículo</a>
+
+        <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank">
+          💼 LinkedIn
+        </a>
+
+        <a href="mailto:gabrielzaccaferreira@gmail.com">✉ E-mail</a>
+
+        <a href="#">📄 Currículo</a>
       </div>
 
       <p class="footer-copy">
-        © 2026 — Construído com HTML, CSS, GitHub Pages e prática contínua.
+        © 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub
+        Pages.
       </p>
     </footer>
   </body>

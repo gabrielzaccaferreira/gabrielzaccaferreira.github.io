@@ -1,0 +1,16 @@
+{
+  "name": "Gabriel Zacca Ferreira | Portfólio Técnico",
+  "short_name": "GZF Portfolio",
+  "description": "Portfólio técnico em Redes, Infraestrutura, Cloud Computing e Cibersegurança.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#38bdf8",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml"
+    }
+  ]
+}
