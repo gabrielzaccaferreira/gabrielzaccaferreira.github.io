@@ -126,7 +126,24 @@ main {
   margin-top: 34px;
   flex-wrap: wrap;
 }
+.hero-socials {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 26px;
+}
 
+.hero-socials a {
+  color: #94a3b8;
+  font-size: 14px;
+  font-weight: 700;
+  transition: 0.25s ease;
+}
+
+.hero-socials a:hover {
+  color: #38bdf8;
+  transform: translateY(-2px);
+}
 /* BUTTONS */
 
 .btn {
@@ -224,10 +241,8 @@ main {
   border-radius: 22px;
   padding: 24px;
   min-height: 260px;
-
   display: flex;
   flex-direction: column;
-
   transition: 0.2s ease;
 }
 
@@ -263,15 +278,6 @@ main {
   grid-template-columns: repeat(3, 1fr);
 }
 
-#projetos .card {
-  display: flex;
-  flex-direction: column;
-}
-
-#projetos .card p {
-  flex: 1;
-}
-
 #projetos .card .btn {
   margin-top: 24px;
   align-self: flex-start;
@@ -288,7 +294,6 @@ main {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-
   margin-top: 18px;
   margin-bottom: 18px;
 }
@@ -403,7 +408,7 @@ main {
   line-height: 1.7;
 }
 
-/* EVIDÊNCIAS */
+/* EVIDENCES */
 
 .evidence-grid {
   display: grid;
@@ -437,18 +442,7 @@ main {
   text-align: center;
 }
 
-/* FOOTER */
-
-.footer {
-  text-align: center;
-  padding: 36px 20px;
-  border-top: 1px solid #1e293b;
-  color: #64748b;
-}
-
-/* =========================
-   HERO - TOPOLOGIA WAZUH
-========================= */
+/* WAZUH ARCHITECTURE HERO */
 
 .architecture-card {
   background: rgba(15, 23, 42, 0.75);
@@ -457,6 +451,7 @@ main {
   padding: 28px;
   height: fit-content;
   max-width: 380px;
+  justify-self: end;
 }
 
 .architecture-card h2 {
@@ -480,7 +475,7 @@ main {
   background: rgba(2, 6, 23, 0.45);
   border: 1px solid #334155;
   font-weight: 700;
-  transition: 0.25s;
+  transition: 0.25s ease;
 }
 
 .architecture-flow span:hover {
@@ -489,12 +484,68 @@ main {
   box-shadow: 0 10px 25px rgba(56, 189, 248, 0.15);
 }
 
+.architecture-flow strong {
+  color: #38bdf8;
+  font-size: 22px;
+}
+
+/* FOOTER */
+
+.footer {
+  text-align: center;
+  padding: 48px 20px;
+  border-top: 1px solid #1e293b;
+  color: #64748b;
+  background: rgba(2, 6, 23, 0.45);
+  backdrop-filter: blur(8px);
+}
+
+.footer-title {
+  color: #e5e7eb;
+  font-weight: 800;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.footer p {
+  line-height: 1.8;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin: 22px 0;
+}
+
+.footer-links a {
+  display: inline-flex;
+  color: #cbd5e1;
+  font-weight: 700;
+  transition: 0.25s ease;
+}
+
+.footer-links a:hover {
+  color: #38bdf8;
+  transform: translateY(-2px);
+}
+
+.footer-copy {
+  font-size: 14px;
+}
+
 /* RESPONSIVE */
 
 @media (max-width: 900px) {
   .hero {
     grid-template-columns: 1fr;
     padding: 80px 0;
+  }
+
+  .architecture-card {
+    justify-self: stretch;
+    max-width: none;
   }
 
   .featured-project {
