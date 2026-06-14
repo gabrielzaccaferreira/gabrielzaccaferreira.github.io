@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CrowdSec | Gabriel Zacca Ferreira</title>
+    <meta name="description" content="Laboratório CrowdSec: instalação, configuração, monitoramento de logs SSH, detecção de brute force e análise de métricas e alertas no Kali Linux." />
+    <meta name="author" content="Gabriel Zacca Ferreira" />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="CrowdSec | Gabriel Zacca Ferreira" />
+    <meta property="og:description" content="Monitoramento de logs SSH, detecção de brute force e análise de alertas com CrowdSec no Kali Linux." />
+    <meta property="og:url" content="https://gabrielzaccaferreira.github.io/pages/crowdsec.html" />
+    <meta property="og:image" content="https://gabrielzaccaferreira.github.io/assets/images/og-image.png" />
+    <link rel="canonical" href="https://gabrielzaccaferreira.github.io/pages/crowdsec.html" />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navbar" aria-label="Navegação principal">
+        <a href="../index.html" class="logo">GZF</a>
+        <div class="nav-links">
+          <a href="../index.html">Home</a>
+          <a href="sobre.html">Sobre</a>
+          <a href="projetos.html">Projetos</a>
+          <a href="blog.html">Blog</a>
+          <a href="roadmap.html">Roadmap</a>
+        </div>
+        <div class="nav-actions">
+          <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer" class="nav-cv">Currículo</a>
+        </div>
+      </nav>
+      <div class="labs-bar">
+        <div class="labs-bar-inner">
+          <span class="labs-bar-label">Labs</span>
+          <a href="wazuh.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-shield-halved"></i> Wazuh SIEM/XDR</a>
+          <a href="kali-linux.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-brands fa-linux"></i> Kali Linux</a>
+          <a href="suricata.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-network-wired"></i> Suricata IDS/IPS</a>
+          <a href="crowdsec.html" class="labs-bar-link active"><span class="lab-dot"></span><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- HERO -->
+      <section id="hero" class="hero">
+        <div class="hero-content">
+          <p class="eyebrow">Segurança Colaborativa • Brute Force Detection • Blue Team • SSH</p>
+          <h1>
+            CrowdSec
+            <span>Detecção de ameaças baseada em comportamento</span>
+          </h1>
+          <p class="hero-description">
+            Implementação do CrowdSec no Kali Linux com foco em monitoramento de logs SSH,
+            detecção de tentativas de brute force, análise de métricas e alertas —
+            compreendendo na prática o funcionamento de collections, parsers e scenarios.
+          </p>
+          <div class="hero-actions">
+            <a href="#sobre" class="btn btn-primary">Ver o laboratório →</a>
+            <a href="https://github.com/gabrielzaccaferreira/soc-lab-crowdsec-kali" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+              <i class="fa-brands fa-github"></i> Ver no GitHub
+            </a>
+          </div>
+        </div>
+
+        <div class="architecture-card">
+          <p class="section-label">Topologia</p>
+          <h2>Fluxo do laboratório</h2>
+          <div class="architecture-flow">
+            <span>Kali Linux — OpenSSH</span>
+            <strong>↓</strong>
+            <span>journalctl — ssh.service</span>
+            <strong>↓</strong>
+            <span>CrowdSec Acquisition</span>
+            <strong>↓</strong>
+            <span>Parsers → Scenarios</span>
+            <strong>↓</strong>
+            <span>Alertas + Métricas</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ÍNDICE -->
+      <section id="indice" class="section">
+        <p class="section-label">Índice</p>
+        <h2>Navegue pelo conteúdo desta documentação.</h2>
+        <div class="profile-tags">
+          <a href="#sobre"><span>Sobre</span></a>
+          <a href="#especificacoes"><span>Especificações</span></a>
+          <a href="#como-funciona"><span>Como funciona</span></a>
+          <a href="#implementacao"><span>Implementação</span></a>
+          <a href="#configuracao"><span>Configuração</span></a>
+          <a href="#competencias"><span>Competências</span></a>
+          <a href="#resultados"><span>Resultados</span></a>
+          <a href="#evidencias"><span>Evidências</span></a>
+          <a href="#conclusao"><span>Conclusão</span></a>
+        </div>
+      </section>
+
+      <!-- SOBRE -->
+      <section id="sobre" class="section">
+        <p class="section-label">Sobre o laboratório</p>
+        <h2>O que é o CrowdSec e por que ele está no laboratório.</h2>
+        <p class="section-text">
+          O CrowdSec é uma solução open source de segurança colaborativa que monitora logs,
+          detecta comportamentos maliciosos e compartilha inteligência de ameaças com a comunidade.
+          Diferente de um IDS tradicional que analisa tráfego de rede, o CrowdSec analisa
+          <strong style="color:var(--text-light);">logs de aplicações</strong> — SSH, Nginx, Apache,
+          sistemas operacionais — e identifica padrões de ataque.
+        </p>
+        <p class="section-text">
+          Neste laboratório, o foco foi no monitoramento de logs SSH para detecção de tentativas
+          de brute force — um dos ataques mais comuns em ambientes Linux expostos. O ambiente foi
+          configurado no Kali Linux com aquisição via journalctl, collections e scenarios SSH ativos
+          e análise das métricas e alertas gerados.
+        </p>
+      </section>
+
+      <!-- ESPECIFICAÇÕES -->
+      <section id="especificacoes" class="section">
+        <p class="section-label">Especificações</p>
+        <h2>Ambiente técnico do laboratório.</h2>
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title"><i class="fa-brands fa-linux card-icon"></i> Sistema base</h3>
+            <p>CrowdSec instalado no Kali Linux rodando como VM no VMware Workstation, mesmo ambiente base dos outros laboratórios do portfólio.</p>
+            <div class="project-stack">
+              <span>Kali Linux</span>
+              <span>VMware Workstation</span>
+              <span>i7-10700T</span>
+              <span>16 GB RAM</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-fire-flame-curved card-icon"></i> CrowdSec</h3>
+            <p>Motor de detecção instalado e configurado para monitorar o serviço SSH via journalctl, com collections e scenarios para detecção de brute force.</p>
+            <div class="project-stack">
+              <span>CrowdSec</span>
+              <span>crowdsec-ssh-bf</span>
+              <span>Collections</span>
+              <span>Scenarios</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-terminal card-icon"></i> OpenSSH</h3>
+            <p>Servidor SSH monitorado como alvo de análise. Logs do serviço coletados via journalctl e processados pelo CrowdSec para identificação de tentativas de acesso.</p>
+            <div class="project-stack">
+              <span>OpenSSH</span>
+              <span>journalctl</span>
+              <span>ssh.service</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-brands fa-github card-icon"></i> Repositório</h3>
+            <p>Laboratório documentado no GitHub com estrutura profissional: configs, notes, screenshots e README completo com evidências do ambiente.</p>
+            <div class="project-stack">
+              <span>Git</span>
+              <span>GitHub</span>
+              <span>soc-lab-crowdsec-kali</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- COMO FUNCIONA -->
+      <section id="como-funciona" class="section">
+        <p class="section-label">Como funciona</p>
+        <h2>A arquitetura do CrowdSec na prática.</h2>
+        <p class="section-text">
+          O CrowdSec tem uma arquitetura modular composta por quatro componentes principais
+          que trabalham em sequência — desde a leitura dos logs até a geração de alertas
+          e tomada de decisão.
+        </p>
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-file-lines card-icon"></i> Acquisition</h3>
+            <p>Define quais fontes de log o CrowdSec vai monitorar. Neste laboratório, configurado para ler o serviço SSH via journalctl — capturando todos os eventos de autenticação.</p>
+            <div class="project-stack">
+              <span>journalctl</span>
+              <span>ssh.service</span>
+              <span>acquis.yaml</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-filter card-icon"></i> Parsers</h3>
+            <p>Interpretam as linhas de log brutas e extraem campos estruturados como IP de origem, usuário, resultado da autenticação e timestamp — tornando os dados analisáveis.</p>
+            <div class="project-stack">
+              <span>sshd parser</span>
+              <span>Campos estruturados</span>
+              <span>GROK patterns</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-crosshairs card-icon"></i> Scenarios</h3>
+            <p>Regras de detecção comportamental. O scenario SSH detecta brute force contando múltiplas falhas de autenticação do mesmo IP dentro de uma janela de tempo definida.</p>
+            <div class="project-stack">
+              <span>crowdsec-ssh-bf</span>
+              <span>Threshold</span>
+              <span>Time window</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-bell card-icon"></i> Alertas</h3>
+            <p>Quando um scenario é ativado, o CrowdSec gera um alerta com o IP malicioso, o tipo de ataque e a contagem de eventos. Os alertas podem ser visualizados com <code style="color:var(--primary);font-family:monospace;">cscli alerts list</code>.</p>
+            <div class="project-stack">
+              <span>cscli alerts list</span>
+              <span>IP bloqueado</span>
+              <span>Decisões</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- IMPLEMENTAÇÃO -->
+      <section id="implementacao" class="section">
+        <p class="section-label">Processo de implementação</p>
+        <h2>Da instalação à detecção ativa.</h2>
+        <div class="roadmap-list">
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Instalação do CrowdSec</h3>
+              <p>Instalação do CrowdSec no Kali Linux via repositório oficial. Verificação do serviço e confirmação do status ativo com <code style="color:var(--primary);font-family:monospace;">systemctl status crowdsec</code>.</p>
+              <div class="project-stack">
+                <span>apt install crowdsec</span>
+                <span>crowdsec.service active</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Configuração do arquivo de aquisição</h3>
+              <p>Configuração do <code style="color:var(--primary);font-family:monospace;">acquis.yaml</code> para monitorar o serviço SSH via journalctl, definindo o tipo de log como <code style="color:var(--primary);font-family:monospace;">sshd</code> para que o parser correto seja aplicado.</p>
+              <div class="project-stack">
+                <span>acquis.yaml</span>
+                <span>journalctl</span>
+                <span>ssh.service</span>
+                <span>type: sshd</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Instalação da collection SSH</h3>
+              <p>Instalação da collection <code style="color:var(--primary);font-family:monospace;">crowdsecurity/sshd</code> que inclui o parser SSH e o scenario de detecção de brute force — ativando a capacidade de detectar tentativas de acesso.</p>
+              <div class="project-stack">
+                <span>crowdsecurity/sshd</span>
+                <span>ssh parser</span>
+                <span>ssh-bf scenario</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Verificação de métricas</h3>
+              <p>Análise das métricas com <code style="color:var(--primary);font-family:monospace;">cscli metrics</code> para validar que o CrowdSec está lendo os logs SSH, aplicando os parsers e processando os eventos corretamente.</p>
+              <div class="project-stack">
+                <span>cscli metrics</span>
+                <span>Parsers ativos</span>
+                <span>Eventos processados</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Análise de alertas gerados</h3>
+              <p>Verificação dos alertas com <code style="color:var(--primary);font-family:monospace;">cscli alerts list</code> confirmando detecções ativas — IPs sinalizados, scenarios ativados e decisões tomadas pelo motor do CrowdSec.</p>
+              <div class="project-stack">
+                <span>cscli alerts list</span>
+                <span>Scenarios ativados</span>
+                <span>Decisões</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Documentação no GitHub</h3>
+              <p>Organização do laboratório em repositório público com estrutura profissional: <code style="color:var(--primary);font-family:monospace;">configs/</code>, <code style="color:var(--primary);font-family:monospace;">notes/</code>, <code style="color:var(--primary);font-family:monospace;">screenshots/</code> e README completo com evidências.</p>
+              <div class="project-stack">
+                <span>soc-lab-crowdsec-kali</span>
+                <span>configs/</span>
+                <span>notes/</span>
+                <span>screenshots/</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- CONFIGURAÇÃO REAL -->
+      <section id="configuracao" class="section">
+        <p class="section-label">Configuração</p>
+        <h2>Arquivo de aquisição configurado no laboratório.</h2>
+        <p class="section-text">
+          O arquivo de aquisição define a fonte de dados que o CrowdSec vai monitorar.
+          Esta foi a configuração utilizada para capturar os eventos do serviço SSH
+          via journalctl no Kali Linux.
+        </p>
+
+        <div style="margin-top:28px;padding:28px;background:rgba(2,6,23,0.8);border:1px solid var(--border-light);border-radius:16px;overflow-x:auto;">
+          <pre style="margin:0;color:var(--text-soft);font-family:monospace;font-size:14px;line-height:1.9;white-space:pre-wrap;"><span style="color:var(--text-muted);"># /etc/crowdsec/acquis.d/sshd.yaml</span>
+
+source: journalctl
+journalctl_filter:
+  - "_SYSTEMD_UNIT=ssh.service"
+labels:
+  type: sshd</pre>
+        </div>
+
+        <div style="margin-top:32px;">
+          <p class="section-text">
+            Esta configuração instrui o CrowdSec a:
+          </p>
+          <div class="timeline" style="margin-top:20px;">
+            <div class="timeline-item">
+              <span><i class="fa-solid fa-plug"></i> source: journalctl</span>
+              <p>Usa o journalctl como fonte de log — o sistema de logs do systemd presente no Kali Linux — em vez de ler um arquivo de texto diretamente.</p>
+            </div>
+            <div class="timeline-item">
+              <span><i class="fa-solid fa-filter"></i> journalctl_filter: _SYSTEMD_UNIT=ssh.service</span>
+              <p>Filtra apenas os eventos do serviço SSH, ignorando todo o restante — garantindo que apenas logs de autenticação SSH sejam processados.</p>
+            </div>
+            <div class="timeline-item">
+              <span><i class="fa-solid fa-tag"></i> labels: type: sshd</span>
+              <p>Define o tipo de log para que o CrowdSec saiba qual parser aplicar — neste caso, o parser SSH que extrai campos como IP de origem e resultado da autenticação.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPETÊNCIAS -->
+      <section id="competencias" class="section">
+        <p class="section-label">Competências desenvolvidas</p>
+        <h2>O que este laboratório construiu na prática.</h2>
+        <p class="section-text">
+          Este laboratório aprofundou o conhecimento em detecção baseada em comportamento —
+          uma abordagem diferente do Suricata (tráfego de rede) e do Wazuh (eventos do sistema),
+          complementando o ecossistema de segurança do laboratório.
+        </p>
+        <div class="skills-grid">
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec</h3>
+            <p>Instalação, configuração e operação do CrowdSec — compreendendo a arquitetura modular com acquisition files, parsers, scenarios, bouncers e a inteligência colaborativa da plataforma.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-crosshairs"></i> Brute Force Detection</h3>
+            <p>Configuração de scenarios para detectar tentativas de brute force SSH — entendendo threshold, janela de tempo e como o comportamento de múltiplas falhas de login gera um alerta.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-scroll"></i> Análise de logs SSH</h3>
+            <p>Monitoramento de eventos de autenticação SSH via journalctl, interpretação dos campos extraídos pelos parsers e correlação entre tentativas de login e alertas gerados.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-chart-bar"></i> Métricas e alertas</h3>
+            <p>Uso do <code style="color:var(--primary);font-family:monospace;">cscli metrics</code> para validar o pipeline de processamento e <code style="color:var(--primary);font-family:monospace;">cscli alerts list</code> para analisar detecções — ferramentas essenciais para operar o CrowdSec.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-brands fa-linux"></i> Linux Administration</h3>
+            <p>Gerenciamento do serviço CrowdSec via systemctl, edição de arquivos YAML de configuração, troubleshooting via logs do sistema e uso do CLI cscli para administração.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-brands fa-github"></i> Documentação técnica</h3>
+            <p>Organização do laboratório em repositório GitHub com estrutura profissional — configs, notes e screenshots documentando o processo completo de implementação.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- RESULTADOS -->
+      <section id="resultados" class="section">
+        <p class="section-label">Resultados</p>
+        <h2>O que foi entregue neste laboratório.</h2>
+        <p class="section-text">
+          Este laboratório resultou em um ambiente de detecção comportamental funcional,
+          com monitoramento SSH ativo, alertas gerados e documentação publicada no GitHub.
+        </p>
+        <div class="stats-grid">
+          <div class="stat-card"><strong>01</strong><span>CrowdSec configurado</span></div>
+          <div class="stat-card"><strong>01</strong><span>Collection SSH ativa</span></div>
+          <div class="stat-card"><strong>04</strong><span>Evidências documentadas</span></div>
+          <div class="stat-card"><strong>01</strong><span>Repositório público</span></div>
+        </div>
+      </section>
+
+      <!-- EVIDÊNCIAS -->
+      <section id="evidencias" class="section">
+        <p class="section-label">Evidências</p>
+        <h2>Registros do laboratório.</h2>
+        <p class="section-text">
+          As evidências abaixo estão documentadas no repositório GitHub do laboratório,
+          cobrindo status do serviço, métricas, alertas gerados e scenarios SSH ativos.
+        </p>
+
+        <div class="profile-tags" style="margin-bottom:32px;">
+          <span><i class="fa-solid fa-circle-check"></i> CrowdSec status active</span>
+          <span><i class="fa-solid fa-chart-bar"></i> Métricas do pipeline</span>
+          <span><i class="fa-solid fa-bell"></i> Alertas gerados</span>
+          <span><i class="fa-solid fa-crosshairs"></i> Cenários SSH ativos</span>
+        </div>
+
+        <div class="evidence-grid">
+          <figure class="evidence-image">
+            <a href="https://github.com/gabrielzaccaferreira/soc-lab-crowdsec-kali/blob/main/screenshots/crowdsec-status.png" target="_blank" rel="noopener noreferrer">
+              <img
+                src="https://github.com/gabrielzaccaferreira/soc-lab-crowdsec-kali/raw/main/screenshots/crowdsec-status.png"
+                alt="Status do serviço CrowdSec"
+                loading="lazy"
+                width="800"
+                height="450"
+              />
+            </a>
+            <figcaption>Status do serviço CrowdSec — active (running) no Kali Linux.</figcaption>
+          </figure>
+
+          <figure class="evidence-image">
+            <a href="https://github.com/gabrielzaccaferreira/soc-lab-crowdsec-kali/blob/main/screenshots/metrics.png" target="_blank" rel="noopener noreferrer">
+              <img
+                src="https://github.com/gabrielzaccaferreira/soc-lab-crowdsec-kali/raw/main/screenshots/metrics.png"
+                alt="Métricas do CrowdSec"
+                loading="lazy"
+                width="800"
+                height="450"
+              />
+            </a>
+            <figcaption>Métricas do pipeline — eventos processados pelos parsers SSH.</figcaption>
+          </figure>
+
+          <figure class="evidence-image">
+            <a href="https://github.com/gabrielzaccaferreira/soc-lab-crowdsec-kali/blob/main/screenshots/alerts.png" target="_blank" rel="noopener noreferrer">
+              <img
+                src="https://github.com/gabrielzaccaferreira/soc-lab-crowdsec-kali/raw/main/screenshots/alerts.png"
+                alt="Alertas gerados pelo CrowdSec"
+                loading="lazy"
+                width="800"
+                height="450"
+              />
+            </a>
+            <figcaption>Alertas gerados — IPs e scenarios ativados pelo CrowdSec.</figcaption>
+          </figure>
+
+          <figure class="evidence-image evidence-image-wide">
+            <a href="https://github.com/gabrielzaccaferreira/soc-lab-crowdsec-kali/blob/main/screenshots/ssh-scenarios.png" target="_blank" rel="noopener noreferrer">
+              <img
+                src="https://github.com/gabrielzaccaferreira/soc-lab-crowdsec-kali/raw/main/screenshots/ssh-scenarios.png"
+                alt="Cenários SSH do CrowdSec"
+                loading="lazy"
+                width="800"
+                height="450"
+              />
+            </a>
+            <figcaption>Scenarios SSH ativos — detecção de brute force configurada.</figcaption>
+          </figure>
+        </div>
+
+        <div style="margin-top:32px;text-align:center;">
+          <a href="https://github.com/gabrielzaccaferreira/soc-lab-crowdsec-kali" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <i class="fa-brands fa-github"></i> Ver repositório completo no GitHub
+          </a>
+        </div>
+      </section>
+
+      <!-- PRÓXIMOS PASSOS -->
+      <section id="proximos-passos" class="section">
+        <p class="section-label">Próximos passos</p>
+        <h2>Como este laboratório continuará evoluindo.</h2>
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-network-wired card-icon"></i> Integração Suricata</h3>
+            <p>Conectar o CrowdSec ao Suricata para enriquecer a detecção com eventos de rede, criando correlação entre logs de aplicação e tráfego monitorado.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-shield-halved card-icon"></i> Integração Wazuh</h3>
+            <p>Enviar os alertas do CrowdSec para o Wazuh SIEM, centralizando todos os eventos de segurança do laboratório em um único dashboard de monitoramento.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-ban card-icon"></i> Bouncers</h3>
+            <p>Configurar um bouncer para bloquear automaticamente os IPs identificados pelo CrowdSec, evoluindo de detecção passiva para prevenção ativa de ameaças.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-globe card-icon"></i> CTI Colaborativa</h3>
+            <p>Explorar a inteligência de ameaças colaborativa do CrowdSec — compartilhando e recebendo listas de IPs maliciosos da comunidade global de usuários.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- CONCLUSÃO -->
+      <section id="conclusao" class="section cta-premium">
+        <p class="section-label">Conclusão</p>
+        <h2>Detecção comportamental. SSH monitorado. Alertas ativos.</h2>
+        <p class="section-text">
+          Este laboratório demonstrou na prática o funcionamento do CrowdSec como ferramenta
+          de detecção baseada em comportamento — complementando o Suricata (análise de tráfego)
+          e o Wazuh (monitoramento de endpoints) para construir um ecossistema de segurança
+          multicamada no laboratório.
+        </p>
+        <div class="hero-actions">
+          <a href="https://github.com/gabrielzaccaferreira/soc-lab-crowdsec-kali" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <i class="fa-brands fa-github"></i> Ver repositório no GitHub →
+          </a>
+          <a href="suricata.html" class="btn btn-secondary">
+            <i class="fa-solid fa-network-wired"></i> Ver laboratório Suricata
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <p class="footer-title">Gabriel Zacca Ferreira</p>
+      <p>Portfólio técnico em Redes, Infraestrutura, Cloud Computing e Cibersegurança.</p>
+      <nav class="footer-nav" aria-label="Navegação do rodapé">
+        <a href="../index.html">Home</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="projetos.html">Projetos</a>
+        <a href="blog.html">Blog</a>
+        <a href="roadmap.html">Roadmap</a>
+      </nav>
+      <div class="footer-links">
+        <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a href="mailto:gabrielzaccaferreira@gmail.com"><i class="fa-solid fa-envelope"></i> E-mail</a>
+        <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-lines"></i> Currículo</a>
+      </div>
+      <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
+    </footer>
+  </body>
+</html>

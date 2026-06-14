@@ -1,266 +1,185 @@
 <!doctype html>
-
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-
-<title>Diário Técnico | Gabriel Zacca Ferreira</title>
-
-<meta
-  name="description"
-  content="Diário Técnico de Gabriel Zacca Ferreira com registros diários de estudos, laboratórios e evolução técnica em Redes, Linux, Cloud, Infraestrutura e Cibersegurança."
-/>
-
-<meta name="author" content="Gabriel Zacca Ferreira" />
-
-<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
-<link rel="stylesheet" href="../style.css" />
-
-
+    <title>Diário Técnico | Gabriel Zacca Ferreira</title>
+    <meta name="description" content="Diário Técnico de Gabriel Zacca Ferreira com registros diários de estudos, laboratórios e evolução técnica em Redes, Linux, Cloud, Infraestrutura e Cibersegurança." />
+    <meta name="author" content="Gabriel Zacca Ferreira" />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Diário Técnico | Gabriel Zacca Ferreira" />
+    <meta property="og:description" content="Registros diários de estudos, laboratórios e evolução técnica em Redes, Linux, Cloud e Cibersegurança." />
+    <meta property="og:url" content="https://gabrielzaccaferreira.github.io/pages/blog.html" />
+    <meta property="og:image" content="https://gabrielzaccaferreira.github.io/assets/images/og-image.png" />
+    <link rel="canonical" href="https://gabrielzaccaferreira.github.io/pages/blog.html" />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="../style.css" />
   </head>
-
   <body>
     <header class="site-header">
-      <nav class="navbar">
+      <nav class="navbar" aria-label="Navegação principal">
         <a href="../index.html" class="logo">GZF</a>
-
-
-    <div class="nav-links">
-      <a href="../index.html">Home</a>
-      <a href="sobre.html">Sobre</a>
-      <a href="projetos.html">Projetos</a>
-      <a href="blog.html">Blog</a>
-      <a href="roadmap.html">Roadmap</a>
-    </div>
-
-    <div class="nav-actions">
-      <a href="https://github.com/gabrielzaccaferreira" target="_blank">GitHub</a>
-      <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank">LinkedIn</a>
-      <a href="../assets/curriculo.pdf" target="_blank" class="nav-cv">Currículo</a>
-    </div>
-  </nav>
-</header>
-
-<main>
-  <section class="blog-hero">
-    <div>
-      <p class="eyebrow">Diário Técnico</p>
-
-      <h1>
-        Diário técnico de estudos,
-        <span>laboratórios e evolução.</span>
-      </h1>
-
-      <p>
-        Um espaço para documentar diariamente minha jornada em Redes,
-        Infraestrutura, Linux, Cloud Computing e Cibersegurança, registrando
-        aprendizados, desafios, projetos e próximos passos.
-      </p>
-
-      <div class="hero-actions">
-        <a href="#artigos" class="btn btn-primary">Ver artigos →</a>
-        <a href="wazuh.html" class="btn btn-secondary">Case Wazuh</a>
-      </div>
-    </div>
-
-    <aside class="blog-summary-card">
-      <span>📚</span>
-      <h2>Registro contínuo</h2>
-      <p>
-        Cada publicação representa uma etapa real de aprendizado, prática e
-        construção de portfólio.
-      </p>
-
-      <div class="blog-stats">
-        <div>
-          <strong>2026</strong>
-          <small>Início</small>
+        <div class="nav-links">
+          <a href="../index.html">Home</a>
+          <a href="sobre.html">Sobre</a>
+          <a href="projetos.html">Projetos</a>
+          <a href="blog.html">Blog</a>
+          <a href="roadmap.html">Roadmap</a>
         </div>
-
-        <div>
-          <strong>04</strong>
-          <small>Labs</small>
+        <div class="nav-actions">
+          <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer" class="nav-cv">Currículo</a>
         </div>
-
-        <div>
-          <strong>∞</strong>
-          <small>Evolução</small>
+      </nav>
+      <div class="labs-bar">
+        <div class="labs-bar-inner">
+          <span class="labs-bar-label">Labs</span>
+          <a href="wazuh.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-shield-halved"></i> Wazuh SIEM/XDR</a>
+          <a href="kali-linux.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-brands fa-linux"></i> Kali Linux</a>
+          <a href="suricata.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-network-wired"></i> Suricata IDS/IPS</a>
+          <a href="crowdsec.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec</a>
         </div>
       </div>
-    </aside>
-  </section>
+    </header>
 
-  <section class="section">
-    <p class="section-label">Categorias</p>
-
-    <h2>Temas que serão documentados.</h2>
-
-    <div class="blog-tags">
-      <span>#Redes</span>
-      <span>#Linux</span>
-      <span>#Wazuh</span>
-      <span>#BlueTeam</span>
-      <span>#Cloud</span>
-      <span>#GitHub</span>
-      <span>#VMware</span>
-      <span>#Segurança</span>
-    </div>
-  </section>
-
-  <section id="artigos" class="section">
-    <p class="section-label">Últimos registros</p>
-
-    <h2>Publicações do diário técnico.</h2>
-
-    <p class="section-text">
-      A ideia deste blog é registrar o que foi estudado, implementado e
-      aprendido ao longo da minha evolução profissional.
-    </p>
-
-    <div class="blog-grid">
-      <article class="blog-post-card featured-post">
-
-  <p class="post-date">
-    PRIMEIRO ARTIGO • 13 JUN 2026
-  </p>
-
-  <h3>
-    Por que decidi documentar toda a minha jornada em Tecnologia
-  </h3>
-
-  <p>
-    Este é o primeiro registro do meu Diário Técnico, explicando
-    por que decidi documentar diariamente meus estudos, laboratórios e
-    evolução em Redes, Infraestrutura, Cloud Computing e
-    Cibersegurança.
-  </p>
-
-  <div class="project-stack">
-    <span>Carreira</span>
-    <span>Portfólio</span>
-    <span>Redes</span>
-    <span>Linux</span>
-  </div>
-
-  <a
-  href="./posts/2026-06-13-apresentacao.html"
-  class="blog-read-link"
->
-  Ler artigo →
-</a>
-
-</article>
-
-      <article class="blog-post-card">
-        <p class="post-date">EM BREVE</p>
-
-        <h3>Como funciona um SIEM</h3>
-
-        <p>
-          Conceitos fundamentais de coleta, correlação e análise de eventos
-          de segurança em ambientes corporativos.
-        </p>
-
-        <div class="project-stack">
-          <span>SIEM</span>
-          <span>Blue Team</span>
-          <span>Segurança</span>
+    <main>
+      <section id="hero" class="blog-hero">
+        <div>
+          <p class="eyebrow">Diário Técnico</p>
+          <h1>
+            Diário técnico de estudos,
+            <span>laboratórios e evolução.</span>
+          </h1>
+          <p>
+            Um espaço para documentar diariamente minha jornada em Redes,
+            Infraestrutura, Linux, Cloud Computing e Cibersegurança, registrando
+            aprendizados, desafios, projetos e próximos passos.
+          </p>
+          <div class="hero-actions">
+            <a href="#artigos" class="btn btn-primary">Ver artigos →</a>
+            <a href="wazuh.html" class="btn btn-secondary">Case Wazuh</a>
+          </div>
         </div>
 
-        <a href="#" class="blog-read-link">Em breve →</a>
-      </article>
-
-      <article class="blog-post-card">
-        <p class="post-date">EM BREVE</p>
-
-        <h3>Entendendo TCP/IP na prática</h3>
-
-        <p>
-          Uma visão prática sobre o modelo TCP/IP, protocolos, comunicação
-          entre dispositivos e troubleshooting.
-        </p>
-
-        <div class="project-stack">
-          <span>Redes</span>
-          <span>TCP/IP</span>
-          <span>Infraestrutura</span>
+        <div class="blog-summary-card">
+          <span><i class="fa-solid fa-book-open"></i></span>
+          <h2>Registro contínuo</h2>
+          <p>Cada publicação representa uma etapa real de aprendizado, prática e construção de portfólio.</p>
+          <div class="blog-stats">
+            <div><strong>2026</strong><small>Início</small></div>
+            <div><strong>04</strong><small>Labs</small></div>
+            <div><strong>∞</strong><small>Evolução</small></div>
+          </div>
         </div>
+      </section>
 
-        <a href="#" class="blog-read-link">Em breve →</a>
-      </article>
-
-      <article class="blog-post-card">
-        <p class="post-date">CASE TÉCNICO</p>
-
-        <h3>Laboratório Wazuh SIEM/XDR</h3>
-
-        <p>
-          Implementação prática de um laboratório Wazuh com Ubuntu Server,
-          Kali Linux, agentes, dashboard e análise de eventos.
-        </p>
-
-        <div class="project-stack">
-          <span>Wazuh</span>
-          <span>Linux</span>
-          <span>SIEM</span>
+      <section id="categorias" class="section">
+        <p class="section-label">Categorias</p>
+        <h2>Temas que serão documentados.</h2>
+        <div class="blog-tags">
+          <span>#Redes</span>
+          <span>#Linux</span>
+          <span>#Wazuh</span>
+          <span>#BlueTeam</span>
+          <span>#Cloud</span>
+          <span>#GitHub</span>
+          <span>#VMware</span>
+          <span>#Segurança</span>
         </div>
+      </section>
 
-        <a href="wazuh.html" class="blog-read-link">Ver case →</a>
-      </article>
-    </div>
-  </section>
+      <section id="artigos" class="section">
+        <p class="section-label">Últimos registros</p>
+        <h2>Publicações do diário técnico.</h2>
+        <p class="section-text">A ideia deste blog é registrar o que foi estudado, implementado e aprendido ao longo da minha evolução profissional.</p>
+        <div class="blog-grid">
+          <article class="blog-post-card featured-post">
+            <p class="post-date">PRIMEIRO ARTIGO • 13 JUN 2026</p>
+            <h3>Por que decidi documentar toda a minha jornada em Tecnologia</h3>
+            <p>Este é o primeiro registro do meu Diário Técnico, explicando por que decidi documentar diariamente meus estudos, laboratórios e evolução em Redes, Infraestrutura, Cloud Computing e Cibersegurança.</p>
+            <div class="project-stack">
+              <span>Carreira</span><span>Portfólio</span><span>Redes</span><span>Linux</span>
+            </div>
+            <a href="./posts/2026-06-13-apresentacao.html" class="blog-read-link">Ler artigo →</a>
+          </article>
 
-  <section class="section blog-method">
-    <p class="section-label">Modelo de publicação</p>
+          <article class="blog-post-card">
+            <p class="post-date">EM BREVE</p>
+            <h3>Como funciona um SIEM</h3>
+            <p>Conceitos fundamentais de coleta, correlação e análise de eventos de segurança em ambientes corporativos.</p>
+            <div class="project-stack">
+              <span>SIEM</span><span>Blue Team</span><span>Segurança</span>
+            </div>
+            <span class="blog-read-link" aria-disabled="true">Em breve</span>
+          </article>
 
-    <h2>Como vou registrar meus estudos.</h2>
+          <article class="blog-post-card">
+            <p class="post-date">EM BREVE</p>
+            <h3>Entendendo TCP/IP na prática</h3>
+            <p>Uma visão prática sobre o modelo TCP/IP, protocolos, comunicação entre dispositivos e troubleshooting.</p>
+            <div class="project-stack">
+              <span>Redes</span><span>TCP/IP</span><span>Infraestrutura</span>
+            </div>
+            <span class="blog-read-link" aria-disabled="true">Em breve</span>
+          </article>
 
-    <div class="method-grid">
-      <article>
-        <h3>1. O que estudei</h3>
-        <p>Resumo do tema, ferramenta, conceito ou laboratório estudado.</p>
-      </article>
+          <article class="blog-post-card">
+            <p class="post-date">CASE TÉCNICO</p>
+            <h3>Laboratório Wazuh SIEM/XDR</h3>
+            <p>Implementação prática de um laboratório Wazuh com Ubuntu Server, Kali Linux, agentes, dashboard e análise de eventos.</p>
+            <div class="project-stack">
+              <span>Wazuh</span><span>Linux</span><span>SIEM</span>
+            </div>
+            <a href="wazuh.html" class="blog-read-link">Ver case →</a>
+          </article>
+        </div>
+      </section>
 
-      <article>
-        <h3>2. O que pratiquei</h3>
-        <p>Comandos, configurações, testes, erros encontrados e soluções.</p>
-      </article>
+      <section id="modelo-publicacao" class="section blog-method">
+        <p class="section-label">Modelo de publicação</p>
+        <h2>Como vou registrar meus estudos.</h2>
+        <div class="method-grid">
+          <article>
+            <h3>1. O que estudei</h3>
+            <p>Resumo do tema, ferramenta, conceito ou laboratório estudado.</p>
+          </article>
+          <article>
+            <h3>2. O que pratiquei</h3>
+            <p>Comandos, configurações, testes, erros encontrados e soluções.</p>
+          </article>
+          <article>
+            <h3>3. O que aprendi</h3>
+            <p>Principais aprendizados técnicos e relação com o mercado.</p>
+          </article>
+          <article>
+            <h3>4. Próximos passos</h3>
+            <p>Continuidade dos estudos e melhorias planejadas.</p>
+          </article>
+        </div>
+      </section>
+    </main>
 
-      <article>
-        <h3>3. O que aprendi</h3>
-        <p>Principais aprendizados técnicos e relação com o mercado.</p>
-      </article>
-
-      <article>
-        <h3>4. Próximos passos</h3>
-        <p>Continuidade dos estudos e melhorias planejadas.</p>
-      </article>
-    </div>
-  </section>
-</main>
-
-<footer id="contato" class="footer">
-  <p class="footer-title">Gabriel Zacca Ferreira</p>
-
-  <p>
-    Portfólio técnico em Redes, Infraestrutura, Cloud Computing e
-    Cibersegurança.
-  </p>
-
-  <div class="footer-links">
-    <a href="https://github.com/gabrielzaccaferreira" target="_blank">GitHub</a>
-    <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank">LinkedIn</a>
-    <a href="mailto:gabrielzaccaferreira@gmail.com">E-mail</a>
-    <a href="../assets/curriculo.pdf" target="_blank">Currículo</a>
-  </div>
-
-  <p class="footer-copy">
-    © 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.
-  </p>
-</footer>
-
-
+    <footer class="footer">
+      <p class="footer-title">Gabriel Zacca Ferreira</p>
+      <p>Portfólio técnico em Redes, Infraestrutura, Cloud Computing e Cibersegurança.</p>
+      <nav class="footer-nav" aria-label="Navegação do rodapé">
+        <a href="../index.html">Home</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="projetos.html">Projetos</a>
+        <a href="blog.html">Blog</a>
+        <a href="roadmap.html">Roadmap</a>
+      </nav>
+      <div class="footer-links">
+        <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a href="mailto:gabrielzaccaferreira@gmail.com"><i class="fa-solid fa-envelope"></i> E-mail</a>
+        <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-lines"></i> Currículo</a>
+      </div>
+      <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
+    </footer>
   </body>
 </html>

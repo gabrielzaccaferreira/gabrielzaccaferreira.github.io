@@ -3,25 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Sobre | Gabriel Zacca Ferreira</title>
-
-    <meta
-      name="description"
-      content="Conheça a trajetória de Gabriel Zacca Ferreira, estudante de Redes de Computadores com foco em Infraestrutura, Linux, Cloud Computing e Cibersegurança."
-    />
-
+    <meta name="description" content="Conheça a trajetória de Gabriel Zacca Ferreira, estudante de Redes de Computadores com foco em Infraestrutura, Linux, Cloud Computing e Cibersegurança." />
     <meta name="author" content="Gabriel Zacca Ferreira" />
-
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sobre | Gabriel Zacca Ferreira" />
+    <meta property="og:description" content="Trajetória e competências técnicas em Redes, Infraestrutura, Linux, Cloud e Cibersegurança." />
+    <meta property="og:url" content="https://gabrielzaccaferreira.github.io/pages/sobre.html" />
+    <meta property="og:image" content="https://gabrielzaccaferreira.github.io/assets/images/og-image.png" />
+    <link rel="canonical" href="https://gabrielzaccaferreira.github.io/pages/sobre.html" />
     <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <link rel="stylesheet" href="../style.css" />
   </head>
-
   <body>
     <header class="site-header">
-      <nav class="navbar">
+      <nav class="navbar" aria-label="Navegação principal">
         <a href="../index.html" class="logo">GZF</a>
-
         <div class="nav-links">
           <a href="../index.html">Home</a>
           <a href="sobre.html">Sobre</a>
@@ -29,241 +29,183 @@
           <a href="blog.html">Blog</a>
           <a href="roadmap.html">Roadmap</a>
         </div>
-
         <div class="nav-actions">
-          <a href="https://github.com/gabrielzaccaferreira" target="_blank">
-            GitHub
-          </a>
-
-          <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank">
-            LinkedIn
-          </a>
-
-          <a href="#" target="_blank" class="nav-cv">Currículo</a>
+          <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer" class="nav-cv">Currículo</a>
         </div>
       </nav>
+      <div class="labs-bar">
+        <div class="labs-bar-inner">
+          <span class="labs-bar-label">Labs</span>
+          <a href="wazuh.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-shield-halved"></i> Wazuh SIEM/XDR</a>
+          <a href="kali-linux.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-brands fa-linux"></i> Kali Linux</a>
+          <a href="suricata.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-network-wired"></i> Suricata IDS/IPS</a>
+          <a href="crowdsec.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec</a>
+        </div>
+      </div>
     </header>
 
     <main>
-      <section class="hero">
+      <section id="hero" class="hero">
         <div class="hero-content">
           <p class="eyebrow">Sobre mim</p>
-
           <h1>
-            Gabriel Zacca Ferreira
-            <span>Redes • Infraestrutura • Cloud • Cibersegurança</span>
+            Da prática ao portfólio.
           </h1>
-
+          <p class="hero-tagline">Redes • Infraestrutura • Cloud • Cibersegurança</p>
           <p class="hero-description">
-            Construindo uma carreira em Tecnologia da Informação através de
-            estudos práticos, laboratórios, documentação técnica e projetos
-            voltados para Redes, Infraestrutura, Cloud Computing e Segurança da
-            Informação.
+            Construindo uma carreira em Tecnologia da Informação através de estudos práticos, laboratórios, documentação técnica e projetos voltados para Redes, Infraestrutura, Cloud Computing e Segurança da Informação.
           </p>
-
           <div class="hero-actions">
-            <a href="../index.html#projetos" class="btn btn-primary">
-              Ver projetos
-            </a>
-
-            <a href="jornada.html" class="btn btn-secondary">
-              Conhecer minha jornada
-            </a>
+            <a href="projetos.html" class="btn btn-primary">Ver projetos</a>
+            <a href="jornada.html" class="btn btn-secondary">Conhecer minha jornada</a>
           </div>
         </div>
 
-        <aside class="profile-card">
-          <div class="profile-avatar">GZF</div>
-
+        <div class="profile-card">
+          <div class="profile-avatar"><i class="fa-solid fa-user-shield"></i></div>
           <h2>Perfil técnico</h2>
-
-          <p>
-            Estudante de Redes de Computadores com foco em prática, organização,
-            troubleshooting, infraestrutura e segurança.
-          </p>
-
+          <p>Estudante de Redes de Computadores com foco em prática, organização, troubleshooting, infraestrutura e segurança.</p>
           <div class="profile-tags">
-            <span>🌐 Redes</span>
-            <span>🐧 Linux</span>
-            <span>🖥️ Infraestrutura</span>
-            <span>☁️ Cloud</span>
-            <span>🛡️ Segurança</span>
+            <span><i class="fa-solid fa-network-wired"></i> Redes</span>
+            <span><i class="fa-brands fa-linux"></i> Linux</span>
+            <span><i class="fa-solid fa-server"></i> Infraestrutura</span>
+            <span><i class="fa-solid fa-cloud"></i> Cloud</span>
+            <span><i class="fa-solid fa-shield-halved"></i> Segurança</span>
           </div>
-        </aside>
+        </div>
       </section>
 
-      <section class="section">
+      <section id="indice" class="section">
+        <p class="section-label">Índice</p>
+        <h2>Navegue pela página.</h2>
+        <div class="profile-tags">
+          <a href="#trajetoria"><span>Trajetória</span></a>
+          <a href="#objetivo"><span>Objetivo</span></a>
+          <a href="#competencias"><span>Competências</span></a>
+        </div>
+      </section>
+
+      <section id="trajetoria" class="section">
         <p class="section-label">Trajetória</p>
-
         <h2>Da experiência prática à construção de uma carreira em TI.</h2>
-
         <p class="section-text">
-          Minha trajetória une atendimento ao cliente, resolução de problemas,
-          suporte técnico e estudos práticos em tecnologia. Ao longo do caminho,
-          desenvolvi uma visão voltada para diagnóstico, organização,
-          comunicação clara e busca contínua por soluções.
+          Minha trajetória une atendimento ao cliente, resolução de problemas, suporte técnico e estudos práticos em tecnologia. Ao longo do caminho, desenvolvi uma visão voltada para diagnóstico, organização, comunicação clara e busca contínua por soluções.
         </p>
-
         <p class="section-text">
-          Atualmente, estou direcionando minha evolução para Redes de
-          Computadores, Infraestrutura, Cloud Computing e Cibersegurança,
-          documentando cada etapa por meio de laboratórios, projetos e registros
-          técnicos.
+          Atualmente, estou direcionando minha evolução para Redes de Computadores, Infraestrutura, Cloud Computing e Cibersegurança, documentando cada etapa por meio de laboratórios, projetos e registros técnicos.
         </p>
       </section>
 
-      <section class="section">
+      <section id="objetivo" class="section">
         <p class="section-label">Objetivo</p>
-
         <h2>Transformar estudo em prática documentada.</h2>
-
         <p class="section-text">
-          Meu objetivo é atuar nas áreas de suporte técnico, infraestrutura,
-          redes, cloud e segurança da informação, evoluindo gradualmente para
-          áreas como SOC, Blue Team, análise de segurança e resposta a
-          incidentes.
+          Meu objetivo é atuar nas áreas de suporte técnico, infraestrutura, redes, cloud e segurança da informação, evoluindo gradualmente para áreas como SOC, Blue Team, análise de segurança e resposta a incidentes.
         </p>
       </section>
 
-<section class="section">
-  <p class="section-label">Competências</p>
+      <section id="competencias" class="section">
+        <p class="section-label">Competências</p>
+        <h2>Áreas que estou desenvolvendo.</h2>
+        <div class="skills-grid">
+          <article class="skill-card">
+            <div class="skill-header">
+              <div class="skill-title">
+                <span class="skill-icon"><i class="fa-solid fa-network-wired"></i></span>
+                <h3>Redes</h3>
+              </div>
+              <span class="skill-status">Em evolução</span>
+            </div>
+            <p>Fundamentos de redes de computadores, comunicação entre dispositivos, conectividade e troubleshooting.</p>
+            <ul>
+              <li>TCP/IP</li>
+              <li>DNS e DHCP</li>
+              <li>VLANs</li>
+              <li>Switching e Routing</li>
+              <li>Troubleshooting</li>
+            </ul>
+            <a href="roadmap.html">Ver estudos →</a>
+          </article>
 
-  <h2>Áreas que estou desenvolvendo.</h2>
+          <article class="skill-card">
+            <div class="skill-header">
+              <div class="skill-title">
+                <span class="skill-icon"><i class="fa-brands fa-linux"></i></span>
+                <h3>Linux</h3>
+              </div>
+              <span class="skill-status">Em evolução</span>
+            </div>
+            <p>Administração Linux com foco em terminal, permissões, usuários, serviços, logs e operação de sistemas.</p>
+            <ul>
+              <li>Bash</li>
+              <li>Systemd</li>
+              <li>Permissões</li>
+              <li>Logs</li>
+              <li>Usuários e serviços</li>
+            </ul>
+            <a href="roadmap.html">Ver estudos →</a>
+          </article>
 
-  <div class="skills-grid">
-    <article class="skill-card">
-      <div class="skill-header">
-        <div class="skill-title">
-          <span class="skill-icon">🌐</span>
-          <h3>Redes</h3>
+          <article class="skill-card">
+            <div class="skill-header">
+              <div class="skill-title">
+                <span class="skill-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                <h3>Segurança</h3>
+              </div>
+              <span class="skill-status">Blue Team</span>
+            </div>
+            <p>Estudos voltados para defesa, monitoramento, análise de eventos, hardening e fundamentos de segurança.</p>
+            <ul>
+              <li>SIEM</li>
+              <li>IDS/IPS</li>
+              <li>Hardening</li>
+              <li>Análise de logs</li>
+              <li>Monitoramento</li>
+            </ul>
+            <a href="projetos.html">Ver projetos →</a>
+          </article>
+
+          <article class="skill-card">
+            <div class="skill-header">
+              <div class="skill-title">
+                <span class="skill-icon"><i class="fa-solid fa-cloud"></i></span>
+                <h3>Cloud</h3>
+              </div>
+              <span class="skill-status">Fundamentos</span>
+            </div>
+            <p>Fundamentos de infraestrutura em nuvem, virtualização, serviços cloud, redes e ambientes híbridos.</p>
+            <ul>
+              <li>Azure</li>
+              <li>Virtualização</li>
+              <li>IaaS</li>
+              <li>Redes em nuvem</li>
+              <li>Ambientes híbridos</li>
+            </ul>
+            <a href="roadmap.html">Ver roadmap →</a>
+          </article>
         </div>
-
-        <span class="skill-status">Em evolução</span>
-      </div>
-
-      <p>
-        Fundamentos de redes de computadores, comunicação entre dispositivos,
-        conectividade e troubleshooting.
-      </p>
-
-      <ul>
-        <li>TCP/IP</li>
-        <li>DNS e DHCP</li>
-        <li>VLANs</li>
-        <li>Switching e Routing</li>
-        <li>Troubleshooting</li>
-      </ul>
-
-      <a href="roadmap.html">Ver estudos →</a>
-    </article>
-
-    <article class="skill-card">
-      <div class="skill-header">
-        <div class="skill-title">
-          <span class="skill-icon">🐧</span>
-          <h3>Linux</h3>
-        </div>
-
-        <span class="skill-status">Em evolução</span>
-      </div>
-
-      <p>
-        Administração Linux com foco em terminal, permissões, usuários,
-        serviços, logs e operação de sistemas.
-      </p>
-
-      <ul>
-        <li>Bash</li>
-        <li>Systemd</li>
-        <li>Permissões</li>
-        <li>Logs</li>
-        <li>Usuários e serviços</li>
-      </ul>
-
-      <a href="roadmap.html">Ver estudos →</a>
-    </article>
-
-    <article class="skill-card">
-      <div class="skill-header">
-        <div class="skill-title">
-          <span class="skill-icon">🛡️</span>
-          <h3>Segurança</h3>
-        </div>
-
-        <span class="skill-status">Blue Team</span>
-      </div>
-
-      <p>
-        Estudos voltados para defesa, monitoramento, análise de eventos,
-        hardening e fundamentos de segurança.
-      </p>
-
-      <ul>
-        <li>SIEM</li>
-        <li>IDS/IPS</li>
-        <li>Hardening</li>
-        <li>Análise de logs</li>
-        <li>Monitoramento</li>
-      </ul>
-
-      <a href="projetos.html">Ver projetos →</a>
-    </article>
-
-    <article class="skill-card">
-      <div class="skill-header">
-        <div class="skill-title">
-          <span class="skill-icon">☁️</span>
-          <h3>Cloud</h3>
-        </div>
-
-        <span class="skill-status">Fundamentos</span>
-      </div>
-
-      <p>
-        Fundamentos de infraestrutura em nuvem, virtualização, serviços cloud,
-        redes e ambientes híbridos.
-      </p>
-
-      <ul>
-        <li>Azure</li>
-        <li>Virtualização</li>
-        <li>IaaS</li>
-        <li>Redes em nuvem</li>
-        <li>Ambientes híbridos</li>
-      </ul>
-
-      <a href="roadmap.html">Ver roadmap →</a>
-    </article>
-  </div>
-</section>
+      </section>
     </main>
 
-    <footer id="contato" class="footer">
+    <footer class="footer">
       <p class="footer-title">Gabriel Zacca Ferreira</p>
-
-      <p>
-        Portfólio técnico em Redes, Infraestrutura, Cloud Computing e
-        Cibersegurança.
-      </p>
-
+      <p>Portfólio técnico em Redes, Infraestrutura, Cloud Computing e Cibersegurança.</p>
+      <nav class="footer-nav" aria-label="Navegação do rodapé">
+        <a href="../index.html">Home</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="projetos.html">Projetos</a>
+        <a href="blog.html">Blog</a>
+        <a href="roadmap.html">Roadmap</a>
+      </nav>
       <div class="footer-links">
-        <a href="https://github.com/gabrielzaccaferreira" target="_blank">
-          🚀 GitHub
-        </a>
-
-        <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank">
-          💼 LinkedIn
-        </a>
-
-        <a href="mailto:gabrielzaccaferreira@gmail.com">✉ E-mail</a>
-
-        <a href="#">📄 Currículo</a>
+        <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a href="mailto:gabrielzaccaferreira@gmail.com"><i class="fa-solid fa-envelope"></i> E-mail</a>
+        <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-lines"></i> Currículo</a>
       </div>
-
-      <p class="footer-copy">
-        © 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub
-        Pages.
-      </p>
+      <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
     </footer>
   </body>
 </html>

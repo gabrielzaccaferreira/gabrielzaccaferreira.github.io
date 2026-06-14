@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kali Linux | Gabriel Zacca Ferreira</title>
+    <meta name="description" content="Documentação completa do laboratório Kali Linux: configuração de VMware, SSH remoto, XRDP, acesso gráfico e base para todos os laboratórios de Redes e Cibersegurança." />
+    <meta name="author" content="Gabriel Zacca Ferreira" />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Kali Linux | Gabriel Zacca Ferreira" />
+    <meta property="og:description" content="Laboratório base: VMware Workstation, Bridge, SSH, VS Code Remote e XRDP funcionando." />
+    <meta property="og:url" content="https://gabrielzaccaferreira.github.io/pages/kali-linux.html" />
+    <meta property="og:image" content="https://gabrielzaccaferreira.github.io/assets/images/og-image.png" />
+    <link rel="canonical" href="https://gabrielzaccaferreira.github.io/pages/kali-linux.html" />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navbar" aria-label="Navegação principal">
+        <a href="../index.html" class="logo">GZF</a>
+        <div class="nav-links">
+          <a href="../index.html">Home</a>
+          <a href="sobre.html">Sobre</a>
+          <a href="projetos.html">Projetos</a>
+          <a href="blog.html">Blog</a>
+          <a href="roadmap.html">Roadmap</a>
+        </div>
+        <div class="nav-actions">
+          <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer" class="nav-cv">Currículo</a>
+        </div>
+      </nav>
+      <div class="labs-bar">
+        <div class="labs-bar-inner">
+          <span class="labs-bar-label">Labs</span>
+          <a href="wazuh.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-shield-halved"></i> Wazuh SIEM/XDR</a>
+          <a href="kali-linux.html" class="labs-bar-link active"><span class="lab-dot"></span><i class="fa-brands fa-linux"></i> Kali Linux</a>
+          <a href="suricata.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-network-wired"></i> Suricata IDS/IPS</a>
+          <a href="crowdsec.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- HERO -->
+      <section id="hero" class="hero">
+        <div class="hero-content">
+          <p class="eyebrow">Laboratório Base • Linux • VMware • SSH • XRDP</p>
+          <h1>
+            Kali Linux
+            <span>A base de todo o meu laboratório técnico</span>
+          </h1>
+          <p class="hero-description">
+            Configuração completa de um ambiente virtualizado com Kali Linux no VMware Workstation,
+            incluindo modo Bridge, acesso SSH remoto, VS Code Remote e área de trabalho gráfica via
+            XRDP — a fundação sobre a qual todos os laboratórios de Redes e Cibersegurança foram construídos.
+          </p>
+          <div class="hero-actions">
+            <a href="#ambiente" class="btn btn-primary">Ver o ambiente →</a>
+            <a href="#implementacao" class="btn btn-secondary">Ver implementação</a>
+          </div>
+        </div>
+
+        <div class="architecture-card">
+          <p class="section-label">Topologia do laboratório</p>
+          <h2>Stack do ambiente</h2>
+          <div class="architecture-flow">
+            <span>Dell OptiPlex — Windows 11</span>
+            <strong>↓</strong>
+            <span>VMware Workstation</span>
+            <strong>↓</strong>
+            <span>Kali Linux — Modo Bridge</span>
+            <strong>↓</strong>
+            <span>SSH • VS Code Remote • XRDP</span>
+            <strong>↓</strong>
+            <span>Wazuh • Suricata • CrowdSec</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ÍNDICE -->
+      <section id="indice" class="section">
+        <p class="section-label">Índice</p>
+        <h2>Navegue pelo conteúdo desta documentação.</h2>
+        <div class="profile-tags">
+          <a href="#ambiente"><span>Ambiente</span></a>
+          <a href="#especificacoes"><span>Especificações</span></a>
+          <a href="#implementacao"><span>Implementação</span></a>
+          <a href="#acesso-remoto"><span>Acesso remoto</span></a>
+          <a href="#scripts"><span>Scripts</span></a>
+          <a href="#competencias"><span>Competências</span></a>
+          <a href="#evolucao"><span>Evolução</span></a>
+          <a href="#evidencias"><span>Evidências</span></a>
+          <a href="#conclusao"><span>Conclusão</span></a>
+        </div>
+      </section>
+
+      <!-- SOBRE -->
+      <section id="ambiente" class="section">
+        <p class="section-label">Sobre o laboratório</p>
+        <h2>O ponto de partida de tudo.</h2>
+        <p class="section-text">
+          O Kali Linux foi a primeira plataforma que configurei do zero como ambiente de estudos.
+          A decisão de usá-lo dentro do VMware Workstation em modo Bridge foi estratégica: permitiu
+          que a VM tivesse um IP real na rede local, possibilitando acesso SSH remoto, integração
+          com outros dispositivos e construção de laboratórios que simulam ambientes reais.
+        </p>
+        <p class="section-text">
+          A partir desse ambiente base, desenvolvi todos os outros laboratórios do portfólio —
+          Wazuh SIEM/XDR, Suricata IDS/IPS e CrowdSec — usando o Kali como endpoint monitorado
+          e plataforma de estudo contínuo.
+        </p>
+      </section>
+
+      <!-- ESPECIFICAÇÕES -->
+      <section id="especificacoes" class="section">
+        <p class="section-label">Especificações</p>
+        <h2>Hardware e software do ambiente.</h2>
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-computer card-icon"></i> Host físico</h3>
+            <p>Dell OptiPlex com Windows 11, Intel Core i7-10700T, 32 GB de RAM e SSD NVMe de 1 TB — base para toda a virtualização do laboratório.</p>
+            <div class="project-stack">
+              <span>Dell OptiPlex</span>
+              <span>i7-10700T</span>
+              <span>32 GB RAM</span>
+              <span>SSD NVMe 1 TB</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-desktop card-icon"></i> VMware Workstation</h3>
+            <p>Hypervisor utilizado para criação e gerenciamento da VM Kali Linux, configurado em modo Bridge para integração com a rede local real.</p>
+            <div class="project-stack">
+              <span>VMware Workstation</span>
+              <span>Modo Bridge</span>
+              <span>Snapshot</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-brands fa-linux card-icon"></i> Kali Linux</h3>
+            <p>Sistema operacional principal do laboratório, rodando como VM com IP fixo na rede local, XFCE como ambiente gráfico e XRDP para acesso remoto.</p>
+            <div class="project-stack">
+              <span>Kali Linux 2026.2</span>
+              <span>XFCE</span>
+              <span>IP Bridge</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-code card-icon"></i> VS Code Remote</h3>
+            <p>Extensão SSH do VS Code configurada para editar arquivos e gerenciar projetos diretamente no Kali Linux a partir do Windows, sem necessidade de interface gráfica.</p>
+            <div class="project-stack">
+              <span>VS Code</span>
+              <span>Remote SSH</span>
+              <span>SSH Keys</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- IMPLEMENTAÇÃO -->
+      <section id="implementacao" class="section">
+        <p class="section-label">Processo de implementação</p>
+        <h2>Do zero ao ambiente completo.</h2>
+        <p class="section-text">
+          Cada etapa foi concluída em ordem, validada antes de avançar para a próxima.
+          Esse fluxo sequencial garantiu estabilidade e permitiu identificar problemas com precisão.
+        </p>
+        <div class="roadmap-list">
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Instalação do VMware Workstation</h3>
+              <p>Instalação do hypervisor no host Windows 11 e configuração inicial da plataforma de virtualização para criação dos laboratórios.</p>
+              <div class="project-stack">
+                <span>VMware Workstation</span>
+                <span>Windows 11</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Criação da VM Kali Linux</h3>
+              <p>Criação da máquina virtual com Kali Linux, alocação de recursos (RAM, CPU, disco) e instalação do sistema operacional. Snapshot inicial criado após instalação limpa.</p>
+              <div class="project-stack">
+                <span>Kali Linux</span>
+                <span>XFCE</span>
+                <span>Snapshot</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Configuração do modo Bridge</h3>
+              <p>Alteração da placa de rede da VM de NAT para Bridge, permitindo que o Kali Linux obtenha um IP real da rede local e seja acessível pelos outros dispositivos do laboratório.</p>
+              <div class="project-stack">
+                <span>Bridge Mode</span>
+                <span>IP real na LAN</span>
+                <span>Conectividade</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Configuração e validação do SSH</h3>
+              <p>Instalação e ativação do servidor SSH no Kali Linux, validação da conexão remota a partir do host Windows e configuração de chaves para acesso seguro sem senha.</p>
+              <div class="project-stack">
+                <span>OpenSSH</span>
+                <span>SSH Keys</span>
+                <span>Porta 22</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>VS Code Remote SSH</h3>
+              <p>Configuração da extensão Remote SSH no VS Code para editar arquivos, gerenciar projetos e executar comandos no Kali Linux diretamente do editor no Windows.</p>
+              <div class="project-stack">
+                <span>VS Code</span>
+                <span>Remote SSH Extension</span>
+                <span>Acesso remoto</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Instalação e configuração do XRDP</h3>
+              <p>Instalação do servidor XRDP e configuração do ambiente gráfico XFCE para acesso via área de trabalho remota. Resolução de conflitos de sessão com múltiplas conexões abertas.</p>
+              <div class="project-stack">
+                <span>XRDP</span>
+                <span>XFCE</span>
+                <span>LightDM</span>
+                <span>mstsc</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Snapshot do ambiente completo</h3>
+              <p>Criação do snapshot <strong>Kali-Remoto-Completo-v1</strong> após validação de todos os serviços: Bridge, SSH, VS Code Remote e XRDP funcionando corretamente.</p>
+              <div class="project-stack">
+                <span>Snapshot VMware</span>
+                <span>Backup do estado</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ACESSO REMOTO -->
+      <section id="acesso-remoto" class="section">
+        <p class="section-label">Acesso remoto</p>
+        <h2>Três formas de acessar o laboratório remotamente.</h2>
+        <p class="section-text">
+          O ambiente foi configurado com três modalidades de acesso remoto, cada uma com uma
+          finalidade diferente. Isso eliminou a necessidade de usar o Kali Linux diretamente
+          no console da VM, tornando o fluxo de trabalho mais profissional e produtivo.
+        </p>
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-terminal card-icon"></i> SSH</h3>
+            <p>Acesso via terminal ao Kali Linux a partir do Windows. Usado para comandos, administração de serviços, troubleshooting e execução de scripts sem interface gráfica.</p>
+            <div class="project-stack">
+              <span>OpenSSH</span>
+              <span>Porta 22</span>
+              <span>Terminal</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-code card-icon"></i> VS Code Remote SSH</h3>
+            <p>Editor de código conectado diretamente ao Kali via SSH. Permite editar arquivos de configuração, escrever scripts e gerenciar projetos com toda a interface do VS Code.</p>
+            <div class="project-stack">
+              <span>VS Code</span>
+              <span>Remote SSH</span>
+              <span>File Explorer</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-display card-icon"></i> XRDP</h3>
+            <p>Área de trabalho gráfica completa via RDP. Acesso ao ambiente XFCE do Kali Linux pelo Windows usando o mstsc (Conexão de Área de Trabalho Remota).</p>
+            <div class="project-stack">
+              <span>XRDP</span>
+              <span>XFCE</span>
+              <span>mstsc</span>
+            </div>
+          </article>
+        </div>
+
+        <!-- TROUBLESHOOTING XRDP -->
+        <div style="margin-top: 48px;">
+          <p class="section-label">Troubleshooting documentado</p>
+          <h2>Resolução de conflito de sessões XRDP.</h2>
+          <p class="section-text">
+            Um problema recorrente com o XRDP é que múltiplas sessões abertas do mesmo usuário
+            causam um loop de login — a tela aceita as credenciais mas retorna imediatamente
+            para o login. O diagnóstico foi feito com <code style="color:var(--primary);background:rgba(56,189,248,0.1);padding:2px 8px;border-radius:6px;font-family:monospace;">loginctl</code> e a solução com dois comandos:
+          </p>
+          <div class="timeline" style="margin-top: 28px;">
+            <div class="timeline-item">
+              <span><i class="fa-solid fa-magnifying-glass"></i> Diagnóstico — identificar sessões abertas</span>
+              <p>
+                O comando <code style="color:var(--primary);font-family:monospace;">loginctl</code> revelou 4 sessões simultâneas do usuário kali — a causa do conflito.
+                Cada conexão XRDP sem encerramento correto deixa uma sessão presa.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <span><i class="fa-solid fa-wrench"></i> Solução — encerrar sessões e reiniciar serviços</span>
+              <p>
+                <code style="color:var(--primary);font-family:monospace;">sudo pkill -u kali</code> encerra todas as sessões do usuário.
+                Em seguida, reiniciar LightDM e XRDP restaura o acesso gráfico corretamente.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <span><i class="fa-solid fa-shield-halved"></i> Prevenção — script de emergência criado</span>
+              <p>
+                Script <code style="color:var(--primary);font-family:monospace;">reiniciar-rdp.sh</code> criado para automatizar o processo de recuperação,
+                executável via SSH quando o acesso gráfico falhar.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCRIPTS -->
+      <section id="scripts" class="section">
+        <p class="section-label">Scripts criados</p>
+        <h2>Automação do laboratório.</h2>
+        <p class="section-text">
+          Durante a configuração do ambiente, foi necessário criar scripts para automatizar
+          tarefas repetitivas e garantir recuperação rápida em caso de falhas.
+        </p>
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-file-code card-icon"></i> reiniciar-rdp.sh</h3>
+            <p>Script de emergência para recuperação do acesso XRDP. Encerra todas as sessões do usuário kali, reinicia o LightDM e o XRDP em sequência. Executado via SSH quando o acesso gráfico falha.</p>
+            <div class="project-stack">
+              <span>Bash</span>
+              <span>pkill</span>
+              <span>systemctl</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-brands fa-github card-icon"></i> wazuh-lab/</h3>
+            <p>Repositório criado no Kali Linux para organização de todos os arquivos, configurações, scripts e evidências dos laboratórios. Versionado com Git e publicado no GitHub.</p>
+            <div class="project-stack">
+              <span>Git</span>
+              <span>GitHub</span>
+              <span>Versionamento</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- COMPETÊNCIAS -->
+      <section id="competencias" class="section">
+        <p class="section-label">Competências desenvolvidas</p>
+        <h2>O que este laboratório construiu na prática.</h2>
+        <p class="section-text">
+          A configuração deste ambiente exigiu conhecimentos que vão além de instalar um sistema
+          operacional. Cada etapa envolveu diagnóstico, decisão técnica e validação — habilidades
+          diretamente aplicáveis em ambientes reais de infraestrutura.
+        </p>
+        <div class="skills-grid">
+          <article class="skill-card">
+            <h3><i class="fa-brands fa-linux"></i> Administração Linux</h3>
+            <p>Gerenciamento de serviços com systemctl, controle de permissões, administração de usuários e sessões, análise de logs do sistema e operação diária via terminal.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-desktop"></i> Virtualização</h3>
+            <p>Criação e configuração de VMs no VMware Workstation, gerenciamento de snapshots para backup de estados estáveis e configuração de modos de rede (Bridge vs NAT).</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-network-wired"></i> Redes</h3>
+            <p>Configuração de modo Bridge para integração com a LAN real, validação de conectividade com ping, verificação de portas abertas e diagnóstico de problemas de conectividade.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-terminal"></i> SSH e Acesso Remoto</h3>
+            <p>Instalação e configuração de servidor SSH, geração e uso de chaves RSA, configuração de acesso sem senha e gerenciamento de conexões remotas seguras.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-gears"></i> Troubleshooting</h3>
+            <p>Diagnóstico de conflitos de sessão com loginctl, identificação da causa raiz do loop de login no XRDP e aplicação de solução definitiva com pkill e reinício de serviços.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-file-code"></i> Scripting Bash</h3>
+            <p>Criação de scripts de automação para recuperação de serviços, uso de chmod para permissões de execução e estruturação de rotinas de manutenção do ambiente.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- EVOLUÇÃO -->
+      <section id="evolucao" class="section">
+        <p class="section-label">Evolução do laboratório</p>
+        <h2>O que foi construído a partir deste ambiente.</h2>
+        <p class="section-text">
+          O Kali Linux foi o ponto zero. Cada laboratório que veio depois foi construído
+          sobre essa base, usando o Kali como endpoint, plataforma de testes ou ferramenta
+          de investigação.
+        </p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span><i class="fa-brands fa-linux"></i> Kali Linux — Ambiente base</span>
+            <p>VMware + Bridge + SSH + VS Code Remote + XRDP. Snapshot criado. Laboratório pronto para uso.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-brands fa-git-alt"></i> Git &amp; GitHub — Versionamento</span>
+            <p>Repositório <code style="color:var(--primary);font-family:monospace;">wazuh-lab/</code> criado no Kali para organizar os projetos e evidências dos laboratórios.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-shield-halved"></i> Wazuh SIEM/XDR — Endpoint monitorado</span>
+            <p>Kali Linux utilizado como endpoint com agente Wazuh instalado, registrado e integrado ao servidor Ubuntu Server.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-magnifying-glass"></i> Suricata IDS/IPS — Plataforma de testes</span>
+            <p>Suricata instalado no Kali, gerando eventos de segurança integrados ao Wazuh via <code style="color:var(--primary);font-family:monospace;">eve.json</code>.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec — Em desenvolvimento</span>
+            <p>Próxima etapa: implementação de proteção colaborativa baseada em análise de logs no ambiente Kali.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- RESULTADOS -->
+      <section id="resultados" class="section">
+        <p class="section-label">Resultados</p>
+        <h2>O que este laboratório entregou.</h2>
+        <p class="section-text">
+          Este ambiente não é apenas uma VM rodando. É uma infraestrutura completa de estudos,
+          acessível remotamente, versionada, documentada e em constante evolução.
+        </p>
+        <div class="stats-grid">
+          <div class="stat-card"><strong>03</strong><span>Formas de acesso remoto</span></div>
+          <div class="stat-card"><strong>01</strong><span>Snapshot de segurança</span></div>
+          <div class="stat-card"><strong>04+</strong><span>Labs construídos sobre esta base</span></div>
+          <div class="stat-card"><strong>100+</strong><span>Horas de prática acumuladas</span></div>
+        </div>
+      </section>
+
+      <!-- EVIDÊNCIAS -->
+      <section id="evidencias" class="section">
+        <p class="section-label">Evidências</p>
+        <h2>Registros do ambiente.</h2>
+        <p class="section-text">
+          A documentação completa do laboratório está disponível no repositório GitHub,
+          incluindo toda a configuração de SSH, XRDP, Bridge e acesso remoto.
+          Os prints do ambiente serão adicionados em breve.
+        </p>
+        <div class="profile-tags" style="margin-bottom:32px;">
+          <span><i class="fa-solid fa-terminal"></i> Terminal SSH</span>
+          <span><i class="fa-solid fa-display"></i> Sessão XRDP</span>
+          <span><i class="fa-solid fa-code"></i> VS Code Remote</span>
+          <span><i class="fa-solid fa-desktop"></i> VMware Workstation</span>
+          <span><i class="fa-solid fa-network-wired"></i> Bridge configurado</span>
+          <span><i class="fa-solid fa-shield-halved"></i> Agente Wazuh ativo</span>
+        </div>
+        <div style="margin-top:16px;padding:40px;border:1px dashed var(--border-light);border-radius:20px;text-align:center;">
+          <i class="fa-solid fa-images" style="font-size:48px;color:var(--primary);opacity:0.4;margin-bottom:16px;display:block;"></i>
+          <p style="color:var(--text-muted);font-size:16px;margin:0 0 24px;">Prints serão adicionados em breve.</p>
+          <a href="https://github.com/gabrielzaccaferreira/kali-remote-access-lab" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <i class="fa-brands fa-github"></i> Ver documentação no GitHub
+          </a>
+        </div>
+      </section>
+
+      <!-- PRÓXIMOS PASSOS -->
+      <section id="proximos-passos" class="section">
+        <p class="section-label">Próximos passos</p>
+        <h2>Como este ambiente continuará evoluindo.</h2>
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-fire-flame-curved card-icon"></i> CrowdSec</h3>
+            <p>Implementar proteção colaborativa baseada em análise de logs, decisões de bloqueio e comportamento malicioso no ambiente Kali.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-fire card-icon"></i> pfSense</h3>
+            <p>Adicionar uma VM pfSense ao laboratório para estudos de firewall, roteamento, NAT e segmentação de redes com o Kali como cliente.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-brands fa-docker card-icon"></i> Docker</h3>
+            <p>Instalar o Docker no Kali Linux para criar ambientes isolados em containers, expandindo os laboratórios para infraestrutura moderna.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-cloud card-icon"></i> Azure</h3>
+            <p>Integrar o ambiente local com fundamentos de cloud computing no Azure, conectando o laboratório físico com infraestrutura em nuvem.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- CONCLUSÃO -->
+      <section id="conclusao" class="section cta-premium">
+        <p class="section-label">Conclusão</p>
+        <h2>A base de todo o laboratório.</h2>
+        <p class="section-text">
+          Configurar esse ambiente do zero — VMware, Bridge, SSH, VS Code Remote e XRDP —
+          foi o primeiro projeto técnico real documentado neste portfólio. Cada erro encontrado
+          e cada solução aplicada fortaleceu a base para tudo que veio depois.
+        </p>
+        <div class="hero-actions">
+          <a href="wazuh.html" class="btn btn-primary">
+            <i class="fa-solid fa-shield-halved"></i> Ver laboratório Wazuh →
+          </a>
+          <a href="projetos.html" class="btn btn-secondary">Ver todos os projetos</a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <p class="footer-title">Gabriel Zacca Ferreira</p>
+      <p>Portfólio técnico em Redes, Infraestrutura, Cloud Computing e Cibersegurança.</p>
+      <nav class="footer-nav" aria-label="Navegação do rodapé">
+        <a href="../index.html">Home</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="projetos.html">Projetos</a>
+        <a href="blog.html">Blog</a>
+        <a href="roadmap.html">Roadmap</a>
+      </nav>
+      <div class="footer-links">
+        <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a href="mailto:gabrielzaccaferreira@gmail.com"><i class="fa-solid fa-envelope"></i> E-mail</a>
+        <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-lines"></i> Currículo</a>
+      </div>
+      <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
+    </footer>
+  </body>
+</html>

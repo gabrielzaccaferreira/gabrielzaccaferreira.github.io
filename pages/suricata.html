@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Suricata IDS/IPS | Gabriel Zacca Ferreira</title>
+    <meta name="description" content="Laboratório Suricata IDS/IPS: instalação, configuração, integração com Wazuh, regras de detecção e testes reais com nmap em ambiente virtualizado." />
+    <meta name="author" content="Gabriel Zacca Ferreira" />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Suricata IDS/IPS | Gabriel Zacca Ferreira" />
+    <meta property="og:description" content="IDS/IPS com detecção real de port scan, análise de tráfego e integração com Wazuh SIEM." />
+    <meta property="og:url" content="https://gabrielzaccaferreira.github.io/pages/suricata.html" />
+    <meta property="og:image" content="https://gabrielzaccaferreira.github.io/assets/images/og-image.png" />
+    <link rel="canonical" href="https://gabrielzaccaferreira.github.io/pages/suricata.html" />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navbar" aria-label="Navegação principal">
+        <a href="../index.html" class="logo">GZF</a>
+        <div class="nav-links">
+          <a href="../index.html">Home</a>
+          <a href="sobre.html">Sobre</a>
+          <a href="projetos.html">Projetos</a>
+          <a href="blog.html">Blog</a>
+          <a href="roadmap.html">Roadmap</a>
+        </div>
+        <div class="nav-actions">
+          <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer" class="nav-cv">Currículo</a>
+        </div>
+      </nav>
+      <div class="labs-bar">
+        <div class="labs-bar-inner">
+          <span class="labs-bar-label">Labs</span>
+          <a href="wazuh.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-shield-halved"></i> Wazuh SIEM/XDR</a>
+          <a href="kali-linux.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-brands fa-linux"></i> Kali Linux</a>
+          <a href="suricata.html" class="labs-bar-link active"><span class="lab-dot"></span><i class="fa-solid fa-network-wired"></i> Suricata IDS/IPS</a>
+          <a href="crowdsec.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- HERO -->
+      <section id="hero" class="hero">
+        <div class="hero-content">
+          <p class="eyebrow">IDS/IPS • Detecção de Intrusão • Análise de Tráfego • Blue Team</p>
+          <h1>
+            Suricata IDS/IPS
+            <span>Detecção real de ameaças em rede</span>
+          </h1>
+          <p class="hero-description">
+            Implementação do Suricata 8.0.5 no Kali Linux com integração ao Wazuh SIEM/XDR,
+            regras de detecção ativas, testes reais com nmap e análise de eventos de segurança
+            — construindo uma camada de defesa de rede no laboratório.
+          </p>
+          <div class="hero-actions">
+            <a href="#sobre" class="btn btn-primary">Ver o laboratório →</a>
+            <a href="#alertas" class="btn btn-secondary">Ver alertas reais</a>
+          </div>
+        </div>
+
+        <div class="architecture-card">
+          <p class="section-label">Topologia</p>
+          <h2>Fluxo do laboratório</h2>
+          <div class="architecture-flow">
+            <span>Kali Linux — Suricata 8.0.5</span>
+            <strong>↓</strong>
+            <span>Monitoramento de tráfego de rede</span>
+            <strong>↓</strong>
+            <span>/var/log/suricata/eve.json</span>
+            <strong>↓</strong>
+            <span>Wazuh Logcollector</span>
+            <strong>↓</strong>
+            <span>Wazuh SIEM Dashboard</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ÍNDICE -->
+      <section id="indice" class="section">
+        <p class="section-label">Índice</p>
+        <h2>Navegue pelo conteúdo desta documentação.</h2>
+        <div class="profile-tags">
+          <a href="#sobre"><span>Sobre</span></a>
+          <a href="#especificacoes"><span>Especificações</span></a>
+          <a href="#implementacao"><span>Implementação</span></a>
+          <a href="#regras"><span>Regras</span></a>
+          <a href="#integracao"><span>Integração Wazuh</span></a>
+          <a href="#alertas"><span>Alertas reais</span></a>
+          <a href="#competencias"><span>Competências</span></a>
+          <a href="#resultados"><span>Resultados</span></a>
+          <a href="#evidencias"><span>Evidências</span></a>
+          <a href="#conclusao"><span>Conclusão</span></a>
+        </div>
+      </section>
+
+      <!-- SOBRE -->
+      <section id="sobre" class="section">
+        <p class="section-label">Sobre o laboratório</p>
+        <h2>O que é o Suricata e por que ele está no laboratório.</h2>
+        <p class="section-text">
+          O Suricata é um motor open source de detecção e prevenção de intrusões em rede (IDS/IPS).
+          Ele analisa o tráfego em tempo real, aplica regras de detecção e gera alertas quando
+          identifica comportamentos suspeitos — como port scans, tentativas de exploração e
+          comunicação com IPs maliciosos.
+        </p>
+        <p class="section-text">
+          Neste laboratório, o Suricata foi instalado no Kali Linux e integrado ao Wazuh SIEM/XDR,
+          criando um pipeline completo: o tráfego é analisado pelo Suricata, os eventos são
+          gravados em JSON e coletados pelo Wazuh para correlação e visualização no dashboard.
+          Testes reais com nmap geraram alertas de port scan detectados e documentados.
+        </p>
+      </section>
+
+      <!-- ESPECIFICAÇÕES -->
+      <section id="especificacoes" class="section">
+        <p class="section-label">Especificações</p>
+        <h2>Ambiente técnico do laboratório.</h2>
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title"><i class="fa-brands fa-linux card-icon"></i> Sistema base</h3>
+            <p>Suricata instalado no Kali Linux rodando como VM no VMware Workstation, em modo Bridge com IP real na rede local do laboratório.</p>
+            <div class="project-stack">
+              <span>Kali Linux 2026.2</span>
+              <span>VMware Bridge</span>
+              <span>IP LAN</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-network-wired card-icon"></i> Suricata 8.0.5</h3>
+            <p>Versão mais recente do Suricata em modo AF-PACKET, monitorando a interface de rede em tempo real com 70MB+ de eventos registrados no eve.json.</p>
+            <div class="project-stack">
+              <span>Suricata 8.0.5</span>
+              <span>AF-PACKET</span>
+              <span>eve.json</span>
+              <span>fast.log</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-shield-halved card-icon"></i> Wazuh SIEM</h3>
+            <p>Ubuntu Server com Wazuh Manager coletando os eventos do Suricata via Logcollector, integrando detecção de rede ao pipeline centralizado de segurança.</p>
+            <div class="project-stack">
+              <span>Wazuh 4.14.5</span>
+              <span>Logcollector</span>
+              <span>ossec.conf</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-scroll card-icon"></i> Fontes de regras</h3>
+            <p>Regras carregadas via suricata-update com fontes open source incluindo Emerging Threats, Abuse.ch, OISF Traffic ID e regras customizadas para detecção de nmap.</p>
+            <div class="project-stack">
+              <span>et/open</span>
+              <span>abuse.ch</span>
+              <span>aleksibovellan/nmap</span>
+              <span>oisf/trafficid</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- IMPLEMENTAÇÃO -->
+      <section id="implementacao" class="section">
+        <p class="section-label">Processo de implementação</p>
+        <h2>Da instalação à detecção ativa.</h2>
+        <p class="section-text">
+          Cada etapa foi executada em sequência, validada e documentada antes de avançar.
+          O fluxo seguiu a mesma metodologia aplicada no laboratório Wazuh: backup,
+          leitura, planejamento, alteração, teste e validação.
+        </p>
+        <div class="roadmap-list">
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Instalação do Suricata</h3>
+              <p>Instalação do Suricata 8.0.5 no Kali Linux via repositório oficial. Verificação do serviço com <code style="color:var(--primary);font-family:monospace;">systemctl status suricata</code> confirmando modo AF-PACKET ativo.</p>
+              <div class="project-stack">
+                <span>apt install suricata</span>
+                <span>Suricata 8.0.5</span>
+                <span>AF-PACKET</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Atualização das regras com suricata-update</h3>
+              <p>Execução do <code style="color:var(--primary);font-family:monospace;">suricata-update</code> para carregar o índice de fontes de regras. Listagem de todas as fontes disponíveis incluindo Emerging Threats, Abuse.ch, OISF, Stamus Networks e outras.</p>
+              <div class="project-stack">
+                <span>suricata-update</span>
+                <span>et/open</span>
+                <span>abuse.ch</span>
+                <span>oisf/trafficid</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Habilitação da fonte aleksibovellan/nmap</h3>
+              <p>Ativação da fonte de regras especializada em detecção de scans Nmap — regras que identificam <code style="color:var(--primary);font-family:monospace;">-sS</code> (SYN scan), <code style="color:var(--primary);font-family:monospace;">-sX</code> (Xmas scan) e outras técnicas de reconhecimento.</p>
+              <div class="project-stack">
+                <span>aleksibovellan/nmap</span>
+                <span>SYN scan</span>
+                <span>Xmas scan</span>
+                <span>Port scan detection</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Configuração do eve.json</h3>
+              <p>Validação do arquivo de configuração <code style="color:var(--primary);font-family:monospace;">/etc/suricata/suricata.yaml</code> e confirmação do log de eventos em formato JSON em <code style="color:var(--primary);font-family:monospace;">/var/log/suricata/eve.json</code> com 70MB+ de dados capturados.</p>
+              <div class="project-stack">
+                <span>suricata.yaml</span>
+                <span>eve.json — 70MB+</span>
+                <span>fast.log</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Integração com o Wazuh</h3>
+              <p>Configuração do <code style="color:var(--primary);font-family:monospace;">ossec.conf</code> no agente Kali para que o Wazuh Logcollector monitore o <code style="color:var(--primary);font-family:monospace;">eve.json</code>. Reinício do agente e confirmação nos logs: <em>"Analyzing file: /var/log/suricata/eve.json"</em>.</p>
+              <div class="project-stack">
+                <span>ossec.conf</span>
+                <span>localfile</span>
+                <span>wazuh-logcollector</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Testes de detecção com nmap</h3>
+              <p>Execução de <code style="color:var(--primary);font-family:monospace;">nmap -sS</code> e <code style="color:var(--primary);font-family:monospace;">nmap -A</code> contra o servidor Wazuh (192.168.218.129). Alertas gerados em tempo real no <code style="color:var(--primary);font-family:monospace;">fast.log</code> confirmando detecção ativa.</p>
+              <div class="project-stack">
+                <span>nmap -sS</span>
+                <span>nmap -A</span>
+                <span>fast.log</span>
+                <span>Alertas reais</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- REGRAS -->
+      <section id="regras" class="section">
+        <p class="section-label">Regras de detecção</p>
+        <h2>Fontes de regras configuradas no laboratório.</h2>
+        <p class="section-text">
+          O Suricata funciona com base em regras — assinaturas que definem padrões de tráfego
+          suspeito. Quanto mais regras ativas e mais específicas para o ambiente, maior a
+          cobertura de detecção.
+        </p>
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-bolt card-icon"></i> Emerging Threats</h3>
+            <p>Conjunto de regras open source mantido pela Proofpoint. Cobre uma ampla variedade de ameaças: malware, exploits, C2, botnets e tráfego suspeito em geral.</p>
+            <div class="project-stack">
+              <span>et/open</span>
+              <span>MIT License</span>
+              <span>Proofpoint</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-ban card-icon"></i> Abuse.ch</h3>
+            <p>Quatro fontes especializadas: Feodo Tracker (botnets C2), SSL Blacklist, JA3 Fingerprints e URLhaus. Foco em infraestrutura maliciosa conhecida.</p>
+            <div class="project-stack">
+              <span>Feodo Tracker</span>
+              <span>SSL Blacklist</span>
+              <span>URLhaus</span>
+              <span>JA3</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-magnifying-glass card-icon"></i> aleksibovellan/nmap</h3>
+            <p>Regras específicas para detecção de scans com Nmap — identificando SYN scan, Xmas scan e outros tipos de reconhecimento de rede. Usadas nos testes do laboratório.</p>
+            <div class="project-stack">
+              <span>NMAP -sS</span>
+              <span>NMAP -sX</span>
+              <span>Port scan</span>
+              <span>MIT License</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-chart-bar card-icon"></i> OISF Traffic ID</h3>
+            <p>Regras de identificação de protocolos e tráfego de rede mantidas pelo Open Information Security Foundation — criadores do Suricata.</p>
+            <div class="project-stack">
+              <span>oisf/trafficid</span>
+              <span>Protocol ID</span>
+              <span>MIT License</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- INTEGRAÇÃO WAZUH -->
+      <section id="integracao" class="section">
+        <p class="section-label">Integração com Wazuh</p>
+        <h2>Como o Suricata se conecta ao SIEM.</h2>
+        <p class="section-text">
+          A integração entre Suricata e Wazuh transforma eventos de rede isolados em alertas
+          correlacionados e visíveis no dashboard centralizado. O fluxo foi configurado no
+          agente Wazuh do Kali Linux editando o arquivo <code style="color:var(--primary);font-family:monospace;">ossec.conf</code>.
+        </p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-network-wired"></i> Suricata monitora o tráfego</span>
+            <p>O Suricata analisa todo o tráfego na interface de rede do Kali Linux em tempo real, aplicando as regras carregadas via suricata-update.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-file-code"></i> Eventos gravados em eve.json</span>
+            <p>Cada evento detectado é gravado em formato JSON estruturado em <code style="color:var(--primary);font-family:monospace;">/var/log/suricata/eve.json</code> — alertas, flows, DNS, HTTP e outros tipos.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-gears"></i> Wazuh Logcollector monitora o arquivo</span>
+            <p>O bloco <code style="color:var(--primary);font-family:monospace;">&lt;localfile&gt;</code> no <code style="color:var(--primary);font-family:monospace;">ossec.conf</code> instrui o agente a ler continuamente o eve.json e enviar os eventos ao servidor Wazuh.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-shield-halved"></i> Wazuh processa e correlaciona</span>
+            <p>O Wazuh Manager recebe os eventos, aplica decoders e regras, gera alertas e os exibe no dashboard — conectando detecção de rede ao SIEM.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-check"></i> Validação confirmada nos logs</span>
+            <p>Confirmação da integração pelo log do agente: <em style="color:var(--primary);">"wazuh-logcollector: INFO: (1950): Analyzing file: '/var/log/suricata/eve.json'"</em></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ALERTAS REAIS -->
+      <section id="alertas" class="section">
+        <p class="section-label">Alertas reais</p>
+        <h2>Detecções geradas durante os testes.</h2>
+        <p class="section-text">
+          Os testes foram executados com <code style="color:var(--primary);font-family:monospace;">nmap -sS</code> e <code style="color:var(--primary);font-family:monospace;">nmap -A</code>
+          a partir do Kali Linux (192.168.218.130) contra o servidor Wazuh (192.168.218.129).
+          O Suricata detectou os scans em tempo real e gerou alertas no <code style="color:var(--primary);font-family:monospace;">fast.log</code>.
+        </p>
+
+        <div class="cards-grid">
+          <article class="card highlight">
+            <h3 class="card-title"><i class="fa-solid fa-triangle-exclamation card-icon"></i> SYN Scan detectado</h3>
+            <p>Regra <strong>POSSBL PORT SCAN (NMAP -sS)</strong> ativada múltiplas vezes durante o scan SYN. Classificado como <em>Attempted Information Leak</em>, prioridade 2.</p>
+            <div class="project-stack">
+              <span>SID 3400002</span>
+              <span>Priority 2</span>
+              <span>TCP</span>
+              <span>nmap -sS</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-triangle-exclamation card-icon"></i> Xmas Scan detectado</h3>
+            <p>Regra <strong>POSSBL PORT SCAN (NMAP -sX)</strong> ativada durante testes avançados. Técnica de reconhecimento usando pacotes TCP com flags FIN, URG e PSH.</p>
+            <div class="project-stack">
+              <span>SID 3400005</span>
+              <span>Priority 2</span>
+              <span>TCP</span>
+              <span>nmap -sX</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-circle-info card-icon"></i> ICMPv4 detectado</h3>
+            <p>Regra <strong>SURICATA ICMPv4 unknown code</strong> ativada durante pings entre as VMs do laboratório. Classificado como <em>Generic Protocol Command Decode</em>, prioridade 3.</p>
+            <div class="project-stack">
+              <span>SID 2200025</span>
+              <span>Priority 3</span>
+              <span>ICMP</span>
+              <span>ping</span>
+            </div>
+          </article>
+        </div>
+
+        <!-- Bloco de log real -->
+        <div style="margin-top:40px;">
+          <p class="section-label">Saída real do fast.log</p>
+          <h2>Alertas capturados durante o teste nmap.</h2>
+          <div style="margin-top:24px;padding:28px;background:rgba(2,6,23,0.8);border:1px solid var(--border-light);border-radius:16px;overflow-x:auto;">
+            <pre style="margin:0;color:var(--text-soft);font-family:monospace;font-size:13px;line-height:1.8;white-space:pre-wrap;">[**] [1:3400002:2] POSSBL PORT SCAN (NMAP -sS) [**]
+[Classification: Attempted Information Leak] [Priority: 2]
+{TCP} 192.168.218.130:42661 -> 192.168.218.129:1272
+
+[**] [1:3400002:2] POSSBL PORT SCAN (NMAP -sS) [**]
+[Classification: Attempted Information Leak] [Priority: 2]
+{TCP} 192.168.218.130:42661 -> 192.168.218.129:2998
+
+[**] [1:2200025:2] SURICATA ICMPv4 unknown code [**]
+[Classification: Generic Protocol Command Decode] [Priority: 3]
+{ICMP} 192.168.218.130:8 -> 192.168.218.129:9
+
+[**] [1:3400005:2] POSSBL PORT SCAN (NMAP -sX) [**]
+[Classification: Attempted Information Leak] [Priority: 2]
+{TCP} 192.168.218.130:45439 -> 192.168.218.129:1</pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPETÊNCIAS -->
+      <section id="competencias" class="section">
+        <p class="section-label">Competências desenvolvidas</p>
+        <h2>O que este laboratório construiu na prática.</h2>
+        <p class="section-text">
+          Este laboratório foi além da instalação — envolveu compreensão do funcionamento
+          do IDS, configuração de regras, integração com SIEM e análise de alertas reais
+          gerados por testes controlados.
+        </p>
+        <div class="skills-grid">
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-network-wired"></i> IDS/IPS</h3>
+            <p>Configuração e operação do Suricata como IDS em modo AF-PACKET, monitorando tráfego de rede em tempo real e aplicando regras de detecção sobre os pacotes capturados.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-scroll"></i> Gerenciamento de regras</h3>
+            <p>Uso do suricata-update para listar, habilitar e atualizar fontes de regras. Compreensão da estrutura de uma regra Suricata: SID, classificação, prioridade, protocolo e condição de match.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-file-code"></i> Análise de logs JSON</h3>
+            <p>Leitura e interpretação do eve.json — formato estruturado com campos como event_type, src_ip, dest_ip, proto, alert.signature e alert.category para análise de eventos.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-shield-halved"></i> Integração SIEM</h3>
+            <p>Configuração do ossec.conf para ingestão do eve.json pelo Wazuh Logcollector, criando um pipeline de detecção de rede integrado ao sistema centralizado de monitoramento.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-magnifying-glass"></i> Threat Detection</h3>
+            <p>Execução de testes controlados com nmap para validar a detecção, análise dos alertas gerados e correlação entre o comportamento do atacante e a resposta do IDS.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-gears"></i> Linux Administration</h3>
+            <p>Gerenciamento do serviço Suricata via systemctl, edição de arquivos de configuração YAML, verificação de logs do sistema e troubleshooting de integração com o agente Wazuh.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- RESULTADOS -->
+      <section id="resultados" class="section">
+        <p class="section-label">Resultados</p>
+        <h2>O que foi entregue neste laboratório.</h2>
+        <p class="section-text">
+          Este laboratório resultou em um IDS funcional, integrado ao SIEM, com regras ativas
+          e detecções reais documentadas — demonstrando na prática o funcionamento de uma
+          camada de defesa de rede.
+        </p>
+        <div class="stats-grid">
+          <div class="stat-card"><strong>8.0.5</strong><span>Versão do Suricata</span></div>
+          <div class="stat-card"><strong>70MB+</strong><span>Eventos no eve.json</span></div>
+          <div class="stat-card"><strong>03</strong><span>Tipos de alerta gerados</span></div>
+          <div class="stat-card"><strong>01</strong><span>Pipeline SIEM integrado</span></div>
+        </div>
+      </section>
+
+      <!-- EVIDÊNCIAS -->
+      <section id="evidencias" class="section">
+        <p class="section-label">Evidências</p>
+        <h2>Registros do laboratório.</h2>
+        <p class="section-text">
+          Evidências reais do laboratório Suricata — status do serviço, alertas no fast.log
+          e eventos JSON capturados durante os testes com nmap.
+        </p>
+        <div class="profile-tags" style="margin-bottom:32px;">
+          <span><i class="fa-solid fa-circle-check"></i> Suricata active (running)</span>
+          <span><i class="fa-solid fa-file-lines"></i> fast.log com alertas reais</span>
+          <span><i class="fa-solid fa-code"></i> eve.json — eventos estruturados</span>
+        </div>
+        <div class="evidence-grid">
+          <figure class="evidence-image">
+            <a href="https://github.com/gabrielzaccaferreira/suricata-lab/blob/main/screenshots/suricata-status.png" target="_blank" rel="noopener noreferrer">
+              <img
+                src="https://github.com/gabrielzaccaferreira/suricata-lab/raw/main/screenshots/suricata-status.png"
+                alt="Status do serviço Suricata"
+                loading="lazy"
+                width="800"
+                height="450"
+              />
+            </a>
+            <figcaption>Suricata 8.0.5 — active (running) no Kali Linux.</figcaption>
+          </figure>
+
+          <figure class="evidence-image">
+            <a href="https://github.com/gabrielzaccaferreira/suricata-lab/blob/main/screenshots/fast-log.png" target="_blank" rel="noopener noreferrer">
+              <img
+                src="https://github.com/gabrielzaccaferreira/suricata-lab/raw/main/screenshots/fast-log.png"
+                alt="Alertas no fast.log do Suricata"
+                loading="lazy"
+                width="800"
+                height="450"
+              />
+            </a>
+            <figcaption>fast.log — alertas de port scan (nmap -sS) detectados em tempo real.</figcaption>
+          </figure>
+
+          <figure class="evidence-image evidence-image-wide">
+            <a href="https://github.com/gabrielzaccaferreira/suricata-lab/blob/main/screenshots/eve-json.png" target="_blank" rel="noopener noreferrer">
+              <img
+                src="https://github.com/gabrielzaccaferreira/suricata-lab/raw/main/screenshots/eve-json.png"
+                alt="Eventos JSON no eve.json do Suricata"
+                loading="lazy"
+                width="800"
+                height="450"
+              />
+            </a>
+            <figcaption>eve.json — eventos estruturados em JSON para integração com o Wazuh.</figcaption>
+          </figure>
+        </div>
+
+        <div style="margin-top:32px;text-align:center;">
+          <a href="https://github.com/gabrielzaccaferreira/suricata-lab" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <i class="fa-brands fa-github"></i> Ver repositório completo no GitHub
+          </a>
+        </div>
+      </section>
+
+      <!-- PRÓXIMOS PASSOS -->
+      <section id="proximos-passos" class="section">
+        <p class="section-label">Próximos passos</p>
+        <h2>Como este laboratório continuará evoluindo.</h2>
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-pen-ruler card-icon"></i> Regras customizadas</h3>
+            <p>Criar regras Suricata próprias para detectar comportamentos específicos do laboratório, seguindo a metodologia de Detection Engineering aplicada no Wazuh.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-fire-flame-curved card-icon"></i> Integração CrowdSec</h3>
+            <p>Adicionar o CrowdSec ao laboratório para criar uma camada de proteção colaborativa complementar ao Suricata, bloqueando IPs maliciosos automaticamente.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-shield-halved card-icon"></i> Modo IPS</h3>
+            <p>Evoluir o Suricata de modo IDS (detecção passiva) para IPS (prevenção ativa), configurando bloqueio automático de tráfego malicioso identificado pelas regras.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-chart-bar card-icon"></i> Dashboard Wazuh</h3>
+            <p>Criar visualizações dedicadas no dashboard Wazuh para eventos do Suricata, separando alertas de rede por tipo, prioridade e IP de origem.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- CONCLUSÃO -->
+      <section id="conclusao" class="section cta-premium">
+        <p class="section-label">Conclusão</p>
+        <h2>IDS funcionando. Ameaças detectadas. Pipeline integrado.</h2>
+        <p class="section-text">
+          Este laboratório demonstrou na prática o funcionamento de um IDS open source —
+          desde a instalação até a detecção real de port scans com nmap, passando pela
+          integração com o Wazuh SIEM. O resultado é uma camada de visibilidade de rede
+          que complementa o monitoramento de endpoints já documentado no case Wazuh.
+        </p>
+        <div class="hero-actions">
+          <a href="wazuh.html" class="btn btn-primary">
+            <i class="fa-solid fa-shield-halved"></i> Ver laboratório Wazuh →
+          </a>
+          <a href="kali-linux.html" class="btn btn-secondary">
+            <i class="fa-brands fa-linux"></i> Ver laboratório Kali
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <p class="footer-title">Gabriel Zacca Ferreira</p>
+      <p>Portfólio técnico em Redes, Infraestrutura, Cloud Computing e Cibersegurança.</p>
+      <nav class="footer-nav" aria-label="Navegação do rodapé">
+        <a href="../index.html">Home</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="projetos.html">Projetos</a>
+        <a href="blog.html">Blog</a>
+        <a href="roadmap.html">Roadmap</a>
+      </nav>
+      <div class="footer-links">
+        <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a href="mailto:gabrielzaccaferreira@gmail.com"><i class="fa-solid fa-envelope"></i> E-mail</a>
+        <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-lines"></i> Currículo</a>
+      </div>
+      <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
+    </footer>
+  </body>
+</html>

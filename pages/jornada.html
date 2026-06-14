@@ -3,25 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Minha Jornada | Gabriel Zacca Ferreira</title>
-
-    <meta
-      name="description"
-      content="Linha do tempo da jornada profissional e técnica de Gabriel Zacca Ferreira, com foco em Redes, Infraestrutura, Linux, Cloud Computing e Cibersegurança."
-    />
-
+    <meta name="description" content="Linha do tempo da jornada profissional e técnica de Gabriel Zacca Ferreira, com foco em Redes, Infraestrutura, Linux, Cloud Computing e Cibersegurança." />
     <meta name="author" content="Gabriel Zacca Ferreira" />
-
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Minha Jornada | Gabriel Zacca Ferreira" />
+    <meta property="og:description" content="Linha do tempo da jornada profissional e técnica em Redes, Infraestrutura, Linux, Cloud e Cibersegurança." />
+    <meta property="og:url" content="https://gabrielzaccaferreira.github.io/pages/jornada.html" />
+    <meta property="og:image" content="https://gabrielzaccaferreira.github.io/assets/images/og-image.png" />
+    <link rel="canonical" href="https://gabrielzaccaferreira.github.io/pages/jornada.html" />
     <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <link rel="stylesheet" href="../style.css" />
   </head>
-
   <body>
     <header class="site-header">
-      <nav class="navbar">
+      <nav class="navbar" aria-label="Navegação principal">
         <a href="../index.html" class="logo">GZF</a>
-
         <div class="nav-links">
           <a href="../index.html">Home</a>
           <a href="sobre.html">Sobre</a>
@@ -29,259 +29,164 @@
           <a href="blog.html">Blog</a>
           <a href="roadmap.html">Roadmap</a>
         </div>
-
         <div class="nav-actions">
-          <a href="https://github.com/gabrielzaccaferreira" target="_blank">
-            GitHub
-          </a>
-
-          <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank">
-            LinkedIn
-          </a>
-
-          <a href="#" target="_blank" class="nav-cv">Currículo</a>
+          <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer" class="nav-cv">Currículo</a>
         </div>
       </nav>
+      <div class="labs-bar">
+        <div class="labs-bar-inner">
+          <span class="labs-bar-label">Labs</span>
+          <a href="wazuh.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-shield-halved"></i> Wazuh SIEM/XDR</a>
+          <a href="kali-linux.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-brands fa-linux"></i> Kali Linux</a>
+          <a href="suricata.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-network-wired"></i> Suricata IDS/IPS</a>
+          <a href="crowdsec.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec</a>
+        </div>
+      </div>
     </header>
 
     <main>
-      <section class="hero">
+      <section id="hero" class="hero">
         <div class="hero-content">
           <p class="eyebrow">Minha Jornada</p>
-
           <h1>
             Evolução contínua
             <span>através da prática.</span>
           </h1>
-
           <p class="hero-description">
             Esta página registra minha evolução profissional e técnica em Redes,
             Infraestrutura, Linux, Cloud Computing e Cibersegurança através de
             experiências práticas, estudos, laboratórios e documentação.
           </p>
-
           <div class="hero-actions">
-            <a href="#timeline" class="btn btn-primary">
-              Ver evolução
-            </a>
-
-            <a href="projetos.html" class="btn btn-secondary">
-              Ver projetos
-            </a>
+            <a href="#timeline" class="btn btn-primary">Ver evolução</a>
+            <a href="projetos.html" class="btn btn-secondary">Ver projetos</a>
           </div>
         </div>
 
-        <aside class="profile-card">
-          <div class="profile-avatar">🚀</div>
-
+        <div class="profile-card">
+          <div class="profile-avatar"><i class="fa-solid fa-rocket"></i></div>
           <h2>Objetivo</h2>
-
-          <p>
-            Construir uma carreira sólida em Tecnologia através de aprendizado
-            contínuo, documentação técnica e experiência prática.
-          </p>
-
+          <p>Construir uma carreira sólida em Tecnologia através de aprendizado contínuo, documentação técnica e experiência prática.</p>
           <div class="profile-tags">
-            <span>🌐 Redes</span>
-            <span>🐧 Linux</span>
-            <span>☁️ Cloud</span>
-            <span>🛡️ Segurança</span>
-            <span>📊 Blue Team</span>
+            <span><i class="fa-solid fa-network-wired"></i> Redes</span>
+            <span><i class="fa-brands fa-linux"></i> Linux</span>
+            <span><i class="fa-solid fa-cloud"></i> Cloud</span>
+            <span><i class="fa-solid fa-shield-halved"></i> Segurança</span>
+            <span><i class="fa-solid fa-chart-bar"></i> Blue Team</span>
           </div>
-        </aside>
+        </div>
+      </section>
+
+      <section id="indice" class="section">
+        <p class="section-label">Índice</p>
+        <h2>Navegue pela minha jornada.</h2>
+        <div class="profile-tags">
+          <a href="#timeline"><span>Linha do Tempo</span></a>
+          <a href="#proximos-passos"><span>Próximos Passos</span></a>
+          <a href="#missao"><span>Missão</span></a>
+        </div>
       </section>
 
       <section id="timeline" class="section roadmap-premium">
         <p class="section-label">Linha do Tempo</p>
-
         <h2>Minha evolução profissional e técnica.</h2>
-
         <p class="section-text">
-          Minha trajetória une experiência prática com atendimento, resolução de
-          problemas, empreendedorismo, disciplina operacional e construção de
-          conhecimento técnico aplicado.
+          Minha trajetória une experiência prática com atendimento, resolução de problemas, empreendedorismo, disciplina operacional e construção de conhecimento técnico aplicado.
         </p>
-
         <div class="timeline">
           <div class="timeline-item">
-            <span>🛠️ Experiência prática com suporte</span>
-            <p>
-              Desenvolvimento de habilidades em atendimento ao cliente,
-              diagnóstico de problemas, suporte técnico, manutenção de sistemas
-              e comunicação clara com usuários.
-            </p>
+            <span><i class="fa-solid fa-screwdriver-wrench"></i> Experiência prática com suporte</span>
+            <p>Desenvolvimento de habilidades em atendimento ao cliente, diagnóstico de problemas, suporte técnico, manutenção de sistemas e comunicação clara com usuários.</p>
           </div>
-
           <div class="timeline-item">
-            <span>🏢 MPZ Eletrônicos</span>
-            <p>
-              Atuação prática com instalação, configuração, manutenção e suporte
-              em ambientes Windows, Linux, hardware, backup, recuperação de
-              dados e resolução de problemas técnicos.
-            </p>
+            <span><i class="fa-solid fa-building"></i> MPZ Eletrônicos</span>
+            <p>Atuação prática com instalação, configuração, manutenção e suporte em ambientes Windows, Linux, hardware, backup, recuperação de dados e resolução de problemas técnicos.</p>
           </div>
-
           <div class="timeline-item">
-            <span>📊 Mercado financeiro</span>
-            <p>
-              Desenvolvimento de disciplina, capacidade analítica, controle
-              emocional, tomada de decisão sob pressão e registro estruturado de
-              operações.
-            </p>
+            <span><i class="fa-solid fa-chart-line"></i> Mercado financeiro</span>
+            <p>Desenvolvimento de disciplina, capacidade analítica, controle emocional, tomada de decisão sob pressão e registro estruturado de operações.</p>
           </div>
-
           <div class="timeline-item">
-            <span>🎯 Foco definitivo em Tecnologia</span>
-            <p>
-              Direcionamento da carreira para Redes de Computadores,
-              Infraestrutura, Cloud Computing e Cibersegurança, com dedicação a
-              estudos práticos e construção de portfólio.
-            </p>
+            <span><i class="fa-solid fa-bullseye"></i> Foco definitivo em Tecnologia</span>
+            <p>Direcionamento da carreira para Redes de Computadores, Infraestrutura, Cloud Computing e Cibersegurança, com dedicação a estudos práticos e construção de portfólio.</p>
           </div>
-
           <div class="timeline-item">
-            <span>🖥️ VMware + Kali Linux</span>
-            <p>
-              Criação de ambiente virtualizado para desenvolvimento de
-              laboratórios técnicos, testes, estudos de segurança e
-              documentação prática.
-            </p>
+            <span><i class="fa-solid fa-desktop"></i> VMware + Kali Linux</span>
+            <p>Criação de ambiente virtualizado para desenvolvimento de laboratórios técnicos, testes, estudos de segurança e documentação prática. <a href="kali-linux.html" style="color:var(--primary);font-weight:700;">Ver documentação →</a></p>
           </div>
-
           <div class="timeline-item">
-            <span>🛡️ Wazuh SIEM/XDR</span>
-            <p>
-              Implementação de ambiente completo para monitoramento, análise de
-              eventos, integração de agentes, validações e documentação técnica.
-            </p>
+            <span><i class="fa-solid fa-shield-halved"></i> Wazuh SIEM/XDR</span>
+            <p>Implementação de ambiente completo para monitoramento, análise de eventos, integração de agentes, validações e documentação técnica. <a href="wazuh.html" style="color:var(--primary);font-weight:700;">Ver documentação →</a></p>
           </div>
-
           <div class="timeline-item">
-            <span>🌐 Suricata IDS/IPS</span>
-            <p>
-              Estudos de monitoramento de tráfego, detecção de ameaças, regras
-              de segurança e análise de eventos de rede.
-            </p>
+            <span><i class="fa-solid fa-network-wired"></i> Suricata IDS/IPS</span>
+            <p>Estudos de monitoramento de tráfego, detecção de ameaças, regras de segurança e análise de eventos de rede.</p>
           </div>
-
           <div class="timeline-item">
-            <span>🔥 CrowdSec</span>
-            <p>
-              Implementação de laboratório voltado para análise colaborativa de
-              ameaças, logs e proteção automatizada.
-            </p>
+            <span><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec</span>
+            <p>Implementação de laboratório voltado para análise colaborativa de ameaças, logs e proteção automatizada. <a href="crowdsec.html" style="color:var(--primary);font-weight:700;">Ver documentação →</a></p>
           </div>
-
           <div class="timeline-item">
-            <span>🎓 Formação em Redes de Computadores</span>
-            <p>
-              Evolução acadêmica com foco em fundamentos de redes,
-              infraestrutura, cloud, segurança da informação e práticas voltadas
-              ao mercado.
-            </p>
+            <span><i class="fa-solid fa-graduation-cap"></i> Formação em Redes de Computadores</span>
+            <p>Evolução acadêmica com foco em fundamentos de redes, infraestrutura, cloud, segurança da informação e práticas voltadas ao mercado.</p>
           </div>
         </div>
       </section>
 
-      <section class="section">
+      <section id="proximos-passos" class="section">
         <p class="section-label">Próximos Passos</p>
-
         <h2>Roadmap de evolução.</h2>
-
         <div class="cards-grid">
           <article class="card">
-            <h3>✅ Redes</h3>
-
-            <p>
-              Consolidação dos fundamentos de redes, protocolos,
-              troubleshooting, roteamento, switching e infraestrutura.
-            </p>
+            <h3 class="card-title"><i class="fa-solid fa-check card-icon"></i> Redes</h3>
+            <p>Consolidação dos fundamentos de redes, protocolos, troubleshooting, roteamento, switching e infraestrutura.</p>
           </article>
-
           <article class="card">
-            <h3>✅ Linux</h3>
-
-            <p>
-              Administração de sistemas, automação, gerenciamento de serviços,
-              permissões, logs e segurança.
-            </p>
+            <h3 class="card-title"><i class="fa-solid fa-check card-icon"></i> Linux</h3>
+            <p>Administração de sistemas, automação, gerenciamento de serviços, permissões, logs e segurança.</p>
           </article>
-
           <article class="card">
-            <h3>🔄 Cloud</h3>
-
-            <p>
-              Aprimoramento em ambientes cloud, virtualização, Azure,
-              infraestrutura e ambientes híbridos.
-            </p>
+            <h3 class="card-title"><i class="fa-solid fa-arrows-rotate card-icon"></i> Cloud</h3>
+            <p>Aprimoramento em ambientes cloud, virtualização, Azure, infraestrutura e ambientes híbridos.</p>
           </article>
-
           <article class="card">
-            <h3>🎯 SOC / Blue Team</h3>
-
-            <p>
-              Especialização em monitoramento, resposta a incidentes, análise de
-              eventos, SIEM, IDS/IPS e defesa cibernética.
-            </p>
+            <h3 class="card-title"><i class="fa-solid fa-crosshairs card-icon"></i> SOC / Blue Team</h3>
+            <p>Especialização em monitoramento, resposta a incidentes, análise de eventos, SIEM, IDS/IPS e defesa cibernética.</p>
           </article>
         </div>
       </section>
 
-      <section class="section">
+      <section id="missao" class="section">
         <p class="section-label">Missão</p>
-
         <h2>Aprender fazendo.</h2>
-
-        <p class="section-text">
-          Acredito que o conhecimento técnico é fortalecido pela prática. Por
-          isso, cada estudo realizado é acompanhado por laboratórios,
-          documentação e projetos publicados neste portfólio.
-        </p>
-
-        <p class="section-text">
-          Meu objetivo é transformar estudo em evidência prática, demonstrando
-          evolução, organização, capacidade de resolução de problemas e preparo
-          para atuar em ambientes reais de tecnologia.
-        </p>
-
+        <p class="section-text">Acredito que o conhecimento técnico é fortalecido pela prática. Por isso, cada estudo realizado é acompanhado por laboratórios, documentação e projetos publicados neste portfólio.</p>
+        <p class="section-text">Meu objetivo é transformar estudo em evidência prática, demonstrando evolução, organização, capacidade de resolução de problemas e preparo para atuar em ambientes reais de tecnologia.</p>
         <div class="hero-actions">
-          <a href="roadmap.html" class="btn btn-primary">
-            Ver roadmap
-          </a>
-
-          <a href="projetos.html" class="btn btn-secondary">
-            Ver projetos
-          </a>
+          <a href="roadmap.html" class="btn btn-primary">Ver roadmap</a>
+          <a href="projetos.html" class="btn btn-secondary">Ver projetos</a>
         </div>
       </section>
     </main>
 
-    <footer id="contato" class="footer">
+    <footer class="footer">
       <p class="footer-title">Gabriel Zacca Ferreira</p>
-
-      <p>
-        Portfólio técnico em Redes, Infraestrutura, Cloud Computing e
-        Cibersegurança.
-      </p>
-
+      <p>Portfólio técnico em Redes, Infraestrutura, Cloud Computing e Cibersegurança.</p>
+      <nav class="footer-nav" aria-label="Navegação do rodapé">
+        <a href="../index.html">Home</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="projetos.html">Projetos</a>
+        <a href="blog.html">Blog</a>
+        <a href="roadmap.html">Roadmap</a>
+      </nav>
       <div class="footer-links">
-        <a href="https://github.com/gabrielzaccaferreira" target="_blank">
-          🚀 GitHub
-        </a>
-
-        <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank">
-          💼 LinkedIn
-        </a>
-
-        <a href="mailto:gabrielzaccaferreira@gmail.com">✉ E-mail</a>
-
-        <a href="#">📄 Currículo</a>
+        <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a href="mailto:gabrielzaccaferreira@gmail.com"><i class="fa-solid fa-envelope"></i> E-mail</a>
+        <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-lines"></i> Currículo</a>
       </div>
-
-      <p class="footer-copy">
-        © 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub
-        Pages.
-      </p>
+      <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
     </footer>
   </body>
 </html>

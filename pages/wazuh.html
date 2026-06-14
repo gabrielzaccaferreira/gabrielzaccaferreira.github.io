@@ -3,25 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Wazuh SIEM/XDR | Gabriel Zacca Ferreira</title>
-
-    <meta
-      name="description"
-      content="Case técnico do laboratório Wazuh SIEM/XDR implementado com Ubuntu Server, Kali Linux e VMware Workstation, com foco em monitoramento, análise de eventos e Blue Team."
-    />
-
+    <meta name="description" content="Case técnico do laboratório Wazuh SIEM/XDR implementado com Ubuntu Server, Kali Linux e VMware Workstation, com foco em monitoramento, análise de eventos e Blue Team." />
     <meta name="author" content="Gabriel Zacca Ferreira" />
-
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Wazuh SIEM/XDR | Gabriel Zacca Ferreira" />
+    <meta property="og:description" content="Case técnico de laboratório SIEM/XDR com Ubuntu Server, Kali Linux e VMware Workstation." />
+    <meta property="og:url" content="https://gabrielzaccaferreira.github.io/pages/wazuh.html" />
+    <meta property="og:image" content="https://gabrielzaccaferreira.github.io/assets/images/og-image.png" />
+    <link rel="canonical" href="https://gabrielzaccaferreira.github.io/pages/wazuh.html" />
     <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <link rel="stylesheet" href="../style.css" />
   </head>
-
   <body>
     <header class="site-header">
-      <nav class="navbar">
+      <nav class="navbar" aria-label="Navegação principal">
         <a href="../index.html" class="logo">GZF</a>
-
         <div class="nav-links">
           <a href="../index.html">Home</a>
           <a href="sobre.html">Sobre</a>
@@ -29,375 +29,354 @@
           <a href="blog.html">Blog</a>
           <a href="roadmap.html">Roadmap</a>
         </div>
-
         <div class="nav-actions">
-          <a href="https://github.com/gabrielzaccaferreira" target="_blank">
-            GitHub
-          </a>
-
-          <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank">
-            LinkedIn
-          </a>
-
-          <a href="#" target="_blank" class="nav-cv">Currículo</a>
+          <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer" class="nav-cv">Currículo</a>
         </div>
       </nav>
+      <div class="labs-bar">
+        <div class="labs-bar-inner">
+          <span class="labs-bar-label">Labs</span>
+          <a href="wazuh.html" class="labs-bar-link active"><span class="lab-dot"></span><i class="fa-solid fa-shield-halved"></i> Wazuh SIEM/XDR</a>
+          <a href="kali-linux.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-brands fa-linux"></i> Kali Linux</a>
+          <a href="suricata.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-network-wired"></i> Suricata IDS/IPS</a>
+          <a href="crowdsec.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec</a>
+        </div>
+      </div>
     </header>
 
     <main>
-      <section class="hero">
+      <section id="hero" class="hero">
         <div class="hero-content">
-          <p class="eyebrow">🛡️ Case Técnico</p>
-
+          <p class="eyebrow">Case Técnico • SIEM • Blue Team</p>
           <h1>
             Wazuh
             <span>SIEM/XDR</span>
           </h1>
-
           <p class="hero-description">
-            Implementação de um laboratório completo de monitoramento e detecção
-            de ameaças utilizando Ubuntu Server, VMware Workstation e Kali
-            Linux, com foco em SIEM, análise de eventos, Blue Team e segurança
-            da informação.
+            Implementação de um laboratório completo de monitoramento e detecção de ameaças utilizando Ubuntu Server, VMware Workstation e Kali Linux, com foco em SIEM, análise de eventos, agentes, hardening e Blue Team.
           </p>
-
           <div class="project-stack">
-            <span>🐧 Linux</span>
-            <span>🖥️ VMware</span>
-            <span>🛡️ SIEM</span>
-            <span>📊 Blue Team</span>
-            <span>🔍 Monitoramento</span>
+            <span>Linux</span><span>VMware</span><span>Wazuh</span>
+            <span>SIEM</span><span>Blue Team</span><span>Monitoramento</span>
           </div>
-
           <div class="hero-actions">
-            <a href="#arquitetura" class="btn btn-primary">
-              Ver Arquitetura
-            </a>
-
-            <a
-              href="https://github.com/gabrielzaccaferreira/wazuh-lab"
-              class="btn btn-secondary"
-              target="_blank"
-            >
-              Ver GitHub
-            </a>
+            <a href="#overview" class="btn btn-primary">Ver resumo do case →</a>
+            <a href="https://github.com/gabrielzaccaferreira/wazuh-lab" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Ver GitHub</a>
           </div>
         </div>
 
-        <aside class="architecture-card">
+        <div class="architecture-card">
           <p class="section-label">Topologia</p>
-
           <h2>Fluxo do laboratório</h2>
-
           <div class="architecture-flow">
-            <span>🖥️ Dell OptiPlex</span>
+            <span>Dell OptiPlex</span>
             <strong>↓</strong>
-            <span>🪟 Windows 11</span>
+            <span>Windows 11</span>
             <strong>↓</strong>
-            <span>⚙️ VMware Workstation</span>
+            <span>VMware Workstation</span>
             <strong>↓</strong>
-            <span>🐧 Ubuntu Server</span>
+            <span>Ubuntu Server</span>
             <strong>↓</strong>
-            <span>🛡️ Wazuh SIEM/XDR</span>
+            <span>Wazuh SIEM/XDR</span>
             <strong>↕</strong>
-            <span>💻 Kali Linux Agent</span>
+            <span>Kali Linux Agent</span>
           </div>
-        </aside>
+        </div>
+      </section>
+
+      <section id="indice" class="section">
+        <p class="section-label">Índice</p>
+        <h2>Navegue pelo projeto.</h2>
+        <div class="profile-tags">
+          <a href="#overview"><span>Resumo</span></a>
+          <a href="#especificacoes"><span>Especificações</span></a>
+          <a href="#implementacao"><span>Implementação</span></a>
+          <a href="#arquitetura"><span>Arquitetura</span></a>
+          <a href="#stack"><span>Stack</span></a>
+          <a href="#competencias"><span>Competências</span></a>
+          <a href="#resultados"><span>Resultados</span></a>
+          <a href="#evidencias"><span>Evidências</span></a>
+          <a href="#desafios"><span>Desafios</span></a>
+          <a href="#conclusao"><span>Conclusão</span></a>
+        </div>
+      </section>
+
+      <section id="overview" class="wazuh-overview">
+        <div class="wazuh-overview-card">
+          <div>
+            <p class="section-label">Resumo do case</p>
+            <h2>Laboratório SIEM/XDR implementado em ambiente virtualizado.</h2>
+            <p>O objetivo deste projeto foi criar um ambiente prático para compreender a implantação de um SIEM, integração de agentes, coleta de eventos, validação de serviços, análise de segurança e documentação técnica.</p>
+          </div>
+          <div class="wazuh-overview-stats">
+            <article><strong>01</strong><span>Servidor Wazuh</span></article>
+            <article><strong>01</strong><span>Agente Kali Linux</span></article>
+            <article><strong>05</strong><span>Evidências técnicas</span></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="especificacoes" class="section">
+        <p class="section-label">Especificações do laboratório</p>
+        <h2>Ambiente técnico utilizado no projeto.</h2>
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-computer card-icon"></i> Host físico</h3>
+            <p>Dell OptiPlex com Windows 11, Intel Core i7-10700T, 32 GB RAM e SSD NVMe de 1 TB.</p>
+            <div class="project-stack"><span>Windows 11</span><span>i7-10700T</span><span>32 GB RAM</span></div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-desktop card-icon"></i> Hypervisor</h3>
+            <p>VMware Workstation utilizado para criação, isolamento e gerenciamento das máquinas virtuais.</p>
+            <div class="project-stack"><span>VMware</span><span>Virtualização</span><span>Lab</span></div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-shield-halved card-icon"></i> Servidor Wazuh</h3>
+            <p>Ubuntu Server executando Wazuh Manager, Dashboard, Indexer e Filebeat.</p>
+            <div class="project-stack"><span>Ubuntu Server</span><span>Wazuh</span><span>SIEM</span></div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-brands fa-linux card-icon"></i> Endpoint</h3>
+            <p>Kali Linux com agente Wazuh instalado, registrado e integrado ao servidor principal.</p>
+            <div class="project-stack"><span>Kali Linux</span><span>Agent</span><span>Monitoring</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="implementacao" class="section">
+        <p class="section-label">Processo de implementação</p>
+        <h2>Do planejamento à validação do laboratório.</h2>
+        <div class="roadmap-list">
+          <article class="roadmap-step done">
+            <div class="roadmap-marker">1</div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Planejamento</span>
+              <h3>Definição da arquitetura</h3>
+              <p>Organização do ambiente com host físico, VMware Workstation, Ubuntu Server como servidor Wazuh e Kali Linux como endpoint monitorado.</p>
+            </div>
+          </article>
+          <article class="roadmap-step done">
+            <div class="roadmap-marker">2</div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Instalação</span>
+              <h3>Implantação do Wazuh</h3>
+              <p>Instalação dos componentes principais: Wazuh Manager, Dashboard, Indexer e Filebeat no Ubuntu Server.</p>
+            </div>
+          </article>
+          <article class="roadmap-step done">
+            <div class="roadmap-marker">3</div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Integração</span>
+              <h3>Registro do agente Kali Linux</h3>
+              <p>Instalação e configuração do agente Wazuh no Kali Linux, com validação de comunicação entre endpoint e servidor.</p>
+            </div>
+          </article>
+          <article class="roadmap-step done">
+            <div class="roadmap-marker">4</div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Validação</span>
+              <h3>Testes e evidências</h3>
+              <p>Verificação dos serviços, dashboard, agentes, eventos coletados e análise SCA para confirmar o funcionamento do laboratório.</p>
+            </div>
+          </article>
+        </div>
       </section>
 
       <section id="arquitetura" class="section">
         <p class="section-label">Arquitetura</p>
-
         <h2>Ambiente do laboratório.</h2>
-
-        <p class="section-text">
-          O laboratório foi implementado em ambiente virtualizado utilizando
-          VMware Workstation, com um servidor Ubuntu para os componentes
-          centrais do Wazuh e uma máquina Kali Linux atuando como endpoint
-          monitorado.
-        </p>
-
+        <p class="section-text">O laboratório foi implementado em ambiente virtualizado utilizando VMware Workstation, com um servidor Ubuntu para os componentes centrais do Wazuh e uma máquina Kali Linux atuando como endpoint monitorado.</p>
         <div class="cards-grid">
           <article class="card">
-            <h3>🖥️ Host</h3>
-            <p>
-              Dell OptiPlex com Windows 11, Intel Core i7-10700T, 32 GB de RAM e NVME 1TB
-              utilizado como base para virtualização.
-            </p>
+            <h3 class="card-title"><i class="fa-solid fa-computer card-icon"></i> Host</h3>
+            <p>Dell OptiPlex com Windows 11, Intel Core i7-10700T, 32 GB de RAM e SSD NVMe de 1 TB utilizado como base para virtualização.</p>
           </article>
-
           <article class="card">
-            <h3>⚙️ Hypervisor</h3>
-            <p>
-              VMware Workstation utilizado para criação, isolamento e
-              gerenciamento das máquinas virtuais do laboratório.
-            </p>
+            <h3 class="card-title"><i class="fa-solid fa-desktop card-icon"></i> Hypervisor</h3>
+            <p>VMware Workstation utilizado para criação, isolamento e gerenciamento das máquinas virtuais do laboratório.</p>
           </article>
-
           <article class="card">
-            <h3>🐧 Ubuntu Server</h3>
-            <p>
-              Servidor principal executando Wazuh Manager, Dashboard, Indexer e
-              Filebeat.
-            </p>
+            <h3 class="card-title"><i class="fa-brands fa-ubuntu card-icon"></i> Ubuntu Server</h3>
+            <p>Servidor principal executando Wazuh Manager, Dashboard, Indexer e Filebeat.</p>
           </article>
-
           <article class="card">
-            <h3>💻 Kali Linux</h3>
-            <p>
-              Endpoint monitorado com agente Wazuh instalado, registrado e
-              integrado ao servidor.
-            </p>
+            <h3 class="card-title"><i class="fa-brands fa-linux card-icon"></i> Kali Linux</h3>
+            <p>Endpoint monitorado com agente Wazuh instalado, registrado e integrado ao servidor.</p>
+            <a href="kali-linux.html" class="card-link">Ver laboratório Kali →</a>
           </article>
         </div>
       </section>
 
-      <section class="section">
-        <p class="section-label">Tecnologias</p>
-
-        <h2>Stack utilizada no laboratório.</h2>
-
+      <section id="stack" class="section">
+        <p class="section-label">Stack</p>
+        <h2>Tecnologias utilizadas no case.</h2>
         <div class="profile-tags">
-          <span>VMware Workstation</span>
-          <span>Ubuntu Server</span>
-          <span>Kali Linux</span>
-          <span>Windows 11</span>
-          <span>Wazuh</span>
-          <span>CrowdSec</span>
-          <span>pfSense</span>
-          <span>Suricata</span>
+          <span><i class="fa-solid fa-desktop"></i> VMware Workstation</span>
+          <span><i class="fa-brands fa-ubuntu"></i> Ubuntu Server</span>
+          <span><i class="fa-brands fa-linux"></i> Kali Linux</span>
+          <span><i class="fa-brands fa-windows"></i> Windows 11</span>
+          <span><i class="fa-solid fa-shield-halved"></i> Wazuh Manager</span>
+          <span><i class="fa-solid fa-chart-bar"></i> Wazuh Dashboard</span>
+          <span><i class="fa-solid fa-database"></i> Wazuh Indexer</span>
+          <span><i class="fa-solid fa-file-lines"></i> Filebeat</span>
+        </div>
+      </section>
+
+      <section id="competencias" class="section">
+        <p class="section-label">Competências demonstradas</p>
+        <h2>Capacidades técnicas evidenciadas neste projeto.</h2>
+        <p class="section-text">Além da implementação do laboratório, este projeto demonstra competências práticas desenvolvidas durante todo o processo de planejamento, configuração, validação e documentação do ambiente.</p>
+        <div class="skills-grid">
+          <article class="skill-card">
+            <h3><i class="fa-brands fa-linux"></i> Linux Administration</h3>
+            <p>Administração do Ubuntu Server e Kali Linux via terminal: gerenciamento de serviços com systemctl, controle de permissões, análise de logs do sistema e troubleshooting de processos em execução.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-desktop"></i> Virtualização</h3>
+            <p>Criação e gerenciamento de múltiplas VMs no VMware Workstation, configuração de redes virtuais, isolamento de ambientes e integração entre máquinas para construção do laboratório SIEM.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-shield-halved"></i> SIEM</h3>
+            <p>Implantação completa do Wazuh: instalação do Manager, Dashboard, Indexer e Filebeat no Ubuntu Server, configuração de coleta de eventos, análise SCA e correlação de alertas de segurança.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-chart-bar"></i> Blue Team</h3>
+            <p>Monitoramento contínuo de endpoints, análise de eventos de segurança no dashboard Wazuh, interpretação de alertas, validação de integridade de arquivos e visão defensiva do ambiente.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-network-wired"></i> Redes</h3>
+            <p>Configuração de comunicação TCP entre agente e servidor na porta 1514, validação de conectividade com ping e nmap, diagnóstico de falhas de conexão e ajuste de endereços IP no ambiente virtual.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-gears"></i> Troubleshooting</h3>
+            <p>Diagnóstico de falhas na comunicação do agente, resolução de conflitos de sessão no XRDP, validação de serviços via systemctl status e análise de logs do ossec.log para identificar erros.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-scroll"></i> Log Analysis</h3>
+            <p>Coleta e interpretação de eventos no formato JSON via eve.json do Suricata, análise de alertas gerados pelo Wazuh, leitura de logs de autenticação e validação de regras customizadas com wazuh-logtest.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-book-open"></i> Documentação Técnica</h3>
+            <p>Registro completo da arquitetura do laboratório, passo a passo de implementação, evidências em screenshots, desafios encontrados, soluções aplicadas e aprendizados documentados no portfólio.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="resultados" class="section">
+        <p class="section-label">Resultados do projeto</p>
+        <h2>O que foi entregue neste laboratório.</h2>
+        <p class="section-text">Este case resultou em um ambiente funcional de monitoramento, com servidor SIEM, endpoint integrado, coleta de eventos, validações técnicas e documentação publicada.</p>
+        <div class="stats-grid">
+          <div class="stat-card"><strong>01</strong><span>Servidor Ubuntu</span></div>
+          <div class="stat-card"><strong>01</strong><span>Endpoint Kali integrado</span></div>
+          <div class="stat-card"><strong>01</strong><span>Plataforma SIEM/XDR</span></div>
+          <div class="stat-card"><strong>05</strong><span>Evidências documentadas</span></div>
         </div>
       </section>
 
       <section id="evidencias" class="section">
         <p class="section-label">Evidências</p>
-
         <h2>Resultados obtidos durante a implementação.</h2>
-
-        <p class="section-text">
-          Abaixo estão evidências reais do laboratório Wazuh SIEM/XDR,
-          demonstrando a implementação do ambiente, a integração dos componentes
-          e o funcionamento da plataforma de monitoramento.
-        </p>
-
+        <p class="section-text">Abaixo estão evidências reais do laboratório Wazuh SIEM/XDR, demonstrando a implementação do ambiente, a integração dos componentes e o funcionamento da plataforma de monitoramento.</p>
         <div class="profile-tags">
-          <span>✅ Dashboard ativo</span>
-          <span>✅ Serviços em execução</span>
-          <span>✅ Agente integrado</span>
-          <span>✅ Eventos coletados</span>
-          <span>✅ Análise SCA validada</span>
+          <span>Dashboard ativo</span>
+          <span>Serviços em execução</span>
+          <span>Agente integrado</span>
+          <span>Eventos coletados</span>
+          <span>Análise SCA validada</span>
         </div>
-
         <div class="evidence-grid">
           <figure class="evidence-image">
-            <img
-              src="../assets/images/wazuh/01-wazuh-dashboard-home.png"
-              alt="Dashboard principal do Wazuh"
-              loading="lazy"
-            />
-
-            <figcaption>
-              Dashboard principal do laboratório Wazuh SIEM/XDR.
-            </figcaption>
+            <a href="../assets/images/wazuh/01-wazuh-dashboard-home.png" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/wazuh/01-wazuh-dashboard-home.png" alt="Dashboard principal do Wazuh" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>Dashboard principal do laboratório Wazuh SIEM/XDR.</figcaption>
           </figure>
 
           <figure class="evidence-image">
-            <img
-              src="../assets/images/wazuh/02-wazuh-services-active.png"
-              alt="Serviços do Wazuh em execução"
-              loading="lazy"
-            />
-
-            <figcaption>
-              Serviços do Wazuh executando corretamente no Ubuntu Server.
-            </figcaption>
+            <a href="../assets/images/wazuh/02-wazuh-services-active.png" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/wazuh/02-wazuh-services-active.png" alt="Serviços do Wazuh em execução" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>Serviços do Wazuh executando corretamente no Ubuntu Server.</figcaption>
           </figure>
 
           <figure class="evidence-image">
-            <img
-              src="../assets/images/wazuh/03-wazuh-agent-active.png"
-              alt="Agente Kali Linux ativo no Wazuh"
-              loading="lazy"
-            />
-
-            <figcaption>
-              Agente Kali Linux registrado e comunicando com o servidor.
-            </figcaption>
+            <a href="../assets/images/wazuh/03-wazuh-agent-active.png" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/wazuh/03-wazuh-agent-active.png" alt="Agente Kali Linux ativo no Wazuh" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>Agente Kali Linux registrado e comunicando com o servidor.</figcaption>
           </figure>
 
           <figure class="evidence-image">
-            <img
-              src="../assets/images/wazuh/04-wazuh-security-events.png"
-              alt="Eventos de segurança no Wazuh"
-              loading="lazy"
-            />
-
-            <figcaption>
-              Eventos de segurança coletados e apresentados pelo Dashboard.
-            </figcaption>
+            <a href="../assets/images/wazuh/04-wazuh-security-events.png" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/wazuh/04-wazuh-security-events.png" alt="Eventos de segurança no Wazuh" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>Eventos de segurança coletados e apresentados pelo Dashboard.</figcaption>
           </figure>
 
-          <figure class="evidence-image">
-            <img
-              src="../assets/images/wazuh/05-wazuh-sca.png"
-              alt="Análise SCA no Wazuh"
-              loading="lazy"
-            />
-
-            <figcaption>
-              Resultado da análise Security Configuration Assessment.
-            </figcaption>
+          <figure class="evidence-image evidence-image-wide">
+            <a href="../assets/images/wazuh/05-wazuh-sca.png" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/wazuh/05-wazuh-sca.png" alt="Análise SCA no Wazuh" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>Resultado da análise Security Configuration Assessment.</figcaption>
           </figure>
         </div>
       </section>
 
-      <section class="section">
-        <p class="section-label">Aprendizados</p>
-
-        <h2>Principais conhecimentos adquiridos.</h2>
-
-        <div class="timeline">
-          <div class="timeline-item">
-            <span>SIEM</span>
-            <p>
-              Compreensão do funcionamento de uma plataforma de monitoramento,
-              correlação e análise de eventos.
-            </p>
-          </div>
-
-          <div class="timeline-item">
-            <span>Virtualização</span>
-            <p>
-              Implementação de ambientes utilizando VMware Workstation com
-              múltiplas máquinas virtuais.
-            </p>
-          </div>
-
-          <div class="timeline-item">
-            <span>Linux</span>
-            <p>
-              Administração de serviços, configuração, troubleshooting e
-              integração entre sistemas.
-            </p>
-          </div>
-
-          <div class="timeline-item">
-            <span>Monitoramento</span>
-            <p>
-              Validação de agentes, coleta de eventos, análise de alertas e
-              acompanhamento do ambiente pelo Dashboard.
-            </p>
-          </div>
-
-          <div class="timeline-item">
-            <span>Blue Team</span>
-            <p>
-              Entendimento prático de conceitos aplicados à defesa, visibilidade
-              de endpoints e análise de segurança.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
+      <section id="desafios" class="section">
         <p class="section-label">Desafios</p>
-
         <h2>Problemas encontrados e soluções aplicadas.</h2>
-
         <div class="timeline">
           <div class="timeline-item">
-            <span>⚠️ Dashboard</span>
-            <p>
-              Diagnóstico e validação dos serviços do Wazuh até a
-              disponibilização correta da interface web.
-            </p>
+            <span><i class="fa-solid fa-chart-bar"></i> Dashboard</span>
+            <p>Diagnóstico e validação dos serviços do Wazuh até a disponibilização correta da interface web.</p>
           </div>
-
           <div class="timeline-item">
-            <span>⚠️ Comunicação do agente</span>
-            <p>
-              Ajustes na configuração e validação da conexão entre servidor e
-              endpoint monitorado.
-            </p>
+            <span><i class="fa-solid fa-plug"></i> Comunicação do agente</span>
+            <p>Ajustes na configuração e validação da conexão entre servidor e endpoint monitorado.</p>
           </div>
-
           <div class="timeline-item">
-            <span>⚠️ Acesso remoto</span>
-            <p>
-              Configuração do XRDP e ambiente gráfico para administração remota
-              do Kali Linux.
-            </p>
+            <span><i class="fa-solid fa-terminal"></i> Acesso remoto</span>
+            <p>Configuração do XRDP e ambiente gráfico para administração remota do Kali Linux.</p>
           </div>
-
           <div class="timeline-item">
-            <span>⚠️ Troubleshooting</span>
-            <p>
-              Verificação de serviços, conectividade, status dos agentes e
-              validação dos componentes do ambiente.
-            </p>
+            <span><i class="fa-solid fa-gears"></i> Troubleshooting</span>
+            <p>Verificação de serviços, conectividade, status dos agentes e validação dos componentes do ambiente.</p>
           </div>
         </div>
       </section>
 
-      <section class="section">
+      <section id="conclusao" class="section cta-premium">
         <p class="section-label">Conclusão</p>
-
         <h2>Resultado do laboratório.</h2>
-
-        <p class="section-text">
-          Este laboratório consolidou conhecimentos práticos em SIEM, Linux,
-          virtualização, agentes de monitoramento, análise de eventos,
-          troubleshooting e documentação técnica.
-        </p>
-
-        <p class="section-text">
-          O projeto demonstra minha capacidade de implementar, documentar e
-          validar um ambiente real de monitoramento utilizando tecnologias
-          amplamente empregadas em operações de Segurança da Informação.
-        </p>
-
+        <p class="section-text">Este laboratório consolidou conhecimentos práticos em SIEM, Linux, virtualização, agentes de monitoramento, análise de eventos, troubleshooting e documentação técnica.</p>
+        <p class="section-text">O projeto demonstra minha capacidade de implementar, documentar e validar um ambiente real de monitoramento utilizando tecnologias empregadas em operações de Segurança da Informação.</p>
         <div class="hero-actions">
-          <a
-            href="https://github.com/gabrielzaccaferreira/wazuh-lab"
-            class="btn btn-primary"
-            target="_blank"
-          >
-            Ver repositório no GitHub
-          </a>
-
-          <a href="projetos.html" class="btn btn-secondary">
-            Voltar para Projetos
-          </a>
+          <a href="https://github.com/gabrielzaccaferreira/wazuh-lab" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Ver repositório no GitHub →</a>
+          <a href="projetos.html" class="btn btn-secondary">Voltar para Projetos</a>
         </div>
       </section>
     </main>
 
-    <footer id="contato" class="footer">
+    <footer class="footer">
       <p class="footer-title">Gabriel Zacca Ferreira</p>
-
-      <p>
-        Portfólio técnico em Redes, Infraestrutura, Cloud Computing e
-        Cibersegurança.
-      </p>
-
+      <p>Portfólio técnico em Redes, Infraestrutura, Cloud Computing e Cibersegurança.</p>
+      <nav class="footer-nav" aria-label="Navegação do rodapé">
+        <a href="../index.html">Home</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="projetos.html">Projetos</a>
+        <a href="blog.html">Blog</a>
+        <a href="roadmap.html">Roadmap</a>
+      </nav>
       <div class="footer-links">
-        <a href="https://github.com/gabrielzaccaferreira" target="_blank">
-          🚀 GitHub
-        </a>
-
-        <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank">
-          💼 LinkedIn
-        </a>
-
-        <a href="mailto:gabrielzaccaferreira@gmail.com">✉ E-mail</a>
-
-        <a href="#">📄 Currículo</a>
+        <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a href="mailto:gabrielzaccaferreira@gmail.com"><i class="fa-solid fa-envelope"></i> E-mail</a>
+        <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-lines"></i> Currículo</a>
       </div>
-
-      <p class="footer-copy">
-        © 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub
-        Pages.
-      </p>
+      <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
     </footer>
   </body>
 </html>
