@@ -49,6 +49,7 @@
           <a href="index.html">Home</a>
           <a href="pages/sobre.html">Sobre</a>
           <a href="pages/projetos.html">Projetos</a>
+          <a href="pages/guia.html">Guia</a>
           <a href="pages/blog.html">Blog</a>
           <a href="pages/roadmap.html">Roadmap</a>
         </div>
@@ -71,7 +72,8 @@
       </div>
     </header>
 
-    <main>
+
+      <main>
       <section id="hero" class="hero hero-premium">
         <div class="hero-content">
           <p class="eyebrow">DIÁRIO TÉCNICO • REDES • INFRAESTRUTURA • CLOUD • CIBERSEGURANÇA</p>
@@ -204,99 +206,86 @@
         <h2>Cases técnicos documentados.</h2>
         <p class="section-text">Projetos práticos desenvolvidos para consolidar conhecimentos em Redes, Infraestrutura, Linux, Segurança da Informação e Cloud Computing.</p>
 
-        <div class="cases-grid">
+        <div class="carousel-wrapper">
+          <button class="carousel-btn carousel-prev" onclick="moveCasesCarousel(-1)" aria-label="Anterior">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <div class="carousel-track-container">
+            <div class="carousel-track" id="casesCarousel">
 
-          <article class="case-card">
-            <div class="case-card-header">
-              <span class="case-badge">Case Principal</span>
-              <h3><i class="fa-solid fa-shield-halved"></i> Wazuh SIEM/XDR</h3>
-              <p>Laboratório completo de SIEM/XDR com Ubuntu Server, Kali Linux e VMware — agentes, monitoramento, análise de eventos e detecção de ameaças.</p>
-              <div class="project-stack">
-                <span>SIEM</span><span>Linux</span><span>VMware</span><span>Blue Team</span>
-              </div>
-            </div>
-            <div class="case-icon-block wazuh">
-              <i class="fa-solid fa-shield-halved"></i>
-            </div>
-            <a href="pages/wazuh.html" class="btn btn-primary">Explorar case →</a>
-          </article>
+              <article class="carousel-card case-card">
+                <div class="case-card-header">
+                  <span class="case-badge">Case Principal</span>
+                  <h3><i class="fa-solid fa-shield-halved"></i> Wazuh SIEM/XDR</h3>
+                  <p>Laboratório completo de SIEM/XDR com Ubuntu Server, Kali Linux e VMware — agentes, monitoramento, análise de eventos e detecção de ameaças.</p>
+                  <div class="project-stack"><span>SIEM</span><span>Linux</span><span>VMware</span><span>Blue Team</span></div>
+                </div>
+                <div class="case-icon-block wazuh"><i class="fa-solid fa-shield-halved"></i></div>
+                <a href="pages/wazuh.html" class="btn btn-primary">Explorar case →</a>
+              </article>
 
-          <article class="case-card">
-            <div class="case-card-header">
-              <span class="case-badge">IDS/IPS</span>
-              <h3><i class="fa-solid fa-network-wired"></i> Suricata IDS/IPS</h3>
-              <p>Detecção de intrusão em rede com alertas reais de port scan, integração com Wazuh via eve.json e regras da fonte aleksibovellan/nmap.</p>
-              <div class="project-stack">
-                <span>IDS/IPS</span><span>AF-PACKET</span><span>eve.json</span><span>Redes</span>
-              </div>
-            </div>
-            <div class="case-icon-block suricata">
-              <i class="fa-solid fa-network-wired"></i>
-            </div>
-            <a href="pages/suricata.html" class="btn btn-primary">Explorar case →</a>
-          </article>
+              <article class="carousel-card case-card">
+                <div class="case-card-header">
+                  <span class="case-badge">IDS/IPS</span>
+                  <h3><i class="fa-solid fa-network-wired"></i> Suricata IDS/IPS</h3>
+                  <p>Detecção de intrusão em rede com alertas reais de port scan, integração com Wazuh via eve.json e regras da fonte aleksibovellan/nmap.</p>
+                  <div class="project-stack"><span>IDS/IPS</span><span>AF-PACKET</span><span>eve.json</span><span>Redes</span></div>
+                </div>
+                <div class="case-icon-block suricata"><i class="fa-solid fa-network-wired"></i></div>
+                <a href="pages/suricata.html" class="btn btn-primary">Explorar case →</a>
+              </article>
 
-          <article class="case-card">
-            <div class="case-card-header">
-              <span class="case-badge">Firewall</span>
-              <h3><i class="fa-solid fa-fire"></i> pfSense CE</h3>
-              <p>Firewall virtualizado com segmentação WAN/LAN, regras de controle de tráfego, NAT, DHCP e integração de logs com o Wazuh SIEM.</p>
-              <div class="project-stack">
-                <span>Firewall</span><span>NAT</span><span>DHCP</span><span>FreeBSD</span>
-              </div>
-            </div>
-            <div class="case-icon-block pfsense">
-              <i class="fa-solid fa-fire"></i>
-            </div>
-            <a href="pages/pfsense.html" class="btn btn-primary">Explorar case →</a>
-          </article>
+              <article class="carousel-card case-card">
+                <div class="case-card-header">
+                  <span class="case-badge">Firewall</span>
+                  <h3><i class="fa-solid fa-fire"></i> pfSense CE</h3>
+                  <p>Firewall virtualizado com segmentação WAN/LAN, regras de controle de tráfego, NAT, DHCP e integração de logs com o Wazuh SIEM.</p>
+                  <div class="project-stack"><span>Firewall</span><span>NAT</span><span>DHCP</span><span>FreeBSD</span></div>
+                </div>
+                <div class="case-icon-block pfsense"><i class="fa-solid fa-fire"></i></div>
+                <a href="pages/pfsense.html" class="btn btn-primary">Explorar case →</a>
+              </article>
 
-          <article class="case-card">
-            <div class="case-card-header">
-              <span class="case-badge">Ambiente Base</span>
-              <h3><i class="fa-brands fa-linux"></i> Kali Linux</h3>
-              <p>Ambiente virtualizado completo com VMware em modo Bridge, SSH remoto, VS Code Remote e XRDP — base sobre a qual todos os labs foram construídos.</p>
-              <div class="project-stack">
-                <span>Linux</span><span>VMware</span><span>SSH</span><span>XRDP</span>
-              </div>
-            </div>
-            <div class="case-icon-block kali">
-              <i class="fa-brands fa-linux"></i>
-            </div>
-            <a href="pages/kali-linux.html" class="btn btn-primary">Explorar case →</a>
-          </article>
+              <article class="carousel-card case-card">
+                <div class="case-card-header">
+                  <span class="case-badge">Ambiente Base</span>
+                  <h3><i class="fa-brands fa-linux"></i> Kali Linux</h3>
+                  <p>Ambiente virtualizado completo com VMware em modo Bridge, SSH remoto, VS Code Remote e XRDP — base sobre a qual todos os labs foram construídos.</p>
+                  <div class="project-stack"><span>Linux</span><span>VMware</span><span>SSH</span><span>XRDP</span></div>
+                </div>
+                <div class="case-icon-block kali"><i class="fa-brands fa-linux"></i></div>
+                <a href="pages/kali-linux.html" class="btn btn-primary">Explorar case →</a>
+              </article>
 
-          <article class="case-card">
-            <div class="case-card-header">
-              <span class="case-badge">Proteção SSH</span>
-              <h3><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec</h3>
-              <p>Detecção comportamental de brute force SSH com collections, parsers e scenarios ativos — monitoramento via journalctl e análise de alertas.</p>
-              <div class="project-stack">
-                <span>CrowdSec</span><span>SSH</span><span>Brute Force</span><span>Logs</span>
-              </div>
-            </div>
-            <div class="case-icon-block crowdsec">
-              <i class="fa-solid fa-fire-flame-curved"></i>
-            </div>
-            <a href="pages/crowdsec.html" class="btn btn-primary">Explorar case →</a>
-          </article>
+              <article class="carousel-card case-card">
+                <div class="case-card-header">
+                  <span class="case-badge">Proteção SSH</span>
+                  <h3><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec</h3>
+                  <p>Detecção comportamental de brute force SSH com collections, parsers e scenarios ativos — monitoramento via journalctl e análise de alertas.</p>
+                  <div class="project-stack"><span>CrowdSec</span><span>SSH</span><span>Brute Force</span><span>Logs</span></div>
+                </div>
+                <div class="case-icon-block crowdsec"><i class="fa-solid fa-fire-flame-curved"></i></div>
+                <a href="pages/crowdsec.html" class="btn btn-primary">Explorar case →</a>
+              </article>
 
-          <article class="case-card">
-            <div class="case-card-header">
-              <span class="case-badge">Análise de Rede</span>
-              <h3><i class="fa-solid fa-magnifying-glass-chart"></i> Wireshark</h3>
-              <p>Captura e análise de 5 protocolos fundamentais: DNS, ARP, ICMP, TCP Three-Way Handshake e HTTPS/TLS — visibilidade real do tráfego de rede.</p>
-              <div class="project-stack">
-                <span>Wireshark</span><span>Protocolos</span><span>Redes</span><span>Packet Analysis</span>
-              </div>
-            </div>
-            <div class="case-icon-block wireshark">
-              <i class="fa-solid fa-magnifying-glass-chart"></i>
-            </div>
-            <a href="pages/wireshark.html" class="btn btn-primary">Explorar case →</a>
-          </article>
+              <article class="carousel-card case-card">
+                <div class="case-card-header">
+                  <span class="case-badge">Análise de Rede</span>
+                  <h3><i class="fa-solid fa-magnifying-glass-chart"></i> Wireshark</h3>
+                  <p>Captura e análise de 5 protocolos fundamentais: DNS, ARP, ICMP, TCP Three-Way Handshake e HTTPS/TLS — visibilidade real do tráfego de rede.</p>
+                  <div class="project-stack"><span>Wireshark</span><span>Protocolos</span><span>Redes</span><span>Packet Analysis</span></div>
+                </div>
+                <div class="case-icon-block wireshark"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                <a href="pages/wireshark.html" class="btn btn-primary">Explorar case →</a>
+              </article>
 
+            </div>
+          </div>
+          <button class="carousel-btn carousel-next" onclick="moveCasesCarousel(1)" aria-label="Próximo">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
         </div>
+        <div class="carousel-dots" id="casesDots"></div>
       </section>
 
       <section id="roadmap-home" class="section roadmap-premium">
@@ -338,36 +327,58 @@
       <section id="labs" class="section labs-premium">
         <p class="section-label">LABORATÓRIOS PRÁTICOS</p>
         <h2>Ambientes reais para aprendizado e documentação técnica.</h2>
-        <div class="cards-grid">
-          <article class="card highlight">
-            <p class="section-label">Concluído</p>
-            <h3 class="card-title"><i class="fa-solid fa-shield-halved card-icon"></i> Wazuh SIEM/XDR</h3>
-            <p>Laboratório de monitoramento, agentes, análise de eventos e SIEM, utilizando Ubuntu Server, Kali Linux e VMware Workstation.</p>
-            <div class="project-stack"><span>SIEM</span><span>Linux</span><span>VMware</span><span>Blue Team</span></div>
-            <a href="pages/wazuh.html" class="card-link">Explorar laboratório →</a>
-          </article>
-          <article class="card">
-            <p class="section-label">Concluído</p>
-            <h3 class="card-title"><i class="fa-brands fa-linux card-icon"></i> Kali Linux</h3>
-            <p>Ambiente virtualizado como base para estudos de Linux, Redes, Segurança da Informação e construção dos laboratórios técnicos.</p>
-            <div class="project-stack"><span>Linux</span><span>VMware</span><span>Terminal</span><span>Bash</span></div>
-            <a href="pages/kali-linux.html" class="card-link">Explorar laboratório →</a>
-          </article>
-          <article class="card">
-            <p class="section-label">Concluído</p>
-            <h3 class="card-title"><i class="fa-solid fa-network-wired card-icon"></i> Suricata IDS/IPS</h3>
-            <p>Laboratório IDS/IPS para inspeção de tráfego, detecção de ameaças, análise de regras e mecanismos de defesa em redes.</p>
-            <div class="project-stack"><span>IDS/IPS</span><span>Redes</span><span>Linux</span><span>Rules</span></div>
-            <a href="pages/suricata.html" class="card-link">Explorar laboratório →</a>
-          </article>
-          <article class="card">
-            <p class="section-label">Concluído</p>
-            <h3 class="card-title"><i class="fa-solid fa-fire-flame-curved card-icon"></i> CrowdSec</h3>
-            <p>Laboratório para análise de logs, proteção colaborativa e mitigação automática de ataques em ambientes Linux.</p>
-            <div class="project-stack"><span>Security</span><span>Logs</span><span>Linux</span><span>Threat Intel</span></div>
-            <a href="pages/crowdsec.html" class="card-link">Explorar laboratório →</a>
-          </article>
+
+        <div class="carousel-wrapper">
+          <button class="carousel-btn carousel-prev" onclick="moveCarousel(-1)" aria-label="Anterior">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+
+          <div class="carousel-track-container">
+            <div class="carousel-track" id="labsCarousel">
+              <article class="carousel-card card highlight">
+                <p class="section-label">Concluído</p>
+                <h3 class="card-title"><i class="fa-solid fa-shield-halved card-icon"></i> Wazuh SIEM/XDR</h3>
+                <p>Laboratório de monitoramento, agentes, análise de eventos e SIEM, utilizando Ubuntu Server, Kali Linux e VMware Workstation.</p>
+                <div class="project-stack"><span>SIEM</span><span>Linux</span><span>VMware</span><span>Blue Team</span></div>
+                <a href="pages/wazuh.html" class="card-link">Explorar laboratório →</a>
+              </article>
+              <article class="carousel-card card">
+                <p class="section-label">Concluído</p>
+                <h3 class="card-title"><i class="fa-brands fa-linux card-icon"></i> Kali Linux</h3>
+                <p>Ambiente virtualizado como base para estudos de Linux, Redes, Segurança da Informação e construção dos laboratórios técnicos.</p>
+                <div class="project-stack"><span>Linux</span><span>VMware</span><span>Terminal</span><span>Bash</span></div>
+                <a href="pages/kali-linux.html" class="card-link">Explorar laboratório →</a>
+              </article>
+              <article class="carousel-card card">
+                <p class="section-label">Concluído</p>
+                <h3 class="card-title"><i class="fa-solid fa-network-wired card-icon"></i> Suricata IDS/IPS</h3>
+                <p>Laboratório IDS/IPS para inspeção de tráfego, detecção de ameaças, análise de regras e mecanismos de defesa em redes.</p>
+                <div class="project-stack"><span>IDS/IPS</span><span>Redes</span><span>Linux</span><span>Rules</span></div>
+                <a href="pages/suricata.html" class="card-link">Explorar laboratório →</a>
+              </article>
+              <article class="carousel-card card">
+                <p class="section-label">Concluído</p>
+                <h3 class="card-title"><i class="fa-solid fa-fire-flame-curved card-icon"></i> CrowdSec</h3>
+                <p>Laboratório para análise de logs, proteção colaborativa e mitigação automática de ataques em ambientes Linux.</p>
+                <div class="project-stack"><span>Security</span><span>Logs</span><span>Linux</span><span>Threat Intel</span></div>
+                <a href="pages/crowdsec.html" class="card-link">Explorar laboratório →</a>
+              </article>
+              <article class="carousel-card card">
+                <p class="section-label">Concluído</p>
+                <h3 class="card-title"><i class="fa-solid fa-fire card-icon"></i> pfSense</h3>
+                <p>Firewall virtualizado com segmentação WAN/LAN, regras de controle de tráfego, NAT, DHCP e integração de logs com o Wazuh SIEM.</p>
+                <div class="project-stack"><span>Firewall</span><span>Redes</span><span>NAT</span><span>FreeBSD</span></div>
+                <a href="pages/pfsense.html" class="card-link">Explorar laboratório →</a>
+              </article>
+            </div>
+          </div>
+
+          <button class="carousel-btn carousel-next" onclick="moveCarousel(1)" aria-label="Próximo">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
         </div>
+
+        <div class="carousel-dots" id="carouselDots"></div>
       </section>
 
       <section id="certificacoes" class="section certifications-premium">
@@ -442,6 +453,7 @@
         <a href="index.html">Home</a>
         <a href="pages/sobre.html">Sobre</a>
         <a href="pages/projetos.html">Projetos</a>
+        <a href="pages/guia.html">Guia</a>
         <a href="pages/blog.html">Blog</a>
         <a href="pages/roadmap.html">Roadmap</a>
       </nav>
@@ -453,5 +465,58 @@
       </div>
       <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
     </footer>
+
+    <script>
+      (function() {
+        // ── Carrossel de Labs ──
+        initCarousel('labsCarousel', 'carouselDots', 'moveCarousel');
+
+        // ── Carrossel de Cases ──
+        initCarousel('casesCarousel', 'casesDots', 'moveCasesCarousel');
+
+        function initCarousel(trackId, dotsId, globalFn) {
+          const track = document.getElementById(trackId);
+          const dotsContainer = document.getElementById(dotsId);
+          if (!track || !dotsContainer) return;
+
+          const cards = track.querySelectorAll('.carousel-card');
+          const total = cards.length;
+          let current = 0;
+
+          cards.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', 'Ir para slide ' + (i + 1));
+            dot.addEventListener('click', () => goTo(i));
+            dotsContainer.appendChild(dot);
+          });
+
+          function getVisible() {
+            return window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
+          }
+
+          function goTo(index) {
+            const visible = getVisible();
+            const max = Math.max(0, total - visible);
+            current = Math.max(0, Math.min(index, max));
+            const cardWidth = cards[0].offsetWidth + 24;
+            track.style.transform = `translateX(-${current * cardWidth}px)`;
+            dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => {
+              d.classList.toggle('active', i === current);
+            });
+          }
+
+          window[globalFn] = function(dir) { goTo(current + dir); };
+          window.addEventListener('resize', () => goTo(current));
+
+          let startX = 0;
+          track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+          track.addEventListener('touchend', e => {
+            const diff = startX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) window[globalFn](diff > 0 ? 1 : -1);
+          });
+        }
+      })();
+    </script>
   </body>
 </html>
