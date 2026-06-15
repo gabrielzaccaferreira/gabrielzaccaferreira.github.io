@@ -153,8 +153,82 @@
         <div class="page-content">
 
 
+        <!-- BOAS-VINDAS — tela inicial -->
+          <div class="guia-module active" id="m00">
+            <p class="section-label">Guia de Estudos</p>
+            <h1 style="color:var(--text-light);font-size:clamp(32px,4vw,52px);line-height:1.08;letter-spacing:-1.5px;margin-bottom:16px;">
+              Bem-vindo ao Guia de Redes.
+            </h1>
+            <p style="color:var(--text-muted);font-size:18px;line-height:1.8;max-width:700px;margin-bottom:48px;">
+              Este guia nasceu de uma decisão simples: documentar tudo que aprendi, da forma que eu gostaria de ter encontrado quando comecei. Teoria conectada à prática real de laboratório — sem enrolação, sem copiar livro.
+            </p>
+
+            <div class="concept-block">
+              <h4><i class="fa-solid fa-bullseye"></i> Para quem é este guia</h4>
+              <p>Para quem quer entender redes de verdade — não só decorar para prova. Para estudantes, curiosos, profissionais de TI que querem preencher lacunas e para quem quer ver a teoria conectada a ferramentas reais como Wazuh, Suricata, pfSense, CrowdSec e Wireshark.</p>
+            </div>
+
+            <div class="concept-block">
+              <h4><i class="fa-solid fa-layer-group"></i> O que você vai encontrar aqui</h4>
+              <p>O conteúdo segue a trilha do curso <strong>Conceitos Básicos de Redes</strong> — 17 módulos do zero ao diagnóstico de problemas — mas escrito com minhas palavras, meus exemplos e conectado aos laboratórios reais que construí e documentei neste portfólio.</p>
+            </div>
+
+            <div class="concept-block">
+              <h4><i class="fa-solid fa-flask"></i> Teoria + Prática</h4>
+              <p>Cada módulo termina com um card apontando para o laboratório real onde aquele conceito foi aplicado. Ler sobre TCP/IP é bom. Ver o Three-Way Handshake capturado no Wireshark é diferente. Configurar NAT no pfSense é diferente. Este guia faz essa ponte.</p>
+            </div>
+
+            <!-- Grade de cursos -->
+            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:48px 0 20px;">Cursos disponíveis</h2>
+            <div class="guia-overview-grid">
+              <button class="guia-overview-item guia-overview-course" onclick="openCourse()">
+                <span class="guia-overview-num">01</span>
+                <div>
+                  <div style="color:var(--text-light);font-weight:700;margin-bottom:3px;">Conceitos Básicos de Redes</div>
+                  <div style="font-size:12px;color:var(--text-muted);">17 módulos · Conceitos de Redes</div>
+                </div>
+                <i class="fa-solid fa-chevron-right" style="margin-left:auto;font-size:11px;color:var(--text-muted);"></i>
+              </button>
+            </div>
+
+            <!-- Labs conectados -->
+            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:48px 0 20px;">Laboratórios conectados ao guia</h2>
+            <div class="cards-grid">
+              <article class="card">
+                <h3 class="card-title"><i class="fa-solid fa-shield-halved card-icon"></i> Wazuh SIEM/XDR</h3>
+                <p>SIEM e monitoramento — módulos 09, 10 e 16 aplicados na prática com agentes, eventos e dashboard.</p>
+                <div class="project-stack"><span>Módulo 10</span><span>Módulo 16</span></div>
+                <a href="wazuh.html" class="card-link">Ver laboratório →</a>
+              </article>
+              <article class="card">
+                <h3 class="card-title"><i class="fa-solid fa-network-wired card-icon"></i> Suricata IDS/IPS</h3>
+                <p>IDS de rede — módulos 07, 08 e 09 na prática com capturas reais de tráfego e alertas de port scan.</p>
+                <div class="project-stack"><span>Módulo 07</span><span>Módulo 09</span></div>
+                <a href="suricata.html" class="card-link">Ver laboratório →</a>
+              </article>
+              <article class="card">
+                <h3 class="card-title"><i class="fa-solid fa-fire card-icon"></i> pfSense</h3>
+                <p>Firewall, NAT e DHCP — módulos 11, 12, 13 e 14 configurados em ambiente virtualizado real.</p>
+                <div class="project-stack"><span>Módulo 11</span><span>Módulo 12</span><span>Módulo 14</span></div>
+                <a href="pfsense.html" class="card-link">Ver laboratório →</a>
+              </article>
+              <article class="card">
+                <h3 class="card-title"><i class="fa-solid fa-magnifying-glass-chart card-icon"></i> Wireshark</h3>
+                <p>Análise de protocolos — módulos 06, 07, 08 e 15 visíveis em capturas reais de DNS, ARP, ICMP, TCP e TLS.</p>
+                <div class="project-stack"><span>Módulo 06</span><span>Módulo 07</span><span>Módulo 15</span></div>
+                <a href="wireshark.html" class="card-link">Ver laboratório →</a>
+              </article>
+            </div>
+
+            <div style="margin-top:48px;display:flex;justify-content:flex-end;">
+              <a href="#m01" class="btn btn-primary" onclick="return showModule('m01', document.querySelector('[href=\'#m01\']'))">
+                Começar pelo Módulo 01 <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
           <!-- MÓDULO 01 -->
-          <div class="guia-module active" id="m01">
+          <div class="guia-module" id="m01">
             <p class="section-label">Módulo 01 — Conceitos Básicos de Redes</p>
             <h1 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Comunicação em Rede</h1>
             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">Toda tecnologia que usamos hoje depende de redes. Antes de entrar em protocolos e configurações, preciso entender o que é comunicação em rede — o conceito que está por baixo de tudo.</p>
@@ -1170,7 +1244,6 @@
     </div><!-- .page-wrapper -->
 
     <footer class="footer">
-      <p class="footer-title">Gabriel Zacca Ferreira</p>
       <p>Portfólio técnico em Redes, Infraestrutura, Cloud Computing e Cibersegurança.</p>
       <nav class="footer-nav" aria-label="Navegação do rodapé">
         <a href="../index.html">Home</a>
@@ -1197,6 +1270,26 @@
         if (clickedItem) clickedItem.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return false;
+      }
+
+      function openCourse() {
+        // Abre categoria Redes
+        const catBtn = document.querySelector('.sidebar-category-toggle');
+        const catItems = document.getElementById('cat-redes');
+        if (catBtn && catItems && catBtn.getAttribute('aria-expanded') === 'false') {
+          catBtn.setAttribute('aria-expanded', 'true');
+          catItems.classList.remove('collapsed');
+        }
+        // Abre subcurso Conceitos Básicos
+        const courseBtn = document.querySelector('.sidebar-course-toggle');
+        const courseItems = document.getElementById('course-items');
+        if (courseBtn && courseItems && courseBtn.getAttribute('aria-expanded') === 'false') {
+          courseBtn.setAttribute('aria-expanded', 'true');
+          courseItems.classList.remove('collapsed');
+        }
+        // Navega para módulo 01
+        const item = document.querySelector('.sidebar-item[href="#m01"]');
+        showModule('m01', item);
       }
 
       function toggleCategory(btn) {
