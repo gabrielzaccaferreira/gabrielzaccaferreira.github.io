@@ -858,7 +858,6 @@ main {
 }
 
 .skill-card > h3 i {
-  color: var(--primary);
   font-size: 18px;
   flex-shrink: 0;
 }
@@ -1015,6 +1014,130 @@ main {
 .featured-stack {
   margin-top: 28px;
   margin-bottom: 28px;
+}
+
+/* Grid de cases em destaque */
+.cases-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.case-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 28px;
+  transition: var(--transition);
+}
+
+.case-card:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-primary);
+  transform: translateY(-6px);
+}
+
+.case-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.case-badge {
+  display: inline-flex;
+  width: fit-content;
+  padding: 4px 12px;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: var(--radius-full);
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.case-card h3 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.case-card h3 i {
+  color: var(--primary);
+}
+
+.case-card p {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+/* Bloco de ícone visual — substitui a imagem */
+.case-icon-block {
+  width: 100%;
+  height: 160px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+  flex-shrink: 0;
+  transition: var(--transition-slow);
+  position: relative;
+  overflow: hidden;
+}
+
+.case-icon-block::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  background: radial-gradient(circle at 30% 50%, white, transparent 70%);
+}
+
+.case-icon-block i {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,0.3));
+}
+
+.case-card:hover .case-icon-block {
+  transform: scale(1.02);
+}
+
+/* Cores individuais por lab */
+.case-icon-block.wazuh    { background: linear-gradient(135deg, #0f3460, #1a5276); color: #38bdf8; }
+.case-icon-block.suricata { background: linear-gradient(135deg, #1a3a1a, #145a14); color: #4ade80; }
+.case-icon-block.pfsense  { background: linear-gradient(135deg, #3d1a00, #7c3500); color: #fb923c; }
+.case-icon-block.kali     { background: linear-gradient(135deg, #1a0533, #3b0764); color: #c084fc; }
+.case-icon-block.crowdsec { background: linear-gradient(135deg, #3d0000, #7c0000); color: #f87171; }
+.case-icon-block.wireshark{ background: linear-gradient(135deg, #003366, #005599); color: #60a5fa; }
+
+.case-card .btn {
+  width: 100%;
+  justify-content: center;
+  margin-top: auto;
+}
+
+@media (max-width: 1100px) {
+  .cases-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .cases-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .featured-project .btn {
@@ -1190,8 +1313,12 @@ main {
 .timeline-item span {
   display: block;
   margin-bottom: 8px;
-  color: var(--primary);
+  color: var(--text-light);
   font-weight: 900;
+}
+
+.timeline-item span i {
+  margin-right: 6px;
 }
 
 .timeline-item p {
@@ -1733,9 +1860,82 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--primary);
   font-size: 22px;
 }
+
+/* ── Cores semânticas por ícone ────────────────────────────
+   Aplicadas em: .card-icon, .skill-card h3 i, .timeline-item span i
+   Um único lugar controla todas as páginas do site.
+──────────────────────────────────────────────────────────── */
+
+/* Segurança / Blue Team */
+.fa-shield-halved, .fa-shield  { color: #38bdf8; } /* azul primário */
+.fa-lock, .fa-key              { color: #38bdf8; }
+.fa-crosshairs                 { color: #f472b6; } /* rosa */
+.fa-triangle-exclamation       { color: #fb923c; } /* laranja */
+.fa-ban                        { color: #f87171; } /* vermelho suave */
+.fa-bell                       { color: #facc15; } /* amarelo */
+.fa-fire-flame-curved          { color: #f87171; } /* vermelho */
+.fa-fire                       { color: #fb923c; } /* laranja */
+
+/* Redes */
+.fa-network-wired              { color: #4ade80; } /* verde */
+.fa-ethernet                   { color: #4ade80; }
+.fa-globe                      { color: #60a5fa; } /* azul claro */
+.fa-diagram-project            { color: #60a5fa; }
+.fa-arrows-left-right          { color: #60a5fa; }
+.fa-signal                     { color: #4ade80; }
+.fa-broadcast-tower            { color: #4ade80; }
+.fa-handshake                  { color: #4ade80; }
+
+/* Linux / Sistema */
+.fa-linux                      { color: #c084fc; } /* roxo */
+.fa-ubuntu                     { color: #fb923c; } /* laranja Ubuntu */
+.fa-terminal                   { color: #4ade80; } /* verde terminal */
+.fa-gears, .fa-gear            { color: #94a3b8; } /* cinza */
+.fa-arrows-rotate              { color: #60a5fa; }
+
+/* Cloud / Infra */
+.fa-cloud                      { color: #60a5fa; }
+.fa-server                     { color: #94a3b8; } /* cinza */
+.fa-desktop, .fa-display       { color: #60a5fa; }
+.fa-computer                   { color: #60a5fa; }
+
+/* Dev / Código */
+.fa-code                       { color: #c084fc; } /* roxo */
+.fa-file-code                  { color: #c084fc; }
+.fa-pen-ruler                  { color: #c084fc; }
+.fa-docker                     { color: #60a5fa; } /* azul Docker */
+.fa-github                     { color: #e2e8f0; } /* branco suave */
+
+/* Análise / Logs */
+.fa-chart-bar                  { color: #facc15; } /* amarelo */
+.fa-magnifying-glass-chart     { color: #60a5fa; }
+.fa-magnifying-glass           { color: #60a5fa; }
+.fa-scroll                     { color: #fbbf24; } /* âmbar */
+.fa-file-lines                 { color: #94a3b8; }
+.fa-filter                     { color: #94a3b8; }
+.fa-bolt                       { color: #facc15; } /* amarelo elétrico */
+
+/* Certificações / Conquistas */
+.fa-award                      { color: #facc15; }
+.fa-check                      { color: #4ade80; }
+.fa-circle-info                { color: #60a5fa; }
+.fa-circle-check               { color: #4ade80; }
+
+/* Outros */
+.fa-plug                       { color: #94a3b8; }
+.fa-tag                        { color: #94a3b8; }
+.fa-book-open                  { color: #fbbf24; }
+.fa-stethoscope                { color: #f472b6; }
+.fa-layer-group                { color: #60a5fa; }
+.fa-images                     { color: #94a3b8; }
+.fa-address-card               { color: #60a5fa; }
+.fa-eye-slash                  { color: #94a3b8; }
+.fa-certificate                { color: #facc15; }
+.fa-wrench                     { color: #94a3b8; }
+.fa-windows                    { color: #60a5fa; }
+.fa-arrow-right                { color: #38bdf8; }
 
 /* =========================
    18. ROADMAP
