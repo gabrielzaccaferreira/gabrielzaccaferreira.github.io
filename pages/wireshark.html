@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wireshark | Gabriel Zacca Ferreira</title>
+    <meta name="description" content="Laboratório Wireshark: análise de protocolos de rede DNS, ARP, ICMP, TCP Three-Way Handshake e HTTPS/TLS no Kali Linux." />
+    <meta name="author" content="Gabriel Zacca Ferreira" />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Wireshark | Gabriel Zacca Ferreira" />
+    <meta property="og:description" content="Análise de protocolos de rede: DNS, ARP, ICMP, TCP Handshake e HTTPS/TLS com Wireshark no Kali Linux." />
+    <meta property="og:url" content="https://gabrielzaccaferreira.github.io/pages/wireshark.html" />
+    <meta property="og:image" content="https://gabrielzaccaferreira.github.io/assets/images/og-image.png" />
+    <link rel="canonical" href="https://gabrielzaccaferreira.github.io/pages/wireshark.html" />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navbar" aria-label="Navegação principal">
+        <a href="../index.html" class="logo">GZF</a>
+        <div class="nav-links">
+          <a href="../index.html">Home</a>
+          <a href="sobre.html">Sobre</a>
+          <a href="projetos.html">Projetos</a>
+          <a href="blog.html">Blog</a>
+          <a href="roadmap.html">Roadmap</a>
+        </div>
+        <div class="nav-actions">
+          <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer" class="nav-cv">Currículo</a>
+        </div>
+      </nav>
+      <div class="labs-bar">
+        <div class="labs-bar-inner">
+          <span class="labs-bar-label">Labs</span>
+          <a href="wazuh.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-shield-halved"></i> Wazuh SIEM/XDR</a>
+          <a href="kali-linux.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-brands fa-linux"></i> Kali Linux</a>
+          <a href="suricata.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-network-wired"></i> Suricata IDS/IPS</a>
+          <a href="crowdsec.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec</a>
+          <a href="wireshark.html" class="labs-bar-link active"><span class="lab-dot"></span><i class="fa-solid fa-magnifying-glass-chart"></i> Wireshark</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- HERO -->
+      <section id="hero" class="hero">
+        <div class="hero-content">
+          <p class="eyebrow">Análise de Protocolos • Redes • Packet Capture • Blue Team</p>
+          <h1>
+            Wireshark
+            <span>Vendo o que acontece na rede</span>
+          </h1>
+          <p class="hero-description">
+            Laboratório de análise de protocolos de rede utilizando Wireshark no Kali Linux —
+            capturando e interpretando tráfego real de DNS, ARP, ICMP, TCP e HTTPS/TLS
+            para compreender na prática como os dados se movem em uma rede.
+          </p>
+          <div class="hero-actions">
+            <a href="#protocolos" class="btn btn-primary">Ver análises →</a>
+            <a href="https://github.com/gabrielzaccaferreira/wireshark-analysis-lab" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+              <i class="fa-brands fa-github"></i> Ver no GitHub
+            </a>
+          </div>
+        </div>
+
+        <div class="architecture-card">
+          <p class="section-label">Protocolos analisados</p>
+          <h2>Capturas do laboratório</h2>
+          <div class="architecture-flow">
+            <span><i class="fa-solid fa-globe"></i> DNS — Resolução de nomes</span>
+            <span><i class="fa-solid fa-network-wired"></i> ARP — Resolução de MACs</span>
+            <span><i class="fa-solid fa-signal"></i> ICMP — Ping Echo Request/Reply</span>
+            <span><i class="fa-solid fa-handshake"></i> TCP — Three-Way Handshake</span>
+            <span><i class="fa-solid fa-lock"></i> HTTPS/TLS — Handshake criptografado</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ÍNDICE -->
+      <section id="indice" class="section">
+        <p class="section-label">Índice</p>
+        <h2>Navegue pelo conteúdo desta documentação.</h2>
+        <div class="profile-tags">
+          <a href="#sobre"><span>Sobre</span></a>
+          <a href="#ambiente"><span>Ambiente</span></a>
+          <a href="#protocolos"><span>Protocolos</span></a>
+          <a href="#evidencias"><span>Evidências</span></a>
+          <a href="#competencias"><span>Competências</span></a>
+          <a href="#proximos-passos"><span>Próximos passos</span></a>
+        </div>
+      </section>
+
+      <!-- SOBRE -->
+      <section id="sobre" class="section">
+        <p class="section-label">Sobre o laboratório</p>
+        <h2>Por que analisar tráfego de rede na prática.</h2>
+        <p class="section-text">
+          O Wireshark é o analisador de protocolos de rede mais utilizado no mundo —
+          tanto por profissionais de redes e segurança quanto em ambientes acadêmicos.
+          Ele permite capturar pacotes em tempo real e inspecionar cada campo de cada protocolo,
+          tornando visível algo que normalmente é invisível: o que realmente acontece na rede.
+        </p>
+        <p class="section-text">
+          Neste laboratório, o Wireshark foi utilizado no Kali Linux para analisar cinco
+          protocolos fundamentais — DNS, ARP, ICMP, TCP e HTTPS/TLS — construindo uma
+          base sólida de compreensão do modelo de camadas e da comunicação entre dispositivos.
+          Cada captura foi registrada, filtrada e documentada com evidências reais.
+        </p>
+      </section>
+
+      <!-- AMBIENTE -->
+      <section id="ambiente" class="section">
+        <p class="section-label">Ambiente</p>
+        <h2>Onde as capturas foram realizadas.</h2>
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title"><i class="fa-brands fa-linux card-icon"></i> Kali Linux</h3>
+            <p>Sistema operacional utilizado para execução do Wireshark, captura de pacotes e análise dos protocolos em ambiente virtualizado.</p>
+            <div class="project-stack">
+              <span>Kali Linux 2026.2</span>
+              <span>Interface de rede</span>
+              <span>Modo promíscuo</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-desktop card-icon"></i> VMware Workstation</h3>
+            <p>Hypervisor utilizado para isolar o ambiente de captura, garantindo que o tráfego analisado seja real e proveniente do laboratório.</p>
+            <div class="project-stack">
+              <span>VMware</span>
+              <span>Bridge Mode</span>
+              <span>Rede local real</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-magnifying-glass-chart card-icon"></i> Wireshark</h3>
+            <p>Analisador de protocolos utilizado para captura, filtragem e inspeção de pacotes em tempo real, com interface gráfica e filtros de display avançados.</p>
+            <div class="project-stack">
+              <span>Wireshark</span>
+              <span>Display Filters</span>
+              <span>Packet Inspector</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-brands fa-github card-icon"></i> Repositório</h3>
+            <p>Laboratório documentado no GitHub com capturas, notas técnicas e screenshots de cada protocolo analisado.</p>
+            <div class="project-stack">
+              <span>captures/</span>
+              <span>screenshots/</span>
+              <span>notes/</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- PROTOCOLOS -->
+      <section id="protocolos" class="section">
+        <p class="section-label">Protocolos analisados</p>
+        <h2>Cinco protocolos fundamentais capturados e documentados.</h2>
+        <p class="section-text">
+          Cada protocolo foi analisado com um objetivo específico — compreender o seu papel
+          na comunicação de rede, identificar seus campos e interpretar o comportamento
+          real dos pacotes capturados.
+        </p>
+
+        <!-- DNS -->
+        <div style="margin-top:48px;">
+          <p class="section-label">Protocolo 01</p>
+          <h2>DNS — Domain Name System</h2>
+          <p class="section-text">
+            O DNS é o protocolo responsável por traduzir nomes de domínio em endereços IP.
+            Na captura, foi possível observar a consulta (Query) enviada pelo cliente para o
+            servidor DNS e a resposta (Response) com o IP resolvido — visualizando na prática
+            como um simples acesso a um site começa com uma pergunta ao DNS.
+          </p>
+          <div class="profile-tags" style="margin-top:20px;margin-bottom:20px;">
+            <span><i class="fa-solid fa-filter"></i> Filtro: <code style="color:var(--primary);font-family:monospace;">dns</code></span>
+            <span><i class="fa-solid fa-arrow-right"></i> Porta UDP 53</span>
+            <span><i class="fa-solid fa-circle-question"></i> Query Type A</span>
+            <span><i class="fa-solid fa-circle-check"></i> Response com IP</span>
+          </div>
+        </div>
+
+        <!-- ARP -->
+        <div style="margin-top:48px;">
+          <p class="section-label">Protocolo 02</p>
+          <h2>ARP — Address Resolution Protocol</h2>
+          <p class="section-text">
+            O ARP opera na camada 2 e resolve endereços IP em endereços MAC — necessário para
+            que pacotes sejam entregues corretamente na rede local. Na captura, foram observados
+            o ARP Request (broadcast perguntando "quem tem este IP?") e o ARP Reply (resposta
+            com o MAC do dispositivo correspondente).
+          </p>
+          <div class="profile-tags" style="margin-top:20px;margin-bottom:20px;">
+            <span><i class="fa-solid fa-filter"></i> Filtro: <code style="color:var(--primary);font-family:monospace;">arp</code></span>
+            <span><i class="fa-solid fa-broadcast-tower"></i> Broadcast</span>
+            <span><i class="fa-solid fa-address-card"></i> MAC Resolution</span>
+            <span><i class="fa-solid fa-layer-group"></i> Camada 2</span>
+          </div>
+        </div>
+
+        <!-- ICMP -->
+        <div style="margin-top:48px;">
+          <p class="section-label">Protocolo 03</p>
+          <h2>ICMP — Internet Control Message Protocol</h2>
+          <p class="section-text">
+            O ICMP é utilizado para diagnóstico de rede — o comando <code style="color:var(--primary);font-family:monospace;">ping</code> usa ICMP
+            Echo Request e Echo Reply para testar conectividade. Na captura, foi possível
+            visualizar os pacotes de ida e volta entre o Kali Linux e o servidor Wazuh
+            (192.168.218.129), confirmando conectividade e medindo o tempo de resposta.
+          </p>
+          <div class="profile-tags" style="margin-top:20px;margin-bottom:20px;">
+            <span><i class="fa-solid fa-filter"></i> Filtro: <code style="color:var(--primary);font-family:monospace;">icmp</code></span>
+            <span><i class="fa-solid fa-arrow-right-arrow-left"></i> Echo Request / Reply</span>
+            <span><i class="fa-solid fa-clock"></i> TTL e RTT</span>
+            <span><i class="fa-solid fa-stethoscope"></i> Diagnóstico</span>
+          </div>
+        </div>
+
+        <!-- TCP -->
+        <div style="margin-top:48px;">
+          <p class="section-label">Protocolo 04</p>
+          <h2>TCP — Three-Way Handshake</h2>
+          <p class="section-text">
+            O TCP estabelece conexões confiáveis através do Three-Way Handshake: SYN →
+            SYN-ACK → ACK. Na captura, foi possível visualizar cada etapa desse processo —
+            o cliente enviando SYN, o servidor respondendo com SYN-ACK e o cliente confirmando
+            com ACK — antes de qualquer dado ser trocado. Essa é a base de toda comunicação
+            TCP na rede.
+          </p>
+          <div class="profile-tags" style="margin-top:20px;margin-bottom:20px;">
+            <span><i class="fa-solid fa-filter"></i> Filtro: <code style="color:var(--primary);font-family:monospace;">tcp.flags.syn==1</code></span>
+            <span><i class="fa-solid fa-handshake"></i> SYN → SYN-ACK → ACK</span>
+            <span><i class="fa-solid fa-shield-halved"></i> Conexão confiável</span>
+            <span><i class="fa-solid fa-layer-group"></i> Camada 4</span>
+          </div>
+        </div>
+
+        <!-- HTTPS/TLS -->
+        <div style="margin-top:48px;">
+          <p class="section-label">Protocolo 05</p>
+          <h2>HTTPS / TLS — Comunicação criptografada</h2>
+          <p class="section-text">
+            O TLS é o protocolo que criptografa a comunicação HTTPS. Na captura, foi possível
+            observar o TLS Handshake — Client Hello, Server Hello, troca de certificados e
+            estabelecimento das chaves de sessão — antes da comunicação criptografada iniciar.
+            Após o handshake, os dados aparecem no Wireshark como Application Data ilegível,
+            demonstrando na prática o que a criptografia faz.
+          </p>
+          <div class="profile-tags" style="margin-top:20px;margin-bottom:20px;">
+            <span><i class="fa-solid fa-filter"></i> Filtro: <code style="color:var(--primary);font-family:monospace;">tls</code></span>
+            <span><i class="fa-solid fa-lock"></i> Client Hello / Server Hello</span>
+            <span><i class="fa-solid fa-certificate"></i> Certificado TLS</span>
+            <span><i class="fa-solid fa-eye-slash"></i> Application Data criptografado</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- EVIDÊNCIAS -->
+      <section id="evidencias" class="section">
+        <p class="section-label">Evidências</p>
+        <h2>Capturas reais dos protocolos analisados.</h2>
+        <p class="section-text">
+          Screenshots reais das capturas realizadas no Wireshark — cada imagem mostra
+          os pacotes filtrados e os campos inspecionados de cada protocolo.
+        </p>
+
+        <div class="evidence-grid" style="grid-template-columns: repeat(2, minmax(0,1fr));">
+          <figure class="evidence-image">
+            <a href="https://github.com/gabrielzaccaferreira/wireshark-analysis-lab/blob/main/screenshots/dns-analysis.png" target="_blank" rel="noopener noreferrer">
+              <img src="https://github.com/gabrielzaccaferreira/wireshark-analysis-lab/raw/main/screenshots/dns-analysis.png" alt="Análise DNS no Wireshark" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>DNS — Query e Response capturados, mostrando resolução de nome para IP.</figcaption>
+          </figure>
+
+          <figure class="evidence-image">
+            <a href="https://github.com/gabrielzaccaferreira/wireshark-analysis-lab/blob/main/screenshots/arp-analysis.png" target="_blank" rel="noopener noreferrer">
+              <img src="https://github.com/gabrielzaccaferreira/wireshark-analysis-lab/raw/main/screenshots/arp-analysis.png" alt="Análise ARP no Wireshark" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>ARP — Request broadcast e Reply com endereço MAC resolvido.</figcaption>
+          </figure>
+
+          <figure class="evidence-image">
+            <a href="https://github.com/gabrielzaccaferreira/wireshark-analysis-lab/blob/main/screenshots/icmp-analysis.png" target="_blank" rel="noopener noreferrer">
+              <img src="https://github.com/gabrielzaccaferreira/wireshark-analysis-lab/raw/main/screenshots/icmp-analysis.png" alt="Análise ICMP no Wireshark" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>ICMP — Echo Request e Echo Reply do ping entre as VMs do laboratório.</figcaption>
+          </figure>
+
+          <figure class="evidence-image">
+            <a href="https://github.com/gabrielzaccaferreira/wireshark-analysis-lab/blob/main/screenshots/tcp-handshake.png" target="_blank" rel="noopener noreferrer">
+              <img src="https://github.com/gabrielzaccaferreira/wireshark-analysis-lab/raw/main/screenshots/tcp-handshake.png" alt="TCP Three-Way Handshake no Wireshark" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>TCP — Three-Way Handshake: SYN, SYN-ACK e ACK visíveis na captura.</figcaption>
+          </figure>
+
+          <figure class="evidence-image evidence-image-wide">
+            <a href="https://github.com/gabrielzaccaferreira/wireshark-analysis-lab/blob/main/screenshots/https-analysis.png" target="_blank" rel="noopener noreferrer">
+              <img src="https://github.com/gabrielzaccaferreira/wireshark-analysis-lab/raw/main/screenshots/https-analysis.png" alt="Análise HTTPS/TLS no Wireshark" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>HTTPS/TLS — Handshake TLS com Client Hello, Server Hello e Application Data criptografado.</figcaption>
+          </figure>
+        </div>
+
+        <div style="margin-top:32px;text-align:center;">
+          <a href="https://github.com/gabrielzaccaferreira/wireshark-analysis-lab" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <i class="fa-brands fa-github"></i> Ver repositório completo no GitHub
+          </a>
+        </div>
+      </section>
+
+      <!-- COMPETÊNCIAS -->
+      <section id="competencias" class="section">
+        <p class="section-label">Competências desenvolvidas</p>
+        <h2>O que este laboratório construiu na prática.</h2>
+        <p class="section-text">
+          A análise de protocolos com Wireshark transforma conceitos teóricos de redes em
+          observações práticas — vendo os pacotes reais, seus campos e seu comportamento
+          em uma rede funcionando.
+        </p>
+        <div class="skills-grid">
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-magnifying-glass-chart"></i> Packet Analysis</h3>
+            <p>Captura e análise de pacotes em tempo real com Wireshark, utilizando filtros de display para isolar protocolos específicos e inspecionar campos individuais de cada pacote.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-layer-group"></i> Modelo de Camadas</h3>
+            <p>Compreensão prática do modelo TCP/IP — observando como cada camada encapsula os dados: Ethernet (L2), IP (L3), TCP/UDP (L4) e aplicação (L7) coexistindo em cada pacote.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-network-wired"></i> Protocolos de Rede</h3>
+            <p>Análise profunda de DNS, ARP, ICMP, TCP e TLS — identificando o papel de cada um na comunicação, seus campos específicos e o comportamento esperado versus anômalo.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-filter"></i> Display Filters</h3>
+            <p>Uso de filtros do Wireshark para isolar tráfego específico: <code style="color:var(--primary);font-family:monospace;">dns</code>, <code style="color:var(--primary);font-family:monospace;">arp</code>, <code style="color:var(--primary);font-family:monospace;">icmp</code>, <code style="color:var(--primary);font-family:monospace;">tcp.flags.syn==1</code>, <code style="color:var(--primary);font-family:monospace;">tls</code> — habilidade essencial para análise de tráfego em ambientes reais.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-shield-halved"></i> Blue Team</h3>
+            <p>Perspectiva defensiva na análise de tráfego — identificando padrões normais de comunicação para reconhecer anomalias, base para threat hunting e análise forense de rede.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-book-open"></i> Documentação técnica</h3>
+            <p>Registro organizado das capturas, análises e aprendizados no GitHub — com estrutura de capturas, screenshots e notas técnicas por protocolo.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- RESULTADOS -->
+      <section id="resultados" class="section">
+        <p class="section-label">Resultados</p>
+        <h2>O que foi entregue neste laboratório.</h2>
+        <div class="stats-grid">
+          <div class="stat-card"><strong>05</strong><span>Protocolos analisados</span></div>
+          <div class="stat-card"><strong>05</strong><span>Capturas documentadas</span></div>
+          <div class="stat-card"><strong>01</strong><span>Repositório público</span></div>
+          <div class="stat-card"><strong>L2→L7</strong><span>Camadas cobertas</span></div>
+        </div>
+      </section>
+
+      <!-- PRÓXIMOS PASSOS -->
+      <section id="proximos-passos" class="section">
+        <p class="section-label">Próximos passos</p>
+        <h2>Como este laboratório continuará evoluindo.</h2>
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-server card-icon"></i> DHCP</h3>
+            <p>Capturar o processo DORA (Discover, Offer, Request, Acknowledge) do DHCP — visualizando como um dispositivo obtém automaticamente um endereço IP na rede.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-globe card-icon"></i> HTTP</h3>
+            <p>Analisar tráfego HTTP não criptografado — visualizando requests, responses, headers e o conteúdo trafegando em texto claro, contrastando com o HTTPS.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-diagram-project card-icon"></i> VLANs</h3>
+            <p>Capturar tráfego com tags 802.1Q para compreender como VLANs são identificadas nos pacotes e como o trunking funciona em switches gerenciáveis.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-magnifying-glass card-icon"></i> Análise de ataques</h3>
+            <p>Utilizar o Wireshark para analisar capturas de port scans e outros ataques gerados no laboratório — correlacionando com os alertas do Suricata e Wazuh.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- CONCLUSÃO -->
+      <section id="conclusao" class="section cta-premium">
+        <p class="section-label">Conclusão</p>
+        <h2>Cinco protocolos. Cinco capturas. Redes visíveis.</h2>
+        <p class="section-text">
+          Este laboratório construiu uma base fundamental para qualquer atuação em redes
+          ou segurança — a capacidade de capturar e interpretar tráfego real. Combinado
+          com o Suricata e o Wazuh, o Wireshark fecha o ciclo de visibilidade do laboratório:
+          eventos de aplicação, tráfego de rede e logs centralizados.
+        </p>
+        <div class="hero-actions">
+          <a href="https://github.com/gabrielzaccaferreira/wireshark-analysis-lab" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <i class="fa-brands fa-github"></i> Ver repositório no GitHub →
+          </a>
+          <a href="suricata.html" class="btn btn-secondary">
+            <i class="fa-solid fa-network-wired"></i> Ver laboratório Suricata
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <p class="footer-title">Gabriel Zacca Ferreira</p>
+      <p>Portfólio técnico em Redes, Infraestrutura, Cloud Computing e Cibersegurança.</p>
+      <nav class="footer-nav" aria-label="Navegação do rodapé">
+        <a href="../index.html">Home</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="projetos.html">Projetos</a>
+        <a href="blog.html">Blog</a>
+        <a href="roadmap.html">Roadmap</a>
+      </nav>
+      <div class="footer-links">
+        <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a href="mailto:gabrielzaccaferreira@gmail.com"><i class="fa-solid fa-envelope"></i> E-mail</a>
+        <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-lines"></i> Currículo</a>
+      </div>
+      <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
+    </footer>
+  </body>
+</html>

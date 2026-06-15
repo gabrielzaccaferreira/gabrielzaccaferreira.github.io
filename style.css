@@ -724,7 +724,7 @@ main {
 }
 
 .card p {
-  margin: 0 0 22px;
+  margin: 0;
   color: var(--text-muted);
   line-height: 1.75;
 }
@@ -777,6 +777,8 @@ main {
 .card .tags,
 .card .project-stack {
   width: 100%;
+  margin-top: auto;
+  padding-top: 16px;
 }
 
 /* =========================
