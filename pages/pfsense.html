@@ -135,6 +135,7 @@
               <span>FreeBSD/amd64</span>
               <span>soc-fw01.home.lab</span>
             </div>
+            <a href="https://github.com/gabrielzaccaferreira/pfsense-lab" target="_blank" rel="noopener noreferrer" class="card-link">Ver repositório →</a>
           </article>
           <article class="card">
             <h3 class="card-title"><i class="fa-solid fa-desktop card-icon"></i> VM no VMware</h3>
@@ -214,11 +215,8 @@
               <span class="roadmap-status">Concluído</span>
               <h3>Criação da VM no VMware</h3>
               <p>Criação da VM <strong>pfSense-CE</strong> no VMware Workstation com 3.9 GB RAM, 2 vCPUs, 20 GB de disco e duas interfaces de rede: VMnet8 (WAN) e VMnet1 (LAN).</p>
-              <div class="project-stack">
-                <span>VMware Workstation</span>
-                <span>FreeBSD</span>
-                <span>2 NICs</span>
-              </div>
+              <div class="project-stack"><span>VMware Workstation</span><span>FreeBSD</span><span>2 NICs</span></div>
+              <button class="modal-trigger" onclick="openModal('pf-modal-vm')">Ver detalhes →</button>
             </div>
           </article>
 
@@ -228,11 +226,8 @@
               <span class="roadmap-status">Concluído</span>
               <h3>Instalação do pfSense 2.8.1-RELEASE</h3>
               <p>Instalação do pfSense Community Edition 2.8.1 (amd64, build 20260513) com hostname <code style="color:var(--primary);font-family:monospace;">soc-fw01.home.lab</code>. Boot completo confirmado via console.</p>
-              <div class="project-stack">
-                <span>pfSense 2.8.1-RELEASE</span>
-                <span>FreeBSD/amd64</span>
-                <span>soc-fw01.home.lab</span>
-              </div>
+              <div class="project-stack"><span>pfSense 2.8.1-RELEASE</span><span>FreeBSD/amd64</span><span>soc-fw01.home.lab</span></div>
+              <button class="modal-trigger" onclick="openModal('pf-modal-install')">Ver detalhes →</button>
             </div>
           </article>
 
@@ -241,12 +236,9 @@
             <div class="roadmap-step-content">
               <span class="roadmap-status">Concluído</span>
               <h3>Configuração das interfaces WAN e LAN</h3>
-              <p>Atribuição das interfaces via console: <code style="color:var(--primary);font-family:monospace;">em0</code> como WAN com DHCP (x.x.x.x/24) e <code style="color:var(--primary);font-family:monospace;">em1</code> como LAN com IP estático (x.x.x.x/24).</p>
-              <div class="project-stack">
-                <span>WAN em0 — DHCP</span>
-                <span>LAN em1 — Estático</span>
-                <span>Segmentação de rede</span>
-              </div>
+              <p>Atribuição das interfaces via console: <code style="color:var(--primary);font-family:monospace;">em0</code> como WAN com DHCP e <code style="color:var(--primary);font-family:monospace;">em1</code> como LAN com IP estático.</p>
+              <div class="project-stack"><span>WAN em0 — DHCP</span><span>LAN em1 — Estático</span><span>Segmentação de rede</span></div>
+              <button class="modal-trigger" onclick="openModal('pf-modal-interfaces')">Ver detalhes →</button>
             </div>
           </article>
 
@@ -255,12 +247,9 @@
             <div class="roadmap-step-content">
               <span class="roadmap-status">Concluído</span>
               <h3>Acesso à interface web (WebGUI)</h3>
-              <p>Acesso ao painel de administração do pfSense via browser na LAN — <code style="color:var(--primary);font-family:monospace;">https://x.x.x.x</code> — para configuração de regras, NAT, DHCP e monitoramento.</p>
-              <div class="project-stack">
-                <span>WebGUI</span>
-                <span>HTTPS</span>
-                <span>x.x.x.x</span>
-              </div>
+              <p>Acesso ao painel de administração do pfSense via browser na LAN para configuração de regras, NAT, DHCP e monitoramento.</p>
+              <div class="project-stack"><span>WebGUI</span><span>HTTPS</span><span>Admin panel</span></div>
+              <button class="modal-trigger" onclick="openModal('pf-modal-webgui')">Ver detalhes →</button>
             </div>
           </article>
 
@@ -270,12 +259,8 @@
               <span class="roadmap-status">Concluído</span>
               <h3>Configuração de regras de Firewall</h3>
               <p>Criação de regras de firewall nas interfaces WAN e LAN para controlar o tráfego entre as redes — definindo quais conexões são permitidas e quais são bloqueadas.</p>
-              <div class="project-stack">
-                <span>Firewall Rules</span>
-                <span>WAN Rules</span>
-                <span>LAN Rules</span>
-                <span>Allow/Block</span>
-              </div>
+              <div class="project-stack"><span>Firewall Rules</span><span>WAN Rules</span><span>LAN Rules</span><span>Allow/Block</span></div>
+              <button class="modal-trigger" onclick="openModal('pf-modal-fw')">Ver detalhes →</button>
             </div>
           </article>
 
@@ -284,12 +269,9 @@
             <div class="roadmap-step-content">
               <span class="roadmap-status">Concluído</span>
               <h3>Configuração de NAT</h3>
-              <p>Configuração de Network Address Translation (NAT) para permitir que dispositivos da LAN acessem a WAN — traduzindo os endereços internos para o IP da interface WAN do pfSense.</p>
-              <div class="project-stack">
-                <span>NAT</span>
-                <span>Outbound NAT</span>
-                <span>Port Forward</span>
-              </div>
+              <p>Configuração de Network Address Translation para permitir que dispositivos da LAN acessem a WAN, traduzindo endereços internos para o IP da interface WAN.</p>
+              <div class="project-stack"><span>NAT</span><span>Outbound NAT</span><span>Port Forward</span></div>
+              <button class="modal-trigger" onclick="openModal('pf-modal-nat')">Ver detalhes →</button>
             </div>
           </article>
 
@@ -298,12 +280,9 @@
             <div class="roadmap-step-content">
               <span class="roadmap-status">Concluído</span>
               <h3>Configuração de DHCP Server</h3>
-              <p>Ativação do servidor DHCP na interface LAN para distribuição automática de endereços IP aos dispositivos conectados à rede interna — range dentro da subnet x.x.x.0/24.</p>
-              <div class="project-stack">
-                <span>DHCP Server</span>
-                <span>x.x.x.0/24</span>
-                <span>IP automático</span>
-              </div>
+              <p>Ativação do servidor DHCP na interface LAN para distribuição automática de endereços IP aos dispositivos da rede interna.</p>
+              <div class="project-stack"><span>DHCP Server</span><span>IP automático</span><span>Lease time</span></div>
+              <button class="modal-trigger" onclick="openModal('pf-modal-dhcp')">Ver detalhes →</button>
             </div>
           </article>
 
@@ -312,18 +291,158 @@
             <div class="roadmap-step-content">
               <span class="roadmap-status">Concluído</span>
               <h3>Integração com Wazuh via Syslog</h3>
-              <p>Configuração do pfSense para envio de logs de firewall e sistema via syslog para o Wazuh Manager (Ubuntu Server — x.x.x.x), integrando eventos do firewall ao SIEM centralizado.</p>
-              <div class="project-stack">
-                <span>Syslog</span>
-                <span>Wazuh Manager</span>
-                <span>Firewall Logs</span>
-                <span>x.x.x.x</span>
-              </div>
+              <p>Configuração do pfSense para envio de logs de firewall e sistema via syslog para o Wazuh Manager, integrando eventos do firewall ao SIEM centralizado.</p>
+              <div class="project-stack"><span>Syslog</span><span>Wazuh Manager</span><span>Firewall Logs</span></div>
+              <button class="modal-trigger" onclick="openModal('pf-modal-syslog')">Ver detalhes →</button>
             </div>
           </article>
 
         </div>
       </section>
+
+      <!-- MODAIS PFSENSE -->
+      <div class="lab-modal" id="pf-modal-vm" onclick="closeModalOutside(event,'pf-modal-vm')">
+        <div class="lab-modal-box">
+          <button class="lab-modal-close" onclick="closeModal('pf-modal-vm')"><i class="fa-solid fa-xmark"></i></button>
+          <p class="section-label">Etapa 01</p>
+          <h2>Criação da VM no VMware</h2>
+          <p class="module-text">O pfSense é baseado em FreeBSD — por isso a VM foi criada com o tipo "FreeBSD 64-bit" no VMware, o que garante as configurações padrão corretas de hardware virtual.</p>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-microchip"></i> Recursos alocados</h4>
+            <p><strong>RAM:</strong> 3.9 GB — suficiente para o firewall com inspeção de estado ativa.<br>
+            <strong>CPUs:</strong> 2 vCPUs — para processar regras e NAT sem gargalo.<br>
+            <strong>Disco:</strong> 20 GB — espaço para o sistema, logs e configurações.<br>
+            <strong>NICs:</strong> 2 interfaces — VMnet8 (WAN) e VMnet1 (LAN).</p>
+          </div>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-ethernet"></i> Por que duas interfaces?</h4>
+            <p>O pfSense precisa de pelo menos duas interfaces para funcionar como firewall: uma para receber tráfego externo (WAN) e outra para distribuir para a rede interna (LAN). Sem isso, não há separação de redes — que é exatamente o objetivo do lab.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-modal" id="pf-modal-install" onclick="closeModalOutside(event,'pf-modal-install')">
+        <div class="lab-modal-box">
+          <button class="lab-modal-close" onclick="closeModal('pf-modal-install')"><i class="fa-solid fa-xmark"></i></button>
+          <p class="section-label">Etapa 02</p>
+          <h2>Instalação do pfSense 2.8.1-RELEASE</h2>
+          <p class="module-text">A ISO foi baixada do site oficial da Netgate (fabricante do pfSense). A versão Community Edition é gratuita e inclui todas as funcionalidades necessárias para o laboratório.</p>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-compact-disc"></i> Processo de instalação</h4>
+            <p>A instalação via console é guiada — Accept, Install, Auto (UFS), Reboot. O pfSense não tem instalação gráfica; tudo é feito via menu de texto. Após o primeiro boot, o console exibiu as interfaces detectadas e o menu principal confirmando que o sistema estava pronto.</p>
+          </div>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-tag"></i> Hostname soc-fw01.home.lab</h4>
+            <p>O hostname foi definido durante a configuração inicial para refletir o papel do dispositivo no laboratório — <strong>soc-fw01</strong> indica o primeiro firewall do ambiente SOC, e <strong>home.lab</strong> é o domínio interno do laboratório.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-modal" id="pf-modal-interfaces" onclick="closeModalOutside(event,'pf-modal-interfaces')">
+        <div class="lab-modal-box">
+          <button class="lab-modal-close" onclick="closeModal('pf-modal-interfaces')"><i class="fa-solid fa-xmark"></i></button>
+          <p class="section-label">Etapa 03</p>
+          <h2>Configuração das interfaces WAN e LAN</h2>
+          <p class="module-text">A primeira configuração importante do pfSense é atribuir quais interfaces físicas serão WAN e LAN. Isso é feito via menu do console — opção 1 (Assign Interfaces).</p>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-network-wired"></i> Atribuição das interfaces</h4>
+            <p><strong>em0 → WAN:</strong> conectada ao VMnet8, recebe IP via DHCP da rede física do laboratório. É a interface "externa" do firewall.<br><br>
+            <strong>em1 → LAN:</strong> conectada ao VMnet1, configurada com IP estático como gateway da rede interna. É a interface "interna" pela qual os clientes da LAN acessam a internet.</p>
+          </div>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-circle-check"></i> Confirmação no console</h4>
+            <p>Após a atribuição, o console exibiu o status das interfaces com os IPs confirmados — WAN com IP do DHCP da rede física e LAN com o IP estático configurado manualmente via opção 2 do menu.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-modal" id="pf-modal-webgui" onclick="closeModalOutside(event,'pf-modal-webgui')">
+        <div class="lab-modal-box">
+          <button class="lab-modal-close" onclick="closeModal('pf-modal-webgui')"><i class="fa-solid fa-xmark"></i></button>
+          <p class="section-label">Etapa 04</p>
+          <h2>Acesso à interface web (WebGUI)</h2>
+          <p class="module-text">Com as interfaces configuradas, o pfSense já serve a WebGUI pelo IP da LAN. O acesso é feito de qualquer dispositivo na rede LAN abrindo o browser e digitando o IP do pfSense.</p>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-browser"></i> Primeiro acesso</h4>
+            <p>O browser exibe um aviso de certificado autoassinado — normal para um ambiente interno. Após aceitar, a tela de login do pfSense aparece. Credenciais padrão: <code style="color:var(--primary);font-family:monospace;">admin</code> / <code style="color:var(--primary);font-family:monospace;">pfsense</code>. A senha foi alterada imediatamente no primeiro acesso.</p>
+          </div>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-gauge-high"></i> Setup Wizard</h4>
+            <p>O pfSense exibe um wizard de configuração inicial no primeiro login — hostname, DNS, timezone, senha do admin. Após o wizard, o dashboard principal exibe o status das interfaces, tráfego em tempo real e alertas do sistema.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-modal" id="pf-modal-fw" onclick="closeModalOutside(event,'pf-modal-fw')">
+        <div class="lab-modal-box">
+          <button class="lab-modal-close" onclick="closeModal('pf-modal-fw')"><i class="fa-solid fa-xmark"></i></button>
+          <p class="section-label">Etapa 05</p>
+          <h2>Configuração de regras de Firewall</h2>
+          <p class="module-text">As regras de firewall são o coração do pfSense. Elas definem o que pode ou não passar entre as interfaces — avaliadas de cima para baixo, a primeira regra que casar é aplicada.</p>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-list-check"></i> Regras LAN (padrão)</h4>
+            <p>Por padrão o pfSense cria uma regra na LAN que permite <strong>todo tráfego de saída</strong> — qualquer dispositivo da LAN consegue acessar a WAN. Essa regra foi mantida para o laboratório e refinada conforme necessário.</p>
+          </div>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-ban"></i> Regras WAN</h4>
+            <p>Na WAN, o comportamento padrão é <strong>bloquear tudo</strong> que chega da internet sem ter sido iniciado por alguém na LAN. O firewall stateful do pfSense rastreia as conexões — respostas a conexões iniciadas internamente passam automaticamente.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-modal" id="pf-modal-nat" onclick="closeModalOutside(event,'pf-modal-nat')">
+        <div class="lab-modal-box">
+          <button class="lab-modal-close" onclick="closeModal('pf-modal-nat')"><i class="fa-solid fa-xmark"></i></button>
+          <p class="section-label">Etapa 06</p>
+          <h2>Configuração de NAT</h2>
+          <p class="module-text">O NAT Outbound foi configurado no modo automático — o pfSense gera automaticamente as regras de mascaramento para qualquer rede LAN cadastrada. Isso permite que todos os dispositivos da LAN saiam pela WAN usando o IP público do pfSense.</p>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-arrows-left-right"></i> Como funciona no lab</h4>
+            <p>Quando um dispositivo da LAN faz uma requisição para a internet:<br><br>
+            1. O pfSense recebe o pacote com IP de origem da LAN<br>
+            2. Substitui o IP de origem pelo IP da interface WAN<br>
+            3. Registra a tradução na tabela de estados<br>
+            4. Quando a resposta volta, entrega ao dispositivo correto da LAN</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-modal" id="pf-modal-dhcp" onclick="closeModalOutside(event,'pf-modal-dhcp')">
+        <div class="lab-modal-box">
+          <button class="lab-modal-close" onclick="closeModal('pf-modal-dhcp')"><i class="fa-solid fa-xmark"></i></button>
+          <p class="section-label">Etapa 07</p>
+          <h2>Configuração de DHCP Server</h2>
+          <p class="module-text">O servidor DHCP do pfSense distribui IPs automaticamente para os dispositivos da rede LAN. É configurado em Services → DHCP Server → LAN.</p>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-server"></i> Parâmetros configurados</h4>
+            <p><strong>Range:</strong> faixa de IPs disponíveis para distribuição automática.<br>
+            <strong>Gateway:</strong> aponta para o próprio pfSense (IP da interface LAN).<br>
+            <strong>DNS:</strong> servidor DNS configurado para resolução de nomes.<br>
+            <strong>Lease time:</strong> tempo de validade do IP atribuído — padrão 24 horas.</p>
+          </div>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-thumbtack"></i> Reservas estáticas</h4>
+            <p>Para dispositivos que precisam sempre do mesmo IP (servidores do laboratório), foram criadas reservas DHCP — associando um MAC específico a um IP fixo. Combina a praticidade do DHCP com a previsibilidade do IP estático.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-modal" id="pf-modal-syslog" onclick="closeModalOutside(event,'pf-modal-syslog')">
+        <div class="lab-modal-box">
+          <button class="lab-modal-close" onclick="closeModal('pf-modal-syslog')"><i class="fa-solid fa-xmark"></i></button>
+          <p class="section-label">Etapa 08</p>
+          <h2>Integração com Wazuh via Syslog</h2>
+          <p class="module-text">O pfSense pode enviar seus logs para um servidor remoto via protocolo Syslog — o padrão da indústria para envio de logs de rede. O Wazuh Manager recebe esses logs e os processa como eventos de segurança.</p>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-gears"></i> Configuração no pfSense</h4>
+            <p>Em Status → System Logs → Settings, a opção "Enable Remote Logging" foi ativada com o IP do servidor Wazuh e porta UDP 514. Os tipos de log habilitados: <strong>Firewall Events</strong>, <strong>System Events</strong> e <strong>Authentication</strong>.</p>
+          </div>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-circle-check"></i> Pipeline completo</h4>
+            <p>Com o syslog configurado, cada pacote bloqueado pelo firewall, cada login na WebGUI e cada evento do sistema do pfSense é enviado em tempo real ao Wazuh Manager, que os correlaciona com os eventos dos outros laboratórios no dashboard centralizado.</p>
+          </div>
+        </div>
+      </div>
 
       <!-- CONFIGURAÇÕES -->
       <section id="configuracoes" class="section">
@@ -505,7 +624,8 @@
           </article>
           <article class="card">
             <h3 class="card-title"><i class="fa-brands fa-github card-icon"></i> Repositório</h3>
-            <p>Criar repositório GitHub dedicado ao laboratório pfSense com configurações exportadas, notas técnicas, diagramas de topologia e evidências da interface web.</p>
+            <p>Repositório GitHub do laboratório pfSense com configurações, notas técnicas e evidências do ambiente virtualizado.</p>
+            <a href="https://github.com/gabrielzaccaferreira/pfsense-lab" target="_blank" rel="noopener noreferrer" class="card-link">Ver no GitHub →</a>
           </article>
         </div>
       </section>
@@ -550,5 +670,11 @@
       </div>
       <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
     </footer>
+    <script>
+      function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden';}
+      function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
+      function closeModalOutside(e,id){if(e.target===document.getElementById(id))closeModal(id);}
+      document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.lab-modal.open').forEach(m=>{m.classList.remove('open');document.body.style.overflow='';});});
+    </script>
   </body>
 </html>
