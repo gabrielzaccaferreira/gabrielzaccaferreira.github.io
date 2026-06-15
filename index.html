@@ -66,6 +66,7 @@
           <a href="pages/suricata.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-network-wired"></i> Suricata IDS/IPS</a>
           <a href="pages/crowdsec.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec</a>
           <a href="pages/wireshark.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-magnifying-glass-chart"></i> Wireshark</a>
+          <a href="pages/pfsense.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-fire"></i> pfSense</a>
         </div>
       </div>
     </header>
@@ -202,24 +203,100 @@
         <p class="section-label">PROJETOS EM DESTAQUE</p>
         <h2>Cases técnicos documentados.</h2>
         <p class="section-text">Projetos práticos desenvolvidos para consolidar conhecimentos em Redes, Infraestrutura, Linux, Segurança da Informação e Cloud Computing.</p>
-        <article class="featured-project featured-case">
-          <div>
-            <p class="section-label">CASE TÉCNICO</p>
-            <h3 class="card-title"><i class="fa-solid fa-shield-halved card-icon"></i> Wazuh SIEM/XDR</h3>
-            <p>Implementação completa de um laboratório SIEM/XDR utilizando Ubuntu Server, VMware Workstation e Kali Linux, documentando ambiente, agentes, monitoramento e análise de eventos.</p>
-            <div class="project-stack">
-              <span>Linux</span><span>VMware</span><span>SIEM</span><span>Blue Team</span>
+
+        <div class="cases-grid">
+
+          <article class="case-card">
+            <div class="case-card-header">
+              <span class="case-badge">Case Principal</span>
+              <h3><i class="fa-solid fa-shield-halved"></i> Wazuh SIEM/XDR</h3>
+              <p>Laboratório completo de SIEM/XDR com Ubuntu Server, Kali Linux e VMware — agentes, monitoramento, análise de eventos e detecção de ameaças.</p>
+              <div class="project-stack">
+                <span>SIEM</span><span>Linux</span><span>VMware</span><span>Blue Team</span>
+              </div>
             </div>
-            <a href="pages/wazuh.html" class="btn btn-primary">Explorar Case Técnico →</a>
-          </div>
-          <img
-            src="assets/images/wazuh/01-wazuh-dashboard-home.png"
-            alt="Dashboard do laboratório Wazuh SIEM/XDR"
-            width="800"
-            height="450"
-            loading="lazy"
-          />
-        </article>
+            <div class="case-icon-block wazuh">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <a href="pages/wazuh.html" class="btn btn-primary">Explorar case →</a>
+          </article>
+
+          <article class="case-card">
+            <div class="case-card-header">
+              <span class="case-badge">IDS/IPS</span>
+              <h3><i class="fa-solid fa-network-wired"></i> Suricata IDS/IPS</h3>
+              <p>Detecção de intrusão em rede com alertas reais de port scan, integração com Wazuh via eve.json e regras da fonte aleksibovellan/nmap.</p>
+              <div class="project-stack">
+                <span>IDS/IPS</span><span>AF-PACKET</span><span>eve.json</span><span>Redes</span>
+              </div>
+            </div>
+            <div class="case-icon-block suricata">
+              <i class="fa-solid fa-network-wired"></i>
+            </div>
+            <a href="pages/suricata.html" class="btn btn-primary">Explorar case →</a>
+          </article>
+
+          <article class="case-card">
+            <div class="case-card-header">
+              <span class="case-badge">Firewall</span>
+              <h3><i class="fa-solid fa-fire"></i> pfSense CE</h3>
+              <p>Firewall virtualizado com segmentação WAN/LAN, regras de controle de tráfego, NAT, DHCP e integração de logs com o Wazuh SIEM.</p>
+              <div class="project-stack">
+                <span>Firewall</span><span>NAT</span><span>DHCP</span><span>FreeBSD</span>
+              </div>
+            </div>
+            <div class="case-icon-block pfsense">
+              <i class="fa-solid fa-fire"></i>
+            </div>
+            <a href="pages/pfsense.html" class="btn btn-primary">Explorar case →</a>
+          </article>
+
+          <article class="case-card">
+            <div class="case-card-header">
+              <span class="case-badge">Ambiente Base</span>
+              <h3><i class="fa-brands fa-linux"></i> Kali Linux</h3>
+              <p>Ambiente virtualizado completo com VMware em modo Bridge, SSH remoto, VS Code Remote e XRDP — base sobre a qual todos os labs foram construídos.</p>
+              <div class="project-stack">
+                <span>Linux</span><span>VMware</span><span>SSH</span><span>XRDP</span>
+              </div>
+            </div>
+            <div class="case-icon-block kali">
+              <i class="fa-brands fa-linux"></i>
+            </div>
+            <a href="pages/kali-linux.html" class="btn btn-primary">Explorar case →</a>
+          </article>
+
+          <article class="case-card">
+            <div class="case-card-header">
+              <span class="case-badge">Proteção SSH</span>
+              <h3><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec</h3>
+              <p>Detecção comportamental de brute force SSH com collections, parsers e scenarios ativos — monitoramento via journalctl e análise de alertas.</p>
+              <div class="project-stack">
+                <span>CrowdSec</span><span>SSH</span><span>Brute Force</span><span>Logs</span>
+              </div>
+            </div>
+            <div class="case-icon-block crowdsec">
+              <i class="fa-solid fa-fire-flame-curved"></i>
+            </div>
+            <a href="pages/crowdsec.html" class="btn btn-primary">Explorar case →</a>
+          </article>
+
+          <article class="case-card">
+            <div class="case-card-header">
+              <span class="case-badge">Análise de Rede</span>
+              <h3><i class="fa-solid fa-magnifying-glass-chart"></i> Wireshark</h3>
+              <p>Captura e análise de 5 protocolos fundamentais: DNS, ARP, ICMP, TCP Three-Way Handshake e HTTPS/TLS — visibilidade real do tráfego de rede.</p>
+              <div class="project-stack">
+                <span>Wireshark</span><span>Protocolos</span><span>Redes</span><span>Packet Analysis</span>
+              </div>
+            </div>
+            <div class="case-icon-block wireshark">
+              <i class="fa-solid fa-magnifying-glass-chart"></i>
+            </div>
+            <a href="pages/wireshark.html" class="btn btn-primary">Explorar case →</a>
+          </article>
+
+        </div>
       </section>
 
       <section id="roadmap-home" class="section roadmap-premium">

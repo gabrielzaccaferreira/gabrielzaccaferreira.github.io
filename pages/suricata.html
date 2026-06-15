@@ -43,6 +43,7 @@
           <a href="suricata.html" class="labs-bar-link active"><span class="lab-dot"></span><i class="fa-solid fa-network-wired"></i> Suricata IDS/IPS</a>
           <a href="crowdsec.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec</a>
           <a href="wireshark.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-magnifying-glass-chart"></i> Wireshark</a>
+          <a href="pfsense.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-fire"></i> pfSense</a>
         </div>
       </div>
     </header>
@@ -255,7 +256,7 @@
             <div class="roadmap-step-content">
               <span class="roadmap-status">Concluído</span>
               <h3>Testes de detecção com nmap</h3>
-              <p>Execução de <code style="color:var(--primary);font-family:monospace;">nmap -sS</code> e <code style="color:var(--primary);font-family:monospace;">nmap -A</code> contra o servidor Wazuh (192.168.218.129). Alertas gerados em tempo real no <code style="color:var(--primary);font-family:monospace;">fast.log</code> confirmando detecção ativa.</p>
+              <p>Execução de <code style="color:var(--primary);font-family:monospace;">nmap -sS</code> e <code style="color:var(--primary);font-family:monospace;">nmap -A</code> contra o servidor Wazuh (10.0.0.20). Alertas gerados em tempo real no <code style="color:var(--primary);font-family:monospace;">fast.log</code> confirmando detecção ativa.</p>
               <div class="project-stack">
                 <span>nmap -sS</span>
                 <span>nmap -A</span>
@@ -359,7 +360,7 @@
         <h2>Detecções geradas durante os testes.</h2>
         <p class="section-text">
           Os testes foram executados com <code style="color:var(--primary);font-family:monospace;">nmap -sS</code> e <code style="color:var(--primary);font-family:monospace;">nmap -A</code>
-          a partir do Kali Linux (192.168.218.130) contra o servidor Wazuh (192.168.218.129).
+          a partir do Kali Linux (10.0.0.10) contra o servidor Wazuh (10.0.0.20).
           O Suricata detectou os scans em tempo real e gerou alertas no <code style="color:var(--primary);font-family:monospace;">fast.log</code>.
         </p>
 
@@ -403,19 +404,19 @@
           <div style="margin-top:24px;padding:28px;background:rgba(2,6,23,0.8);border:1px solid var(--border-light);border-radius:16px;overflow-x:auto;">
             <pre style="margin:0;color:var(--text-soft);font-family:monospace;font-size:13px;line-height:1.8;white-space:pre-wrap;">[**] [1:3400002:2] POSSBL PORT SCAN (NMAP -sS) [**]
 [Classification: Attempted Information Leak] [Priority: 2]
-{TCP} 192.168.218.130:42661 -> 192.168.218.129:1272
+{TCP} 10.0.0.10:42661 -> 10.0.0.20:1272
 
 [**] [1:3400002:2] POSSBL PORT SCAN (NMAP -sS) [**]
 [Classification: Attempted Information Leak] [Priority: 2]
-{TCP} 192.168.218.130:42661 -> 192.168.218.129:2998
+{TCP} 10.0.0.10:42661 -> 10.0.0.20:2998
 
 [**] [1:2200025:2] SURICATA ICMPv4 unknown code [**]
 [Classification: Generic Protocol Command Decode] [Priority: 3]
-{ICMP} 192.168.218.130:8 -> 192.168.218.129:9
+{ICMP} 10.0.0.10:8 -> 10.0.0.20:9
 
 [**] [1:3400005:2] POSSBL PORT SCAN (NMAP -sX) [**]
 [Classification: Attempted Information Leak] [Priority: 2]
-{TCP} 192.168.218.130:45439 -> 192.168.218.129:1</pre>
+{TCP} 10.0.0.10:45439 -> 10.0.0.20:1</pre>
           </div>
         </div>
       </section>

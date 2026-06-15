@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pfSense | Gabriel Zacca Ferreira</title>
+    <meta name="description" content="Laboratório pfSense CE: firewall virtualizado com interfaces WAN/LAN, regras de firewall, NAT, DHCP e integração com o laboratório de segurança." />
+    <meta name="author" content="Gabriel Zacca Ferreira" />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="pfSense | Gabriel Zacca Ferreira" />
+    <meta property="og:description" content="Firewall pfSense 2.8.1 virtualizado: WAN/LAN, regras, NAT, DHCP e integração com Wazuh SIEM." />
+    <meta property="og:url" content="https://gabrielzaccaferreira.github.io/pages/pfsense.html" />
+    <meta property="og:image" content="https://gabrielzaccaferreira.github.io/assets/images/og-image.png" />
+    <link rel="canonical" href="https://gabrielzaccaferreira.github.io/pages/pfsense.html" />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navbar" aria-label="Navegação principal">
+        <a href="../index.html" class="logo">GZF</a>
+        <div class="nav-links">
+          <a href="../index.html">Home</a>
+          <a href="sobre.html">Sobre</a>
+          <a href="projetos.html">Projetos</a>
+          <a href="blog.html">Blog</a>
+          <a href="roadmap.html">Roadmap</a>
+        </div>
+        <div class="nav-actions">
+          <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer" class="nav-cv">Currículo</a>
+        </div>
+      </nav>
+      <div class="labs-bar">
+        <div class="labs-bar-inner">
+          <span class="labs-bar-label">Labs</span>
+          <a href="wazuh.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-shield-halved"></i> Wazuh SIEM/XDR</a>
+          <a href="kali-linux.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-brands fa-linux"></i> Kali Linux</a>
+          <a href="suricata.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-network-wired"></i> Suricata IDS/IPS</a>
+          <a href="crowdsec.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec</a>
+          <a href="wireshark.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-magnifying-glass-chart"></i> Wireshark</a>
+          <a href="pfsense.html" class="labs-bar-link active"><span class="lab-dot"></span><i class="fa-solid fa-fire"></i> pfSense</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- HERO -->
+      <section id="hero" class="hero">
+        <div class="hero-content">
+          <p class="eyebrow">Firewall • Redes • NAT • DHCP • Blue Team</p>
+          <h1>
+            pfSense
+            <span>Firewall e roteamento no laboratório</span>
+          </h1>
+          <p class="hero-description">
+            Implementação do pfSense CE 2.8.1 como VM no VMware Workstation — criando uma
+            camada de firewall real entre a WAN e a LAN do laboratório, com segmentação
+            de rede, regras de acesso, NAT e DHCP configurados na prática.
+          </p>
+          <div class="hero-actions">
+            <a href="#sobre" class="btn btn-primary">Ver o laboratório →</a>
+            <a href="#topologia" class="btn btn-secondary">Ver topologia</a>
+          </div>
+        </div>
+
+        <div class="architecture-card">
+          <p class="section-label">Interfaces configuradas</p>
+          <h2>pfSense 2.8.1-RELEASE</h2>
+          <div class="architecture-flow">
+            <span><strong>Hostname:</strong> soc-fw01.home.lab</span>
+            <strong>↓</strong>
+            <span><strong>WAN</strong> — em0 — x.x.x.x/24</span>
+            <strong>↓</strong>
+            <span><strong>LAN</strong> — em1 — x.x.x.x/24</span>
+            <strong>↓</strong>
+            <span>Firewall • NAT • DHCP • Logs</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ÍNDICE -->
+      <section id="indice" class="section">
+        <p class="section-label">Índice</p>
+        <h2>Navegue pelo conteúdo desta documentação.</h2>
+        <div class="profile-tags">
+          <a href="#sobre"><span>Sobre</span></a>
+          <a href="#especificacoes"><span>Especificações</span></a>
+          <a href="#topologia"><span>Topologia</span></a>
+          <a href="#implementacao"><span>Implementação</span></a>
+          <a href="#configuracoes"><span>Configurações</span></a>
+          <a href="#integracao"><span>Integração</span></a>
+          <a href="#competencias"><span>Competências</span></a>
+          <a href="#evidencias"><span>Evidências</span></a>
+          <a href="#conclusao"><span>Conclusão</span></a>
+        </div>
+      </section>
+
+      <!-- SOBRE -->
+      <section id="sobre" class="section">
+        <p class="section-label">Sobre o laboratório</p>
+        <h2>Por que um firewall no laboratório.</h2>
+        <p class="section-text">
+          O pfSense é uma distribuição open source de firewall e roteador baseada no FreeBSD,
+          amplamente utilizada em ambientes corporativos e domésticos. Ele oferece interface
+          web completa para gerenciamento de regras, NAT, DHCP, VPN e muito mais — sem
+          necessidade de conhecimento avançado em linha de comando.
+        </p>
+        <p class="section-text">
+          Neste laboratório, o pfSense foi implementado como VM no VMware Workstation com
+          duas interfaces de rede — WAN e LAN — criando uma segmentação real entre a rede
+          externa e a rede interna do laboratório. Isso adiciona uma camada de controle e
+          visibilidade ao ambiente, complementando o Wazuh SIEM, Suricata IDS e CrowdSec
+          já configurados.
+        </p>
+      </section>
+
+      <!-- ESPECIFICAÇÕES -->
+      <section id="especificacoes" class="section">
+        <p class="section-label">Especificações</p>
+        <h2>Ambiente técnico do laboratório.</h2>
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-fire card-icon"></i> pfSense CE 2.8.1</h3>
+            <p>Community Edition mais recente, build amd64 de 20260513. Rodando sobre FreeBSD com hostname <code style="color:var(--primary);font-family:monospace;">soc-fw01.home.lab</code> — nome que reflete o papel de firewall do SOC.</p>
+            <div class="project-stack">
+              <span>pfSense 2.8.1-RELEASE</span>
+              <span>FreeBSD/amd64</span>
+              <span>soc-fw01.home.lab</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-desktop card-icon"></i> VM no VMware</h3>
+            <p>Máquina virtual dedicada no VMware Workstation com 3.9 GB de RAM, 2 CPUs e 20 GB de disco — recursos suficientes para um firewall de laboratório com inspeção de tráfego ativa.</p>
+            <div class="project-stack">
+              <span>VMware Workstation</span>
+              <span>3.9 GB RAM</span>
+              <span>2 vCPUs</span>
+              <span>20 GB disco</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-ethernet card-icon"></i> Interface WAN</h3>
+            <p>Interface <code style="color:var(--primary);font-family:monospace;">em0</code> conectada ao VMnet8, recebendo IP via DHCP da rede física do laboratório — <code style="color:var(--primary);font-family:monospace;">x.x.x.x/24</code>, mesma subnet do Kali e Ubuntu Server.</p>
+            <div class="project-stack">
+              <span>em0</span>
+              <span>VMnet8</span>
+              <span>x.x.x.x/24</span>
+              <span>DHCP</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-network-wired card-icon"></i> Interface LAN</h3>
+            <p>Interface <code style="color:var(--primary);font-family:monospace;">em1</code> conectada ao VMnet1, com IP estático <code style="color:var(--primary);font-family:monospace;">x.x.x.x/24</code> — gateway da rede interna do laboratório, subnet isolada da WAN.</p>
+            <div class="project-stack">
+              <span>em1</span>
+              <span>VMnet1</span>
+              <span>x.x.x.x/24</span>
+              <span>Gateway LAN</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- TOPOLOGIA -->
+      <section id="topologia" class="section">
+        <p class="section-label">Topologia</p>
+        <h2>Como o pfSense se encaixa no laboratório.</h2>
+        <p class="section-text">
+          O pfSense cria uma fronteira real entre duas redes — a WAN (x.x.x.0/24),
+          onde vivem o Kali Linux e o Ubuntu Server, e a LAN (x.x.x.0/24), a rede
+          interna protegida pelo firewall. Todo tráfego entre as subnets passa pelo pfSense.
+        </p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-computer"></i> Host físico — Dell OptiPlex</span>
+            <p>Windows 11, i7-10700T, 32 GB RAM. Roda o VMware Workstation com todas as VMs do laboratório.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-fire"></i> pfSense CE — soc-fw01.home.lab</span>
+            <p>WAN: <code style="color:var(--primary);font-family:monospace;">x.x.x.x</code> (VMnet8) — LAN: <code style="color:var(--primary);font-family:monospace;">x.x.x.x</code> (VMnet1). Gateway e firewall entre as duas redes.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-brands fa-linux"></i> Kali Linux — Endpoint da WAN</span>
+            <p>Endpoint na WAN com Suricata IDS, CrowdSec e agente Wazuh. Acessa a LAN via pfSense conforme as regras configuradas.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-server"></i> Ubuntu Server — x.x.x.x</span>
+            <p>Wazuh Manager, Dashboard, Indexer e Filebeat na WAN. Recebe eventos e logs de toda a infraestrutura do laboratório.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-shield-halved"></i> Rede LAN — x.x.x.0/24</span>
+            <p>Rede interna protegida pelo pfSense. Dispositivos nesta subnet dependem do pfSense como gateway e têm o tráfego filtrado pelas regras de firewall.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- IMPLEMENTAÇÃO -->
+      <section id="implementacao" class="section">
+        <p class="section-label">Processo de implementação</p>
+        <h2>Da VM ao firewall funcional.</h2>
+        <div class="roadmap-list">
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Criação da VM no VMware</h3>
+              <p>Criação da VM <strong>pfSense-CE</strong> no VMware Workstation com 3.9 GB RAM, 2 vCPUs, 20 GB de disco e duas interfaces de rede: VMnet8 (WAN) e VMnet1 (LAN).</p>
+              <div class="project-stack">
+                <span>VMware Workstation</span>
+                <span>FreeBSD</span>
+                <span>2 NICs</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Instalação do pfSense 2.8.1-RELEASE</h3>
+              <p>Instalação do pfSense Community Edition 2.8.1 (amd64, build 20260513) com hostname <code style="color:var(--primary);font-family:monospace;">soc-fw01.home.lab</code>. Boot completo confirmado via console.</p>
+              <div class="project-stack">
+                <span>pfSense 2.8.1-RELEASE</span>
+                <span>FreeBSD/amd64</span>
+                <span>soc-fw01.home.lab</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Configuração das interfaces WAN e LAN</h3>
+              <p>Atribuição das interfaces via console: <code style="color:var(--primary);font-family:monospace;">em0</code> como WAN com DHCP (x.x.x.x/24) e <code style="color:var(--primary);font-family:monospace;">em1</code> como LAN com IP estático (x.x.x.x/24).</p>
+              <div class="project-stack">
+                <span>WAN em0 — DHCP</span>
+                <span>LAN em1 — Estático</span>
+                <span>Segmentação de rede</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Acesso à interface web (WebGUI)</h3>
+              <p>Acesso ao painel de administração do pfSense via browser na LAN — <code style="color:var(--primary);font-family:monospace;">https://x.x.x.x</code> — para configuração de regras, NAT, DHCP e monitoramento.</p>
+              <div class="project-stack">
+                <span>WebGUI</span>
+                <span>HTTPS</span>
+                <span>x.x.x.x</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Configuração de regras de Firewall</h3>
+              <p>Criação de regras de firewall nas interfaces WAN e LAN para controlar o tráfego entre as redes — definindo quais conexões são permitidas e quais são bloqueadas.</p>
+              <div class="project-stack">
+                <span>Firewall Rules</span>
+                <span>WAN Rules</span>
+                <span>LAN Rules</span>
+                <span>Allow/Block</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Configuração de NAT</h3>
+              <p>Configuração de Network Address Translation (NAT) para permitir que dispositivos da LAN acessem a WAN — traduzindo os endereços internos para o IP da interface WAN do pfSense.</p>
+              <div class="project-stack">
+                <span>NAT</span>
+                <span>Outbound NAT</span>
+                <span>Port Forward</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Configuração de DHCP Server</h3>
+              <p>Ativação do servidor DHCP na interface LAN para distribuição automática de endereços IP aos dispositivos conectados à rede interna — range dentro da subnet x.x.x.0/24.</p>
+              <div class="project-stack">
+                <span>DHCP Server</span>
+                <span>x.x.x.0/24</span>
+                <span>IP automático</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Integração com Wazuh via Syslog</h3>
+              <p>Configuração do pfSense para envio de logs de firewall e sistema via syslog para o Wazuh Manager (Ubuntu Server — x.x.x.x), integrando eventos do firewall ao SIEM centralizado.</p>
+              <div class="project-stack">
+                <span>Syslog</span>
+                <span>Wazuh Manager</span>
+                <span>Firewall Logs</span>
+                <span>x.x.x.x</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- CONFIGURAÇÕES -->
+      <section id="configuracoes" class="section">
+        <p class="section-label">Configurações aplicadas</p>
+        <h2>O que foi configurado na interface web.</h2>
+        <p class="section-text">
+          O pfSense oferece uma interface web completa para gerenciamento de todas as
+          funcionalidades. As configurações abaixo foram aplicadas no laboratório para
+          criar um ambiente de firewall funcional e integrado ao ecossistema de segurança.
+        </p>
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-shield card-icon"></i> Regras de Firewall</h3>
+            <p>Regras criadas nas interfaces WAN e LAN controlando o fluxo de tráfego entre as redes. LAN com acesso permitido à WAN; WAN com acesso restrito à LAN conforme necessidade.</p>
+            <div class="project-stack">
+              <span>Allow/Deny Rules</span>
+              <span>Stateful</span>
+              <span>Interface-based</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-arrows-left-right card-icon"></i> NAT Outbound</h3>
+            <p>NAT de saída configurado para permitir que dispositivos da LAN (x.x.x.0/24) acessem a internet e a WAN usando o IP da interface externa do pfSense.</p>
+            <div class="project-stack">
+              <span>Outbound NAT</span>
+              <span>Masquerade</span>
+              <span>WAN IP</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-server card-icon"></i> DHCP Server</h3>
+            <p>Servidor DHCP ativo na interface LAN distribuindo endereços IP automaticamente na faixa x.x.x.0/24, com pfSense como gateway e DNS para os clientes da rede interna.</p>
+            <div class="project-stack">
+              <span>DHCP Range</span>
+              <span>Gateway LAN</span>
+              <span>DNS</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-file-lines card-icon"></i> System Logs</h3>
+            <p>Logs do sistema e do firewall configurados para envio remoto via syslog ao Wazuh Manager, permitindo visibilidade centralizada de eventos de firewall no dashboard do SIEM.</p>
+            <div class="project-stack">
+              <span>Syslog remoto</span>
+              <span>Firewall logs</span>
+              <span>System logs</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- INTEGRAÇÃO -->
+      <section id="integracao" class="section">
+        <p class="section-label">Integração com o ecossistema</p>
+        <h2>pfSense no contexto do laboratório de segurança.</h2>
+        <p class="section-text">
+          O pfSense não opera isolado — ele é a camada de controle de rede que conecta e
+          protege todo o ambiente. A integração com as outras ferramentas do laboratório
+          cria um pipeline de visibilidade e defesa em camadas.
+        </p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-fire"></i> pfSense — Controle de perímetro</span>
+            <p>Define quais conexões entram e saem da rede interna. Primeira linha de defesa do laboratório — filtrando tráfego antes de chegar aos endpoints.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-network-wired"></i> Suricata — Inspeção de tráfego</span>
+            <p>Analisa o tráfego que passa pela rede do laboratório detectando ameaças em nível de pacote — complementando as regras de firewall do pfSense com detecção baseada em assinaturas.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec — Proteção comportamental</span>
+            <p>Detecta padrões maliciosos nos logs de aplicação e sistema — camada complementar ao firewall com inteligência colaborativa.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-shield-halved"></i> Wazuh — Centralização dos eventos</span>
+            <p>Recebe os logs de firewall do pfSense via syslog, integrando eventos de rede ao SIEM junto com alertas do Suricata, CrowdSec e agentes dos endpoints.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPETÊNCIAS -->
+      <section id="competencias" class="section">
+        <p class="section-label">Competências desenvolvidas</p>
+        <h2>O que este laboratório construiu na prática.</h2>
+        <div class="skills-grid">
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-fire"></i> Firewall</h3>
+            <p>Configuração de regras de firewall stateful no pfSense — criando políticas de allow/deny por interface, protocolo e porta para controlar o fluxo de tráfego entre WAN e LAN.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-network-wired"></i> Roteamento e NAT</h3>
+            <p>Configuração de NAT Outbound para tradução de endereços, permitindo que a rede interna acesse recursos externos usando o IP da WAN do pfSense como saída.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-diagram-project"></i> Segmentação de rede</h3>
+            <p>Criação de duas subnets isoladas — WAN e LAN — com pfSense como ponto de controle, aplicando na prática o conceito de segmentação de rede.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-server"></i> DHCP</h3>
+            <p>Configuração de servidor DHCP na LAN para distribuição automática de IPs, gateway e DNS — compreendendo o processo DORA na prática dentro de um ambiente real.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-file-lines"></i> Log Management</h3>
+            <p>Configuração de syslog remoto para envio de logs do pfSense ao Wazuh Manager, integrando eventos de firewall ao pipeline centralizado de monitoramento de segurança.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-layer-group"></i> Defense in Depth</h3>
+            <p>Construção de defesa em camadas combinando pfSense (perímetro), Suricata (rede), CrowdSec (comportamento) e Wazuh (SIEM) — arquitetura de segurança multicamada real.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- RESULTADOS -->
+      <section id="resultados" class="section">
+        <p class="section-label">Resultados</p>
+        <h2>O que foi entregue neste laboratório.</h2>
+        <div class="stats-grid">
+          <div class="stat-card"><strong>2.8.1</strong><span>Versão pfSense CE</span></div>
+          <div class="stat-card"><strong>02</strong><span>Interfaces configuradas</span></div>
+          <div class="stat-card"><strong>02</strong><span>Subnets segmentadas</span></div>
+          <div class="stat-card"><strong>01</strong><span>Pipeline SIEM integrado</span></div>
+        </div>
+      </section>
+
+      <!-- EVIDÊNCIAS -->
+      <section id="evidencias" class="section">
+        <p class="section-label">Evidências</p>
+        <h2>Registros do laboratório.</h2>
+        <p class="section-text">
+          Evidências do pfSense em funcionamento — console com as interfaces configuradas
+          e a VM no VMware Workstation. Prints da interface web serão adicionados em breve.
+        </p>
+
+        <div class="evidence-grid">
+          <figure class="evidence-image">
+            <img
+              src="../assets/images/pfsense/console.jpeg"
+              alt="Console do pfSense com interfaces WAN e LAN configuradas"
+              loading="lazy"
+              width="800"
+              height="450"
+            />
+            <figcaption>Console do pfSense 2.8.1-RELEASE — hostname soc-fw01.home.lab, WAN x.x.x.x e LAN x.x.x.x configuradas.</figcaption>
+          </figure>
+          <figure class="evidence-image">
+            <img
+              src="../assets/images/pfsense/vmware.jpeg"
+              alt="VM pfSense-CE no VMware Workstation"
+              loading="lazy"
+              width="800"
+              height="450"
+            />
+            <figcaption>VM pfSense-CE no VMware Workstation — 3.9 GB RAM, 2 vCPUs, 20 GB disco e 2 interfaces de rede.</figcaption>
+          </figure>
+        </div>
+
+        <div style="margin-top:40px;padding:32px;border:1px dashed var(--border-light);border-radius:20px;text-align:center;">
+          <i class="fa-solid fa-globe" style="font-size:40px;color:var(--primary);opacity:0.4;margin-bottom:16px;display:block;"></i>
+          <p style="color:var(--text-muted);font-size:16px;margin:0 0 8px;">Prints da interface web (WebGUI) serão adicionados em breve.</p>
+          <p style="color:var(--text-muted);font-size:14px;margin:0;">Dashboard, regras de firewall, NAT, DHCP e logs do sistema.</p>
+        </div>
+      </section>
+
+      <!-- PRÓXIMOS PASSOS -->
+      <section id="proximos-passos" class="section">
+        <p class="section-label">Próximos passos</p>
+        <h2>Como este laboratório continuará evoluindo.</h2>
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-key card-icon"></i> VPN</h3>
+            <p>Configurar um servidor OpenVPN ou WireGuard no pfSense para acesso remoto seguro ao laboratório, criando um túnel criptografado entre o host externo e a LAN.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-shield card-icon"></i> IDS/IPS inline</h3>
+            <p>Integrar o Suricata diretamente no pfSense como IDS/IPS inline — inspecionando o tráfego que passa pelo firewall em vez de monitorar apenas no endpoint Kali.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-diagram-project card-icon"></i> VLANs</h3>
+            <p>Implementar segmentação por VLANs no pfSense, criando redes lógicas separadas para diferentes categorias de dispositivos dentro do laboratório.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-brands fa-github card-icon"></i> Repositório</h3>
+            <p>Criar repositório GitHub dedicado ao laboratório pfSense com configurações exportadas, notas técnicas, diagramas de topologia e evidências da interface web.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- CONCLUSÃO -->
+      <section id="conclusao" class="section cta-premium">
+        <p class="section-label">Conclusão</p>
+        <h2>Firewall no ar. Rede segmentada. Laboratório completo.</h2>
+        <p class="section-text">
+          O pfSense fecha o ciclo de defesa em camadas do laboratório — adicionando controle
+          de perímetro ao ecossistema formado por Wazuh, Suricata, CrowdSec e Wireshark.
+          Com WAN, LAN, firewall, NAT, DHCP e integração via syslog, o ambiente simula
+          uma infraestrutura de segurança real em escala reduzida.
+        </p>
+        <div class="hero-actions">
+          <a href="wazuh.html" class="btn btn-primary">
+            <i class="fa-solid fa-shield-halved"></i> Ver laboratório Wazuh →
+          </a>
+          <a href="suricata.html" class="btn btn-secondary">
+            <i class="fa-solid fa-network-wired"></i> Ver laboratório Suricata
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <p class="footer-title">Gabriel Zacca Ferreira</p>
+      <p>Portfólio técnico em Redes, Infraestrutura, Cloud Computing e Cibersegurança.</p>
+      <nav class="footer-nav" aria-label="Navegação do rodapé">
+        <a href="../index.html">Home</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="projetos.html">Projetos</a>
+        <a href="blog.html">Blog</a>
+        <a href="roadmap.html">Roadmap</a>
+      </nav>
+      <div class="footer-links">
+        <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a href="mailto:gabrielzaccaferreira@gmail.com"><i class="fa-solid fa-envelope"></i> E-mail</a>
+        <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-lines"></i> Currículo</a>
+      </div>
+      <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
+    </footer>
+  </body>
+</html>
