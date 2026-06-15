@@ -1501,10 +1501,10 @@ main {
 }
 
 .blog-tags span::before {
-  content: '#';
+  content: '# ';
   color: var(--primary);
-  margin-right: 2px;
   font-weight: 800;
+  letter-spacing: -1px;
 }
 
 .blog-grid {
@@ -3265,3 +3265,25 @@ body.has-sidebar main {
 .fa-lock-open       { color: #facc15; } /* amarelo — WPA */
 .fa-list-ol         { color: #60a5fa; } /* azul — ordem */
 .fa-search          { color: #60a5fa; } /* azul — busca */
+
+/* ── Ícones de conteúdo adicionais ── */
+.fa-rocket              { color: #f472b6; } /* rosa — lançamento/objetivo */
+.fa-chart-line          { color: #facc15; } /* amarelo — evolução */
+.fa-screwdriver-wrench  { color: #94a3b8; } /* cinza — ferramentas */
+.fa-user-shield         { color: #38bdf8; } /* azul — segurança pessoal */
+.fa-map                 { color: #60a5fa; } /* azul — roadmap */
+.fa-git-alt             { color: #fb923c; } /* laranja Git */
+.fa-html5               { color: #fb923c; } /* laranja HTML */
+.fa-css3-alt            { color: #60a5fa; } /* azul CSS */
+.fa-linkedin            { color: #60a5fa; } /* azul LinkedIn */
+.fa-envelope            { color: #4ade80; } /* verde — contato */
+.fa-arrow-left          { color: #38bdf8; } /* azul — navegação */
+.fa-arrow-right-arrow-left { color: #60a5fa; } /* azul — comparação */
+.fa-circle-question     { color: #60a5fa; } /* azul — info */
+.fa-clock               { color: #fbbf24; } /* âmbar — tempo */
+
+/* ── Ícones de UI (neutros) ── */
+.fa-xmark               { color: var(--text-muted); }
+.fa-chevron-down        { color: var(--text-muted); }
+.fa-chevron-right       { color: var(--text-muted); }
+.fa-chevron-left        { color: var(--text-muted); }
