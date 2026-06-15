@@ -370,6 +370,7 @@ main {
 .project-stack span {
   display: inline-flex;
   align-items: center;
+  gap: 6px;
   padding: 6px 10px;
   color: var(--text-soft);
   font-size: 12px;
@@ -1497,6 +1498,13 @@ main {
   background: rgba(15, 23, 42, 0.75);
   border: 1px solid var(--border-light);
   font-weight: 700;
+}
+
+.blog-tags span::before {
+  content: '#';
+  color: var(--primary);
+  margin-right: 2px;
+  font-weight: 800;
 }
 
 .blog-grid {
@@ -3203,3 +3211,57 @@ body.has-sidebar main {
     padding: 28px 20px;
   }
 }
+
+/* ── Ícones adicionais sem cobertura semântica ── */
+.fa-docker          { color: #60a5fa; } /* azul Docker */
+.fa-tv              { color: #94a3b8; } /* cinza — tecnologia legada */
+.fa-circle-dot      { color: #4ade80; } /* verde — fibra óptica */
+.fa-lock-open       { color: #facc15; } /* amarelo — WPA/segurança */
+.fa-graduation-cap  { color: #facc15; } /* amarelo — conclusão/conquista */
+.fa-images          { color: #94a3b8; } /* cinza — galeria */
+.fa-router          { color: #60a5fa; } /* azul — rede */
+.fa-house-lock      { color: #38bdf8; } /* azul — endereço privado */
+.fa-lightbulb       { color: #facc15; } /* amarelo — dica/conceito */
+.fa-bullseye        { color: #f472b6; } /* rosa — objetivo */
+.fa-flask           { color: #4ade80; } /* verde — laboratório */
+.fa-puzzle-piece    { color: #c084fc; } /* roxo — extensão */
+.fa-folder-open     { color: #fbbf24; } /* âmbar — arquivos */
+.fa-compact-disc    { color: #94a3b8; } /* cinza — instalação */
+.fa-camera          { color: #60a5fa; } /* azul — snapshot */
+.fa-floppy-disk     { color: #60a5fa; } /* azul — salvar */
+.fa-list-check      { color: #4ade80; } /* verde — checklist */
+.fa-map-location-dot { color: #60a5fa; }/* azul — traceroute */
+.fa-gauge-high      { color: #f87171; } /* vermelho — máximo */
+.fa-gauge           { color: #fbbf24; } /* âmbar — medição */
+.fa-sitemap        { color: #60a5fa; } /* azul — hierarquia */
+.fa-database        { color: #94a3b8; } /* cinza — dados */
+.fa-users           { color: #4ade80; } /* verde — grupo */
+.fa-house           { color: #94a3b8; } /* cinza — local */
+.fa-city            { color: #60a5fa; } /* azul — cidade */
+.fa-mobile-screen   { color: #4ade80; } /* verde — mobile */
+.fa-tower-cell      { color: #4ade80; } /* verde — celular */
+.fa-wifi            { color: #4ade80; } /* verde — wireless */
+.fa-fingerprint     { color: #c084fc; } /* roxo — identidade */
+.fa-circle-exclamation { color: #fb923c; } /* laranja — atenção */
+.fa-laptop          { color: #60a5fa; } /* azul — cliente */
+.fa-download        { color: #4ade80; } /* verde — download */
+.fa-timeline        { color: #60a5fa; } /* azul — linha do tempo */
+.fa-signs-post      { color: #60a5fa; } /* azul — decisão */
+.fa-browser         { color: #60a5fa; } /* azul — web */
+.fa-link            { color: #60a5fa; } /* azul — sessão */
+.fa-arrows-to-dot   { color: #38bdf8; } /* azul — loopback */
+.fa-paper-plane     { color: #94a3b8; } /* cinza — UDP */
+.fa-minus           { color: #94a3b8; } /* cinza — bus/obsoleto */
+.fa-circle-nodes    { color: #60a5fa; } /* azul — mesh */
+.fa-hashtag         { color: #primary;  } /* azul — tag */
+.fa-star            { color: #facc15; } /* amarelo — objetivo */
+.fa-thumbtack       { color: #fbbf24; } /* âmbar — reserva */
+.fa-hand            { color: #94a3b8; } /* cinza — estático */
+.fa-scissors        { color: #f472b6; } /* rosa — segmentar */
+.fa-map-pin         { color: #60a5fa; } /* azul — endereço */
+.fa-layer-group     { color: #60a5fa; } /* azul — camadas */
+.fa-eye             { color: #60a5fa; } /* azul — IDS */
+.fa-brain           { color: #c084fc; } /* roxo — IPS/ML */
+.fa-lock-open       { color: #facc15; } /* amarelo — WPA */
+.fa-list-ol         { color: #60a5fa; } /* azul — ordem */
+.fa-search          { color: #60a5fa; } /* azul — busca */
