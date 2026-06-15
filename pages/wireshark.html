@@ -327,32 +327,44 @@
           observações práticas — vendo os pacotes reais, seus campos e seu comportamento
           em uma rede funcionando.
         </p>
-        <div class="skills-grid">
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-magnifying-glass-chart"></i> Packet Analysis</h3>
-            <p>Captura e análise de pacotes em tempo real com Wireshark, utilizando filtros de display para isolar protocolos específicos e inspecionar campos individuais de cada pacote.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-layer-group"></i> Modelo de Camadas</h3>
-            <p>Compreensão prática do modelo TCP/IP — observando como cada camada encapsula os dados: Ethernet (L2), IP (L3), TCP/UDP (L4) e aplicação (L7) coexistindo em cada pacote.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-network-wired"></i> Protocolos de Rede</h3>
-            <p>Análise profunda de DNS, ARP, ICMP, TCP e TLS — identificando o papel de cada um na comunicação, seus campos específicos e o comportamento esperado versus anômalo.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-filter"></i> Display Filters</h3>
-            <p>Uso de filtros do Wireshark para isolar tráfego específico: <code style="color:var(--primary);font-family:monospace;">dns</code>, <code style="color:var(--primary);font-family:monospace;">arp</code>, <code style="color:var(--primary);font-family:monospace;">icmp</code>, <code style="color:var(--primary);font-family:monospace;">tcp.flags.syn==1</code>, <code style="color:var(--primary);font-family:monospace;">tls</code> — habilidade essencial para análise de tráfego em ambientes reais.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-shield-halved"></i> Blue Team</h3>
-            <p>Perspectiva defensiva na análise de tráfego — identificando padrões normais de comunicação para reconhecer anomalias, base para threat hunting e análise forense de rede.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-book-open"></i> Documentação técnica</h3>
-            <p>Registro organizado das capturas, análises e aprendizados no GitHub — com estrutura de capturas, screenshots e notas técnicas por protocolo.</p>
-          </article>
+
+        <div class="carousel-wrapper">
+          <button class="carousel-btn carousel-prev" onclick="moveWiresharkCarousel(-1)" aria-label="Anterior">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <div class="carousel-track-container">
+            <div class="carousel-track" id="wiresharkCarousel">
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-magnifying-glass-chart"></i> Packet Analysis</h3>
+                <p>Captura e análise de pacotes em tempo real com Wireshark, utilizando filtros de display para isolar protocolos específicos e inspecionar campos individuais de cada pacote.</p>
+              </article>
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-layer-group"></i> Modelo de Camadas</h3>
+                <p>Compreensão prática do modelo TCP/IP — observando como cada camada encapsula os dados: Ethernet (L2), IP (L3), TCP/UDP (L4) e aplicação (L7) coexistindo em cada pacote.</p>
+              </article>
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-network-wired"></i> Protocolos de Rede</h3>
+                <p>Análise profunda de DNS, ARP, ICMP, TCP e TLS — identificando o papel de cada um na comunicação, seus campos específicos e o comportamento esperado versus anômalo.</p>
+              </article>
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-filter"></i> Display Filters</h3>
+                <p>Uso de filtros do Wireshark para isolar tráfego específico: <code style="color:var(--primary);font-family:monospace;">dns</code>, <code style="color:var(--primary);font-family:monospace;">arp</code>, <code style="color:var(--primary);font-family:monospace;">icmp</code>, <code style="color:var(--primary);font-family:monospace;">tcp.flags.syn==1</code>, <code style="color:var(--primary);font-family:monospace;">tls</code> — habilidade essencial para análise em ambientes reais.</p>
+              </article>
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-shield-halved"></i> Blue Team</h3>
+                <p>Perspectiva defensiva na análise de tráfego — identificando padrões normais de comunicação para reconhecer anomalias, base para threat hunting e análise forense de rede.</p>
+              </article>
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-book-open"></i> Documentação técnica</h3>
+                <p>Registro organizado das capturas, análises e aprendizados no GitHub — com estrutura de capturas, screenshots e notas técnicas por protocolo.</p>
+              </article>
+            </div>
+          </div>
+          <button class="carousel-btn carousel-next" onclick="moveWiresharkCarousel(1)" aria-label="Próximo">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
         </div>
+        <div class="carousel-dots" id="wiresharkDots"></div>
       </section>
 
       <!-- RESULTADOS -->
@@ -431,5 +443,34 @@
       </div>
       <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
     </footer>
+    <script>
+      (function() {
+        const track = document.getElementById('wiresharkCarousel');
+        const dotsContainer = document.getElementById('wiresharkDots');
+        if (!track || !dotsContainer) return;
+        const cards = track.querySelectorAll('.carousel-card');
+        const total = cards.length;
+        let current = 0;
+        cards.forEach((_, i) => {
+          const dot = document.createElement('button');
+          dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+          dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+          dot.addEventListener('click', () => goTo(i));
+          dotsContainer.appendChild(dot);
+        });
+        function getVisible() { return window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1; }
+        function goTo(index) {
+          const max = Math.max(0, total - getVisible());
+          current = Math.max(0, Math.min(index, max));
+          track.style.transform = `translateX(-${current * (cards[0].offsetWidth + 24)}px)`;
+          dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+        }
+        window.moveWiresharkCarousel = (dir) => goTo(current + dir);
+        window.addEventListener('resize', () => goTo(current));
+        let startX = 0;
+        track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+        track.addEventListener('touchend', e => { if (Math.abs(startX - e.changedTouches[0].clientX) > 50) window.moveWiresharkCarousel(startX > e.changedTouches[0].clientX ? 1 : -1); });
+      })();
+    </script>
   </body>
 </html>

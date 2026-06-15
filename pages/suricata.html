@@ -187,11 +187,8 @@
               <span class="roadmap-status">Concluído</span>
               <h3>Instalação do Suricata</h3>
               <p>Instalação do Suricata 8.0.5 no Kali Linux via repositório oficial. Verificação do serviço com <code style="color:var(--primary);font-family:monospace;">systemctl status suricata</code> confirmando modo AF-PACKET ativo.</p>
-              <div class="project-stack">
-                <span>apt install suricata</span>
-                <span>Suricata 8.0.5</span>
-                <span>AF-PACKET</span>
-              </div>
+              <div class="project-stack"><span>apt install suricata</span><span>Suricata 8.0.5</span><span>AF-PACKET</span></div>
+              <button class="modal-trigger" onclick="openModal('suri-modal-install')">Ver detalhes →</button>
             </div>
           </article>
 
@@ -201,12 +198,8 @@
               <span class="roadmap-status">Concluído</span>
               <h3>Atualização das regras com suricata-update</h3>
               <p>Execução do <code style="color:var(--primary);font-family:monospace;">suricata-update</code> para carregar o índice de fontes de regras. Listagem de todas as fontes disponíveis incluindo Emerging Threats, Abuse.ch, OISF, Stamus Networks e outras.</p>
-              <div class="project-stack">
-                <span>suricata-update</span>
-                <span>et/open</span>
-                <span>abuse.ch</span>
-                <span>oisf/trafficid</span>
-              </div>
+              <div class="project-stack"><span>suricata-update</span><span>et/open</span><span>abuse.ch</span><span>oisf/trafficid</span></div>
+              <button class="modal-trigger" onclick="openModal('suri-modal-rules')">Ver detalhes →</button>
             </div>
           </article>
 
@@ -216,12 +209,8 @@
               <span class="roadmap-status">Concluído</span>
               <h3>Habilitação da fonte aleksibovellan/nmap</h3>
               <p>Ativação da fonte de regras especializada em detecção de scans Nmap — regras que identificam <code style="color:var(--primary);font-family:monospace;">-sS</code> (SYN scan), <code style="color:var(--primary);font-family:monospace;">-sX</code> (Xmas scan) e outras técnicas de reconhecimento.</p>
-              <div class="project-stack">
-                <span>aleksibovellan/nmap</span>
-                <span>SYN scan</span>
-                <span>Xmas scan</span>
-                <span>Port scan detection</span>
-              </div>
+              <div class="project-stack"><span>aleksibovellan/nmap</span><span>SYN scan</span><span>Xmas scan</span></div>
+              <button class="modal-trigger" onclick="openModal('suri-modal-nmap')">Ver detalhes →</button>
             </div>
           </article>
 
@@ -231,11 +220,8 @@
               <span class="roadmap-status">Concluído</span>
               <h3>Configuração do eve.json</h3>
               <p>Validação do arquivo de configuração <code style="color:var(--primary);font-family:monospace;">/etc/suricata/suricata.yaml</code> e confirmação do log de eventos em formato JSON em <code style="color:var(--primary);font-family:monospace;">/var/log/suricata/eve.json</code> com 70MB+ de dados capturados.</p>
-              <div class="project-stack">
-                <span>suricata.yaml</span>
-                <span>eve.json — 70MB+</span>
-                <span>fast.log</span>
-              </div>
+              <div class="project-stack"><span>suricata.yaml</span><span>eve.json — 70MB+</span><span>fast.log</span></div>
+              <button class="modal-trigger" onclick="openModal('suri-modal-eve')">Ver detalhes →</button>
             </div>
           </article>
 
@@ -244,12 +230,9 @@
             <div class="roadmap-step-content">
               <span class="roadmap-status">Concluído</span>
               <h3>Integração com o Wazuh</h3>
-              <p>Configuração do <code style="color:var(--primary);font-family:monospace;">ossec.conf</code> no agente Kali para que o Wazuh Logcollector monitore o <code style="color:var(--primary);font-family:monospace;">eve.json</code>. Reinício do agente e confirmação nos logs: <em>"Analyzing file: /var/log/suricata/eve.json"</em>.</p>
-              <div class="project-stack">
-                <span>ossec.conf</span>
-                <span>localfile</span>
-                <span>wazuh-logcollector</span>
-              </div>
+              <p>Configuração do <code style="color:var(--primary);font-family:monospace;">ossec.conf</code> no agente Kali para que o Wazuh Logcollector monitore o <code style="color:var(--primary);font-family:monospace;">eve.json</code>. Reinício do agente e confirmação nos logs.</p>
+              <div class="project-stack"><span>ossec.conf</span><span>localfile</span><span>wazuh-logcollector</span></div>
+              <button class="modal-trigger" onclick="openModal('suri-modal-wazuh')">Ver detalhes →</button>
             </div>
           </article>
 
@@ -258,18 +241,159 @@
             <div class="roadmap-step-content">
               <span class="roadmap-status">Concluído</span>
               <h3>Testes de detecção com nmap</h3>
-              <p>Execução de <code style="color:var(--primary);font-family:monospace;">nmap -sS</code> e <code style="color:var(--primary);font-family:monospace;">nmap -A</code> contra o servidor Wazuh (10.0.0.20). Alertas gerados em tempo real no <code style="color:var(--primary);font-family:monospace;">fast.log</code> confirmando detecção ativa.</p>
-              <div class="project-stack">
-                <span>nmap -sS</span>
-                <span>nmap -A</span>
-                <span>fast.log</span>
-                <span>Alertas reais</span>
-              </div>
+              <p>Execução de <code style="color:var(--primary);font-family:monospace;">nmap -sS</code> e <code style="color:var(--primary);font-family:monospace;">nmap -A</code> contra o servidor Wazuh. Alertas gerados em tempo real no <code style="color:var(--primary);font-family:monospace;">fast.log</code> confirmando detecção ativa.</p>
+              <div class="project-stack"><span>nmap -sS</span><span>nmap -A</span><span>fast.log</span><span>Alertas reais</span></div>
+              <button class="modal-trigger" onclick="openModal('suri-modal-test')">Ver detalhes →</button>
             </div>
           </article>
 
         </div>
       </section>
+
+      <!-- MODAIS SURICATA -->
+      <div class="lab-modal" id="suri-modal-install" onclick="closeModalOutside(event,'suri-modal-install')">
+        <div class="lab-modal-box">
+          <button class="lab-modal-close" onclick="closeModal('suri-modal-install')"><i class="fa-solid fa-xmark"></i></button>
+          <p class="section-label">Etapa 01</p>
+          <h2>Instalação do Suricata</h2>
+          <p class="module-text">O Suricata está disponível nos repositórios oficiais do Kali Linux. A instalação é direta, mas exige atenção à versão — o Kali entrega a versão mais recente disponível no momento.</p>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-terminal"></i> Comandos de instalação</h4>
+            <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
+              sudo apt update<br>
+              sudo apt install suricata -y<br>
+              suricata --version
+            </div>
+          </div>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-network-wired"></i> Modo AF-PACKET</h4>
+            <p>O AF-PACKET é o modo de captura padrão do Suricata no Linux — usa a interface de rede diretamente via kernel, sem depender de libpcap. É mais eficiente e suporta captura em alta velocidade. O Suricata identifica automaticamente a interface de rede ao iniciar.</p>
+          </div>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-circle-check"></i> Validação</h4>
+            <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
+              sudo systemctl status suricata<br>
+              <span style="color:#4ade80;">● suricata.service - LSB: Next Generation IDS/IPS<br>
+              &nbsp;&nbsp;&nbsp;Active: active (running)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-modal" id="suri-modal-rules" onclick="closeModalOutside(event,'suri-modal-rules')">
+        <div class="lab-modal-box">
+          <button class="lab-modal-close" onclick="closeModal('suri-modal-rules')"><i class="fa-solid fa-xmark"></i></button>
+          <p class="section-label">Etapa 02</p>
+          <h2>Atualização das regras com suricata-update</h2>
+          <p class="module-text">O Suricata sem regras é um motor sem combustível. O <code style="color:var(--primary);font-family:monospace;">suricata-update</code> é a ferramenta oficial para gerenciar fontes de regras — baixar, atualizar e habilitar conjuntos de assinaturas.</p>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-terminal"></i> Comandos utilizados</h4>
+            <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
+              sudo suricata-update update-sources<br>
+              sudo suricata-update list-sources<br>
+              sudo suricata-update
+            </div>
+          </div>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-list"></i> Fontes disponíveis listadas</h4>
+            <p>O <code style="color:var(--primary);font-family:monospace;">list-sources</code> retornou mais de 20 fontes de regras — Emerging Threats (et/open), Abuse.ch com quatro feeds especializados, OISF Traffic ID, Stamus Networks, PTsecurity e outras. Cada fonte tem uma licença e foco diferente.</p>
+          </div>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-circle-check"></i> Resultado</h4>
+            <p>Após o update, o Suricata carregou milhares de regras ativas. As regras ficam em <code style="color:var(--primary);font-family:monospace;">/var/lib/suricata/rules/suricata.rules</code> e são referenciadas no <code style="color:var(--primary);font-family:monospace;">suricata.yaml</code>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-modal" id="suri-modal-nmap" onclick="closeModalOutside(event,'suri-modal-nmap')">
+        <div class="lab-modal-box">
+          <button class="lab-modal-close" onclick="closeModal('suri-modal-nmap')"><i class="fa-solid fa-xmark"></i></button>
+          <p class="section-label">Etapa 03</p>
+          <h2>Habilitação da fonte aleksibovellan/nmap</h2>
+          <p class="module-text">A fonte <code style="color:var(--primary);font-family:monospace;">aleksibovellan/nmap</code> contém regras especificamente criadas para detectar scans realizados com o Nmap — a ferramenta de reconhecimento mais usada em testes de penetração.</p>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-terminal"></i> Habilitando a fonte</h4>
+            <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
+              sudo suricata-update enable-source aleksibovellan/nmap<br>
+              sudo suricata-update<br>
+              sudo systemctl restart suricata
+            </div>
+          </div>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-magnifying-glass"></i> O que essa fonte detecta</h4>
+            <p><strong>SID 3400002:</strong> POSSBL PORT SCAN (NMAP -sS) — SYN scan, o mais comum<br>
+            <strong>SID 3400005:</strong> POSSBL PORT SCAN (NMAP -sX) — Xmas scan, com flags FIN/URG/PSH<br>
+            Ambos classificados como "Attempted Information Leak", Prioridade 2.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-modal" id="suri-modal-eve" onclick="closeModalOutside(event,'suri-modal-eve')">
+        <div class="lab-modal-box">
+          <button class="lab-modal-close" onclick="closeModal('suri-modal-eve')"><i class="fa-solid fa-xmark"></i></button>
+          <p class="section-label">Etapa 04</p>
+          <h2>Configuração do eve.json</h2>
+          <p class="module-text">O <code style="color:var(--primary);font-family:monospace;">eve.json</code> é o log principal do Suricata — um arquivo JSON estruturado com todos os eventos: alertas, flows, DNS, HTTP, TLS. É o que o Wazuh consome para correlação.</p>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-file-code"></i> Localização e estrutura</h4>
+            <p>O arquivo fica em <code style="color:var(--primary);font-family:monospace;">/var/log/suricata/eve.json</code>. Cada linha é um evento JSON independente. Após os testes, o arquivo chegou a 70MB+ — cada pacote suspeito, cada flow e cada alerta registrado.</p>
+          </div>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-gears"></i> Configuração no suricata.yaml</h4>
+            <p>No arquivo <code style="color:var(--primary);font-family:monospace;">/etc/suricata/suricata.yaml</code>, a seção <code style="color:var(--primary);font-family:monospace;">outputs</code> define os tipos de log habilitados. O bloco <code style="color:var(--primary);font-family:monospace;">eve-log</code> estava ativo por padrão com os tipos <code style="color:var(--primary);font-family:monospace;">alert</code>, <code style="color:var(--primary);font-family:monospace;">flow</code>, <code style="color:var(--primary);font-family:monospace;">dns</code>, <code style="color:var(--primary);font-family:monospace;">http</code> e <code style="color:var(--primary);font-family:monospace;">tls</code> habilitados.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-modal" id="suri-modal-wazuh" onclick="closeModalOutside(event,'suri-modal-wazuh')">
+        <div class="lab-modal-box">
+          <button class="lab-modal-close" onclick="closeModal('suri-modal-wazuh')"><i class="fa-solid fa-xmark"></i></button>
+          <p class="section-label">Etapa 05</p>
+          <h2>Integração com o Wazuh</h2>
+          <p class="module-text">Para que o Wazuh processe os eventos do Suricata, o agente precisa saber onde está o <code style="color:var(--primary);font-family:monospace;">eve.json</code> e como interpretá-lo. Isso é feito editando o <code style="color:var(--primary);font-family:monospace;">ossec.conf</code> do agente.</p>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-file-code"></i> Bloco adicionado ao ossec.conf</h4>
+            <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
+              &lt;localfile&gt;<br>
+              &nbsp;&nbsp;&lt;log_format&gt;json&lt;/log_format&gt;<br>
+              &nbsp;&nbsp;&lt;location&gt;/var/log/suricata/eve.json&lt;/location&gt;<br>
+              &lt;/localfile&gt;
+            </div>
+          </div>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-circle-check"></i> Confirmação nos logs</h4>
+            <p>Após reiniciar o agente com <code style="color:var(--primary);font-family:monospace;">sudo systemctl restart wazuh-agent</code>, o log do agente confirmou:<br><em style="color:var(--primary);">"wazuh-logcollector: INFO: (1950): Analyzing file: '/var/log/suricata/eve.json'"</em></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-modal" id="suri-modal-test" onclick="closeModalOutside(event,'suri-modal-test')">
+        <div class="lab-modal-box">
+          <button class="lab-modal-close" onclick="closeModal('suri-modal-test')"><i class="fa-solid fa-xmark"></i></button>
+          <p class="section-label">Etapa 06</p>
+          <h2>Testes de detecção com nmap</h2>
+          <p class="module-text">Com tudo configurado, o teste final foi executar scans reais com nmap e confirmar que o Suricata detectava e registrava os alertas em tempo real.</p>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-terminal"></i> Comandos de teste</h4>
+            <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
+              nmap -sS 10.0.0.20<br>
+              nmap -A 10.0.0.20
+            </div>
+          </div>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-file-lines"></i> Alertas gerados no fast.log</h4>
+            <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:12px;color:var(--text-soft);line-height:1.8;">
+              [**] [1:3400002:2] POSSBL PORT SCAN (NMAP -sS) [**]<br>
+              [Classification: Attempted Information Leak] [Priority: 2]<br>
+              {TCP} 10.0.0.10:42661 -> 10.0.0.20:1272
+            </div>
+          </div>
+          <div class="concept-block">
+            <h4><i class="fa-solid fa-circle-check"></i> Resultado</h4>
+            <p>Três tipos de alerta foram gerados: SID 3400002 (SYN scan), SID 3400005 (Xmas scan) e SID 2200025 (ICMPv4). O pipeline completo Suricata → eve.json → Wazuh estava funcional.</p>
+          </div>
+        </div>
+      </div>
 
       <!-- REGRAS -->
       <section id="regras" class="section">
@@ -602,5 +726,11 @@
       </div>
       <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
     </footer>
+    <script>
+      function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden';}
+      function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
+      function closeModalOutside(e,id){if(e.target===document.getElementById(id))closeModal(id);}
+      document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.lab-modal.open').forEach(m=>{m.classList.remove('open');document.body.style.overflow='';});});
+    </script>
   </body>
 </html>
