@@ -100,6 +100,7 @@
           <a href="#acesso-remoto"><span>Acesso remoto</span></a>
           <a href="#scripts"><span>Scripts</span></a>
           <a href="#competencias"><span>Competências</span></a>
+          <div style="width:100%;height:8px;"></div>
           <a href="#evolucao"><span>Evolução</span></a>
           <a href="#evidencias"><span>Evidências</span></a>
           <a href="#conclusao"><span>Conclusão</span></a>
@@ -594,32 +595,43 @@
           operacional. Cada etapa envolveu diagnóstico, decisão técnica e validação — habilidades
           diretamente aplicáveis em ambientes reais de infraestrutura.
         </p>
-        <div class="skills-grid">
-          <article class="skill-card">
+        <div class="carousel-wrapper">
+          <button class="carousel-btn carousel-prev" onclick="moveKaliCarousel(-1)" aria-label="Anterior">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <div class="carousel-track-container">
+            <div class="carousel-track" id="kaliCarousel">
+          <article class="carousel-card skill-card">
             <h3><i class="fa-brands fa-linux"></i> Administração Linux</h3>
             <p>Gerenciamento de serviços com systemctl, controle de permissões, administração de usuários e sessões, análise de logs do sistema e operação diária via terminal.</p>
           </article>
-          <article class="skill-card">
+          <article class="carousel-card skill-card">
             <h3><i class="fa-solid fa-desktop"></i> Virtualização</h3>
             <p>Criação e configuração de VMs no VMware Workstation, gerenciamento de snapshots para backup de estados estáveis e configuração de modos de rede (Bridge vs NAT).</p>
           </article>
-          <article class="skill-card">
+          <article class="carousel-card skill-card">
             <h3><i class="fa-solid fa-network-wired"></i> Redes</h3>
             <p>Configuração de modo Bridge para integração com a LAN real, validação de conectividade com ping, verificação de portas abertas e diagnóstico de problemas de conectividade.</p>
           </article>
-          <article class="skill-card">
+          <article class="carousel-card skill-card">
             <h3><i class="fa-solid fa-terminal"></i> SSH e Acesso Remoto</h3>
             <p>Instalação e configuração de servidor SSH, geração e uso de chaves RSA, configuração de acesso sem senha e gerenciamento de conexões remotas seguras.</p>
           </article>
-          <article class="skill-card">
+          <article class="carousel-card skill-card">
             <h3><i class="fa-solid fa-gears"></i> Troubleshooting</h3>
             <p>Diagnóstico de conflitos de sessão com loginctl, identificação da causa raiz do loop de login no XRDP e aplicação de solução definitiva com pkill e reinício de serviços.</p>
           </article>
-          <article class="skill-card">
+          <article class="carousel-card skill-card">
             <h3><i class="fa-solid fa-file-code"></i> Scripting Bash</h3>
             <p>Criação de scripts de automação para recuperação de serviços, uso de chmod para permissões de execução e estruturação de rotinas de manutenção do ambiente.</p>
           </article>
         </div>
+          </div>
+          <button class="carousel-btn carousel-next" onclick="moveKaliCarousel(1)" aria-label="Próximo">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+        <div class="carousel-dots" id="kaliDots"></div>
       </section>
 
       <!-- EVOLUÇÃO -->
@@ -758,6 +770,39 @@
       </div>
       <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
     </footer>
+    <script>
+      (() => {
+        const track = document.getElementById('kaliCarousel');
+        const dotsContainer = document.getElementById('kaliDots');
+        if (!track || !dotsContainer) return;
+        const cards = track.querySelectorAll('.carousel-card');
+        const total = cards.length;
+        let current = 0;
+        function getVisible() {
+          return window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
+        }
+        cards.forEach((_, i) => {
+          const dot = document.createElement('button');
+          dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+          dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+          dot.addEventListener('click', () => goTo(i));
+          dotsContainer.appendChild(dot);
+        });
+        function goTo(index) {
+          const max = Math.max(0, total - getVisible());
+          current = Math.max(0, Math.min(index, max));
+          track.style.transform = `translateX(-${current * (cards[0].offsetWidth + 24)}px)`;
+          dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+        }
+        window.moveKaliCarousel = (dir) => goTo(current + dir);
+        window.addEventListener('resize', () => goTo(current));
+        let startX = 0;
+        track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+        track.addEventListener('touchend', e => { if (Math.abs(startX - e.changedTouches[0].clientX) > 50) window.moveKaliCarousel(startX > e.changedTouches[0].clientX ? 1 : -1); });
+      })();
+    </script>
+    
+    
     <script>
       function openModal(id) {
         document.getElementById(id).classList.add('open');
