@@ -189,6 +189,7 @@
             <span><i class="fa-solid fa-circle-question"></i> Query Type A</span>
             <span><i class="fa-solid fa-circle-check"></i> Response com IP</span>
           </div>
+          <button class="modal-trigger" onclick="openModal('ws-modal-dns')" style="margin-top:16px;">Ver detalhes →</button>
         </div>
 
         <!-- ARP -->
@@ -207,6 +208,7 @@
             <span><i class="fa-solid fa-address-card"></i> MAC Resolution</span>
             <span><i class="fa-solid fa-layer-group"></i> Camada 2</span>
           </div>
+          <button class="modal-trigger" onclick="openModal('ws-modal-arp')" style="margin-top:16px;">Ver detalhes →</button>
         </div>
 
         <!-- ICMP -->
@@ -225,6 +227,7 @@
             <span><i class="fa-solid fa-clock"></i> TTL e RTT</span>
             <span><i class="fa-solid fa-stethoscope"></i> Diagnóstico</span>
           </div>
+          <button class="modal-trigger" onclick="openModal('ws-modal-icmp')" style="margin-top:16px;">Ver detalhes →</button>
         </div>
 
         <!-- TCP -->
@@ -244,6 +247,7 @@
             <span><i class="fa-solid fa-shield-halved"></i> Conexão confiável</span>
             <span><i class="fa-solid fa-layer-group"></i> Camada 4</span>
           </div>
+          <button class="modal-trigger" onclick="openModal('ws-modal-tcp')" style="margin-top:16px;">Ver detalhes →</button>
         </div>
 
         <!-- HTTPS/TLS -->
@@ -263,6 +267,7 @@
             <span><i class="fa-solid fa-certificate"></i> Certificado TLS</span>
             <span><i class="fa-solid fa-eye-slash"></i> Application Data criptografado</span>
           </div>
+          <button class="modal-trigger" onclick="openModal('ws-modal-tls')" style="margin-top:16px;">Ver detalhes →</button>
         </div>
       </section>
 
@@ -472,6 +477,109 @@
         track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
         track.addEventListener('touchend', e => { if (Math.abs(startX - e.changedTouches[0].clientX) > 50) window.moveWiresharkCarousel(startX > e.changedTouches[0].clientX ? 1 : -1); });
       })();
+    </script>
+
+    <!-- MODAIS WIRESHARK -->
+    <div id="ws-modal-dns" class="lab-modal" onclick="closeModalOutside(event,'ws-modal-dns')">
+      <div class="lab-modal-box">
+        <button class="lab-modal-close" onclick="closeModal('ws-modal-dns')"><i class="fa-solid fa-xmark"></i></button>
+        <p class="section-label">Protocolo 01</p>
+        <h2>DNS — Domain Name System</h2>
+        <p class="module-text">O DNS traduz nomes de domínio em endereços IP. É o primeiro protocolo a ser ativado quando você acessa qualquer site — antes do TCP, antes do TLS.</p>
+        <div class="concept-block">
+          <h4><i class="fa-solid fa-filter"></i> Filtro Wireshark</h4>
+          <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">dns</div>
+        </div>
+        <div class="concept-block">
+          <h4><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h4>
+          <p><strong>Query:</strong> pacote UDP enviado pelo cliente na porta 53 perguntando o IP de um domínio. Campo <code style="color:var(--primary);font-family:monospace;">Questions</code> mostra o nome buscado.<br><br>
+          <strong>Response:</strong> resposta do servidor DNS com o IP resolvido. Campo <code style="color:var(--primary);font-family:monospace;">Answers</code> mostra o registro A com o IP.<br><br>
+          <strong>Flags:</strong> bit QR=0 na query (Question), QR=1 na response (Response).</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="ws-modal-arp" class="lab-modal" onclick="closeModalOutside(event,'ws-modal-arp')">
+      <div class="lab-modal-box">
+        <button class="lab-modal-close" onclick="closeModal('ws-modal-arp')"><i class="fa-solid fa-xmark"></i></button>
+        <p class="section-label">Protocolo 02</p>
+        <h2>ARP — Address Resolution Protocol</h2>
+        <p class="module-text">O ARP opera na camada 2 e resolve endereços IP em endereços MAC — necessário para que pacotes sejam entregues na rede local antes de qualquer roteamento.</p>
+        <div class="concept-block">
+          <h4><i class="fa-solid fa-filter"></i> Filtro Wireshark</h4>
+          <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">arp</div>
+        </div>
+        <div class="concept-block">
+          <h4><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h4>
+          <p><strong>ARP Request:</strong> broadcast enviado para ff:ff:ff:ff:ff:ff perguntando "Who has IP X? Tell IP Y".<br><br>
+          <strong>ARP Reply:</strong> resposta unicast do dispositivo dono do IP com seu MAC address.<br><br>
+          <strong>Opcode:</strong> campo que diferencia Request (1) de Reply (2).</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="ws-modal-icmp" class="lab-modal" onclick="closeModalOutside(event,'ws-modal-icmp')">
+      <div class="lab-modal-box">
+        <button class="lab-modal-close" onclick="closeModal('ws-modal-icmp')"><i class="fa-solid fa-xmark"></i></button>
+        <p class="section-label">Protocolo 03</p>
+        <h2>ICMP — Internet Control Message Protocol</h2>
+        <p class="module-text">O ICMP é usado para diagnóstico de rede. O <code style="color:var(--primary);font-family:monospace;">ping</code> usa Echo Request e Echo Reply para testar conectividade e medir latência.</p>
+        <div class="concept-block">
+          <h4><i class="fa-solid fa-filter"></i> Filtro Wireshark</h4>
+          <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">icmp</div>
+        </div>
+        <div class="concept-block">
+          <h4><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h4>
+          <p><strong>Echo Request (Type 8):</strong> pacote enviado pelo cliente com um identificador e número de sequência.<br><br>
+          <strong>Echo Reply (Type 0):</strong> resposta do destino com os mesmos campos — confirmando que o host está ativo.<br><br>
+          <strong>TTL:</strong> campo que indica quantos saltos o pacote pode fazer antes de ser descartado.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="ws-modal-tcp" class="lab-modal" onclick="closeModalOutside(event,'ws-modal-tcp')">
+      <div class="lab-modal-box">
+        <button class="lab-modal-close" onclick="closeModal('ws-modal-tcp')"><i class="fa-solid fa-xmark"></i></button>
+        <p class="section-label">Protocolo 04</p>
+        <h2>TCP — Three-Way Handshake</h2>
+        <p class="module-text">O TCP estabelece conexões confiáveis. O Three-Way Handshake (SYN → SYN-ACK → ACK) é o processo de negociação antes de qualquer dado ser trocado.</p>
+        <div class="concept-block">
+          <h4><i class="fa-solid fa-filter"></i> Filtro Wireshark</h4>
+          <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">tcp.flags.syn==1</div>
+        </div>
+        <div class="concept-block">
+          <h4><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h4>
+          <p><strong>SYN:</strong> cliente envia pacote com flag SYN=1, escolhendo um número de sequência inicial.<br><br>
+          <strong>SYN-ACK:</strong> servidor responde com SYN=1 e ACK=1, confirmando e escolhendo seu próprio número de sequência.<br><br>
+          <strong>ACK:</strong> cliente confirma com ACK=1 — conexão estabelecida, dados podem fluir.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="ws-modal-tls" class="lab-modal" onclick="closeModalOutside(event,'ws-modal-tls')">
+      <div class="lab-modal-box">
+        <button class="lab-modal-close" onclick="closeModal('ws-modal-tls')"><i class="fa-solid fa-xmark"></i></button>
+        <p class="section-label">Protocolo 05</p>
+        <h2>HTTPS / TLS — Comunicação criptografada</h2>
+        <p class="module-text">O TLS criptografa a comunicação HTTPS. No Wireshark é possível ver o handshake — antes dos dados ficarem ilegíveis — demonstrando na prática o que a criptografia faz.</p>
+        <div class="concept-block">
+          <h4><i class="fa-solid fa-filter"></i> Filtro Wireshark</h4>
+          <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">tls</div>
+        </div>
+        <div class="concept-block">
+          <h4><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h4>
+          <p><strong>Client Hello:</strong> cliente anuncia versões TLS suportadas e cipher suites.<br><br>
+          <strong>Server Hello:</strong> servidor escolhe a versão e cipher suite, envia o certificado.<br><br>
+          <strong>Application Data:</strong> após o handshake, todos os dados aparecem como bytes criptografados — ilegíveis mesmo para o Wireshark.</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden';}
+      function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
+      function closeModalOutside(e,id){if(e.target===document.getElementById(id))closeModal(id);}
+      document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.lab-modal.open').forEach(m=>{m.classList.remove('open');document.body.style.overflow='';});});
     </script>
   </body>
 </html>
