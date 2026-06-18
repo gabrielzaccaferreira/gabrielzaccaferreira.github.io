@@ -534,8 +534,8 @@
 
     <!-- MODAIS -->
     <div id="ws-modal-vm" class="lab-modal" onclick="closeModalOutside(event,'ws-modal-vm')">
-      <div class="lab-modal-content">
-        <button class="modal-close" onclick="closeModal('ws-modal-vm')">✕</button>
+      <div class="lab-modal-box">
+        <button class="lab-modal-close" onclick="closeModal('ws-modal-vm')"><i class="fa-solid fa-xmark"></i></button>
         <h3>Provisionamento da VM</h3>
         <p>Download do ISO via <a href="https://www.microsoft.com/en-us/evalcenter/download-windows-server-2025" target="_blank">Microsoft Evaluation Center</a> — avaliação gratuita de 180 dias, sem necessidade de product key.</p>
         <p style="margin-top:16px;">Parâmetros da VM no VMware Workstation:</p>
@@ -548,8 +548,8 @@ Edição: Standard com Desktop Experience</pre>
     </div>
 
     <div id="ws-modal-rede" class="lab-modal" onclick="closeModalOutside(event,'ws-modal-rede')">
-      <div class="lab-modal-content">
-        <button class="modal-close" onclick="closeModal('ws-modal-rede')">✕</button>
+      <div class="lab-modal-box">
+        <button class="lab-modal-close" onclick="closeModal('ws-modal-rede')"><i class="fa-solid fa-xmark"></i></button>
         <h3>Configuração de rede estática</h3>
         <p>A configuração via GUI (Painel de Controle → Propriedades do adaptador) foi aplicada, mas o DHCP continuou ativo silenciosamente. Diagnóstico:</p>
         <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">Get-NetIPInterface -InterfaceAlias "Ethernet0" -AddressFamily IPv4 `
@@ -565,8 +565,8 @@ Set-DnsClientServerAddress -InterfaceAlias "Ethernet0" -ServerAddresses 10.10.10
     </div>
 
     <div id="ws-modal-sysmon" class="lab-modal" onclick="closeModalOutside(event,'ws-modal-sysmon')">
-      <div class="lab-modal-content">
-        <button class="modal-close" onclick="closeModal('ws-modal-sysmon')">✕</button>
+      <div class="lab-modal-box">
+        <button class="lab-modal-close" onclick="closeModal('ws-modal-sysmon')"><i class="fa-solid fa-xmark"></i></button>
         <h3>Sysmon + Auditoria avançada</h3>
         <p>Instalação do Sysmon com a config da <a href="https://github.com/SwiftOnSecurity/sysmon-config" target="_blank">SwiftOnSecurity</a>:</p>
         <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">.\Sysmon64.exe -i sysmonconfig-export.xml -accepteula
@@ -581,8 +581,8 @@ Get-Service sysmon64   # Status: Running</pre>
     </div>
 
     <div id="ws-modal-wazuh" class="lab-modal" onclick="closeModalOutside(event,'ws-modal-wazuh')">
-      <div class="lab-modal-content">
-        <button class="modal-close" onclick="closeModal('ws-modal-wazuh')">✕</button>
+      <div class="lab-modal-box">
+        <button class="lab-modal-close" onclick="closeModal('ws-modal-wazuh')"><i class="fa-solid fa-xmark"></i></button>
         <h3>Agente Wazuh + ossec.conf</h3>
         <p>Comando gerado pelo dashboard (Agents Management → Deploy new agent → Windows):</p>
         <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.5-1.msi `

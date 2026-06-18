@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
@@ -554,8 +554,8 @@ agent.name: win-srv01 AND location: Microsoft-Windows-Sysmon/Operational</pre>
 
     <!-- MODAIS -->
     <div id="wazuh-modal-install" class="lab-modal" onclick="closeModalOutside(event,'wazuh-modal-install')">
-      <div class="lab-modal-content">
-        <button class="modal-close" onclick="closeModal('wazuh-modal-install')">✕</button>
+      <div class="lab-modal-box">
+        <button class="lab-modal-close" onclick="closeModal('wazuh-modal-install')"><i class="fa-solid fa-xmark"></i></button>
         <h3>Instalação do Wazuh Manager</h3>
         <p>Instalação via script oficial (all-in-one) no Ubuntu Server:</p>
         <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh
@@ -569,8 +569,8 @@ sudo systemctl status wazuh-dashboard --no-pager</pre>
     </div>
 
     <div id="wazuh-modal-kali" class="lab-modal" onclick="closeModalOutside(event,'wazuh-modal-kali')">
-      <div class="lab-modal-content">
-        <button class="modal-close" onclick="closeModal('wazuh-modal-kali')">✕</button>
+      <div class="lab-modal-box">
+        <button class="lab-modal-close" onclick="closeModal('wazuh-modal-kali')"><i class="fa-solid fa-xmark"></i></button>
         <h3>Agente Kali Linux</h3>
         <p>Deploy gerado pelo dashboard (Agents Management → Deploy new agent → Linux/DEB amd64):</p>
         <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.14.5-1_amd64.deb
@@ -583,8 +583,8 @@ sudo systemctl enable wazuh-agent</pre>
     </div>
 
     <div id="wazuh-modal-suricata" class="lab-modal" onclick="closeModalOutside(event,'wazuh-modal-suricata')">
-      <div class="lab-modal-content">
-        <button class="modal-close" onclick="closeModal('wazuh-modal-suricata')">✕</button>
+      <div class="lab-modal-box">
+        <button class="lab-modal-close" onclick="closeModal('wazuh-modal-suricata')"><i class="fa-solid fa-xmark"></i></button>
         <h3>Integração com Suricata</h3>
         <p>Bloco adicionado ao <code>/var/ossec/etc/ossec.conf</code> do agente Kali:</p>
         <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">&lt;localfile&gt;
@@ -599,8 +599,8 @@ sudo systemctl enable wazuh-agent</pre>
     </div>
 
     <div id="wazuh-modal-windows" class="lab-modal" onclick="closeModalOutside(event,'wazuh-modal-windows')">
-      <div class="lab-modal-content">
-        <button class="modal-close" onclick="closeModal('wazuh-modal-windows')">✕</button>
+      <div class="lab-modal-box">
+        <button class="lab-modal-close" onclick="closeModal('wazuh-modal-windows')"><i class="fa-solid fa-xmark"></i></button>
         <h3>Agente Windows Server + Sysmon</h3>
         <p>Deploy via MSI gerado pelo dashboard (Windows):</p>
         <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.5-1.msi `
@@ -618,8 +618,8 @@ NET START WazuhSvc</pre>
     </div>
 
     <div id="wazuh-modal-tuning" class="lab-modal" onclick="closeModalOutside(event,'wazuh-modal-tuning')">
-      <div class="lab-modal-content">
-        <button class="modal-close" onclick="closeModal('wazuh-modal-tuning')">✕</button>
+      <div class="lab-modal-box">
+        <button class="lab-modal-close" onclick="closeModal('wazuh-modal-tuning')"><i class="fa-solid fa-xmark"></i></button>
         <h3>Tuning — Falso positivo Rule 92205</h3>
         <p>O evento que disparou a regra 92205 tinha estes campos no <code>data.win.eventdata</code>:</p>
         <ul style="margin-top:12px;color:var(--text-soft);font-size:14px;line-height:2;">

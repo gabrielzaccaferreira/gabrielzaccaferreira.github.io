@@ -628,8 +628,8 @@
 
     <!-- MODAIS -->
     <div id="suri-modal-install" class="lab-modal" onclick="closeModalOutside(event,'suri-modal-install')">
-      <div class="lab-modal-content">
-        <button class="modal-close" onclick="closeModal('suri-modal-install')">✕</button>
+      <div class="lab-modal-box">
+        <button class="lab-modal-close" onclick="closeModal('suri-modal-install')"><i class="fa-solid fa-xmark"></i></button>
         <h3>Instalação do Suricata</h3>
         <p>O Suricata está disponível nos repositórios oficiais do Kali Linux. Instalação direta via apt:</p>
         <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">sudo apt update
@@ -645,8 +645,8 @@ suricata --version
     </div>
 
     <div id="suri-modal-rules" class="lab-modal" onclick="closeModalOutside(event,'suri-modal-rules')">
-      <div class="lab-modal-content">
-        <button class="modal-close" onclick="closeModal('suri-modal-rules')">✕</button>
+      <div class="lab-modal-box">
+        <button class="lab-modal-close" onclick="closeModal('suri-modal-rules')"><i class="fa-solid fa-xmark"></i></button>
         <h3>Atualização das regras com suricata-update</h3>
         <p>O suricata-update é a ferramenta oficial para gerenciar fontes de regras:</p>
         <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">sudo suricata-update update-sources
@@ -659,8 +659,8 @@ sudo systemctl restart suricata</pre>
     </div>
 
     <div id="suri-modal-nmap" class="lab-modal" onclick="closeModalOutside(event,'suri-modal-nmap')">
-      <div class="lab-modal-content">
-        <button class="modal-close" onclick="closeModal('suri-modal-nmap')">✕</button>
+      <div class="lab-modal-box">
+        <button class="lab-modal-close" onclick="closeModal('suri-modal-nmap')"><i class="fa-solid fa-xmark"></i></button>
         <h3>Habilitação da fonte aleksibovellan/nmap</h3>
         <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">sudo suricata-update enable-source aleksibovellan/nmap
 sudo suricata-update
@@ -676,8 +676,8 @@ sudo systemctl restart suricata</pre>
     </div>
 
     <div id="suri-modal-wazuh" class="lab-modal" onclick="closeModalOutside(event,'suri-modal-wazuh')">
-      <div class="lab-modal-content">
-        <button class="modal-close" onclick="closeModal('suri-modal-wazuh')">✕</button>
+      <div class="lab-modal-box">
+        <button class="lab-modal-close" onclick="closeModal('suri-modal-wazuh')"><i class="fa-solid fa-xmark"></i></button>
         <h3>Integração com o Wazuh</h3>
         <p>Bloco adicionado ao <code>/var/ossec/etc/ossec.conf</code> do agente Kali:</p>
         <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">&lt;localfile&gt;
@@ -692,8 +692,8 @@ sudo systemctl restart suricata</pre>
     </div>
 
     <div id="suri-modal-interface" class="lab-modal" onclick="closeModalOutside(event,'suri-modal-interface')">
-      <div class="lab-modal-content">
-        <button class="modal-close" onclick="closeModal('suri-modal-interface')">✕</button>
+      <div class="lab-modal-box">
+        <button class="lab-modal-close" onclick="closeModal('suri-modal-interface')"><i class="fa-solid fa-xmark"></i></button>
         <h3>Correção da interface de captura</h3>
         <p>Diagnóstico: sensor estava em <code>eth1</code> (10.10.20.0/24), não em <code>eth0</code> (10.10.10.0/24 — LAN do lab).</p>
         <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">grep -A 5 "af-packet:" /etc/suricata/suricata.yaml
@@ -709,8 +709,8 @@ sudo systemctl restart suricata</pre>
     </div>
 
     <div id="suri-modal-custom" class="lab-modal" onclick="closeModalOutside(event,'suri-modal-custom')">
-      <div class="lab-modal-content">
-        <button class="modal-close" onclick="closeModal('suri-modal-custom')">✕</button>
+      <div class="lab-modal-box">
+        <button class="lab-modal-close" onclick="closeModal('suri-modal-custom')"><i class="fa-solid fa-xmark"></i></button>
         <h3>Regras customizadas — local.rules</h3>
         <p>Arquivo criado em <code>/var/lib/suricata/rules/local.rules</code> e referenciado no <code>suricata.yaml</code>:</p>
         <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">rule-files:
