@@ -1,18 +1,18 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wazuh SIEM/XDR | Gabriel Zacca Ferreira</title>
-    <meta name="description" content="Case técnico do laboratório Wazuh SIEM/XDR implementado com Ubuntu Server, Kali Linux e VMware Workstation, com foco em monitoramento, análise de eventos e Blue Team." />
+    <meta name="description" content="Laboratório Wazuh SIEM/XDR completo: instalação, múltiplos agentes, integração com Suricata e pfSense, tuning de regras, Threat Hunting real e Red Team vs Blue Team." />
     <meta name="author" content="Gabriel Zacca Ferreira" />
     <meta name="robots" content="index,follow" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Wazuh SIEM/XDR | Gabriel Zacca Ferreira" />
-    <meta property="og:description" content="Case técnico de laboratório SIEM/XDR com Ubuntu Server, Kali Linux e VMware Workstation." />
-    <meta property="og:url" content="https://gabrielzaccaferreira.github.io/pages/wazuh.html" />
+    <meta property="og:description" content="SIEM/XDR com múltiplos agentes, regras customizadas, Threat Hunting real e pipeline completo de detecção." />
+    <meta property="og:url" content="https://gabrielzacca.com.br/pages/wazuh.html" />
     <meta property="og:image" content="https://gabrielzaccaferreira.github.io/assets/images/og-image.png" />
-    <link rel="canonical" href="https://gabrielzaccaferreira.github.io/pages/wazuh.html" />
+    <link rel="canonical" href="https://gabrielzacca.com.br/pages/wazuh.html" />
     <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
     <link rel="manifest" href="../manifest.webmanifest" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
@@ -50,320 +50,593 @@
       </div>
     </header>
 
+    <main>
 
-      <main>
+      <!-- HERO -->
       <section id="hero" class="hero">
         <div class="hero-content">
-          <p class="eyebrow">Case Técnico • SIEM • Blue Team</p>
+          <p class="eyebrow">SIEM/XDR • Blue Team • Threat Hunting • Detection Engineering</p>
           <h1>
-            Wazuh
-            <span>SIEM/XDR</span>
+            Wazuh SIEM/XDR
+            <span>O centro do SOC Home Lab</span>
           </h1>
           <p class="hero-description">
-            Implementação de um laboratório completo de monitoramento e detecção de ameaças utilizando Ubuntu Server, VMware Workstation e Kali Linux, com foco em SIEM, análise de eventos, agentes, hardening e Blue Team.
+            Wazuh 4.14.5 instalado no Ubuntu Server, com múltiplos agentes ativos (Kali Linux e
+            Windows Server 2025), integrado ao Suricata IDS e ao pfSense. Pipeline completo de
+            detecção com regras customizadas, tuning de falsos positivos, SCA, FIM e Threat Hunting
+            real validado contra ataques do Metasploit e OWASP Juice Shop.
           </p>
-          <div class="project-stack">
-            <span>Linux</span><span>VMware</span><span>Wazuh</span>
-            <span>SIEM</span><span>Blue Team</span><span>Monitoramento</span>
-          </div>
           <div class="hero-actions">
-            <a href="#overview" class="btn btn-primary">Ver resumo do case →</a>
-            <a href="https://github.com/gabrielzaccaferreira/wazuh-lab" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Ver GitHub</a>
+            <a href="#sobre" class="btn btn-primary">Ver o laboratório →</a>
+            <a href="#threatHunting" class="btn btn-secondary">Ver Threat Hunting real</a>
           </div>
         </div>
 
         <div class="architecture-card">
           <p class="section-label">Topologia</p>
-          <h2>Fluxo do laboratório</h2>
+          <h2>Arquitetura do lab</h2>
           <div class="architecture-flow">
-            <span>Dell OptiPlex</span>
+            <span>Kali Linux (Suricata + Agente) + Windows Server (Sysmon + Agente)</span>
             <strong>↓</strong>
-            <span>Windows 11</span>
+            <span>Wazuh Manager — Ubuntu Server (10.10.10.10)</span>
             <strong>↓</strong>
-            <span>VMware Workstation</span>
+            <span>Wazuh Indexer + Dashboard</span>
             <strong>↓</strong>
-            <span>Ubuntu Server</span>
-            <strong>↓</strong>
-            <span>Wazuh SIEM/XDR</span>
-            <strong>↕</strong>
-            <span>Kali Linux Agent</span>
+            <span>pfSense — Gateway/Firewall da LAN</span>
           </div>
         </div>
       </section>
 
+      <!-- ÍNDICE -->
       <section id="indice" class="section">
         <p class="section-label">Índice</p>
-        <h2>Navegue pelo projeto.</h2>
+        <h2>Navegue pelo conteúdo desta documentação.</h2>
         <div class="profile-tags">
-          <a href="#overview"><span>Resumo</span></a>
+          <a href="#sobre"><span>Sobre</span></a>
           <a href="#especificacoes"><span>Especificações</span></a>
           <a href="#implementacao"><span>Implementação</span></a>
-          <a href="#arquitetura"><span>Arquitetura</span></a>
-          <a href="#stack"><span>Stack</span></a>
+          <a href="#agentes"><span>Agentes</span></a>
+          <a href="#integrações"><span>Integrações</span></a>
+          <a href="#tuning"><span>Tuning de Regras</span></a>
+          <a href="#threatHunting"><span>Threat Hunting</span></a>
           <a href="#competencias"><span>Competências</span></a>
+          <br style="width:100%;display:block;margin-top:8px;">
           <a href="#resultados"><span>Resultados</span></a>
           <a href="#evidencias"><span>Evidências</span></a>
-          <a href="#desafios"><span>Desafios</span></a>
           <a href="#conclusao"><span>Conclusão</span></a>
         </div>
       </section>
 
-      <section id="overview" class="wazuh-overview">
-        <div class="wazuh-overview-card">
-          <div>
-            <p class="section-label">Resumo do case</p>
-            <h2>Laboratório SIEM/XDR implementado em ambiente virtualizado.</h2>
-            <p>O objetivo deste projeto foi criar um ambiente prático para compreender a implantação de um SIEM, integração de agentes, coleta de eventos, validação de serviços, análise de segurança e documentação técnica.</p>
-          </div>
-          <div class="wazuh-overview-stats">
-            <article><strong>01</strong><span>Servidor Wazuh</span></article>
-            <article><strong>01</strong><span>Agente Kali Linux</span></article>
-            <article><strong>05</strong><span>Evidências técnicas</span></article>
-          </div>
-        </div>
+      <!-- SOBRE -->
+      <section id="sobre" class="section">
+        <p class="section-label">Sobre o laboratório</p>
+        <h2>O centro do SOC Home Lab.</h2>
+        <p class="section-text">
+          O Wazuh é o eixo central do laboratório — é ele que coleta, processa, correlaciona e
+          apresenta os eventos de segurança de todos os outros componentes. Sem o Wazuh, os logs
+          do Suricata ficam em arquivos JSON isolados, os eventos do Sysmon ficam no Event Viewer
+          do Windows e as detecções do pfSense ficam no syslog. Com o Wazuh, tudo converge num
+          único painel com busca, correlação e alertas.
+        </p>
+        <p class="section-text">
+          Este laboratório foi construído progressivamente: primeiro o Manager e o agente do Kali,
+          depois a integração com o Suricata, depois o pfSense, e finalmente o agente do
+          Windows Server com Sysmon. Cada etapa adicionou uma nova camada de visibilidade ao
+          ambiente — e cada integração trouxe novos problemas reais pra diagnosticar e resolver.
+        </p>
       </section>
 
+      <!-- ESPECIFICAÇÕES -->
       <section id="especificacoes" class="section">
-        <p class="section-label">Especificações do laboratório</p>
-        <h2>Ambiente técnico utilizado no projeto.</h2>
+        <p class="section-label">Especificações</p>
+        <h2>Ambiente técnico do laboratório.</h2>
         <div class="cards-grid">
           <article class="card">
             <h3 class="card-title"><i class="fa-solid fa-computer card-icon"></i> Host físico</h3>
-            <p>Dell OptiPlex com Windows 11, Intel Core i7-10700T, 32 GB RAM e SSD NVMe de 1 TB.</p>
-            <div class="project-stack"><span>Windows 11</span><span>i7-10700T</span><span>32 GB RAM</span></div>
+            <p>Dell OptiPlex com Windows 11, Intel Core i7-10700T, 32GB RAM e SSD NVMe 1TB. Base de virtualização para todas as VMs do lab.</p>
+            <div class="project-stack">
+              <span>Dell OptiPlex</span>
+              <span>i7-10700T</span>
+              <span>32GB RAM</span>
+              <span>VMware Workstation</span>
+            </div>
+          </article>
+          <article class="card highlight">
+            <h3 class="card-title"><i class="fa-solid fa-shield-halved card-icon"></i> Wazuh Manager</h3>
+            <p>Ubuntu Server com Wazuh 4.14.5 completo — Manager, Dashboard, Indexer e Filebeat. IP <code style="color:var(--primary);font-family:monospace;">10.10.10.10</code> na LAN do pfSense. Ponto central de coleta e correlação de todos os eventos do lab.</p>
+            <div class="project-stack">
+              <span>Wazuh 4.14.5</span>
+              <span>Ubuntu Server</span>
+              <span>Manager + Indexer + Dashboard</span>
+            </div>
           </article>
           <article class="card">
-            <h3 class="card-title"><i class="fa-solid fa-desktop card-icon"></i> Hypervisor</h3>
-            <p>VMware Workstation utilizado para criação, isolamento e gerenciamento das máquinas virtuais.</p>
-            <div class="project-stack"><span>VMware</span><span>Virtualização</span><span>Lab</span></div>
+            <h3 class="card-title"><i class="fa-brands fa-linux card-icon"></i> Agente Kali Linux</h3>
+            <p>Kali Linux com agente Wazuh e Suricata 8.0.5. Dupla função: endpoint monitorado (agente) e sensor de rede (Suricata → eve.json → Wazuh).</p>
+            <div class="project-stack">
+              <span>Kali Linux 2026.1</span>
+              <span>Wazuh Agent</span>
+              <span>Suricata 8.0.5</span>
+            </div>
           </article>
           <article class="card">
-            <h3 class="card-title"><i class="fa-solid fa-shield-halved card-icon"></i> Servidor Wazuh</h3>
-            <p>Ubuntu Server executando Wazuh Manager, Dashboard, Indexer e Filebeat.</p>
-            <div class="project-stack"><span>Ubuntu Server</span><span>Wazuh</span><span>SIEM</span></div>
-          </article>
-          <article class="card">
-            <h3 class="card-title"><i class="fa-brands fa-linux card-icon"></i> Endpoint</h3>
-            <p>Kali Linux com agente Wazuh instalado, registrado e integrado ao servidor principal.</p>
-            <div class="project-stack"><span>Kali Linux</span><span>Agent</span><span>Monitoring</span></div>
+            <h3 class="card-title"><i class="fa-brands fa-windows card-icon"></i> Agente Windows Server</h3>
+            <p>Windows Server 2025 com Sysmon (SwiftOnSecurity config), auditoria avançada (Event ID 4688/4104) e agente Wazuh. Telemetria de host Windows completa.</p>
+            <div class="project-stack">
+              <span>Windows Server 2025</span>
+              <span>Sysmon</span>
+              <span>Wazuh Agent 4.14.5</span>
+            </div>
           </article>
         </div>
       </section>
 
+      <!-- IMPLEMENTAÇÃO -->
       <section id="implementacao" class="section">
         <p class="section-label">Processo de implementação</p>
-        <h2>Do planejamento à validação do laboratório.</h2>
+        <h2>Do servidor ao pipeline completo.</h2>
+        <p class="section-text">
+          A implementação foi progressiva — cada etapa adicionou uma nova camada de visibilidade.
+          A metodologia foi a mesma em todas: backup, leitura da documentação, planejamento,
+          execução, teste e validação antes de avançar.
+        </p>
         <div class="roadmap-list">
+
           <article class="roadmap-step done">
-            <div class="roadmap-marker">1</div>
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
             <div class="roadmap-step-content">
-              <span class="roadmap-status">Planejamento</span>
-              <h3>Definição da arquitetura</h3>
-              <p>Organização do ambiente com host físico, VMware Workstation, Ubuntu Server como servidor Wazuh e Kali Linux como endpoint monitorado.</p>
+              <span class="roadmap-status">Concluído</span>
+              <h3>Instalação do Wazuh Manager</h3>
+              <p>Instalação do stack completo no Ubuntu Server via script oficial: Manager, Indexer, Dashboard e Filebeat. Validação com <code style="color:var(--primary);font-family:monospace;">systemctl status wazuh-manager</code> e acesso ao dashboard via HTTPS.</p>
+              <div class="project-stack"><span>Ubuntu Server</span><span>Wazuh 4.14.5</span><span>Dashboard HTTPS</span></div>
+              <button class="modal-trigger" onclick="openModal('wazuh-modal-install')">Ver detalhes →</button>
             </div>
           </article>
+
           <article class="roadmap-step done">
-            <div class="roadmap-marker">2</div>
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
             <div class="roadmap-step-content">
-              <span class="roadmap-status">Instalação</span>
-              <h3>Implantação do Wazuh</h3>
-              <p>Instalação dos componentes principais: Wazuh Manager, Dashboard, Indexer e Filebeat no Ubuntu Server.</p>
+              <span class="roadmap-status">Concluído</span>
+              <h3>Agente Kali Linux</h3>
+              <p>Deploy do agente no Kali via comando gerado pelo dashboard (Agents Management → Deploy new agent). Registro automático no Manager, status Active confirmado.</p>
+              <div class="project-stack"><span>wazuh-agent</span><span>ossec.conf</span><span>TCP 1514</span></div>
+              <button class="modal-trigger" onclick="openModal('wazuh-modal-kali')">Ver detalhes →</button>
             </div>
           </article>
+
           <article class="roadmap-step done">
-            <div class="roadmap-marker">3</div>
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
             <div class="roadmap-step-content">
-              <span class="roadmap-status">Integração</span>
-              <h3>Registro do agente Kali Linux</h3>
-              <p>Instalação e configuração do agente Wazuh no Kali Linux, com validação de comunicação entre endpoint e servidor.</p>
+              <span class="roadmap-status">Concluído</span>
+              <h3>Integração com Suricata</h3>
+              <p>Adição do <code style="color:var(--primary);font-family:monospace;">eve.json</code> no <code style="color:var(--primary);font-family:monospace;">ossec.conf</code> do agente Kali. Wazuh passou a ingerir alertas do Suricata com decoders nativos — 710+ eventos nas primeiras 24h.</p>
+              <div class="project-stack"><span>eve.json</span><span>log_format json</span><span>rule 86601</span></div>
+              <button class="modal-trigger" onclick="openModal('wazuh-modal-suricata')">Ver detalhes →</button>
             </div>
           </article>
+
           <article class="roadmap-step done">
-            <div class="roadmap-marker">4</div>
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
             <div class="roadmap-step-content">
-              <span class="roadmap-status">Validação</span>
-              <h3>Testes e evidências</h3>
-              <p>Verificação dos serviços, dashboard, agentes, eventos coletados e análise SCA para confirmar o funcionamento do laboratório.</p>
+              <span class="roadmap-status">Concluído</span>
+              <h3>Agente Windows Server + Sysmon</h3>
+              <p>Deploy do agente no Windows Server 2025 via MSI. Configuração dos canais Sysmon/Operational e PowerShell/Operational no <code style="color:var(--primary);font-family:monospace;">ossec.conf</code>. Telemetria completa de host Windows no dashboard.</p>
+              <div class="project-stack"><span>Windows Server 2025</span><span>Sysmon</span><span>eventchannel</span></div>
+              <button class="modal-trigger" onclick="openModal('wazuh-modal-windows')">Ver detalhes →</button>
             </div>
           </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Tuning de regras</h3>
+              <p>Falso positivo identificado: regra <strong>92205</strong> (nível 9) disparando pra execução legítima do módulo SCA do próprio Wazuh. Regra de exceção criada no <code style="color:var(--primary);font-family:monospace;">local_rules.xml</code> com nível rebaixado para 3.</p>
+              <div class="project-stack"><span>local_rules.xml</span><span>Rule ID 100205</span><span>if_sid: 92205</span></div>
+              <button class="modal-trigger" onclick="openModal('wazuh-modal-tuning')">Ver detalhes →</button>
+            </div>
+          </article>
+
         </div>
       </section>
 
-      <section id="arquitetura" class="section">
-        <p class="section-label">Arquitetura</p>
-        <h2>Ambiente do laboratório.</h2>
-        <p class="section-text">O laboratório foi implementado em ambiente virtualizado utilizando VMware Workstation, com um servidor Ubuntu para os componentes centrais do Wazuh e uma máquina Kali Linux atuando como endpoint monitorado.</p>
+      <!-- AGENTES -->
+      <section id="agentes" class="section">
+        <p class="section-label">Agentes ativos</p>
+        <h2>Dois endpoints. Dois sistemas operacionais. Uma visão centralizada.</h2>
+        <p class="section-text">
+          Ter agentes em Linux e Windows é fundamental pra cobertura real de SOC — a maioria das
+          detecções do mercado são para Windows (Event Log, Sysmon, PowerShell), mas ambientes
+          Linux (servidores, Kali como atacante) também precisam de monitoramento. Este lab cobre os dois.
+        </p>
         <div class="cards-grid">
           <article class="card">
-            <h3 class="card-title"><i class="fa-solid fa-computer card-icon"></i> Host</h3>
-            <p>Dell OptiPlex com Windows 11, Intel Core i7-10700T, 32 GB de RAM e SSD NVMe de 1 TB utilizado como base para virtualização.</p>
+            <h3 class="card-title"><i class="fa-brands fa-linux card-icon"></i> kali-linux (ID 001)</h3>
+            <p>Agente no Kali Linux monitorando autenticação, processos, integridade de arquivos e ingerindo eventos do Suricata (50k+ regras). Versão 4.14.5, status <strong>Active</strong>.</p>
+            <div class="project-stack">
+              <span>Kali GNU/Linux 2026.2</span>
+              <span>v4.14.5</span>
+              <span>Active</span>
+              <span>Suricata pipeline</span>
+            </div>
           </article>
-          <article class="card">
-            <h3 class="card-title"><i class="fa-solid fa-desktop card-icon"></i> Hypervisor</h3>
-            <p>VMware Workstation utilizado para criação, isolamento e gerenciamento das máquinas virtuais do laboratório.</p>
+          <article class="card highlight">
+            <h3 class="card-title"><i class="fa-brands fa-windows card-icon"></i> win-srv01 (ID 002)</h3>
+            <p>Agente no Windows Server 2025 com telemetria completa — Sysmon (Event IDs 1/3/11/13), Security log (4688 com linha de comando) e PowerShell/Operational (4104 script block logging). Versão 4.14.5, status <strong>Active</strong>.</p>
+            <div class="project-stack">
+              <span>Windows Server 2025</span>
+              <span>v4.14.5</span>
+              <span>Active</span>
+              <span>Sysmon + 4688 + 4104</span>
+            </div>
           </article>
-          <article class="card">
-            <h3 class="card-title"><i class="fa-brands fa-ubuntu card-icon"></i> Ubuntu Server</h3>
-            <p>Servidor principal executando Wazuh Manager, Dashboard, Indexer e Filebeat.</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title"><i class="fa-brands fa-linux card-icon"></i> Kali Linux</h3>
-            <p>Endpoint monitorado com agente Wazuh instalado, registrado e integrado ao servidor.</p>
-            <a href="kali-linux.html" class="card-link">Ver laboratório Kali →</a>
-          </article>
+        </div>
+
+        <div style="margin-top:32px;padding:24px;background:rgba(2,6,23,0.8);border:1px solid var(--border-light);border-radius:16px;">
+          <p class="section-label">ossec.conf — canais monitorados no Windows Server</p>
+          <pre style="margin:8px 0 0;color:var(--text-soft);font-family:monospace;font-size:13px;line-height:1.8;white-space:pre-wrap;">&lt;!-- Canais padrão --&gt;
+&lt;localfile&gt;&lt;location&gt;Application&lt;/location&gt;&lt;log_format&gt;eventchannel&lt;/log_format&gt;&lt;/localfile&gt;
+&lt;localfile&gt;&lt;location&gt;Security&lt;/location&gt;&lt;log_format&gt;eventchannel&lt;/log_format&gt;&lt;/localfile&gt;
+&lt;localfile&gt;&lt;location&gt;System&lt;/location&gt;&lt;log_format&gt;eventchannel&lt;/log_format&gt;&lt;/localfile&gt;
+
+&lt;!-- Canais adicionados manualmente --&gt;
+&lt;localfile&gt;
+  &lt;location&gt;Microsoft-Windows-Sysmon/Operational&lt;/location&gt;
+  &lt;log_format&gt;eventchannel&lt;/log_format&gt;
+&lt;/localfile&gt;
+&lt;localfile&gt;
+  &lt;location&gt;Microsoft-Windows-PowerShell/Operational&lt;/location&gt;
+  &lt;log_format&gt;eventchannel&lt;/log_format&gt;
+&lt;/localfile&gt;</pre>
         </div>
       </section>
 
-      <section id="stack" class="section">
-        <p class="section-label">Stack</p>
-        <h2>Tecnologias utilizadas no case.</h2>
-        <div class="profile-tags">
-          <span><i class="fa-solid fa-desktop"></i> VMware Workstation</span>
-          <span><i class="fa-brands fa-ubuntu"></i> Ubuntu Server</span>
-          <span><i class="fa-brands fa-linux"></i> Kali Linux</span>
-          <span><i class="fa-brands fa-windows"></i> Windows 11</span>
-          <span><i class="fa-solid fa-shield-halved"></i> Wazuh Manager</span>
-          <span><i class="fa-solid fa-chart-bar"></i> Wazuh Dashboard</span>
-          <span><i class="fa-solid fa-database"></i> Wazuh Indexer</span>
-          <span><i class="fa-solid fa-file-lines"></i> Filebeat</span>
+      <!-- INTEGRAÇÕES -->
+      <section id="integrações" class="section">
+        <p class="section-label">Integrações</p>
+        <h2>Wazuh como centro de correlação do lab.</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-network-wired"></i> Suricata IDS/IPS</span>
+            <p>O <code style="color:var(--primary);font-family:monospace;">eve.json</code> do Suricata é lido continuamente pelo Wazuh Logcollector no agente Kali. Decoders nativos processam campos como <code style="color:var(--primary);font-family:monospace;">alert.signature</code>, <code style="color:var(--primary);font-family:monospace;">src_ip</code> e <code style="color:var(--primary);font-family:monospace;">dest_port</code> — correlacionando tráfego de rede com eventos de host.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-brands fa-windows"></i> Windows Event Log + Sysmon</span>
+            <p>O agente Windows coleta via <code style="color:var(--primary);font-family:monospace;">eventchannel</code> os canais Application, Security, System, Sysmon/Operational e PowerShell/Operational. Regras nativas do Wazuh como <strong>67027</strong> (Event ID 4688) e regras Sysmon decodam e classificam cada evento automaticamente.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-fire"></i> pfSense (Firewall)</span>
+            <p>O pfSense está na mesma rede (VMnet1) e atua como gateway do lab — todo tráfego entre as VMs e a internet passa por ele. Integração via syslog documenta conexões e bloqueios do firewall no Wazuh.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-chart-line"></i> Threat Hunting — Dashboard</span>
+            <p>Todos os eventos convergem no módulo <strong>Threat Hunting → Events</strong>, pesquisável em DQL. Filtros como <code style="color:var(--primary);font-family:monospace;">rule.groups: suricata</code>, <code style="color:var(--primary);font-family:monospace;">agent.name: win-srv01</code> e <code style="color:var(--primary);font-family:monospace;">data.alert.signature_id: 3400020</code> permitem isolar eventos específicos de qualquer fonte.</p>
+          </div>
         </div>
       </section>
 
+      <!-- TUNING -->
+      <section id="tuning" class="section">
+        <p class="section-label">Tuning de regras</p>
+        <h2>Falso positivo identificado e corrigido.</h2>
+        <p class="section-text">
+          Durante a operação normal do lab, a regra nativa <strong>92205</strong> (nível 9 —
+          "Powershell process created an executable file in Windows root folder") disparou de forma
+          persistente para uma execução completamente legítima. Análise do alerta revelou a causa raiz.
+        </p>
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-triangle-exclamation card-icon"></i> Alerta disparado</h3>
+            <p>Regra <strong>92205</strong>, nível 9. Processo: <code style="color:var(--primary);font-family:monospace;">SecEdit.exe /export /cfg C:\Windows\TEMP\secexport.cfg</code>. Parecia suspeito pelo nível alto — mas a análise mostrou que era legítimo.</p>
+            <div class="project-stack"><span>Rule 92205</span><span>Nível 9</span><span>SecEdit.exe</span></div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-magnifying-glass card-icon"></i> Análise do evento</h3>
+            <p>Campos inspecionados: <code style="color:var(--primary);font-family:monospace;">win.eventdata.currentDirectory</code> = <code style="color:var(--primary);font-family:monospace;">C:\Program Files (x86)\ossec-agent\</code>, <code style="color:var(--primary);font-family:monospace;">integrityLevel</code> = System, binário assinado por Microsoft. Conclusão: módulo SCA do próprio Wazuh fazendo auditoria de política de segurança local.</p>
+            <div class="project-stack"><span>parentImage: ossec-agent</span><span>Microsoft Corp</span><span>SYSTEM</span></div>
+          </article>
+          <article class="card highlight">
+            <h3 class="card-title"><i class="fa-solid fa-sliders card-icon"></i> Regra de exceção criada</h3>
+            <p>Regra customizada <strong>100205</strong> no <code style="color:var(--primary);font-family:monospace;">local_rules.xml</code> do Manager: quando a 92205 dispara com <code style="color:var(--primary);font-family:monospace;">SecEdit.exe</code> + <code style="color:var(--primary);font-family:monospace;">ossec-agent</code> como pai, rebaixa o nível para 3 (informativo).</p>
+            <div class="project-stack"><span>Rule ID 100205</span><span>Nível 3</span><span>if_sid: 92205</span></div>
+          </article>
+        </div>
+
+        <div style="margin-top:32px;padding:24px;background:rgba(2,6,23,0.8);border:1px solid var(--border-light);border-radius:16px;">
+          <p class="section-label">local_rules.xml — /var/ossec/etc/rules/</p>
+          <pre style="margin:8px 0 0;color:var(--text-soft);font-family:monospace;font-size:13px;line-height:1.8;white-space:pre-wrap;">&lt;group name="local,sca,"&gt;
+  &lt;rule id="100205" level="3"&gt;
+    &lt;if_sid&gt;92205&lt;/if_sid&gt;
+    &lt;field name="win.eventdata.image"&gt;SecEdit.exe&lt;/field&gt;
+    &lt;field name="win.eventdata.parentImage"&gt;ossec-agent&lt;/field&gt;
+    &lt;description&gt;Wazuh SCA module exporting security policy via SecEdit - expected behavior&lt;/description&gt;
+    &lt;options&gt;no_full_log&lt;/options&gt;
+  &lt;/rule&gt;
+&lt;/group&gt;</pre>
+          <p style="color:var(--text-soft);font-size:13px;margin-top:12px;">⚠️ IDs de regra customizada usam a faixa <strong>100000–119999</strong> — nunca reutilizar IDs do ruleset padrão (evita conflito em updates do Wazuh).</p>
+        </div>
+      </section>
+
+      <!-- THREAT HUNTING -->
+      <section id="threatHunting" class="section">
+        <p class="section-label">Threat Hunting</p>
+        <h2>Alertas reais de ataques executados no lab.</h2>
+        <p class="section-text">
+          O Threat Hunting no Wazuh não é sobre alertas sintéticos — é sobre ataques reais,
+          executados do Kali contra alvos reais do lab, com detecção validada no dashboard.
+          Dois exercícios de Red Team vs Blue Team foram conduzidos e correlacionados no SIEM.
+        </p>
+
+        <div style="margin-top:48px;">
+          <p class="section-label">Exercício 1 — Metasploitable2</p>
+          <h2>CVE-2007-2447 — Shell reversa detectada</h2>
+          <div class="cards-grid">
+            <article class="card">
+              <h3 class="card-title"><i class="fa-solid fa-magnifying-glass card-icon"></i> Reconhecimento</h3>
+              <p>nmap <code style="color:var(--primary);font-family:monospace;">-sV -p-</code> contra o alvo. Suricata detectou e encaminhou ao Wazuh: <em>POSSBL PORT SCAN (NMAP -sA)</em>, rule 86601.</p>
+              <div class="project-stack"><span>nmap -sV -p-</span><span>Rule 86601</span><span>Suricata → Wazuh</span></div>
+            </article>
+            <article class="card highlight">
+              <h3 class="card-title"><i class="fa-solid fa-skull card-icon"></i> Shell reversa detectada</h3>
+              <p>Exploração via <code style="color:var(--primary);font-family:monospace;">exploit/multi/samba/usermap_script</code>. Shell reversa na porta 4444 detectada pelo Suricata: <em>POSSBL SCAN SHELL M-SPLOIT TCP</em>, severity 1, "Network Trojan detected".</p>
+              <div class="project-stack"><span>SID 3400020</span><span>Severity 1</span><span>Porta 4444</span></div>
+            </article>
+            <article class="card">
+              <h3 class="card-title"><i class="fa-solid fa-chart-line card-icon"></i> No Wazuh</h3>
+              <p>Busca <code style="color:var(--primary);font-family:monospace;">data.alert.signature_id: 3400020</code> em Threat Hunting retornou 2 hits — reconhecimento e exploração — com timestamps e IPs documentados.</p>
+              <div class="project-stack"><span>2 hits</span><span>Threat Hunting</span><span>Last 4 hours</span></div>
+            </article>
+          </div>
+        </div>
+
+        <div style="margin-top:64px;">
+          <p class="section-label">Exercício 2 — OWASP Juice Shop</p>
+          <h2>SQL Injection detectado via regra customizada</h2>
+          <div class="cards-grid">
+            <article class="card highlight">
+              <h3 class="card-title"><i class="fa-solid fa-database card-icon"></i> SQLi em POST JSON</h3>
+              <p>Payload <code style="color:var(--primary);font-family:monospace;">' OR 1=1--</code> no POST /rest/user/login. Regra customizada SID 9000001 (criada no Suricata) detectou e encaminhou ao Wazuh: <em>LOCAL SQLi Attempt - OR 1=1 in HTTP Body</em>.</p>
+              <div class="project-stack"><span>SID 9000001</span><span>POST /rest/user/login</span><span>Rule 86601</span></div>
+            </article>
+            <article class="card">
+              <h3 class="card-title"><i class="fa-solid fa-code card-icon"></i> DOM XSS — invisível</h3>
+              <p>DOM XSS executado com sucesso no navegador, mas <strong>não apareceu no Wazuh</strong> — parâmetro processado inteiramente no frontend, nunca trafegou como requisição HTTP. Gap estrutural confirmado.</p>
+              <div class="project-stack"><span>DOM XSS</span><span>Client-side</span><span>Sem alerta</span></div>
+            </article>
+            <article class="card">
+              <h3 class="card-title"><i class="fa-solid fa-chart-line card-icon"></i> No Wazuh</h3>
+              <p>Busca <code style="color:var(--primary);font-family:monospace;">data.dest_port: 3000 AND data.alert.category: "Web Application Attack"</code> retornou 1 hit — SQLi detectado, XSS ausente conforme esperado.</p>
+              <div class="project-stack"><span>1 hit</span><span>Web Application Attack</span><span>Gap documentado</span></div>
+            </article>
+          </div>
+        </div>
+
+        <div style="margin-top:32px;padding:24px;background:rgba(2,6,23,0.8);border:1px solid var(--border-light);border-radius:16px;">
+          <p class="section-label">Buscas DQL usadas no Threat Hunting</p>
+          <pre style="margin:8px 0 0;color:var(--text-soft);font-family:monospace;font-size:13px;line-height:1.8;white-space:pre-wrap;"># Todos os eventos do Suricata
+rule.groups: suricata
+
+# Shell reversa do Metasploit
+data.alert.signature_id: 3400020
+
+# Eventos do Windows Server
+agent.name: win-srv01
+
+# SQLi no Juice Shop
+data.dest_port: 3000 AND data.alert.category: "Web Application Attack"
+
+# Criação de processo (Sysmon)
+agent.name: win-srv01 AND location: Microsoft-Windows-Sysmon/Operational</pre>
+        </div>
+      </section>
+
+      <!-- COMPETÊNCIAS -->
       <section id="competencias" class="section">
-        <p class="section-label">Competências demonstradas</p>
-        <h2>Capacidades técnicas evidenciadas neste projeto.</h2>
-        <p class="section-text">Além da implementação do laboratório, este projeto demonstra competências práticas desenvolvidas durante todo o processo de planejamento, configuração, validação e documentação do ambiente.</p>
-        <div class="skills-grid">
-          <article class="skill-card">
-            <h3><i class="fa-brands fa-linux"></i> Linux Administration</h3>
-            <p>Administração do Ubuntu Server e Kali Linux via terminal: gerenciamento de serviços com systemctl, controle de permissões, análise de logs do sistema e troubleshooting de processos em execução.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-desktop"></i> Virtualização</h3>
-            <p>Criação e gerenciamento de múltiplas VMs no VMware Workstation, configuração de redes virtuais, isolamento de ambientes e integração entre máquinas para construção do laboratório SIEM.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-shield-halved"></i> SIEM</h3>
-            <p>Implantação completa do Wazuh: instalação do Manager, Dashboard, Indexer e Filebeat no Ubuntu Server, configuração de coleta de eventos, análise SCA e correlação de alertas de segurança.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-chart-bar"></i> Blue Team</h3>
-            <p>Monitoramento contínuo de endpoints, análise de eventos de segurança no dashboard Wazuh, interpretação de alertas, validação de integridade de arquivos e visão defensiva do ambiente.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-network-wired"></i> Redes</h3>
-            <p>Configuração de comunicação TCP entre agente e servidor na porta 1514, validação de conectividade com ping e nmap, diagnóstico de falhas de conexão e ajuste de endereços IP no ambiente virtual.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-gears"></i> Troubleshooting</h3>
-            <p>Diagnóstico de falhas na comunicação do agente, resolução de conflitos de sessão no XRDP, validação de serviços via systemctl status e análise de logs do ossec.log para identificar erros.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-scroll"></i> Log Analysis</h3>
-            <p>Coleta e interpretação de eventos no formato JSON via eve.json do Suricata, análise de alertas gerados pelo Wazuh, leitura de logs de autenticação e validação de regras customizadas com wazuh-logtest.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-book-open"></i> Documentação Técnica</h3>
-            <p>Registro completo da arquitetura do laboratório, passo a passo de implementação, evidências em screenshots, desafios encontrados, soluções aplicadas e aprendizados documentados no portfólio.</p>
-          </article>
+        <p class="section-label">Competências desenvolvidas</p>
+        <h2>O que este laboratório construiu na prática.</h2>
+        <div class="carousel-wrapper">
+          <button class="carousel-btn carousel-prev" onclick="moveWazuhCarousel(-1)" aria-label="Anterior">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <div class="carousel-track-container">
+            <div class="carousel-track" id="wazuhCarousel">
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-shield-halved"></i> SIEM Administration</h3>
+                <p>Instalação, configuração e operação do Wazuh 4.14.5 — Manager, Indexer, Dashboard e Filebeat. Gerenciamento de agentes, verificação de saúde do cluster e manutenção do pipeline de eventos.</p>
+              </article>
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-sliders"></i> Detection Engineering</h3>
+                <p>Análise de falso positivo com identificação de processo pai, hash, integridade e diretório de execução. Criação de regra de exceção no <code style="color:var(--primary);font-family:monospace;">local_rules.xml</code> com nível calibrado — sem suprimir o alerta, só ajustando a severidade.</p>
+              </article>
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-magnifying-glass"></i> Threat Hunting</h3>
+                <p>Busca ativa em DQL por ataques reais — port scan, shell reversa do Metasploit e SQL Injection. Correlação de eventos de rede (Suricata) com eventos de host (Sysmon) no mesmo dashboard.</p>
+              </article>
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-brands fa-windows"></i> Windows Telemetry</h3>
+                <p>Integração de Sysmon (EIDs 1/3/11/13), Event ID 4688 (linha de comando completa) e Event ID 4104 (PowerShell Script Block) via eventchannel. Cobertura de host Windows no nível que o mercado real exige.</p>
+              </article>
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-network-wired"></i> NIDS Integration</h3>
+                <p>Pipeline Suricata → eve.json → Wazuh Logcollector → Manager. Decoders nativos processando alertas de rede, correlacionados com eventos de host — visibilidade de ponta a ponta.</p>
+              </article>
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-wrench"></i> Troubleshooting</h3>
+                <p>Diagnóstico de IP dinâmico no agente Windows (DHCP não desabilitado), log duplicado no ossec.conf e sensor Suricata na interface errada. Todos corrigidos com causa raiz identificada e revalidação ativa.</p>
+              </article>
+            </div>
+          </div>
+          <button class="carousel-btn carousel-next" onclick="moveWazuhCarousel(1)" aria-label="Próximo">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
         </div>
+        <div class="carousel-dots" id="wazuhDots"></div>
       </section>
 
+      <!-- RESULTADOS -->
       <section id="resultados" class="section">
-        <p class="section-label">Resultados do projeto</p>
+        <p class="section-label">Resultados</p>
         <h2>O que foi entregue neste laboratório.</h2>
-        <p class="section-text">Este case resultou em um ambiente funcional de monitoramento, com servidor SIEM, endpoint integrado, coleta de eventos, validações técnicas e documentação publicada.</p>
         <div class="stats-grid">
-          <div class="stat-card"><strong>01</strong><span>Servidor Ubuntu</span></div>
-          <div class="stat-card"><strong>01</strong><span>Endpoint Kali integrado</span></div>
-          <div class="stat-card"><strong>01</strong><span>Plataforma SIEM/XDR</span></div>
-          <div class="stat-card"><strong>05</strong><span>Evidências documentadas</span></div>
+          <div class="stat-card"><strong>2</strong><span>Agentes ativos (Linux + Windows)</span></div>
+          <div class="stat-card"><strong>4</strong><span>Integrações (Suricata, Sysmon, pfSense, PowerShell)</span></div>
+          <div class="stat-card"><strong>2</strong><span>Ataques reais detectados no SIEM</span></div>
+          <div class="stat-card"><strong>1</strong><span>Regra customizada de tuning</span></div>
         </div>
       </section>
 
+      <!-- EVIDÊNCIAS -->
       <section id="evidencias" class="section">
         <p class="section-label">Evidências</p>
-        <h2>Resultados obtidos durante a implementação.</h2>
-        <p class="section-text">Abaixo estão evidências reais do laboratório Wazuh SIEM/XDR, demonstrando a implementação do ambiente, a integração dos componentes e o funcionamento da plataforma de monitoramento.</p>
-        <div class="profile-tags">
-          <span>Dashboard ativo</span>
-          <span>Serviços em execução</span>
-          <span>Agente integrado</span>
-          <span>Eventos coletados</span>
-          <span>Análise SCA validada</span>
+        <h2>Registros do laboratório.</h2>
+        <div class="profile-tags" style="margin-bottom:32px;">
+          <span><i class="fa-solid fa-circle-check"></i> 2 agentes Active no dashboard</span>
+          <span><i class="fa-solid fa-bell"></i> Alertas de Red Team no Threat Hunting</span>
+          <span><i class="fa-solid fa-sliders"></i> Tuning de falso positivo documentado</span>
+          <span><i class="fa-solid fa-code"></i> local_rules.xml no Manager</span>
         </div>
         <div class="evidence-grid">
           <figure class="evidence-image">
             <a href="../assets/images/wazuh/01-wazuh-dashboard-home.png" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/wazuh/01-wazuh-dashboard-home.png" alt="Dashboard principal do Wazuh" loading="lazy" width="800" height="450" />
             </a>
-            <figcaption>Dashboard principal do laboratório Wazuh SIEM/XDR.</figcaption>
+            <figcaption>Dashboard principal — 2 agentes ativos, Kali Linux e Windows Server.</figcaption>
           </figure>
-
           <figure class="evidence-image">
             <a href="../assets/images/wazuh/02-wazuh-services-active.png" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/wazuh/02-wazuh-services-active.png" alt="Serviços do Wazuh em execução" loading="lazy" width="800" height="450" />
             </a>
             <figcaption>Serviços do Wazuh executando corretamente no Ubuntu Server.</figcaption>
           </figure>
-
           <figure class="evidence-image">
             <a href="../assets/images/wazuh/03-wazuh-agent-active.png" target="_blank" rel="noopener noreferrer">
-              <img src="../assets/images/wazuh/03-wazuh-agent-active.png" alt="Agente Kali Linux ativo no Wazuh" loading="lazy" width="800" height="450" />
+              <img src="../assets/images/wazuh/03-wazuh-agent-active.png" alt="Agentes ativos no Wazuh" loading="lazy" width="800" height="450" />
             </a>
-            <figcaption>Agente Kali Linux registrado e comunicando com o servidor.</figcaption>
+            <figcaption>kali-linux (ID 001) e win-srv01 (ID 002) — ambos Active.</figcaption>
           </figure>
-
-          <figure class="evidence-image">
+          <figure class="evidence-image evidence-image-wide">
             <a href="../assets/images/wazuh/04-wazuh-security-events.png" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/wazuh/04-wazuh-security-events.png" alt="Eventos de segurança no Wazuh" loading="lazy" width="800" height="450" />
             </a>
-            <figcaption>Eventos de segurança coletados e apresentados pelo Dashboard.</figcaption>
+            <figcaption>Threat Hunting — alertas do Suricata e Sysmon correlacionados no dashboard.</figcaption>
           </figure>
-
-          <figure class="evidence-image evidence-image-wide">
-            <a href="../assets/images/wazuh/05-wazuh-sca.png" target="_blank" rel="noopener noreferrer">
-              <img src="../assets/images/wazuh/05-wazuh-sca.png" alt="Análise SCA no Wazuh" loading="lazy" width="800" height="450" />
-            </a>
-            <figcaption>Resultado da análise Security Configuration Assessment.</figcaption>
-          </figure>
+        </div>
+        <div style="margin-top:32px;text-align:center;">
+          <a href="https://github.com/gabrielzaccaferreira/wazuh-lab" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <i class="fa-brands fa-github"></i> Ver repositório completo no GitHub
+          </a>
         </div>
       </section>
 
-      <section id="desafios" class="section">
-        <p class="section-label">Desafios</p>
-        <h2>Problemas encontrados e soluções aplicadas.</h2>
-        <div class="timeline">
-          <div class="timeline-item">
-            <span><i class="fa-solid fa-chart-bar"></i> Dashboard</span>
-            <p>Diagnóstico e validação dos serviços do Wazuh até a disponibilização correta da interface web.</p>
-          </div>
-          <div class="timeline-item">
-            <span><i class="fa-solid fa-plug"></i> Comunicação do agente</span>
-            <p>Ajustes na configuração e validação da conexão entre servidor e endpoint monitorado.</p>
-          </div>
-          <div class="timeline-item">
-            <span><i class="fa-solid fa-terminal"></i> Acesso remoto</span>
-            <p>Configuração do XRDP e ambiente gráfico para administração remota do Kali Linux.</p>
-          </div>
-          <div class="timeline-item">
-            <span><i class="fa-solid fa-gears"></i> Troubleshooting</span>
-            <p>Verificação de serviços, conectividade, status dos agentes e validação dos componentes do ambiente.</p>
-          </div>
-        </div>
-      </section>
-
+      <!-- CONCLUSÃO -->
       <section id="conclusao" class="section cta-premium">
         <p class="section-label">Conclusão</p>
-        <h2>Resultado do laboratório.</h2>
-        <p class="section-text">Este laboratório consolidou conhecimentos práticos em SIEM, Linux, virtualização, agentes de monitoramento, análise de eventos, troubleshooting e documentação técnica.</p>
-        <p class="section-text">O projeto demonstra minha capacidade de implementar, documentar e validar um ambiente real de monitoramento utilizando tecnologias empregadas em operações de Segurança da Informação.</p>
+        <h2>SIEM operacional. Ataques detectados. Pipeline validado.</h2>
+        <p class="section-text">
+          O Wazuh foi o primeiro lab do ambiente e continua sendo o centro dele — cada nova
+          ferramenta adicionada (Suricata, pfSense, Windows Server) se integra ao Wazuh como ponto
+          de convergência. O resultado é um pipeline de detecção que cobre host Linux, host Windows,
+          tráfego de rede e perímetro de firewall em um único painel, com alertas validados contra
+          ataques reais executados no próprio lab.
+        </p>
         <div class="hero-actions">
-          <a href="https://github.com/gabrielzaccaferreira/wazuh-lab" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Ver repositório no GitHub →</a>
-          <a href="projetos.html" class="btn btn-secondary">Voltar para Projetos</a>
+          <a href="suricata.html" class="btn btn-primary">
+            <i class="fa-solid fa-network-wired"></i> Ver laboratório Suricata →
+          </a>
+          <a href="windows-server.html" class="btn btn-secondary">
+            <i class="fa-brands fa-windows"></i> Ver laboratório Windows Server
+          </a>
         </div>
       </section>
+
     </main>
+
+    <!-- MODAIS -->
+    <div id="wazuh-modal-install" class="lab-modal" onclick="closeModalOutside(event,'wazuh-modal-install')">
+      <div class="lab-modal-content">
+        <button class="modal-close" onclick="closeModal('wazuh-modal-install')">✕</button>
+        <h3>Instalação do Wazuh Manager</h3>
+        <p>Instalação via script oficial (all-in-one) no Ubuntu Server:</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh
+sudo bash wazuh-install.sh -a</pre>
+        <p style="margin-top:16px;">O script instala Manager, Indexer, Dashboard e Filebeat. Ao final, exibe a senha gerada do usuário <code>admin</code>. Acesso ao dashboard via <code>https://&lt;IP&gt;</code>.</p>
+        <p style="margin-top:16px;">Validação dos serviços:</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">sudo systemctl status wazuh-manager --no-pager
+sudo systemctl status wazuh-indexer --no-pager
+sudo systemctl status wazuh-dashboard --no-pager</pre>
+      </div>
+    </div>
+
+    <div id="wazuh-modal-kali" class="lab-modal" onclick="closeModalOutside(event,'wazuh-modal-kali')">
+      <div class="lab-modal-content">
+        <button class="modal-close" onclick="closeModal('wazuh-modal-kali')">✕</button>
+        <h3>Agente Kali Linux</h3>
+        <p>Deploy gerado pelo dashboard (Agents Management → Deploy new agent → Linux/DEB amd64):</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.14.5-1_amd64.deb
+sudo WAZUH_MANAGER='10.10.10.10' WAZUH_AGENT_NAME='kali-linux' \
+  dpkg -i ./wazuh-agent_4.14.5-1_amd64.deb
+sudo systemctl start wazuh-agent
+sudo systemctl enable wazuh-agent</pre>
+        <p style="margin-top:16px;">Confirmação no dashboard: agente <strong>kali-linux</strong> com status <strong>Active</strong>, ID 001.</p>
+      </div>
+    </div>
+
+    <div id="wazuh-modal-suricata" class="lab-modal" onclick="closeModalOutside(event,'wazuh-modal-suricata')">
+      <div class="lab-modal-content">
+        <button class="modal-close" onclick="closeModal('wazuh-modal-suricata')">✕</button>
+        <h3>Integração com Suricata</h3>
+        <p>Bloco adicionado ao <code>/var/ossec/etc/ossec.conf</code> do agente Kali:</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">&lt;localfile&gt;
+  &lt;location&gt;/var/log/suricata/eve.json&lt;/location&gt;
+  &lt;log_format&gt;json&lt;/log_format&gt;
+&lt;/localfile&gt;</pre>
+        <p style="margin-top:16px;">Confirmação nos logs do agente após restart:</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">sudo tail -50 /var/ossec/logs/ossec.log | grep -i suricata
+# wazuh-logcollector: INFO: (1950): Analyzing file: '/var/log/suricata/eve.json'</pre>
+        <p style="margin-top:16px;">⚠️ Cuidado com <strong>entrada duplicada</strong> no ossec.conf — o Wazuh avisa com <em>"Log file is duplicated"</em> e ignora a segunda entrada, mas o warning aparece nos logs.</p>
+      </div>
+    </div>
+
+    <div id="wazuh-modal-windows" class="lab-modal" onclick="closeModalOutside(event,'wazuh-modal-windows')">
+      <div class="lab-modal-content">
+        <button class="modal-close" onclick="closeModal('wazuh-modal-windows')">✕</button>
+        <h3>Agente Windows Server + Sysmon</h3>
+        <p>Deploy via MSI gerado pelo dashboard (Windows):</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.5-1.msi `
+  -OutFile $env:tmp\wazuh-agent.msi
+msiexec.exe /i $env:tmp\wazuh-agent.msi /q `
+  WAZUH_MANAGER='10.10.10.10' `
+  WAZUH_AGENT_NAME='win-srv01'
+NET START WazuhSvc</pre>
+        <p style="margin-top:16px;">Canais adicionados ao ossec.conf para telemetria completa:</p>
+        <ul style="margin-top:8px;color:var(--text-soft);font-size:14px;line-height:2;">
+          <li><code>Microsoft-Windows-Sysmon/Operational</code> — EIDs 1/3/11/13</li>
+          <li><code>Microsoft-Windows-PowerShell/Operational</code> — EID 4104 (Script Block)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="wazuh-modal-tuning" class="lab-modal" onclick="closeModalOutside(event,'wazuh-modal-tuning')">
+      <div class="lab-modal-content">
+        <button class="modal-close" onclick="closeModal('wazuh-modal-tuning')">✕</button>
+        <h3>Tuning — Falso positivo Rule 92205</h3>
+        <p>O evento que disparou a regra 92205 tinha estes campos no <code>data.win.eventdata</code>:</p>
+        <ul style="margin-top:12px;color:var(--text-soft);font-size:14px;line-height:2;">
+          <li><strong>commandLine:</strong> SecEdit.exe /export /cfg C:\Windows\TEMP\secexport.cfg</li>
+          <li><strong>currentDirectory:</strong> C:\Program Files (x86)\ossec-agent\</li>
+          <li><strong>integrityLevel:</strong> System</li>
+          <li><strong>company:</strong> Microsoft Corporation</li>
+        </ul>
+        <p style="margin-top:16px;">Regra criada no Manager em <code>/var/ossec/etc/rules/local_rules.xml</code>:</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">&lt;rule id="100205" level="3"&gt;
+  &lt;if_sid&gt;92205&lt;/if_sid&gt;
+  &lt;field name="win.eventdata.image"&gt;SecEdit.exe&lt;/field&gt;
+  &lt;field name="win.eventdata.parentImage"&gt;ossec-agent&lt;/field&gt;
+  &lt;description&gt;Wazuh SCA - SecEdit export - expected behavior&lt;/description&gt;
+&lt;/rule&gt;</pre>
+        <p style="margin-top:16px;">Aplicado com <code>sudo systemctl restart wazuh-manager</code>. Validado com <code>sudo /var/ossec/bin/wazuh-logtest</code>.</p>
+      </div>
+    </div>
 
     <footer class="footer">
       <p>Portfólio técnico em Redes, Infraestrutura, Cloud Computing e Cibersegurança.</p>
@@ -383,5 +656,43 @@
       </div>
       <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
     </footer>
+
+    <script>
+      (() => {
+        const track = document.getElementById('wazuhCarousel');
+        const dotsContainer = document.getElementById('wazuhDots');
+        if (!track || !dotsContainer) return;
+        const cards = track.querySelectorAll('.carousel-card');
+        const total = cards.length;
+        let current = 0;
+        function getVisible() {
+          return window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
+        }
+        cards.forEach((_, i) => {
+          const dot = document.createElement('button');
+          dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+          dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+          dot.addEventListener('click', () => goTo(i));
+          dotsContainer.appendChild(dot);
+        });
+        function goTo(index) {
+          const max = Math.max(0, total - getVisible());
+          current = Math.max(0, Math.min(index, max));
+          track.style.transform = `translateX(-${current * (cards[0].offsetWidth + 24)}px)`;
+          dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+        }
+        window.moveWazuhCarousel = (dir) => goTo(current + dir);
+        window.addEventListener('resize', () => goTo(current));
+        let startX = 0;
+        track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+        track.addEventListener('touchend', e => { if (Math.abs(startX - e.changedTouches[0].clientX) > 50) window.moveWazuhCarousel(startX > e.changedTouches[0].clientX ? 1 : -1); });
+      })();
+    </script>
+    <script>
+      function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden';}
+      function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
+      function closeModalOutside(e,id){if(e.target===document.getElementById(id))closeModal(id);}
+      document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.lab-modal.open').forEach(m=>{m.classList.remove('open');document.body.style.overflow='';});});
+    </script>
   </body>
 </html>
