@@ -1,18 +1,18 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Suricata IDS/IPS | Gabriel Zacca Ferreira</title>
-    <meta name="description" content="Laboratório Suricata IDS/IPS: instalação, configuração, integração com Wazuh, regras de detecção e testes reais com nmap em ambiente virtualizado." />
+    <meta name="description" content="Laboratório Suricata IDS/IPS: instalação, configuração, interface corrigida, regras customizadas, Red Team vs Blue Team com Metasploitable2 e OWASP Juice Shop, integração com Wazuh SIEM." />
     <meta name="author" content="Gabriel Zacca Ferreira" />
     <meta name="robots" content="index,follow" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Suricata IDS/IPS | Gabriel Zacca Ferreira" />
-    <meta property="og:description" content="IDS/IPS com detecção real de port scan, análise de tráfego e integração com Wazuh SIEM." />
-    <meta property="og:url" content="https://gabrielzaccaferreira.github.io/pages/suricata.html" />
+    <meta property="og:description" content="IDS/IPS com detecção real de ataques, regras customizadas e gap analysis de visibilidade contra APIs modernas." />
+    <meta property="og:url" content="https://gabrielzacca.com.br/pages/suricata.html" />
     <meta property="og:image" content="https://gabrielzaccaferreira.github.io/assets/images/og-image.png" />
-    <link rel="canonical" href="https://gabrielzaccaferreira.github.io/pages/suricata.html" />
+    <link rel="canonical" href="https://gabrielzacca.com.br/pages/suricata.html" />
     <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
     <link rel="manifest" href="../manifest.webmanifest" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
@@ -50,25 +50,25 @@
       </div>
     </header>
 
-
-      <main>
+    <main>
 
       <!-- HERO -->
       <section id="hero" class="hero">
         <div class="hero-content">
-          <p class="eyebrow">IDS/IPS • Detecção de Intrusão • Análise de Tráfego • Blue Team</p>
+          <p class="eyebrow">IDS/IPS • Detecção de Intrusão • Detection Engineering • Blue Team</p>
           <h1>
             Suricata IDS/IPS
-            <span>Detecção real de ameaças em rede</span>
+            <span>Da detecção passiva ao Red Team vs Blue Team real</span>
           </h1>
           <p class="hero-description">
-            Implementação do Suricata 8.0.5 no Kali Linux com integração ao Wazuh SIEM/XDR,
-            regras de detecção ativas, testes reais com nmap e análise de eventos de segurança
-            — construindo uma camada de defesa de rede no laboratório.
+            Suricata 8.0.5 no Kali Linux com 50.000+ regras ativas, integrado ao Wazuh SIEM.
+            Diagnóstico de sensor mal posicionado (interface errada), criação de regras customizadas
+            para cobrir gap real do ET Open contra APIs JSON, e detecção validada de dois ataques
+            reais — Metasploitable2 e OWASP Juice Shop.
           </p>
           <div class="hero-actions">
             <a href="#sobre" class="btn btn-primary">Ver o laboratório →</a>
-            <a href="#alertas" class="btn btn-secondary">Ver alertas reais</a>
+            <a href="#redteam" class="btn btn-secondary">Ver ataques detectados</a>
           </div>
         </div>
 
@@ -76,15 +76,15 @@
           <p class="section-label">Topologia</p>
           <h2>Fluxo do laboratório</h2>
           <div class="architecture-flow">
-            <span>Kali Linux — Suricata 8.0.5</span>
+            <span>Kali Linux — Suricata 8.0.5 (eth0 — 192.168.220.130)</span>
             <strong>↓</strong>
-            <span>Monitoramento de tráfego de rede</span>
+            <span>AF-PACKET — captura em tempo real</span>
             <strong>↓</strong>
             <span>/var/log/suricata/eve.json</span>
             <strong>↓</strong>
-            <span>Wazuh Logcollector</span>
+            <span>Wazuh Agent → Logcollector</span>
             <strong>↓</strong>
-            <span>Wazuh SIEM Dashboard</span>
+            <span>Wazuh Manager (192.168.220.103) → Dashboard</span>
           </div>
         </div>
       </section>
@@ -98,11 +98,13 @@
           <a href="#especificacoes"><span>Especificações</span></a>
           <a href="#implementacao"><span>Implementação</span></a>
           <a href="#regras"><span>Regras</span></a>
+          <a href="#troubleshooting"><span>Troubleshooting</span></a>
           <a href="#integracao"><span>Integração Wazuh</span></a>
-          <a href="#alertas"><span>Alertas reais</span></a>
+          <a href="#redteam"><span>Red Team vs Blue Team</span></a>
+          <a href="#customizacao"><span>Regras Customizadas</span></a>
           <a href="#competencias"><span>Competências</span></a>
+          <br style="width:100%;display:block;margin-top:8px;">
           <a href="#resultados"><span>Resultados</span></a>
-          <a href="#evidencias"><span>Evidências</span></a>
           <a href="#conclusao"><span>Conclusão</span></a>
         </div>
       </section>
@@ -113,15 +115,16 @@
         <h2>O que é o Suricata e por que ele está no laboratório.</h2>
         <p class="section-text">
           O Suricata é um motor open source de detecção e prevenção de intrusões em rede (IDS/IPS).
-          Ele analisa o tráfego em tempo real, aplica regras de detecção e gera alertas quando
-          identifica comportamentos suspeitos — como port scans, tentativas de exploração e
-          comunicação com IPs maliciosos.
+          Ele analisa tráfego em tempo real, aplica assinaturas de detecção e gera alertas estruturados
+          em JSON — cobrindo uma camada que ferramentas de HIDS como o Wazuh Agent sozinhas não cobrem:
+          o tráfego de rede entre os hosts.
         </p>
         <p class="section-text">
-          Neste laboratório, o Suricata foi instalado no Kali Linux e integrado ao Wazuh SIEM/XDR,
-          criando um pipeline completo: o tráfego é analisado pelo Suricata, os eventos são
-          gravados em JSON e coletados pelo Wazuh para correlação e visualização no dashboard.
-          Testes reais com nmap geraram alertas de port scan detectados e documentados.
+          Este laboratório foi além da instalação e configuração básica. Após integrar o Suricata ao
+          Wazuh, dois problemas reais foram diagnosticados e corrigidos — interface de captura errada
+          e gap de cobertura das regras ET Open contra APIs modernas. O resultado é um sensor de rede
+          calibrado, com regras customizadas criadas, e detecção validada contra ataques reais executados
+          do zero no ambiente do lab.
         </p>
       </section>
 
@@ -132,26 +135,26 @@
         <div class="cards-grid">
           <article class="card">
             <h3 class="card-title"><i class="fa-brands fa-linux card-icon"></i> Sistema base</h3>
-            <p>Suricata instalado no Kali Linux rodando como VM no VMware Workstation, em modo Bridge com IP real na rede local do laboratório.</p>
+            <p>Suricata instalado no Kali Linux rodando como VM no VMware Workstation. Interface de captura <code style="color:var(--primary);font-family:monospace;">eth0</code> na LAN do pfSense (<code style="color:var(--primary);font-family:monospace;">192.168.220.130</code>), atrás do gateway.</p>
             <div class="project-stack">
-              <span>Kali Linux 2026.2</span>
-              <span>VMware Bridge</span>
-              <span>IP LAN</span>
+              <span>Kali Linux 2026.1</span>
+              <span>VMware VMnet1</span>
+              <span>192.168.220.130</span>
             </div>
           </article>
           <article class="card">
             <h3 class="card-title"><i class="fa-solid fa-network-wired card-icon"></i> Suricata 8.0.5</h3>
-            <p>Versão mais recente do Suricata em modo AF-PACKET, monitorando a interface de rede em tempo real com 70MB+ de eventos registrados no eve.json.</p>
+            <p>Versão mais recente em modo AF-PACKET. Após correção da interface (eth1 → eth0), o sensor passou a capturar todo o tráfego da LAN do lab. 272MB+ de eventos no eve.json, 50.000+ regras carregadas.</p>
             <div class="project-stack">
               <span>Suricata 8.0.5</span>
               <span>AF-PACKET</span>
-              <span>eve.json</span>
-              <span>fast.log</span>
+              <span>eth0</span>
+              <span>50.000+ regras</span>
             </div>
           </article>
           <article class="card">
             <h3 class="card-title"><i class="fa-solid fa-shield-halved card-icon"></i> Wazuh SIEM</h3>
-            <p>Ubuntu Server com Wazuh Manager coletando os eventos do Suricata via Logcollector, integrando detecção de rede ao pipeline centralizado de segurança.</p>
+            <p>Ubuntu Server com Wazuh Manager (<code style="color:var(--primary);font-family:monospace;">192.168.220.103</code>) coletando eventos do Suricata via Logcollector. Decoders nativos para eve.json processam campos como <code style="color:var(--primary);font-family:monospace;">alert.signature</code>, <code style="color:var(--primary);font-family:monospace;">src_ip</code> e <code style="color:var(--primary);font-family:monospace;">dest_port</code>.</p>
             <div class="project-stack">
               <span>Wazuh 4.14.5</span>
               <span>Logcollector</span>
@@ -160,12 +163,12 @@
           </article>
           <article class="card">
             <h3 class="card-title"><i class="fa-solid fa-scroll card-icon"></i> Fontes de regras</h3>
-            <p>Regras carregadas via suricata-update com fontes open source incluindo Emerging Threats, Abuse.ch, OISF Traffic ID e regras customizadas para detecção de nmap.</p>
+            <p>Regras carregadas via suricata-update de múltiplas fontes open source. Duas regras customizadas criadas localmente (SID 9000001 e 9000002) para cobrir gap real de cobertura contra APIs JSON modernas.</p>
             <div class="project-stack">
               <span>et/open</span>
               <span>abuse.ch</span>
               <span>aleksibovellan/nmap</span>
-              <span>oisf/trafficid</span>
+              <span>local.rules</span>
             </div>
           </article>
         </div>
@@ -177,8 +180,8 @@
         <h2>Da instalação à detecção ativa.</h2>
         <p class="section-text">
           Cada etapa foi executada em sequência, validada e documentada antes de avançar.
-          O fluxo seguiu a mesma metodologia aplicada no laboratório Wazuh: backup,
-          leitura, planejamento, alteração, teste e validação.
+          O fluxo seguiu a mesma metodologia aplicada nos outros laboratórios: leitura, planejamento,
+          alteração, teste e validação.
         </p>
         <div class="roadmap-list">
 
@@ -198,8 +201,8 @@
             <div class="roadmap-step-content">
               <span class="roadmap-status">Concluído</span>
               <h3>Atualização das regras com suricata-update</h3>
-              <p>Execução do <code style="color:var(--primary);font-family:monospace;">suricata-update</code> para carregar o índice de fontes de regras. Listagem de todas as fontes disponíveis incluindo Emerging Threats, Abuse.ch, OISF, Stamus Networks e outras.</p>
-              <div class="project-stack"><span>suricata-update</span><span>et/open</span><span>abuse.ch</span><span>oisf/trafficid</span></div>
+              <p>Execução do <code style="color:var(--primary);font-family:monospace;">suricata-update</code> para carregar o índice de fontes. Listagem de todas as fontes disponíveis incluindo Emerging Threats, Abuse.ch, OISF, Stamus Networks e outras. 50.000+ regras carregadas.</p>
+              <div class="project-stack"><span>suricata-update</span><span>et/open</span><span>abuse.ch</span><span>50k+ regras</span></div>
               <button class="modal-trigger" onclick="openModal('suri-modal-rules')">Ver detalhes →</button>
             </div>
           </article>
@@ -209,7 +212,7 @@
             <div class="roadmap-step-content">
               <span class="roadmap-status">Concluído</span>
               <h3>Habilitação da fonte aleksibovellan/nmap</h3>
-              <p>Ativação da fonte de regras especializada em detecção de scans Nmap — regras que identificam <code style="color:var(--primary);font-family:monospace;">-sS</code> (SYN scan), <code style="color:var(--primary);font-family:monospace;">-sX</code> (Xmas scan) e outras técnicas de reconhecimento.</p>
+              <p>Ativação da fonte especializada em detecção de scans Nmap — regras que identificam <code style="color:var(--primary);font-family:monospace;">-sS</code> (SYN scan), <code style="color:var(--primary);font-family:monospace;">-sX</code> (Xmas scan) e outras técnicas de reconhecimento.</p>
               <div class="project-stack"><span>aleksibovellan/nmap</span><span>SYN scan</span><span>Xmas scan</span></div>
               <button class="modal-trigger" onclick="openModal('suri-modal-nmap')">Ver detalhes →</button>
             </div>
@@ -219,20 +222,9 @@
             <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
             <div class="roadmap-step-content">
               <span class="roadmap-status">Concluído</span>
-              <h3>Configuração do eve.json</h3>
-              <p>Validação do arquivo de configuração <code style="color:var(--primary);font-family:monospace;">/etc/suricata/suricata.yaml</code> e confirmação do log de eventos em formato JSON em <code style="color:var(--primary);font-family:monospace;">/var/log/suricata/eve.json</code> com 70MB+ de dados capturados.</p>
-              <div class="project-stack"><span>suricata.yaml</span><span>eve.json — 70MB+</span><span>fast.log</span></div>
-              <button class="modal-trigger" onclick="openModal('suri-modal-eve')">Ver detalhes →</button>
-            </div>
-          </article>
-
-          <article class="roadmap-step done">
-            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
-            <div class="roadmap-step-content">
-              <span class="roadmap-status">Concluído</span>
               <h3>Integração com o Wazuh</h3>
-              <p>Configuração do <code style="color:var(--primary);font-family:monospace;">ossec.conf</code> no agente Kali para que o Wazuh Logcollector monitore o <code style="color:var(--primary);font-family:monospace;">eve.json</code>. Reinício do agente e confirmação nos logs.</p>
-              <div class="project-stack"><span>ossec.conf</span><span>localfile</span><span>wazuh-logcollector</span></div>
+              <p>Configuração do <code style="color:var(--primary);font-family:monospace;">ossec.conf</code> no agente Kali para monitorar o <code style="color:var(--primary);font-family:monospace;">eve.json</code> via Logcollector. Confirmação nos logs do agente e no dashboard Wazuh com 710+ eventos nas primeiras 24h.</p>
+              <div class="project-stack"><span>ossec.conf</span><span>localfile json</span><span>wazuh-logcollector</span></div>
               <button class="modal-trigger" onclick="openModal('suri-modal-wazuh')">Ver detalhes →</button>
             </div>
           </article>
@@ -241,183 +233,49 @@
             <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
             <div class="roadmap-step-content">
               <span class="roadmap-status">Concluído</span>
-              <h3>Testes de detecção com nmap</h3>
-              <p>Execução de <code style="color:var(--primary);font-family:monospace;">nmap -sS</code> e <code style="color:var(--primary);font-family:monospace;">nmap -A</code> contra o servidor Wazuh. Alertas gerados em tempo real no <code style="color:var(--primary);font-family:monospace;">fast.log</code> confirmando detecção ativa.</p>
-              <div class="project-stack"><span>nmap -sS</span><span>nmap -A</span><span>fast.log</span><span>Alertas reais</span></div>
-              <button class="modal-trigger" onclick="openModal('suri-modal-test')">Ver detalhes →</button>
+              <h3>Correção da interface de captura</h3>
+              <p>Diagnóstico de gap de visibilidade: sensor configurado na interface <code style="color:var(--primary);font-family:monospace;">eth1</code> (rede errada) em vez de <code style="color:var(--primary);font-family:monospace;">eth0</code> (LAN do lab). Ataques não apareciam no SIEM. Corrigido no <code style="color:var(--primary);font-family:monospace;">suricata.yaml</code> e revalidado com reteste.</p>
+              <div class="project-stack"><span>suricata.yaml</span><span>af-packet</span><span>eth1 → eth0</span></div>
+              <button class="modal-trigger" onclick="openModal('suri-modal-interface')">Ver detalhes →</button>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Criação de regras customizadas</h3>
+              <p>ET Open tem 7104 regras de web-application-attack, mas nenhuma para APIs REST/JSON modernas. Duas regras criadas em <code style="color:var(--primary);font-family:monospace;">local.rules</code> usando <code style="color:var(--primary);font-family:monospace;">http.request_body</code> e <code style="color:var(--primary);font-family:monospace;">pcre</code> para cobrir SQLi em POST e XSS em URI.</p>
+              <div class="project-stack"><span>local.rules</span><span>SID 9000001</span><span>SID 9000002</span><span>http.request_body</span></div>
+              <button class="modal-trigger" onclick="openModal('suri-modal-custom')">Ver detalhes →</button>
             </div>
           </article>
 
         </div>
       </section>
 
-      <!-- MODAIS SURICATA -->
-      <div class="lab-modal" id="suri-modal-install" onclick="closeModalOutside(event,'suri-modal-install')">
-        <div class="lab-modal-box">
-          <button class="lab-modal-close" onclick="closeModal('suri-modal-install')"><i class="fa-solid fa-xmark"></i></button>
-          <p class="section-label">Etapa 01</p>
-          <h2>Instalação do Suricata</h2>
-          <p class="module-text">O Suricata está disponível nos repositórios oficiais do Kali Linux. A instalação é direta, mas exige atenção à versão — o Kali entrega a versão mais recente disponível no momento.</p>
-          <div class="concept-block">
-            <h4><i class="fa-solid fa-terminal"></i> Comandos de instalação</h4>
-            <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
-              sudo apt update<br>
-              sudo apt install suricata -y<br>
-              suricata --version
-            </div>
-          </div>
-          <div class="concept-block">
-            <h4><i class="fa-solid fa-network-wired"></i> Modo AF-PACKET</h4>
-            <p>O AF-PACKET é o modo de captura padrão do Suricata no Linux — usa a interface de rede diretamente via kernel, sem depender de libpcap. É mais eficiente e suporta captura em alta velocidade. O Suricata identifica automaticamente a interface de rede ao iniciar.</p>
-          </div>
-          <div class="concept-block">
-            <h4><i class="fa-solid fa-circle-check"></i> Validação</h4>
-            <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
-              sudo systemctl status suricata<br>
-              <span style="color:#4ade80;">● suricata.service - LSB: Next Generation IDS/IPS<br>
-              &nbsp;&nbsp;&nbsp;Active: active (running)</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="lab-modal" id="suri-modal-rules" onclick="closeModalOutside(event,'suri-modal-rules')">
-        <div class="lab-modal-box">
-          <button class="lab-modal-close" onclick="closeModal('suri-modal-rules')"><i class="fa-solid fa-xmark"></i></button>
-          <p class="section-label">Etapa 02</p>
-          <h2>Atualização das regras com suricata-update</h2>
-          <p class="module-text">O Suricata sem regras é um motor sem combustível. O <code style="color:var(--primary);font-family:monospace;">suricata-update</code> é a ferramenta oficial para gerenciar fontes de regras — baixar, atualizar e habilitar conjuntos de assinaturas.</p>
-          <div class="concept-block">
-            <h4><i class="fa-solid fa-terminal"></i> Comandos utilizados</h4>
-            <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
-              sudo suricata-update update-sources<br>
-              sudo suricata-update list-sources<br>
-              sudo suricata-update
-            </div>
-          </div>
-          <div class="concept-block">
-            <h4><i class="fa-solid fa-list"></i> Fontes disponíveis listadas</h4>
-            <p>O <code style="color:var(--primary);font-family:monospace;">list-sources</code> retornou mais de 20 fontes de regras — Emerging Threats (et/open), Abuse.ch com quatro feeds especializados, OISF Traffic ID, Stamus Networks, PTsecurity e outras. Cada fonte tem uma licença e foco diferente.</p>
-          </div>
-          <div class="concept-block">
-            <h4><i class="fa-solid fa-circle-check"></i> Resultado</h4>
-            <p>Após o update, o Suricata carregou milhares de regras ativas. As regras ficam em <code style="color:var(--primary);font-family:monospace;">/var/lib/suricata/rules/suricata.rules</code> e são referenciadas no <code style="color:var(--primary);font-family:monospace;">suricata.yaml</code>.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="lab-modal" id="suri-modal-nmap" onclick="closeModalOutside(event,'suri-modal-nmap')">
-        <div class="lab-modal-box">
-          <button class="lab-modal-close" onclick="closeModal('suri-modal-nmap')"><i class="fa-solid fa-xmark"></i></button>
-          <p class="section-label">Etapa 03</p>
-          <h2>Habilitação da fonte aleksibovellan/nmap</h2>
-          <p class="module-text">A fonte <code style="color:var(--primary);font-family:monospace;">aleksibovellan/nmap</code> contém regras especificamente criadas para detectar scans realizados com o Nmap — a ferramenta de reconhecimento mais usada em testes de penetração.</p>
-          <div class="concept-block">
-            <h4><i class="fa-solid fa-terminal"></i> Habilitando a fonte</h4>
-            <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
-              sudo suricata-update enable-source aleksibovellan/nmap<br>
-              sudo suricata-update<br>
-              sudo systemctl restart suricata
-            </div>
-          </div>
-          <div class="concept-block">
-            <h4><i class="fa-solid fa-magnifying-glass"></i> O que essa fonte detecta</h4>
-            <p><strong>SID 3400002:</strong> POSSBL PORT SCAN (NMAP -sS) — SYN scan, o mais comum<br>
-            <strong>SID 3400005:</strong> POSSBL PORT SCAN (NMAP -sX) — Xmas scan, com flags FIN/URG/PSH<br>
-            Ambos classificados como "Attempted Information Leak", Prioridade 2.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="lab-modal" id="suri-modal-eve" onclick="closeModalOutside(event,'suri-modal-eve')">
-        <div class="lab-modal-box">
-          <button class="lab-modal-close" onclick="closeModal('suri-modal-eve')"><i class="fa-solid fa-xmark"></i></button>
-          <p class="section-label">Etapa 04</p>
-          <h2>Configuração do eve.json</h2>
-          <p class="module-text">O <code style="color:var(--primary);font-family:monospace;">eve.json</code> é o log principal do Suricata — um arquivo JSON estruturado com todos os eventos: alertas, flows, DNS, HTTP, TLS. É o que o Wazuh consome para correlação.</p>
-          <div class="concept-block">
-            <h4><i class="fa-solid fa-file-code"></i> Localização e estrutura</h4>
-            <p>O arquivo fica em <code style="color:var(--primary);font-family:monospace;">/var/log/suricata/eve.json</code>. Cada linha é um evento JSON independente. Após os testes, o arquivo chegou a 70MB+ — cada pacote suspeito, cada flow e cada alerta registrado.</p>
-          </div>
-          <div class="concept-block">
-            <h4><i class="fa-solid fa-gears"></i> Configuração no suricata.yaml</h4>
-            <p>No arquivo <code style="color:var(--primary);font-family:monospace;">/etc/suricata/suricata.yaml</code>, a seção <code style="color:var(--primary);font-family:monospace;">outputs</code> define os tipos de log habilitados. O bloco <code style="color:var(--primary);font-family:monospace;">eve-log</code> estava ativo por padrão com os tipos <code style="color:var(--primary);font-family:monospace;">alert</code>, <code style="color:var(--primary);font-family:monospace;">flow</code>, <code style="color:var(--primary);font-family:monospace;">dns</code>, <code style="color:var(--primary);font-family:monospace;">http</code> e <code style="color:var(--primary);font-family:monospace;">tls</code> habilitados.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="lab-modal" id="suri-modal-wazuh" onclick="closeModalOutside(event,'suri-modal-wazuh')">
-        <div class="lab-modal-box">
-          <button class="lab-modal-close" onclick="closeModal('suri-modal-wazuh')"><i class="fa-solid fa-xmark"></i></button>
-          <p class="section-label">Etapa 05</p>
-          <h2>Integração com o Wazuh</h2>
-          <p class="module-text">Para que o Wazuh processe os eventos do Suricata, o agente precisa saber onde está o <code style="color:var(--primary);font-family:monospace;">eve.json</code> e como interpretá-lo. Isso é feito editando o <code style="color:var(--primary);font-family:monospace;">ossec.conf</code> do agente.</p>
-          <div class="concept-block">
-            <h4><i class="fa-solid fa-file-code"></i> Bloco adicionado ao ossec.conf</h4>
-            <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
-              &lt;localfile&gt;<br>
-              &nbsp;&nbsp;&lt;log_format&gt;json&lt;/log_format&gt;<br>
-              &nbsp;&nbsp;&lt;location&gt;/var/log/suricata/eve.json&lt;/location&gt;<br>
-              &lt;/localfile&gt;
-            </div>
-          </div>
-          <div class="concept-block">
-            <h4><i class="fa-solid fa-circle-check"></i> Confirmação nos logs</h4>
-            <p>Após reiniciar o agente com <code style="color:var(--primary);font-family:monospace;">sudo systemctl restart wazuh-agent</code>, o log do agente confirmou:<br><em style="color:var(--primary);">"wazuh-logcollector: INFO: (1950): Analyzing file: '/var/log/suricata/eve.json'"</em></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="lab-modal" id="suri-modal-test" onclick="closeModalOutside(event,'suri-modal-test')">
-        <div class="lab-modal-box">
-          <button class="lab-modal-close" onclick="closeModal('suri-modal-test')"><i class="fa-solid fa-xmark"></i></button>
-          <p class="section-label">Etapa 06</p>
-          <h2>Testes de detecção com nmap</h2>
-          <p class="module-text">Com tudo configurado, o teste final foi executar scans reais com nmap e confirmar que o Suricata detectava e registrava os alertas em tempo real.</p>
-          <div class="concept-block">
-            <h4><i class="fa-solid fa-terminal"></i> Comandos de teste</h4>
-            <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
-              nmap -sS 10.0.0.20<br>
-              nmap -A 10.0.0.20
-            </div>
-          </div>
-          <div class="concept-block">
-            <h4><i class="fa-solid fa-file-lines"></i> Alertas gerados no fast.log</h4>
-            <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:12px;color:var(--text-soft);line-height:1.8;">
-              [**] [1:3400002:2] POSSBL PORT SCAN (NMAP -sS) [**]<br>
-              [Classification: Attempted Information Leak] [Priority: 2]<br>
-              {TCP} 10.0.0.10:42661 -> 10.0.0.20:1272
-            </div>
-          </div>
-          <div class="concept-block">
-            <h4><i class="fa-solid fa-circle-check"></i> Resultado</h4>
-            <p>Três tipos de alerta foram gerados: SID 3400002 (SYN scan), SID 3400005 (Xmas scan) e SID 2200025 (ICMPv4). O pipeline completo Suricata → eve.json → Wazuh estava funcional.</p>
-          </div>
-        </div>
-      </div>
-
       <!-- REGRAS -->
       <section id="regras" class="section">
         <p class="section-label">Regras de detecção</p>
-        <h2>Fontes de regras configuradas no laboratório.</h2>
+        <h2>Fontes configuradas e regras criadas.</h2>
         <p class="section-text">
-          O Suricata funciona com base em regras — assinaturas que definem padrões de tráfego
-          suspeito. Quanto mais regras ativas e mais específicas para o ambiente, maior a
-          cobertura de detecção.
+          O Suricata funciona com base em assinaturas — regras que definem padrões de tráfego suspeito.
+          Quanto mais regras calibradas para o ambiente, maior a cobertura real de detecção.
+          Neste lab, além das fontes externas, foram criadas regras próprias para cobrir gaps identificados.
         </p>
         <div class="cards-grid">
           <article class="card">
-            <h3 class="card-title"><i class="fa-solid fa-bolt card-icon"></i> Emerging Threats</h3>
-            <p>Conjunto de regras open source mantido pela Proofpoint. Cobre uma ampla variedade de ameaças: malware, exploits, C2, botnets e tráfego suspeito em geral.</p>
+            <h3 class="card-title"><i class="fa-solid fa-bolt card-icon"></i> Emerging Threats Open</h3>
+            <p>Conjunto open source mantido pela Proofpoint. Cobre ameaças como malware, exploits, C2, botnets e tráfego suspeito em geral. 7104 regras de <code style="color:var(--primary);font-family:monospace;">web-application-attack</code> incluídas, mas com cobertura limitada para APIs JSON modernas.</p>
             <div class="project-stack">
               <span>et/open</span>
               <span>MIT License</span>
-              <span>Proofpoint</span>
+              <span>50k+ regras</span>
             </div>
           </article>
           <article class="card">
             <h3 class="card-title"><i class="fa-solid fa-ban card-icon"></i> Abuse.ch</h3>
-            <p>Quatro fontes especializadas: Feodo Tracker (botnets C2), SSL Blacklist, JA3 Fingerprints e URLhaus. Foco em infraestrutura maliciosa conhecida.</p>
+            <p>Quatro feeds especializados: Feodo Tracker (botnets C2), SSL Blacklist, JA3 Fingerprints e URLhaus. Foco em infraestrutura maliciosa conhecida e certificados TLS suspeitos.</p>
             <div class="project-stack">
               <span>Feodo Tracker</span>
               <span>SSL Blacklist</span>
@@ -427,23 +285,62 @@
           </article>
           <article class="card">
             <h3 class="card-title"><i class="fa-solid fa-magnifying-glass card-icon"></i> aleksibovellan/nmap</h3>
-            <p>Regras específicas para detecção de scans com Nmap — identificando SYN scan, Xmas scan e outros tipos de reconhecimento de rede. Usadas nos testes do laboratório.</p>
+            <p>Regras específicas para detecção de scans com Nmap — SYN scan, Xmas scan e outras técnicas de reconhecimento. Usadas nos testes do laboratório e responsáveis pelas primeiras detecções reais.</p>
             <div class="project-stack">
               <span>NMAP -sS</span>
               <span>NMAP -sX</span>
               <span>Port scan</span>
-              <span>MIT License</span>
             </div>
           </article>
-          <article class="card">
-            <h3 class="card-title"><i class="fa-solid fa-chart-bar card-icon"></i> OISF Traffic ID</h3>
-            <p>Regras de identificação de protocolos e tráfego de rede mantidas pelo Open Information Security Foundation — criadores do Suricata.</p>
+          <article class="card highlight">
+            <h3 class="card-title"><i class="fa-solid fa-pen-ruler card-icon"></i> Regras customizadas (local.rules)</h3>
+            <p>Duas regras criadas para cobrir gap real identificado durante o Red Team vs Blue Team. A keyword <code style="color:var(--primary);font-family:monospace;">http.request_body</code> inspeciona o corpo de requisições POST — o que as regras ET Open não faziam.</p>
             <div class="project-stack">
-              <span>oisf/trafficid</span>
-              <span>Protocol ID</span>
-              <span>MIT License</span>
+              <span>SID 9000001 — SQLi</span>
+              <span>SID 9000002 — XSS</span>
+              <span>http.request_body</span>
+              <span>pcre</span>
             </div>
           </article>
+        </div>
+      </section>
+
+      <!-- TROUBLESHOOTING -->
+      <section id="troubleshooting" class="section">
+        <p class="section-label">Troubleshooting</p>
+        <h2>Sensor mal posicionado — diagnóstico e correção.</h2>
+        <p class="section-text">
+          Após configurar a integração com o Wazuh, os ataques executados contra o Metasploitable2
+          simplesmente não apareciam no dashboard. O pipeline estava funcionando (outros alertas chegavam),
+          mas nenhum evento relacionado ao IP do alvo era encontrado — mesmo com o ataque confirmado
+          na shell reversa.
+        </p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-magnifying-glass"></i> Sintoma identificado</span>
+            <p>Busca <code style="color:var(--primary);font-family:monospace;">data.dest_ip: 192.168.220.152</code> no Wazuh retornando zero resultados, mesmo com o exploit Metasploit confirmado e shell reversa ativa na porta 4444.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-terminal"></i> Diagnóstico via suricata.yaml</span>
+            <p>Comando <code style="color:var(--primary);font-family:monospace;">grep -A 5 "af-packet:" /etc/suricata/suricata.yaml</code> revelou <code style="color:var(--primary);font-family:monospace;">interface: eth1</code> — a interface secundária do Kali (rede <code style="color:var(--primary);font-family:monospace;">192.168.218.0/24</code>), não a LAN do lab (<code style="color:var(--primary);font-family:monospace;">eth0, 192.168.220.0/24</code>).</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-wrench"></i> Correção aplicada</span>
+            <p>Edição do <code style="color:var(--primary);font-family:monospace;">suricata.yaml</code>: <code style="color:var(--primary);font-family:monospace;">af-packet: interface: eth1</code> → <code style="color:var(--primary);font-family:monospace;">interface: eth0</code>. Restart do serviço e reteste do ataque.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-circle-check"></i> Validação confirmada</span>
+            <p>Após a correção, alertas apareceram no <code style="color:var(--primary);font-family:monospace;">eve.json</code> e no dashboard do Wazuh — incluindo a detecção da shell reversa do Metasploit (SID 3400020, severity 1, "A Network Trojan was detected").</p>
+          </div>
+        </div>
+        <div style="margin-top:32px;padding:24px;background:rgba(2,6,23,0.8);border:1px solid var(--border-light);border-radius:16px;">
+          <p class="section-label">Lição aprendida</p>
+          <p style="color:var(--text-soft);font-size:14px;line-height:1.8;margin-top:8px;">
+            Sensor de rede mal posicionado é uma das causas mais comuns de gap de visibilidade em SOCs reais.
+            A configuração parecia correta, o serviço estava ativo e eventos chegavam ao SIEM — mas o sensor
+            simplesmente não via o tráfego certo. <strong>Configuração não validada com tráfego real é
+            configuração não confirmada.</strong>
+          </p>
         </div>
       </section>
 
@@ -451,99 +348,185 @@
       <section id="integracao" class="section">
         <p class="section-label">Integração com Wazuh</p>
         <h2>Como o Suricata se conecta ao SIEM.</h2>
-        <p class="section-text">
-          A integração entre Suricata e Wazuh transforma eventos de rede isolados em alertas
-          correlacionados e visíveis no dashboard centralizado. O fluxo foi configurado no
-          agente Wazuh do Kali Linux editando o arquivo <code style="color:var(--primary);font-family:monospace;">ossec.conf</code>.
-        </p>
-
         <div class="timeline">
           <div class="timeline-item">
             <span><i class="fa-solid fa-network-wired"></i> Suricata monitora o tráfego</span>
-            <p>O Suricata analisa todo o tráfego na interface de rede do Kali Linux em tempo real, aplicando as regras carregadas via suricata-update.</p>
+            <p>O Suricata analisa todo o tráfego na interface <code style="color:var(--primary);font-family:monospace;">eth0</code> do Kali em tempo real, aplicando as 50.000+ regras carregadas via suricata-update.</p>
           </div>
           <div class="timeline-item">
             <span><i class="fa-solid fa-file-code"></i> Eventos gravados em eve.json</span>
-            <p>Cada evento detectado é gravado em formato JSON estruturado em <code style="color:var(--primary);font-family:monospace;">/var/log/suricata/eve.json</code> — alertas, flows, DNS, HTTP e outros tipos.</p>
+            <p>Cada evento detectado é gravado em formato JSON estruturado em <code style="color:var(--primary);font-family:monospace;">/var/log/suricata/eve.json</code> — alertas, flows, DNS, HTTP, TLS e SMB.</p>
           </div>
           <div class="timeline-item">
             <span><i class="fa-solid fa-gears"></i> Wazuh Logcollector monitora o arquivo</span>
-            <p>O bloco <code style="color:var(--primary);font-family:monospace;">&lt;localfile&gt;</code> no <code style="color:var(--primary);font-family:monospace;">ossec.conf</code> instrui o agente a ler continuamente o eve.json e enviar os eventos ao servidor Wazuh.</p>
+            <p>O bloco <code style="color:var(--primary);font-family:monospace;">&lt;localfile&gt;&lt;log_format&gt;json&lt;/log_format&gt;</code> no <code style="color:var(--primary);font-family:monospace;">ossec.conf</code> instrui o agente a ler o eve.json e enviar os eventos ao Manager.</p>
           </div>
           <div class="timeline-item">
             <span><i class="fa-solid fa-shield-halved"></i> Wazuh processa e correlaciona</span>
-            <p>O Wazuh Manager recebe os eventos, aplica decoders e regras, gera alertas e os exibe no dashboard — conectando detecção de rede ao SIEM.</p>
+            <p>O Manager aplica decoders nativos de Suricata (regra <code style="color:var(--primary);font-family:monospace;">86601</code>) e exibe os alertas no dashboard com campos como <code style="color:var(--primary);font-family:monospace;">data.alert.signature</code>, <code style="color:var(--primary);font-family:monospace;">data.src_ip</code> e <code style="color:var(--primary);font-family:monospace;">data.dest_port</code>.</p>
           </div>
           <div class="timeline-item">
-            <span><i class="fa-solid fa-check"></i> Validação confirmada nos logs</span>
-            <p>Confirmação da integração pelo log do agente: <em style="color:var(--primary);">"wazuh-logcollector: INFO: (1950): Analyzing file: '/var/log/suricata/eve.json'"</em></p>
+            <span><i class="fa-solid fa-check"></i> Validação confirmada</span>
+            <p>710+ eventos nas primeiras 24h após a correção da interface. Buscas por <code style="color:var(--primary);font-family:monospace;">rule.groups: suricata</code> retornando alertas reais com assinaturas identificadas.</p>
           </div>
         </div>
       </section>
 
-      <!-- ALERTAS REAIS -->
-      <section id="alertas" class="section">
-        <p class="section-label">Alertas reais</p>
-        <h2>Detecções geradas durante os testes.</h2>
+      <!-- RED TEAM VS BLUE TEAM -->
+      <section id="redteam" class="section">
+        <p class="section-label">Red Team vs Blue Team</p>
+        <h2>Dois ataques reais. Detecção validada no SIEM.</h2>
         <p class="section-text">
-          Os testes foram executados com <code style="color:var(--primary);font-family:monospace;">nmap -sS</code> e <code style="color:var(--primary);font-family:monospace;">nmap -A</code>
-          a partir do Kali Linux (10.0.0.10) contra o servidor Wazuh (10.0.0.20).
-          O Suricata detectou os scans em tempo real e gerou alertas no <code style="color:var(--primary);font-family:monospace;">fast.log</code>.
+          O objetivo foi validar o pipeline completo: configurar o sensor, atacar de propósito,
+          e confirmar (ou identificar a ausência de) detecção real no Wazuh. Dois alvos
+          diferentes, cada um expondo uma camada diferente da cobertura do Suricata.
         </p>
 
-        <div class="cards-grid">
-          <article class="card highlight">
-            <h3 class="card-title"><i class="fa-solid fa-triangle-exclamation card-icon"></i> SYN Scan detectado</h3>
-            <p>Regra <strong>POSSBL PORT SCAN (NMAP -sS)</strong> ativada múltiplas vezes durante o scan SYN. Classificado como <em>Attempted Information Leak</em>, prioridade 2.</p>
-            <div class="project-stack">
-              <span>SID 3400002</span>
-              <span>Priority 2</span>
-              <span>TCP</span>
-              <span>nmap -sS</span>
-            </div>
-          </article>
-          <article class="card">
-            <h3 class="card-title"><i class="fa-solid fa-triangle-exclamation card-icon"></i> Xmas Scan detectado</h3>
-            <p>Regra <strong>POSSBL PORT SCAN (NMAP -sX)</strong> ativada durante testes avançados. Técnica de reconhecimento usando pacotes TCP com flags FIN, URG e PSH.</p>
-            <div class="project-stack">
-              <span>SID 3400005</span>
-              <span>Priority 2</span>
-              <span>TCP</span>
-              <span>nmap -sX</span>
-            </div>
-          </article>
-          <article class="card">
-            <h3 class="card-title"><i class="fa-solid fa-circle-info card-icon"></i> ICMPv4 detectado</h3>
-            <p>Regra <strong>SURICATA ICMPv4 unknown code</strong> ativada durante pings entre as VMs do laboratório. Classificado como <em>Generic Protocol Command Decode</em>, prioridade 3.</p>
-            <div class="project-stack">
-              <span>SID 2200025</span>
-              <span>Priority 3</span>
-              <span>ICMP</span>
-              <span>ping</span>
-            </div>
-          </article>
+        <div style="margin-top:48px;">
+          <p class="section-label">Ataque 1</p>
+          <h2>Metasploitable2 — CVE-2007-2447 (Samba usermap_script)</h2>
+          <div class="cards-grid">
+            <article class="card">
+              <h3 class="card-title"><i class="fa-solid fa-magnifying-glass card-icon"></i> Reconhecimento</h3>
+              <p><code style="color:var(--primary);font-family:monospace;">nmap -sV -p-</code> contra <code style="color:var(--primary);font-family:monospace;">192.168.220.152</code>. 29 serviços identificados incluindo Samba 3.X nas portas 139/445, vsftpd 2.3.4 e UnrealIRCd.</p>
+              <div class="project-stack"><span>nmap -sV -p-</span><span>29 portas</span><span>Samba 3.X</span></div>
+            </article>
+            <article class="card highlight">
+              <h3 class="card-title"><i class="fa-solid fa-skull card-icon"></i> Exploração</h3>
+              <p>Módulo Metasploit <code style="color:var(--primary);font-family:monospace;">exploit/multi/samba/usermap_script</code>. Shell reversa porta 4444. Confirmado: <code style="color:var(--primary);font-family:monospace;">whoami → root, uid=0(root)</code>.</p>
+              <div class="project-stack"><span>CVE-2007-2447</span><span>Shell reversa</span><span>Porta 4444</span><span>root</span></div>
+            </article>
+            <article class="card">
+              <h3 class="card-title"><i class="fa-solid fa-bell card-icon"></i> Detecção</h3>
+              <p>Suricata detectou reconhecimento (<em>POSSBL PORT SCAN NMAP -sA</em>) e exploração (<em>POSSBL SCAN SHELL M-SPLOIT TCP</em>, severity 1, "Network Trojan detected"). Ambos visíveis no Wazuh.</p>
+              <div class="project-stack"><span>SID 3400020</span><span>Severity 1</span><span>Rule 86601</span></div>
+            </article>
+          </div>
+          <div style="margin-top:32px;padding:24px;background:rgba(2,6,23,0.8);border:1px solid var(--border-light);border-radius:16px;">
+            <p class="section-label">Alerta real — eve.json</p>
+            <pre style="margin:8px 0 0;color:var(--text-soft);font-family:monospace;font-size:13px;line-height:1.8;white-space:pre-wrap;">{
+  "event_type": "alert",
+  "src_ip": "192.168.220.152",
+  "dest_ip": "192.168.220.130",
+  "dest_port": 4444,
+  "alert": {
+    "signature": "POSSBL SCAN SHELL M-SPLOIT TCP",
+    "category": "A Network Trojan was detected",
+    "severity": 1,
+    "signature_id": 3400020
+  }
+}</pre>
+          </div>
         </div>
 
-        <!-- Bloco de log real -->
-        <div style="margin-top:40px;">
-          <p class="section-label">Saída real do fast.log</p>
-          <h2>Alertas capturados durante o teste nmap.</h2>
-          <div style="margin-top:24px;padding:28px;background:rgba(2,6,23,0.8);border:1px solid var(--border-light);border-radius:16px;overflow-x:auto;">
-            <pre style="margin:0;color:var(--text-soft);font-family:monospace;font-size:13px;line-height:1.8;white-space:pre-wrap;">[**] [1:3400002:2] POSSBL PORT SCAN (NMAP -sS) [**]
-[Classification: Attempted Information Leak] [Priority: 2]
-{TCP} 10.0.0.10:42661 -> 10.0.0.20:1272
+        <div style="margin-top:64px;">
+          <p class="section-label">Ataque 2</p>
+          <h2>OWASP Juice Shop — SQLi e DOM XSS</h2>
+          <div class="cards-grid">
+            <article class="card highlight">
+              <h3 class="card-title"><i class="fa-solid fa-database card-icon"></i> SQL Injection</h3>
+              <p>Payload <code style="color:var(--primary);font-family:monospace;">' OR 1=1--</code> no POST /rest/user/login. Bypass de autenticação — acesso ao admin sem senha. Detectado pela regra customizada SID 9000001.</p>
+              <div class="project-stack"><span>SQLi</span><span>POST JSON</span><span>SID 9000001</span></div>
+            </article>
+            <article class="card">
+              <h3 class="card-title"><i class="fa-solid fa-code card-icon"></i> DOM XSS — limite do NIDS</h3>
+              <p>Payload <code style="color:var(--primary);font-family:monospace;">&lt;img src=x onerror="alert('XSS')"&gt;</code>. Ataque executado com sucesso, mas <strong>não detectável via rede</strong> — parâmetro processado inteiramente no frontend (Angular hash routing), nunca trafegou como requisição HTTP.</p>
+              <div class="project-stack"><span>DOM XSS</span><span>Client-side</span><span>Não detectável por NIDS</span></div>
+            </article>
+            <article class="card">
+              <h3 class="card-title"><i class="fa-solid fa-triangle-exclamation card-icon"></i> Gap identificado</h3>
+              <p>ET Open tem 7104 regras de web-application-attack, mas escritas para stacks PHP/GET — não para APIs JSON modernas. SQLi em body de POST não era coberto por nenhuma regra existente até a criação da regra customizada.</p>
+              <div class="project-stack"><span>7104 regras ET Open</span><span>Gap real</span><span>Regra criada</span></div>
+            </article>
+          </div>
+        </div>
+      </section>
 
-[**] [1:3400002:2] POSSBL PORT SCAN (NMAP -sS) [**]
-[Classification: Attempted Information Leak] [Priority: 2]
-{TCP} 10.0.0.10:42661 -> 10.0.0.20:2998
+      <!-- REGRAS CUSTOMIZADAS -->
+      <section id="customizacao" class="section">
+        <p class="section-label">Detection Engineering</p>
+        <h2>Regras customizadas criadas para cobrir o gap.</h2>
+        <p class="section-text">
+          Identificado o gap de cobertura, a solução foi criar regras próprias em
+          <code style="color:var(--primary);font-family:monospace;">/var/lib/suricata/rules/local.rules</code>
+          e referenciar o arquivo no <code style="color:var(--primary);font-family:monospace;">suricata.yaml</code>.
+          A keyword <code style="color:var(--primary);font-family:monospace;">http.request_body</code>
+          foi o elemento-chave — ela instrui o Suricata a inspecionar o corpo da requisição HTTP,
+          não apenas a URL.
+        </p>
 
-[**] [1:2200025:2] SURICATA ICMPv4 unknown code [**]
-[Classification: Generic Protocol Command Decode] [Priority: 3]
-{ICMP} 10.0.0.10:8 -> 10.0.0.20:9
+        <div style="padding:24px;background:rgba(2,6,23,0.8);border:1px solid var(--border-light);border-radius:16px;margin-top:24px;">
+          <p class="section-label">local.rules — SID 9000001 (SQLi)</p>
+          <pre style="margin:8px 0 0;color:var(--text-soft);font-family:monospace;font-size:13px;line-height:1.8;white-space:pre-wrap;">alert http any any -> any 3000 (
+  msg:"LOCAL SQLi Attempt - OR 1=1 in HTTP Body";
+  flow:to_server,established;
+  http.request_body;
+  content:"OR 1";
+  nocase;
+  classtype:web-application-attack;
+  sid:9000001;
+  rev:1;
+)</pre>
+        </div>
 
-[**] [1:3400005:2] POSSBL PORT SCAN (NMAP -sX) [**]
-[Classification: Attempted Information Leak] [Priority: 2]
-{TCP} 10.0.0.10:45439 -> 10.0.0.20:1</pre>
+        <div style="padding:24px;background:rgba(2,6,23,0.8);border:1px solid var(--border-light);border-radius:16px;margin-top:16px;">
+          <p class="section-label">local.rules — SID 9000002 (XSS)</p>
+          <pre style="margin:8px 0 0;color:var(--text-soft);font-family:monospace;font-size:13px;line-height:1.8;white-space:pre-wrap;">alert http any any -> any 3000 (
+  msg:"LOCAL XSS Attempt - script/onerror in URI";
+  flow:to_server,established;
+  http.uri;
+  pcre:"/(script|onerror|onload)/i";
+  classtype:web-application-attack;
+  sid:9000002;
+  rev:2;
+)</pre>
+        </div>
+
+        <div style="margin-top:32px;">
+          <p class="section-label">Gap analysis — visibilidade por tipo de ataque</p>
+          <div style="overflow-x:auto;margin-top:16px;">
+            <table style="width:100%;border-collapse:collapse;font-size:14px;">
+              <thead>
+                <tr style="border-bottom:1px solid var(--border-light);">
+                  <th style="text-align:left;padding:12px 16px;color:var(--text-soft);">Tipo de ataque</th>
+                  <th style="text-align:left;padding:12px 16px;color:var(--text-soft);">Trafega pela rede?</th>
+                  <th style="text-align:left;padding:12px 16px;color:var(--text-soft);">ET Open detecta?</th>
+                  <th style="text-align:left;padding:12px 16px;color:var(--text-soft);">Regra customizada?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom:1px solid var(--border-light);">
+                  <td style="padding:12px 16px;">Port scan (nmap)</td>
+                  <td style="padding:12px 16px;color:#22c55e;">✅ Sim</td>
+                  <td style="padding:12px 16px;color:#22c55e;">✅ Sim</td>
+                  <td style="padding:12px 16px;color:var(--text-soft);">—</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border-light);">
+                  <td style="padding:12px 16px;">Shell reversa Metasploit</td>
+                  <td style="padding:12px 16px;color:#22c55e;">✅ Sim</td>
+                  <td style="padding:12px 16px;color:#22c55e;">✅ Sim (SID 3400020)</td>
+                  <td style="padding:12px 16px;color:var(--text-soft);">—</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border-light);">
+                  <td style="padding:12px 16px;">SQLi em body JSON (POST API)</td>
+                  <td style="padding:12px 16px;color:#22c55e;">✅ Sim</td>
+                  <td style="padding:12px 16px;color:#ef4444;">❌ Não (gap real)</td>
+                  <td style="padding:12px 16px;color:#22c55e;">✅ SID 9000001</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border-light);">
+                  <td style="padding:12px 16px;">XSS Refletido/Armazenado</td>
+                  <td style="padding:12px 16px;color:#22c55e;">✅ Sim</td>
+                  <td style="padding:12px 16px;color:#f59e0b;">⚠️ Parcial</td>
+                  <td style="padding:12px 16px;color:#22c55e;">✅ SID 9000002</td>
+                </tr>
+                <tr>
+                  <td style="padding:12px 16px;">DOM XSS puro (client-side)</td>
+                  <td style="padding:12px 16px;color:#ef4444;">❌ Não</td>
+                  <td style="padding:12px 16px;color:#ef4444;">❌ Impossível</td>
+                  <td style="padding:12px 16px;color:#ef4444;">❌ Impossível por design</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
@@ -552,53 +535,54 @@
       <section id="competencias" class="section">
         <p class="section-label">Competências desenvolvidas</p>
         <h2>O que este laboratório construiu na prática.</h2>
-        <p class="section-text">
-          Este laboratório foi além da instalação — envolveu compreensão do funcionamento
-          do IDS, configuração de regras, integração com SIEM e análise de alertas reais
-          gerados por testes controlados.
-        </p>
-        <div class="skills-grid">
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-network-wired"></i> IDS/IPS</h3>
-            <p>Configuração e operação do Suricata como IDS em modo AF-PACKET, monitorando tráfego de rede em tempo real e aplicando regras de detecção sobre os pacotes capturados.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-scroll"></i> Gerenciamento de regras</h3>
-            <p>Uso do suricata-update para listar, habilitar e atualizar fontes de regras. Compreensão da estrutura de uma regra Suricata: SID, classificação, prioridade, protocolo e condição de match.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-file-code"></i> Análise de logs JSON</h3>
-            <p>Leitura e interpretação do eve.json — formato estruturado com campos como event_type, src_ip, dest_ip, proto, alert.signature e alert.category para análise de eventos.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-shield-halved"></i> Integração SIEM</h3>
-            <p>Configuração do ossec.conf para ingestão do eve.json pelo Wazuh Logcollector, criando um pipeline de detecção de rede integrado ao sistema centralizado de monitoramento.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-magnifying-glass"></i> Threat Detection</h3>
-            <p>Execução de testes controlados com nmap para validar a detecção, análise dos alertas gerados e correlação entre o comportamento do atacante e a resposta do IDS.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-gears"></i> Linux Administration</h3>
-            <p>Gerenciamento do serviço Suricata via systemctl, edição de arquivos de configuração YAML, verificação de logs do sistema e troubleshooting de integração com o agente Wazuh.</p>
-          </article>
+        <div class="carousel-wrapper">
+          <button class="carousel-btn carousel-prev" onclick="moveSuricataCarousel(-1)" aria-label="Anterior">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <div class="carousel-track-container">
+            <div class="carousel-track" id="suricataCarousel">
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-network-wired"></i> IDS/IPS</h3>
+                <p>Configuração e operação do Suricata como IDS em modo AF-PACKET, monitorando tráfego de rede em tempo real. Diagnóstico e correção de sensor mal posicionado com revalidação ativa.</p>
+              </article>
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-pen-ruler"></i> Detection Engineering</h3>
+                <p>Criação de regras Suricata customizadas para cobrir gap real do ET Open. Uso de <code style="color:var(--primary);font-family:monospace;">http.request_body</code> e <code style="color:var(--primary);font-family:monospace;">pcre</code> para inspecionar corpo de POST e URI — o que as regras genéricas não faziam.</p>
+              </article>
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-magnifying-glass"></i> Gap Analysis</h3>
+                <p>Identificação de limitações estruturais do NIDS: ET Open vs APIs JSON modernas, e DOM XSS client-side invisível a qualquer sensor de rede. Documentação de causas raiz e controles adequados por camada.</p>
+              </article>
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-shield-halved"></i> Integração SIEM</h3>
+                <p>Pipeline completo Suricata → eve.json → Wazuh Logcollector → Manager → Dashboard. Decoders nativos processando campos estruturados de alerta, com busca por <code style="color:var(--primary);font-family:monospace;">rule.groups: suricata</code> e <code style="color:var(--primary);font-family:monospace;">data.alert.signature_id</code>.</p>
+              </article>
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-skull"></i> Red Team Fundamentals</h3>
+                <p>Reconhecimento com nmap, exploração de CVE via Metasploit, SQL Injection em API REST e DOM XSS em SPA moderna. Cada ataque executado e correlacionado com alertas de rede no SIEM.</p>
+              </article>
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-wrench"></i> Troubleshooting</h3>
+                <p>Diagnóstico de visibilidade zero no SIEM com pipeline funcionando. Causa raiz identificada via <code style="color:var(--primary);font-family:monospace;">suricata.yaml</code>, corrigida e revalidada com reteste real — não com simulação.</p>
+              </article>
+            </div>
+          </div>
+          <button class="carousel-btn carousel-next" onclick="moveSuricataCarousel(1)" aria-label="Próximo">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
         </div>
+        <div class="carousel-dots" id="suricataDots"></div>
       </section>
 
       <!-- RESULTADOS -->
       <section id="resultados" class="section">
         <p class="section-label">Resultados</p>
         <h2>O que foi entregue neste laboratório.</h2>
-        <p class="section-text">
-          Este laboratório resultou em um IDS funcional, integrado ao SIEM, com regras ativas
-          e detecções reais documentadas — demonstrando na prática o funcionamento de uma
-          camada de defesa de rede.
-        </p>
         <div class="stats-grid">
           <div class="stat-card"><strong>8.0.5</strong><span>Versão do Suricata</span></div>
-          <div class="stat-card"><strong>70MB+</strong><span>Eventos no eve.json</span></div>
-          <div class="stat-card"><strong>03</strong><span>Tipos de alerta gerados</span></div>
-          <div class="stat-card"><strong>01</strong><span>Pipeline SIEM integrado</span></div>
+          <div class="stat-card"><strong>50k+</strong><span>Regras carregadas</span></div>
+          <div class="stat-card"><strong>2</strong><span>Regras customizadas criadas</span></div>
+          <div class="stat-card"><strong>272MB+</strong><span>Eventos no eve.json</span></div>
         </div>
       </section>
 
@@ -606,108 +590,147 @@
       <section id="evidencias" class="section">
         <p class="section-label">Evidências</p>
         <h2>Registros do laboratório.</h2>
-        <p class="section-text">
-          Evidências reais do laboratório Suricata — status do serviço, alertas no fast.log
-          e eventos JSON capturados durante os testes com nmap.
-        </p>
         <div class="profile-tags" style="margin-bottom:32px;">
           <span><i class="fa-solid fa-circle-check"></i> Suricata active (running)</span>
-          <span><i class="fa-solid fa-file-lines"></i> fast.log com alertas reais</span>
-          <span><i class="fa-solid fa-code"></i> eve.json — eventos estruturados</span>
+          <span><i class="fa-solid fa-file-lines"></i> eve.json — 272MB+ de eventos</span>
+          <span><i class="fa-solid fa-bell"></i> Alertas reais no Wazuh dashboard</span>
+          <span><i class="fa-solid fa-pen-ruler"></i> Regras customizadas validadas</span>
         </div>
-        <div class="evidence-grid">
-          <figure class="evidence-image">
-            <a href="https://github.com/gabrielzaccaferreira/suricata-lab/blob/main/screenshots/suricata-status.png" target="_blank" rel="noopener noreferrer">
-              <img
-                src="https://github.com/gabrielzaccaferreira/suricata-lab/raw/main/screenshots/suricata-status.png"
-                alt="Status do serviço Suricata"
-                loading="lazy"
-                width="800"
-                height="450"
-              />
-            </a>
-            <figcaption>Suricata 8.0.5 — active (running) no Kali Linux.</figcaption>
-          </figure>
-
-          <figure class="evidence-image">
-            <a href="https://github.com/gabrielzaccaferreira/suricata-lab/blob/main/screenshots/fast-log.png" target="_blank" rel="noopener noreferrer">
-              <img
-                src="https://github.com/gabrielzaccaferreira/suricata-lab/raw/main/screenshots/fast-log.png"
-                alt="Alertas no fast.log do Suricata"
-                loading="lazy"
-                width="800"
-                height="450"
-              />
-            </a>
-            <figcaption>fast.log — alertas de port scan (nmap -sS) detectados em tempo real.</figcaption>
-          </figure>
-
-          <figure class="evidence-image evidence-image-wide">
-            <a href="https://github.com/gabrielzaccaferreira/suricata-lab/blob/main/screenshots/eve-json.png" target="_blank" rel="noopener noreferrer">
-              <img
-                src="https://github.com/gabrielzaccaferreira/suricata-lab/raw/main/screenshots/eve-json.png"
-                alt="Eventos JSON no eve.json do Suricata"
-                loading="lazy"
-                width="800"
-                height="450"
-              />
-            </a>
-            <figcaption>eve.json — eventos estruturados em JSON para integração com o Wazuh.</figcaption>
-          </figure>
-        </div>
-
-        <div style="margin-top:32px;text-align:center;">
+        <div style="text-align:center;margin-top:16px;">
           <a href="https://github.com/gabrielzaccaferreira/suricata-lab" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
             <i class="fa-brands fa-github"></i> Ver repositório completo no GitHub
           </a>
         </div>
       </section>
 
-      <!-- PRÓXIMOS PASSOS -->
-      <section id="proximos-passos" class="section">
-        <p class="section-label">Próximos passos</p>
-        <h2>Como este laboratório continuará evoluindo.</h2>
-        <div class="cards-grid">
-          <article class="card">
-            <h3 class="card-title"><i class="fa-solid fa-pen-ruler card-icon"></i> Regras customizadas</h3>
-            <p>Criar regras Suricata próprias para detectar comportamentos específicos do laboratório, seguindo a metodologia de Detection Engineering aplicada no Wazuh.</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title"><i class="fa-solid fa-fire-flame-curved card-icon"></i> Integração CrowdSec</h3>
-            <p>Adicionar o CrowdSec ao laboratório para criar uma camada de proteção colaborativa complementar ao Suricata, bloqueando IPs maliciosos automaticamente.</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title"><i class="fa-solid fa-shield-halved card-icon"></i> Modo IPS</h3>
-            <p>Evoluir o Suricata de modo IDS (detecção passiva) para IPS (prevenção ativa), configurando bloqueio automático de tráfego malicioso identificado pelas regras.</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title"><i class="fa-solid fa-chart-bar card-icon"></i> Dashboard Wazuh</h3>
-            <p>Criar visualizações dedicadas no dashboard Wazuh para eventos do Suricata, separando alertas de rede por tipo, prioridade e IP de origem.</p>
-          </article>
-        </div>
-      </section>
-
       <!-- CONCLUSÃO -->
       <section id="conclusao" class="section cta-premium">
         <p class="section-label">Conclusão</p>
-        <h2>IDS funcionando. Ameaças detectadas. Pipeline integrado.</h2>
+        <h2>Sensor calibrado. Gaps identificados. Detecção real validada.</h2>
         <p class="section-text">
-          Este laboratório demonstrou na prática o funcionamento de um IDS open source —
-          desde a instalação até a detecção real de port scans com nmap, passando pela
-          integração com o Wazuh SIEM. O resultado é uma camada de visibilidade de rede
-          que complementa o monitoramento de endpoints já documentado no case Wazuh.
+          Este laboratório foi além de "instalar e rodar" — envolveu diagnóstico de infraestrutura
+          (sensor mal posicionado), análise crítica das regras disponíveis (gap do ET Open contra APIs
+          modernas), criação de assinaturas próprias e validação com ataques reais executados de ponta
+          a ponta. O resultado é um NIDS calibrado e documentado, com cobertura de detecção estendida
+          além do que vem out-of-the-box.
         </p>
         <div class="hero-actions">
-          <a href="wazuh.html" class="btn btn-primary">
-            <i class="fa-solid fa-shield-halved"></i> Ver laboratório Wazuh →
+          <a href="windows-server.html" class="btn btn-primary">
+            <i class="fa-brands fa-windows"></i> Ver laboratório Windows Server →
           </a>
-          <a href="kali-linux.html" class="btn btn-secondary">
-            <i class="fa-brands fa-linux"></i> Ver laboratório Kali
+          <a href="wazuh.html" class="btn btn-secondary">
+            <i class="fa-solid fa-shield-halved"></i> Ver laboratório Wazuh
           </a>
         </div>
       </section>
 
     </main>
+
+    <!-- MODAIS -->
+    <div id="suri-modal-install" class="lab-modal" onclick="closeModalOutside(event,'suri-modal-install')">
+      <div class="lab-modal-content">
+        <button class="modal-close" onclick="closeModal('suri-modal-install')">✕</button>
+        <h3>Instalação do Suricata</h3>
+        <p>O Suricata está disponível nos repositórios oficiais do Kali Linux. Instalação direta via apt:</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">sudo apt update
+sudo apt install suricata -y
+suricata --version
+# Suricata version 8.0.5 RELEASE</pre>
+        <p style="margin-top:16px;">Validação do serviço:</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">sudo systemctl status suricata --no-pager
+# Active: active (running)
+# /usr/bin/suricata -D --af-packet -c /etc/suricata/suricata.yaml</pre>
+        <p style="margin-top:16px;">O modo <strong>AF-PACKET</strong> captura pacotes diretamente via kernel, sem libpcap — mais eficiente para ambientes de alta velocidade.</p>
+      </div>
+    </div>
+
+    <div id="suri-modal-rules" class="lab-modal" onclick="closeModalOutside(event,'suri-modal-rules')">
+      <div class="lab-modal-content">
+        <button class="modal-close" onclick="closeModal('suri-modal-rules')">✕</button>
+        <h3>Atualização das regras com suricata-update</h3>
+        <p>O suricata-update é a ferramenta oficial para gerenciar fontes de regras:</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">sudo suricata-update update-sources
+sudo suricata-update list-sources
+sudo suricata-update
+sudo systemctl restart suricata</pre>
+        <p style="margin-top:16px;">Após o update, 50.517 regras foram carregadas de 2 arquivos (<code>suricata.rules</code> + <code>local.rules</code>). As regras ficam em <code>/var/lib/suricata/rules/suricata.rules</code>.</p>
+        <p style="margin-top:12px;">Fontes habilitadas: <strong>et/open</strong> (Emerging Threats), <strong>abuse.ch</strong> (4 feeds), <strong>oisf/trafficid</strong>, <strong>aleksibovellan/nmap</strong>.</p>
+      </div>
+    </div>
+
+    <div id="suri-modal-nmap" class="lab-modal" onclick="closeModalOutside(event,'suri-modal-nmap')">
+      <div class="lab-modal-content">
+        <button class="modal-close" onclick="closeModal('suri-modal-nmap')">✕</button>
+        <h3>Habilitação da fonte aleksibovellan/nmap</h3>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">sudo suricata-update enable-source aleksibovellan/nmap
+sudo suricata-update
+sudo systemctl restart suricata</pre>
+        <p style="margin-top:16px;">Regras incluídas nessa fonte:</p>
+        <ul style="margin-top:12px;color:var(--text-soft);font-size:14px;line-height:2;">
+          <li><strong>SID 3400002:</strong> POSSBL PORT SCAN (NMAP -sS) — SYN scan</li>
+          <li><strong>SID 3400005:</strong> POSSBL PORT SCAN (NMAP -sX) — Xmas scan (FIN/URG/PSH)</li>
+          <li><strong>SID 3400020:</strong> POSSBL SCAN SHELL M-SPLOIT TCP — shell reversa Metasploit</li>
+        </ul>
+        <p style="margin-top:16px;">Todos classificados como <em>Attempted Information Leak</em>, prioridade 2.</p>
+      </div>
+    </div>
+
+    <div id="suri-modal-wazuh" class="lab-modal" onclick="closeModalOutside(event,'suri-modal-wazuh')">
+      <div class="lab-modal-content">
+        <button class="modal-close" onclick="closeModal('suri-modal-wazuh')">✕</button>
+        <h3>Integração com o Wazuh</h3>
+        <p>Bloco adicionado ao <code>/var/ossec/etc/ossec.conf</code> do agente Kali:</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">&lt;localfile&gt;
+  &lt;location&gt;/var/log/suricata/eve.json&lt;/location&gt;
+  &lt;log_format&gt;json&lt;/log_format&gt;
+&lt;/localfile&gt;</pre>
+        <p style="margin-top:16px;">Após reiniciar o agente, confirmação nos logs:</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">sudo tail -50 /var/ossec/logs/ossec.log | grep -i suricata
+# wazuh-logcollector: INFO: (1950): Analyzing file: '/var/log/suricata/eve.json'</pre>
+        <p style="margin-top:16px;">⚠️ <strong>Atenção:</strong> se aparecer <em>"Log file is duplicated"</em>, o bloco foi adicionado duas vezes no ossec.conf. Remover a entrada duplicada e reiniciar o agente.</p>
+      </div>
+    </div>
+
+    <div id="suri-modal-interface" class="lab-modal" onclick="closeModalOutside(event,'suri-modal-interface')">
+      <div class="lab-modal-content">
+        <button class="modal-close" onclick="closeModal('suri-modal-interface')">✕</button>
+        <h3>Correção da interface de captura</h3>
+        <p>Diagnóstico: sensor estava em <code>eth1</code> (192.168.218.0/24), não em <code>eth0</code> (192.168.220.0/24 — LAN do lab).</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">grep -A 5 "af-packet:" /etc/suricata/suricata.yaml
+# af-packet:
+#   - interface: eth1  ← errado</pre>
+        <p style="margin-top:16px;">Correção no <code>suricata.yaml</code>:</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">af-packet:
+  - interface: eth0   # ← correto: LAN do lab
+
+sudo systemctl restart suricata</pre>
+        <p style="margin-top:16px;">Validação: reteste do ataque nmap e confirmação do alerta no eve.json com <code>in_iface: "eth0"</code>.</p>
+      </div>
+    </div>
+
+    <div id="suri-modal-custom" class="lab-modal" onclick="closeModalOutside(event,'suri-modal-custom')">
+      <div class="lab-modal-content">
+        <button class="modal-close" onclick="closeModal('suri-modal-custom')">✕</button>
+        <h3>Regras customizadas — local.rules</h3>
+        <p>Arquivo criado em <code>/var/lib/suricata/rules/local.rules</code> e referenciado no <code>suricata.yaml</code>:</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">rule-files:
+  - suricata.rules
+  - local.rules</pre>
+        <p style="margin-top:16px;">Validação de sintaxe antes de aplicar:</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">sudo suricata -T -c /etc/suricata/suricata.yaml -v 2>&1 | tail -5
+# 2 rule files processed. 50517 rules successfully loaded, 0 failed
+# Configuration provided was successfully loaded.</pre>
+        <p style="margin-top:16px;">Resultado após reteste do SQLi no Juice Shop:</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">{
+  "alert": {
+    "signature": "LOCAL SQLi Attempt - OR 1=1 in HTTP Body",
+    "category": "Web Application Attack",
+    "signature_id": 9000001
+  },
+  "http": { "url": "/rest/user/login", "http_method": "POST" }
+}</pre>
+      </div>
+    </div>
 
     <footer class="footer">
       <p>Portfólio técnico em Redes, Infraestrutura, Cloud Computing e Cibersegurança.</p>
@@ -727,6 +750,38 @@
       </div>
       <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
     </footer>
+
+    <script>
+      (() => {
+        const track = document.getElementById('suricataCarousel');
+        const dotsContainer = document.getElementById('suricataDots');
+        if (!track || !dotsContainer) return;
+        const cards = track.querySelectorAll('.carousel-card');
+        const total = cards.length;
+        let current = 0;
+        function getVisible() {
+          return window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
+        }
+        cards.forEach((_, i) => {
+          const dot = document.createElement('button');
+          dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+          dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+          dot.addEventListener('click', () => goTo(i));
+          dotsContainer.appendChild(dot);
+        });
+        function goTo(index) {
+          const max = Math.max(0, total - getVisible());
+          current = Math.max(0, Math.min(index, max));
+          track.style.transform = `translateX(-${current * (cards[0].offsetWidth + 24)}px)`;
+          dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+        }
+        window.moveSuricataCarousel = (dir) => goTo(current + dir);
+        window.addEventListener('resize', () => goTo(current));
+        let startX = 0;
+        track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+        track.addEventListener('touchend', e => { if (Math.abs(startX - e.changedTouches[0].clientX) > 50) window.moveSuricataCarousel(startX > e.changedTouches[0].clientX ? 1 : -1); });
+      })();
+    </script>
     <script>
       function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden';}
       function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
