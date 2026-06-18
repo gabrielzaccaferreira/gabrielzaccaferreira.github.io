@@ -527,28 +527,33 @@
       <section id="competencias" class="section">
         <p class="section-label">Competências desenvolvidas</p>
         <h2>O que este laboratório construiu na prática.</h2>
-        <div class="skills-grid">
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-fire"></i> Firewall</h3>
+        <div class="carousel-wrapper">
+          <button class="carousel-btn carousel-prev" onclick="movePfsenseCarousel(-1)" aria-label="Anterior">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <div class="carousel-track-container">
+            <div class="carousel-track" id="pfsenseCarousel">
+          <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-fire"></i> Firewall</h3>
             <p>Configuração de regras de firewall stateful no pfSense — criando políticas de allow/deny por interface, protocolo e porta para controlar o fluxo de tráfego entre WAN e LAN.</p>
           </article>
-          <article class="skill-card">
+          <article class="carousel-card skill-card">
             <h3><i class="fa-solid fa-network-wired"></i> Roteamento e NAT</h3>
             <p>Configuração de NAT Outbound para tradução de endereços, permitindo que a rede interna acesse recursos externos usando o IP da WAN do pfSense como saída.</p>
           </article>
-          <article class="skill-card">
+          <article class="carousel-card skill-card">
             <h3><i class="fa-solid fa-diagram-project"></i> Segmentação de rede</h3>
             <p>Criação de duas subnets isoladas — WAN e LAN — com pfSense como ponto de controle, aplicando na prática o conceito de segmentação de rede.</p>
           </article>
-          <article class="skill-card">
+          <article class="carousel-card skill-card">
             <h3><i class="fa-solid fa-server"></i> DHCP</h3>
             <p>Configuração de servidor DHCP na LAN para distribuição automática de IPs, gateway e DNS — compreendendo o processo DORA na prática dentro de um ambiente real.</p>
           </article>
-          <article class="skill-card">
+          <article class="carousel-card skill-card">
             <h3><i class="fa-solid fa-file-lines"></i> Log Management</h3>
             <p>Configuração de syslog remoto para envio de logs do pfSense ao Wazuh Manager, integrando eventos de firewall ao pipeline centralizado de monitoramento de segurança.</p>
           </article>
-          <article class="skill-card">
+          <article class="carousel-card skill-card">
             <h3><i class="fa-solid fa-layer-group"></i> Defense in Depth</h3>
             <p>Construção de defesa em camadas combinando pfSense (perímetro), Suricata (rede), CrowdSec (comportamento) e Wazuh (SIEM) — arquitetura de segurança multicamada real.</p>
           </article>
