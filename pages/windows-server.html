@@ -81,7 +81,7 @@
             <strong>↓</strong>
             <span>Sysmon / Event Log / PowerShell Operational</span>
             <strong>↓</strong>
-            <span>Wazuh Agent → Manager (192.168.220.103)</span>
+            <span>Wazuh Agent → Manager (10.10.10.10)</span>
             <strong>↓</strong>
             <span>Suricata (Kali) → eve.json</span>
             <strong>↓</strong>
@@ -134,7 +134,7 @@
         <div class="cards-grid">
           <article class="card">
             <h3 class="card-title"><i class="fa-brands fa-windows card-icon"></i> Windows Server 2025</h3>
-            <p>Standard com Desktop Experience, avaliação gratuita de 180 dias. VM no VMware Workstation com 4GB RAM, 60GB disco NVMe, UEFI + Secure Boot. IP estático <code style="color:var(--primary);font-family:monospace;">192.168.220.50</code> na LAN do pfSense.</p>
+            <p>Standard com Desktop Experience, avaliação gratuita de 180 dias. VM no VMware Workstation com 4GB RAM, 60GB disco NVMe, UEFI + Secure Boot. IP estático <code style="color:var(--primary);font-family:monospace;">10.10.10.40</code> na LAN do pfSense.</p>
             <div class="project-stack">
               <span>WS 2025 Standard</span>
               <span>VMware Workstation</span>
@@ -163,7 +163,7 @@
           </article>
           <article class="card">
             <h3 class="card-title"><i class="fa-solid fa-shield-halved card-icon"></i> Wazuh Agent 4.14.5</h3>
-            <p>Agente instalado e registrado no Manager existente (<code style="color:var(--primary);font-family:monospace;">192.168.220.103</code>). Configurado para monitorar os canais Sysmon/Operational e PowerShell/Operational além dos canais padrão (Application, Security, System).</p>
+            <p>Agente instalado e registrado no Manager existente (<code style="color:var(--primary);font-family:monospace;">10.10.10.10</code>). Configurado para monitorar os canais Sysmon/Operational e PowerShell/Operational além dos canais padrão (Application, Security, System).</p>
             <div class="project-stack">
               <span>Wazuh 4.14.5</span>
               <span>ossec.conf</span>
@@ -201,7 +201,7 @@
               <span class="roadmap-status">Concluído</span>
               <h3>Configuração de rede estática</h3>
               <p>IP estático aplicado via PowerShell após falha silenciosa da GUI (DHCP continuou ativo mesmo após configuração manual pelo Painel de Controle). Diagnóstico com <code style="color:var(--primary);font-family:monospace;">Get-NetIPInterface</code> confirmou a causa raiz.</p>
-              <div class="project-stack"><span>New-NetIPAddress</span><span>Set-NetIPInterface</span><span>192.168.220.50/24</span></div>
+              <div class="project-stack"><span>New-NetIPAddress</span><span>Set-NetIPInterface</span><span>10.10.10.40/24</span></div>
               <button class="modal-trigger" onclick="openModal('ws-modal-rede')">Ver detalhes →</button>
             </div>
           </article>
@@ -302,7 +302,7 @@
           <p class="section-label">Exercício 1</p>
           <h2>Metasploitable2 — CVE-2007-2447 (Samba usermap_script)</h2>
           <p class="section-text">
-            VM Metasploitable2 provisionada na mesma VMnet1 (<code style="color:var(--primary);font-family:monospace;">192.168.220.152</code>).
+            VM Metasploitable2 provisionada na mesma VMnet1 (<code style="color:var(--primary);font-family:monospace;">10.10.10.30</code>).
             Reconhecimento com nmap revelou 29 portas abertas incluindo Samba 3.X nas portas 139/445.
           </p>
           <div class="cards-grid">
@@ -327,8 +327,8 @@
             <p class="section-label">Alerta real no eve.json</p>
             <pre style="margin:0;color:var(--text-soft);font-family:monospace;font-size:13px;line-height:1.8;white-space:pre-wrap;">{
   "event_type": "alert",
-  "src_ip": "192.168.220.152",
-  "dest_ip": "192.168.220.130",
+  "src_ip": "10.10.10.30",
+  "dest_ip": "10.10.10.20",
   "dest_port": 4444,
   "alert": {
     "signature": "POSSBL SCAN SHELL M-SPLOIT TCP",
@@ -345,7 +345,7 @@
           <p class="section-label">Exercício 2</p>
           <h2>OWASP Juice Shop — SQLi, DOM XSS e gap de detecção</h2>
           <p class="section-text">
-            Juice Shop rodando via Docker no Kali (<code style="color:var(--primary);font-family:monospace;">192.168.220.130:3000</code>).
+            Juice Shop rodando via Docker no Kali (<code style="color:var(--primary);font-family:monospace;">10.10.10.20:3000</code>).
             Ataques executados a partir do navegador do Windows Server, garantindo que o tráfego
             atravessasse a rede física e fosse capturável pelo Suricata.
           </p>
@@ -442,7 +442,7 @@
         <div class="cards-grid">
           <article class="card">
             <h3 class="card-title"><i class="fa-solid fa-triangle-exclamation card-icon"></i> Sensor na interface errada</h3>
-            <p>O Suricata estava com <code style="color:var(--primary);font-family:monospace;">af-packet: interface: eth1</code> — a rede secundária do Kali (<code style="color:var(--primary);font-family:monospace;">192.168.218.0/24</code>), não a LAN do lab (<code style="color:var(--primary);font-family:monospace;">eth0, 192.168.220.0/24</code>). Ataques contra Metasploitable2 não apareciam no SIEM. Diagnóstico pelo <code style="color:var(--primary);font-family:monospace;">suricata.yaml</code>, correção e revalidação com reteste do ataque.</p>
+            <p>O Suricata estava com <code style="color:var(--primary);font-family:monospace;">af-packet: interface: eth1</code> — a rede secundária do Kali (<code style="color:var(--primary);font-family:monospace;">10.10.20.0/24</code>), não a LAN do lab (<code style="color:var(--primary);font-family:monospace;">eth0, 10.10.10.0/24</code>). Ataques contra Metasploitable2 não apareciam no SIEM. Diagnóstico pelo <code style="color:var(--primary);font-family:monospace;">suricata.yaml</code>, correção e revalidação com reteste do ataque.</p>
             <div class="project-stack"><span>eth1 → eth0</span><span>suricata.yaml</span><span>af-packet</span></div>
           </article>
           <article class="card">
@@ -559,8 +559,8 @@ Edição: Standard com Desktop Experience</pre>
         <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">Remove-NetIPAddress -InterfaceAlias "Ethernet0" -Confirm:$false
 Remove-NetRoute -InterfaceAlias "Ethernet0" -Confirm:$false -ErrorAction SilentlyContinue
 Set-NetIPInterface -InterfaceAlias "Ethernet0" -Dhcp Disabled
-New-NetIPAddress -InterfaceAlias "Ethernet0" -IPAddress 192.168.220.50 -PrefixLength 24 -DefaultGateway 192.168.220.254
-Set-DnsClientServerAddress -InterfaceAlias "Ethernet0" -ServerAddresses 192.168.220.254</pre>
+New-NetIPAddress -InterfaceAlias "Ethernet0" -IPAddress 10.10.10.40 -PrefixLength 24 -DefaultGateway 10.10.10.1
+Set-DnsClientServerAddress -InterfaceAlias "Ethernet0" -ServerAddresses 10.10.10.1</pre>
       </div>
     </div>
 
@@ -588,7 +588,7 @@ Get-Service sysmon64   # Status: Running</pre>
         <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.5-1.msi `
   -OutFile $env:tmp\wazuh-agent.msi
 msiexec.exe /i $env:tmp\wazuh-agent.msi /q `
-  WAZUH_MANAGER='192.168.220.103' `
+  WAZUH_MANAGER='10.10.10.10' `
   WAZUH_AGENT_NAME='win-srv01'
 NET START WazuhSvc</pre>
         <p style="margin-top:16px;">Blocos adicionados ao <code>ossec.conf</code> para monitorar Sysmon e PowerShell:</p>

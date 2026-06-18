@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
@@ -76,7 +76,7 @@
           <p class="section-label">Topologia</p>
           <h2>Fluxo do laboratório</h2>
           <div class="architecture-flow">
-            <span>Kali Linux — Suricata 8.0.5 (eth0 — 192.168.220.130)</span>
+            <span>Kali Linux — Suricata 8.0.5 (eth0 — 10.10.10.20)</span>
             <strong>↓</strong>
             <span>AF-PACKET — captura em tempo real</span>
             <strong>↓</strong>
@@ -84,7 +84,7 @@
             <strong>↓</strong>
             <span>Wazuh Agent → Logcollector</span>
             <strong>↓</strong>
-            <span>Wazuh Manager (192.168.220.103) → Dashboard</span>
+            <span>Wazuh Manager (10.10.10.10) → Dashboard</span>
           </div>
         </div>
       </section>
@@ -135,11 +135,11 @@
         <div class="cards-grid">
           <article class="card">
             <h3 class="card-title"><i class="fa-brands fa-linux card-icon"></i> Sistema base</h3>
-            <p>Suricata instalado no Kali Linux rodando como VM no VMware Workstation. Interface de captura <code style="color:var(--primary);font-family:monospace;">eth0</code> na LAN do pfSense (<code style="color:var(--primary);font-family:monospace;">192.168.220.130</code>), atrás do gateway.</p>
+            <p>Suricata instalado no Kali Linux rodando como VM no VMware Workstation. Interface de captura <code style="color:var(--primary);font-family:monospace;">eth0</code> na LAN do pfSense (<code style="color:var(--primary);font-family:monospace;">10.10.10.20</code>), atrás do gateway.</p>
             <div class="project-stack">
               <span>Kali Linux 2026.1</span>
               <span>VMware VMnet1</span>
-              <span>192.168.220.130</span>
+              <span>10.10.10.20</span>
             </div>
           </article>
           <article class="card">
@@ -154,7 +154,7 @@
           </article>
           <article class="card">
             <h3 class="card-title"><i class="fa-solid fa-shield-halved card-icon"></i> Wazuh SIEM</h3>
-            <p>Ubuntu Server com Wazuh Manager (<code style="color:var(--primary);font-family:monospace;">192.168.220.103</code>) coletando eventos do Suricata via Logcollector. Decoders nativos para eve.json processam campos como <code style="color:var(--primary);font-family:monospace;">alert.signature</code>, <code style="color:var(--primary);font-family:monospace;">src_ip</code> e <code style="color:var(--primary);font-family:monospace;">dest_port</code>.</p>
+            <p>Ubuntu Server com Wazuh Manager (<code style="color:var(--primary);font-family:monospace;">10.10.10.10</code>) coletando eventos do Suricata via Logcollector. Decoders nativos para eve.json processam campos como <code style="color:var(--primary);font-family:monospace;">alert.signature</code>, <code style="color:var(--primary);font-family:monospace;">src_ip</code> e <code style="color:var(--primary);font-family:monospace;">dest_port</code>.</p>
             <div class="project-stack">
               <span>Wazuh 4.14.5</span>
               <span>Logcollector</span>
@@ -318,11 +318,11 @@
         <div class="timeline">
           <div class="timeline-item">
             <span><i class="fa-solid fa-magnifying-glass"></i> Sintoma identificado</span>
-            <p>Busca <code style="color:var(--primary);font-family:monospace;">data.dest_ip: 192.168.220.152</code> no Wazuh retornando zero resultados, mesmo com o exploit Metasploit confirmado e shell reversa ativa na porta 4444.</p>
+            <p>Busca <code style="color:var(--primary);font-family:monospace;">data.dest_ip: 10.10.10.30</code> no Wazuh retornando zero resultados, mesmo com o exploit Metasploit confirmado e shell reversa ativa na porta 4444.</p>
           </div>
           <div class="timeline-item">
             <span><i class="fa-solid fa-terminal"></i> Diagnóstico via suricata.yaml</span>
-            <p>Comando <code style="color:var(--primary);font-family:monospace;">grep -A 5 "af-packet:" /etc/suricata/suricata.yaml</code> revelou <code style="color:var(--primary);font-family:monospace;">interface: eth1</code> — a interface secundária do Kali (rede <code style="color:var(--primary);font-family:monospace;">192.168.218.0/24</code>), não a LAN do lab (<code style="color:var(--primary);font-family:monospace;">eth0, 192.168.220.0/24</code>).</p>
+            <p>Comando <code style="color:var(--primary);font-family:monospace;">grep -A 5 "af-packet:" /etc/suricata/suricata.yaml</code> revelou <code style="color:var(--primary);font-family:monospace;">interface: eth1</code> — a interface secundária do Kali (rede <code style="color:var(--primary);font-family:monospace;">10.10.20.0/24</code>), não a LAN do lab (<code style="color:var(--primary);font-family:monospace;">eth0, 10.10.10.0/24</code>).</p>
           </div>
           <div class="timeline-item">
             <span><i class="fa-solid fa-wrench"></i> Correção aplicada</span>
@@ -388,7 +388,7 @@
           <div class="cards-grid">
             <article class="card">
               <h3 class="card-title"><i class="fa-solid fa-magnifying-glass card-icon"></i> Reconhecimento</h3>
-              <p><code style="color:var(--primary);font-family:monospace;">nmap -sV -p-</code> contra <code style="color:var(--primary);font-family:monospace;">192.168.220.152</code>. 29 serviços identificados incluindo Samba 3.X nas portas 139/445, vsftpd 2.3.4 e UnrealIRCd.</p>
+              <p><code style="color:var(--primary);font-family:monospace;">nmap -sV -p-</code> contra <code style="color:var(--primary);font-family:monospace;">10.10.10.30</code>. 29 serviços identificados incluindo Samba 3.X nas portas 139/445, vsftpd 2.3.4 e UnrealIRCd.</p>
               <div class="project-stack"><span>nmap -sV -p-</span><span>29 portas</span><span>Samba 3.X</span></div>
             </article>
             <article class="card highlight">
@@ -406,8 +406,8 @@
             <p class="section-label">Alerta real — eve.json</p>
             <pre style="margin:8px 0 0;color:var(--text-soft);font-family:monospace;font-size:13px;line-height:1.8;white-space:pre-wrap;">{
   "event_type": "alert",
-  "src_ip": "192.168.220.152",
-  "dest_ip": "192.168.220.130",
+  "src_ip": "10.10.10.30",
+  "dest_ip": "10.10.10.20",
   "dest_port": 4444,
   "alert": {
     "signature": "POSSBL SCAN SHELL M-SPLOIT TCP",
@@ -695,7 +695,7 @@ sudo systemctl restart suricata</pre>
       <div class="lab-modal-content">
         <button class="modal-close" onclick="closeModal('suri-modal-interface')">✕</button>
         <h3>Correção da interface de captura</h3>
-        <p>Diagnóstico: sensor estava em <code>eth1</code> (192.168.218.0/24), não em <code>eth0</code> (192.168.220.0/24 — LAN do lab).</p>
+        <p>Diagnóstico: sensor estava em <code>eth1</code> (10.10.20.0/24), não em <code>eth0</code> (10.10.10.0/24 — LAN do lab).</p>
         <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">grep -A 5 "af-packet:" /etc/suricata/suricata.yaml
 # af-packet:
 #   - interface: eth1  ← errado</pre>
