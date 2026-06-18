@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Windows Server + Sysmon | Gabriel Zacca Ferreira</title>
+    <meta name="description" content="Laboratório Windows Server 2025 com Sysmon, auditoria avançada, agente Wazuh e exercícios reais de Red Team vs Blue Team contra Metasploitable2 e OWASP Juice Shop." />
+    <meta name="author" content="Gabriel Zacca Ferreira" />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Windows Server + Sysmon | Gabriel Zacca Ferreira" />
+    <meta property="og:description" content="Telemetria avançada em Windows Server, Sysmon, Red Team vs Blue Team com Metasploitable2 e OWASP Juice Shop." />
+    <meta property="og:url" content="https://gabrielzacca.com.br/pages/windows-server.html" />
+    <meta property="og:image" content="https://gabrielzaccaferreira.github.io/assets/images/og-image.png" />
+    <link rel="canonical" href="https://gabrielzacca.com.br/pages/windows-server.html" />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navbar" aria-label="Navegação principal">
+        <a href="../index.html" class="logo">GZF</a>
+        <div class="nav-links">
+          <a href="../index.html">Home</a>
+          <a href="sobre.html">Sobre</a>
+          <a href="projetos.html">Projetos</a>
+          <a href="guia.html">Guia</a>
+          <a href="blog.html">Blog</a>
+          <a href="roadmap.html">Roadmap</a>
+        </div>
+        <div class="nav-actions">
+          <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer" class="nav-cv">Currículo</a>
+        </div>
+      </nav>
+      <div class="labs-bar">
+        <div class="labs-bar-inner">
+          <span class="labs-bar-label">Labs</span>
+          <a href="wazuh.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-shield-halved"></i> Wazuh SIEM/XDR</a>
+          <a href="kali-linux.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-brands fa-linux"></i> Kali Linux</a>
+          <a href="suricata.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-network-wired"></i> Suricata IDS/IPS</a>
+          <a href="crowdsec.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec</a>
+          <a href="wireshark.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-magnifying-glass-chart"></i> Wireshark</a>
+          <a href="pfsense.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-fire"></i> pfSense</a>
+          <a href="windows-server.html" class="labs-bar-link active"><span class="lab-dot"></span><i class="fa-brands fa-windows"></i> Windows Server</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- HERO -->
+      <section id="hero" class="hero">
+        <div class="hero-content">
+          <p class="eyebrow">Blue Team • Sysmon • SIEM • Red Team vs Blue Team</p>
+          <h1>
+            Windows Server 2025 + Sysmon
+            <span>Telemetria avançada e detecção real de ataques</span>
+          </h1>
+          <p class="hero-description">
+            Provisionamento de Windows Server 2025 com Sysmon, auditoria avançada de processo
+            e PowerShell logging — integrado ao Wazuh SIEM. Dois exercícios reais de Red Team
+            vs Blue Team: exploração de Metasploitable2 via CVE-2007-2447 e SQL Injection/XSS
+            no OWASP Juice Shop, com detecção validada no Suricata e no dashboard.
+          </p>
+          <div class="hero-actions">
+            <a href="#sobre" class="btn btn-primary">Ver o laboratório →</a>
+            <a href="#redteam" class="btn btn-secondary">Ver ataques reais</a>
+          </div>
+        </div>
+
+        <div class="architecture-card">
+          <p class="section-label">Topologia</p>
+          <h2>Fluxo do laboratório</h2>
+          <div class="architecture-flow">
+            <span>Windows Server 2025 — Sysmon + Wazuh Agent</span>
+            <strong>↓</strong>
+            <span>Sysmon / Event Log / PowerShell Operational</span>
+            <strong>↓</strong>
+            <span>Wazuh Agent → Manager (192.168.220.103)</span>
+            <strong>↓</strong>
+            <span>Suricata (Kali) → eve.json</span>
+            <strong>↓</strong>
+            <span>Wazuh Dashboard — Threat Hunting</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ÍNDICE -->
+      <section id="indice" class="section">
+        <p class="section-label">Índice</p>
+        <h2>Navegue pelo conteúdo desta documentação.</h2>
+        <div class="profile-tags">
+          <a href="#sobre"><span>Sobre</span></a>
+          <a href="#especificacoes"><span>Especificações</span></a>
+          <a href="#implementacao"><span>Implementação</span></a>
+          <a href="#telemetria"><span>Telemetria</span></a>
+          <a href="#integracao"><span>Integração Wazuh</span></a>
+          <a href="#redteam"><span>Red Team vs Blue Team</span></a>
+          <a href="#tuning"><span>Tuning de Regras</span></a>
+          <a href="#competencias"><span>Competências</span></a>
+          <a href="#resultados"><span>Resultados</span></a>
+          <a href="#conclusao"><span>Conclusão</span></a>
+        </div>
+      </section>
+
+      <!-- SOBRE -->
+      <section id="sobre" class="section">
+        <p class="section-label">Sobre o laboratório</p>
+        <h2>Por que Windows Server no lab de SOC.</h2>
+        <p class="section-text">
+          A maioria das detecções de SOC no mercado real — e a maioria das regras prontas do Wazuh
+          e do framework Sigma — é voltada a Windows Event Log, Sysmon e PowerShell logging.
+          Um ambiente só Linux, por mais completo que seja, deixa esse eixo de visibilidade em aberto.
+        </p>
+        <p class="section-text">
+          Este laboratório fecha essa lacuna: um Windows Server 2025 com telemetria de host completa
+          (Sysmon, Event ID 4688 com linha de comando, script block logging do PowerShell),
+          integrado ao mesmo Wazuh Manager já em produção no lab. O resultado é um pipeline de
+          detecção que cobre tanto o host Windows quanto o tráfego de rede capturado pelo Suricata —
+          e foi validado com ataques reais, não cenários simulados.
+        </p>
+      </section>
+
+      <!-- ESPECIFICAÇÕES -->
+      <section id="especificacoes" class="section">
+        <p class="section-label">Especificações</p>
+        <h2>Ambiente técnico do laboratório.</h2>
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title"><i class="fa-brands fa-windows card-icon"></i> Windows Server 2025</h3>
+            <p>Standard com Desktop Experience, avaliação gratuita de 180 dias. VM no VMware Workstation com 4GB RAM, 60GB disco NVMe, UEFI + Secure Boot. IP estático <code style="color:var(--primary);font-family:monospace;">192.168.220.50</code> na LAN do pfSense.</p>
+            <div class="project-stack">
+              <span>WS 2025 Standard</span>
+              <span>VMware Workstation</span>
+              <span>UEFI</span>
+              <span>VMnet1</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-eye card-icon"></i> Sysmon</h3>
+            <p>Instalado com a configuração de referência da comunidade (SwiftOnSecurity). Captura criação de processos, conexões de rede, criação de arquivos e alterações de registro com hashes e processo pai completo.</p>
+            <div class="project-stack">
+              <span>Sysmon64</span>
+              <span>SwiftOnSecurity config</span>
+              <span>Event ID 1/3/11/13</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-terminal card-icon"></i> Auditoria avançada</h3>
+            <p>Três políticas habilitadas via GPO: linha de comando completa no Event ID 4688, auditoria de criação de processo (Success), e PowerShell Script Block Logging (Event ID 4104 com conteúdo real de scripts).</p>
+            <div class="project-stack">
+              <span>Event ID 4688</span>
+              <span>Event ID 4104</span>
+              <span>gpedit.msc</span>
+              <span>gpupdate /force</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-shield-halved card-icon"></i> Wazuh Agent 4.14.5</h3>
+            <p>Agente instalado e registrado no Manager existente (<code style="color:var(--primary);font-family:monospace;">192.168.220.103</code>). Configurado para monitorar os canais Sysmon/Operational e PowerShell/Operational além dos canais padrão (Application, Security, System).</p>
+            <div class="project-stack">
+              <span>Wazuh 4.14.5</span>
+              <span>ossec.conf</span>
+              <span>eventchannel</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- IMPLEMENTAÇÃO -->
+      <section id="implementacao" class="section">
+        <p class="section-label">Processo de implementação</p>
+        <h2>Do download ao endpoint monitorado.</h2>
+        <p class="section-text">
+          Cada etapa foi executada, validada e documentada antes de avançar. Dois problemas
+          reais de infraestrutura foram encontrados e resolvidos durante o processo —
+          registrados aqui como parte do aprendizado.
+        </p>
+        <div class="roadmap-list">
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Provisionamento da VM</h3>
+              <p>Download do ISO via Microsoft Evaluation Center, criação da VM com UEFI + Secure Boot, rede em VMnet1 (mesma LAN do pfSense, Kali e Wazuh). Instalação limpa do Windows Server 2025 Standard com Desktop Experience.</p>
+              <div class="project-stack"><span>UEFI</span><span>Secure Boot</span><span>VMnet1</span><span>Desktop Experience</span></div>
+              <button class="modal-trigger" onclick="openModal('ws-modal-vm')">Ver detalhes →</button>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Configuração de rede estática</h3>
+              <p>IP estático aplicado via PowerShell após falha silenciosa da GUI (DHCP continuou ativo mesmo após configuração manual pelo Painel de Controle). Diagnóstico com <code style="color:var(--primary);font-family:monospace;">Get-NetIPInterface</code> confirmou a causa raiz.</p>
+              <div class="project-stack"><span>New-NetIPAddress</span><span>Set-NetIPInterface</span><span>192.168.220.50/24</span></div>
+              <button class="modal-trigger" onclick="openModal('ws-modal-rede')">Ver detalhes →</button>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Sysmon + Auditoria avançada</h3>
+              <p>Sysmon instalado com config da SwiftOnSecurity. Três políticas de auditoria habilitadas via GPO: linha de comando no 4688, Auditar Criação de Processo (Êxito) e PowerShell Script Block Logging. Validado com Event IDs 4688 e 4104 reais.</p>
+              <div class="project-stack"><span>Sysmon64.exe -i</span><span>gpedit.msc</span><span>gpupdate /force</span></div>
+              <button class="modal-trigger" onclick="openModal('ws-modal-sysmon')">Ver detalhes →</button>
+            </div>
+          </article>
+
+          <article class="roadmap-step done">
+            <div class="roadmap-marker"><i class="fa-solid fa-check"></i></div>
+            <div class="roadmap-step-content">
+              <span class="roadmap-status">Concluído</span>
+              <h3>Agente Wazuh + ossec.conf</h3>
+              <p>Agente instalado via MSI gerado pelo dashboard. Canal Sysmon/Operational e PowerShell/Operational adicionados ao ossec.conf. Agente registrado com status Active no Manager e eventos do Sysmon visíveis no dashboard.</p>
+              <div class="project-stack"><span>wazuh-agent-4.14.5.msi</span><span>ossec.conf</span><span>eventchannel</span></div>
+              <button class="modal-trigger" onclick="openModal('ws-modal-wazuh')">Ver detalhes →</button>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- TELEMETRIA -->
+      <section id="telemetria" class="section">
+        <p class="section-label">Cobertura de telemetria</p>
+        <h2>O que este endpoint gera de visibilidade.</h2>
+        <p class="section-text">
+          Com Sysmon + auditoria avançada + PowerShell logging, o host Windows passa a gerar
+          uma telemetria bem mais rica do que a configuração padrão. Os três canais se complementam:
+          Sysmon tem mais contexto por evento (hash, processo pai detalhado), o Event ID 4688
+          é nativo do SO sem dependência de ferramenta extra, e o 4104 captura o conteúdo
+          real de scripts PowerShell — inclusive após deofuscação em memória.
+        </p>
+        <div class="cards-grid">
+          <article class="card highlight">
+            <h3 class="card-title"><i class="fa-solid fa-eye card-icon"></i> Sysmon (Event IDs 1, 3, 11, 13)</h3>
+            <p>Criação de processos com hash SHA256 e processo pai completo (ID 1), conexões de rede com IP/porta de destino (ID 3), criação de arquivos (ID 11) e alterações de registro (ID 13). Base do framework de detecção Sigma.</p>
+            <div class="project-stack"><span>EID 1 — Processo</span><span>EID 3 — Rede</span><span>EID 11 — Arquivo</span><span>EID 13 — Registry</span></div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-terminal card-icon"></i> Event ID 4688 — Linha de comando</h3>
+            <p>Criação de processo com a linha de comando completa no campo <em>Process Command Line</em> — preenchido somente com a política de auditoria avançada ativa. Detecta execuções suspeitas como <code style="color:var(--primary);font-family:monospace;">cmd.exe /c whoami</code> ou download via PowerShell.</p>
+            <div class="project-stack"><span>Security Log</span><span>EID 4688</span><span>CommandLine completo</span></div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-brands fa-windows card-icon"></i> Event ID 4104 — Script Block</h3>
+            <p>Conteúdo completo de blocos de script PowerShell executados, incluindo scripts deofuscados em memória. Essencial para detectar técnicas como download cradles, encoded commands e living-off-the-land.</p>
+            <div class="project-stack"><span>PowerShell Operational</span><span>EID 4104</span><span>Script Block</span></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- INTEGRAÇÃO WAZUH -->
+      <section id="integracao" class="section">
+        <p class="section-label">Integração com Wazuh</p>
+        <h2>Como os eventos do Windows chegam ao SIEM.</h2>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-eye"></i> Sysmon e Windows Event Log geram eventos</span>
+            <p>O Sysmon registra eventos em <em>Microsoft-Windows-Sysmon/Operational</em>. As políticas de auditoria alimentam o Security log (4688) e o PowerShell/Operational (4104).</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-gears"></i> Agente Wazuh coleta via eventchannel</span>
+            <p>O bloco <code style="color:var(--primary);font-family:monospace;">&lt;localfile&gt;&lt;log_format&gt;eventchannel&lt;/log_format&gt;</code> no ossec.conf instrui o agente a ler os canais configurados e enviar ao Manager via TCP 1514.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-shield-halved"></i> Wazuh Manager decodifica e correlaciona</span>
+            <p>O Manager aplica decoders nativos de Windows (campos <code style="color:var(--primary);font-family:monospace;">data.win.eventdata.*</code>) e regras de detecção — incluindo mapeamento para MITRE ATT&CK.</p>
+          </div>
+          <div class="timeline-item">
+            <span><i class="fa-solid fa-chart-line"></i> Dashboard — Threat Hunting</span>
+            <p>Eventos visíveis no Threat Hunting com filtros por <code style="color:var(--primary);font-family:monospace;">agent.name: win-srv01</code>, pesquisáveis por Event ID, linha de comando ou hash de processo.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- RED TEAM VS BLUE TEAM -->
+      <section id="redteam" class="section">
+        <p class="section-label">Red Team vs Blue Team</p>
+        <h2>Dois ataques reais. Detecção validada.</h2>
+        <p class="section-text">
+          O objetivo foi sair de "telemetria passiva" para um ciclo completo de detecção:
+          configurar o sensor, atacar de propósito, e validar — ou identificar a ausência de —
+          detecção real no SIEM. Dois alvos foram utilizados, cada um expondo uma camada
+          diferente do pipeline de detecção.
+        </p>
+
+        <!-- Exercício 1 -->
+        <div style="margin-top:48px;">
+          <p class="section-label">Exercício 1</p>
+          <h2>Metasploitable2 — CVE-2007-2447 (Samba usermap_script)</h2>
+          <p class="section-text">
+            VM Metasploitable2 provisionada na mesma VMnet1 (<code style="color:var(--primary);font-family:monospace;">192.168.220.152</code>).
+            Reconhecimento com nmap revelou 29 portas abertas incluindo Samba 3.X nas portas 139/445.
+          </p>
+          <div class="cards-grid">
+            <article class="card">
+              <h3 class="card-title"><i class="fa-solid fa-magnifying-glass card-icon"></i> Reconhecimento</h3>
+              <p>nmap <code style="color:var(--primary);font-family:monospace;">-sV -p-</code> contra o alvo. 29 serviços identificados incluindo vsftpd 2.3.4, Samba 3.X, UnrealIRCd e distccd — todos com vulnerabilidades conhecidas.</p>
+              <div class="project-stack"><span>nmap -sV -p-</span><span>29 portas abertas</span><span>Samba 3.X</span></div>
+            </article>
+            <article class="card highlight">
+              <h3 class="card-title"><i class="fa-solid fa-skull card-icon"></i> Exploração — acesso root</h3>
+              <p>Módulo Metasploit <code style="color:var(--primary);font-family:monospace;">exploit/multi/samba/usermap_script</code>. Shell reversa aberta na porta 4444. Confirmação: <code style="color:var(--primary);font-family:monospace;">whoami → root</code>, <code style="color:var(--primary);font-family:monospace;">uid=0(root)</code>.</p>
+              <div class="project-stack"><span>CVE-2007-2447</span><span>Shell reversa</span><span>Porta 4444</span><span>root</span></div>
+            </article>
+            <article class="card">
+              <h3 class="card-title"><i class="fa-solid fa-bell card-icon"></i> Detecção — Suricata</h3>
+              <p>Após correção da interface de captura (eth1 → eth0), Suricata detectou: reconhecimento (<em>POSSBL PORT SCAN NMAP -sA</em>) e exploração (<em>POSSBL SCAN SHELL M-SPLOIT TCP</em>, severity 1, categoria "Network Trojan detected").</p>
+              <div class="project-stack"><span>SID 3400020</span><span>Severity 1</span><span>86601 no Wazuh</span></div>
+            </article>
+          </div>
+
+          <div style="margin-top:32px;padding:24px;background:rgba(2,6,23,0.8);border:1px solid var(--border-light);border-radius:16px;">
+            <p class="section-label">Alerta real no eve.json</p>
+            <pre style="margin:0;color:var(--text-soft);font-family:monospace;font-size:13px;line-height:1.8;white-space:pre-wrap;">{
+  "event_type": "alert",
+  "src_ip": "192.168.220.152",
+  "dest_ip": "192.168.220.130",
+  "dest_port": 4444,
+  "alert": {
+    "signature": "POSSBL SCAN SHELL M-SPLOIT TCP",
+    "category": "A Network Trojan was detected",
+    "severity": 1,
+    "signature_id": 3400020
+  }
+}</pre>
+          </div>
+        </div>
+
+        <!-- Exercício 2 -->
+        <div style="margin-top:64px;">
+          <p class="section-label">Exercício 2</p>
+          <h2>OWASP Juice Shop — SQLi, DOM XSS e gap de detecção</h2>
+          <p class="section-text">
+            Juice Shop rodando via Docker no Kali (<code style="color:var(--primary);font-family:monospace;">192.168.220.130:3000</code>).
+            Ataques executados a partir do navegador do Windows Server, garantindo que o tráfego
+            atravessasse a rede física e fosse capturável pelo Suricata.
+          </p>
+          <div class="cards-grid">
+            <article class="card highlight">
+              <h3 class="card-title"><i class="fa-solid fa-database card-icon"></i> SQL Injection — bypass de login</h3>
+              <p>Payload <code style="color:var(--primary);font-family:monospace;">' OR 1=1--</code> no campo de email do login. Acesso ao administrador sem senha. Desafio "Login Admin" resolvido. Tráfego via POST /rest/user/login com body JSON.</p>
+              <div class="project-stack"><span>SQLi</span><span>POST body</span><span>Login Admin</span></div>
+            </article>
+            <article class="card">
+              <h3 class="card-title"><i class="fa-solid fa-code card-icon"></i> DOM XSS — limite do NIDS</h3>
+              <p>Payload <code style="color:var(--primary);font-family:monospace;">&lt;img src=x onerror="alert('XSS')"&gt;</code> na busca. Desafio "DOM XSS" resolvido. Mas o parâmetro nunca trafegou pela rede — <code style="color:var(--primary);font-family:monospace;">/rest/products/search?q=</code> sempre chegou vazio ao servidor.</p>
+              <div class="project-stack"><span>DOM XSS</span><span>Client-side</span><span>Sem tráfego de rede</span></div>
+            </article>
+            <article class="card">
+              <h3 class="card-title"><i class="fa-solid fa-pen-ruler card-icon"></i> Regra customizada criada</h3>
+              <p>ET Open tem 7104 regras de web-application-attack, mas escritas para stacks PHP/GET — não para APIs JSON modernas. Regra customizada criada com <code style="color:var(--primary);font-family:monospace;">http.request_body</code> para inspecionar corpo de POST.</p>
+              <div class="project-stack"><span>SID 9000001</span><span>http.request_body</span><span>local.rules</span></div>
+            </article>
+          </div>
+
+          <div style="margin-top:32px;padding:24px;background:rgba(2,6,23,0.8);border:1px solid var(--border-light);border-radius:16px;">
+            <p class="section-label">Regra customizada — local.rules</p>
+            <pre style="margin:0;color:var(--text-soft);font-family:monospace;font-size:13px;line-height:1.8;white-space:pre-wrap;">alert http any any -> any 3000 (
+  msg:"LOCAL SQLi Attempt - OR 1=1 in HTTP Body";
+  flow:to_server,established;
+  http.request_body;
+  content:"OR 1";
+  nocase;
+  classtype:web-application-attack;
+  sid:9000001;
+  rev:1;
+)</pre>
+          </div>
+
+          <!-- Tabela de gap -->
+          <div style="margin-top:32px;">
+            <p class="section-label">Gap analysis — visibilidade por tipo de ataque</p>
+            <div style="overflow-x:auto;margin-top:16px;">
+              <table style="width:100%;border-collapse:collapse;font-size:14px;">
+                <thead>
+                  <tr style="border-bottom:1px solid var(--border-light);">
+                    <th style="text-align:left;padding:12px 16px;color:var(--text-soft);">Tipo de ataque</th>
+                    <th style="text-align:left;padding:12px 16px;color:var(--text-soft);">Trafega pela rede?</th>
+                    <th style="text-align:left;padding:12px 16px;color:var(--text-soft);">ET Open detecta?</th>
+                    <th style="text-align:left;padding:12px 16px;color:var(--text-soft);">Regra customizada?</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--border-light);">
+                    <td style="padding:12px 16px;">SQLi em query string (GET)</td>
+                    <td style="padding:12px 16px;color:#22c55e;">✅ Sim</td>
+                    <td style="padding:12px 16px;color:#22c55e;">✅ Sim (ET Open)</td>
+                    <td style="padding:12px 16px;color:var(--text-soft);">—</td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--border-light);">
+                    <td style="padding:12px 16px;">SQLi em body JSON (POST API)</td>
+                    <td style="padding:12px 16px;color:#22c55e;">✅ Sim</td>
+                    <td style="padding:12px 16px;color:#ef4444;">❌ Não (gap real)</td>
+                    <td style="padding:12px 16px;color:#22c55e;">✅ SID 9000001</td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--border-light);">
+                    <td style="padding:12px 16px;">XSS Refletido/Armazenado</td>
+                    <td style="padding:12px 16px;color:#22c55e;">✅ Sim</td>
+                    <td style="padding:12px 16px;color:#f59e0b;">⚠️ Parcial</td>
+                    <td style="padding:12px 16px;color:#22c55e;">✅ SID 9000002</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:12px 16px;">DOM XSS puro (client-side)</td>
+                    <td style="padding:12px 16px;color:#ef4444;">❌ Não</td>
+                    <td style="padding:12px 16px;color:#ef4444;">❌ Impossível</td>
+                    <td style="padding:12px 16px;color:#ef4444;">❌ Impossível por design</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="section-text" style="margin-top:16px;font-size:14px;opacity:0.7;">
+              DOM XSS puro é processado inteiramente no frontend (Angular/React roteamento baseado em hash).
+              O parâmetro nunca sai do navegador como requisição HTTP — nenhuma ferramenta de inspeção de rede
+              pode detectar algo que não trafega. Controles adequados: CSP headers, WAF com inspeção JS, RASP.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- TUNING -->
+      <section id="tuning" class="section">
+        <p class="section-label">Tuning de regras</p>
+        <h2>Problema real encontrado e resolvido.</h2>
+        <p class="section-text">
+          Durante a operação do lab, dois problemas reais de infraestrutura foram identificados
+          e corrigidos — registrados aqui como exercício genuíno de troubleshooting de SOC.
+        </p>
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-triangle-exclamation card-icon"></i> Sensor na interface errada</h3>
+            <p>O Suricata estava com <code style="color:var(--primary);font-family:monospace;">af-packet: interface: eth1</code> — a rede secundária do Kali (<code style="color:var(--primary);font-family:monospace;">192.168.218.0/24</code>), não a LAN do lab (<code style="color:var(--primary);font-family:monospace;">eth0, 192.168.220.0/24</code>). Ataques contra Metasploitable2 não apareciam no SIEM. Diagnóstico pelo <code style="color:var(--primary);font-family:monospace;">suricata.yaml</code>, correção e revalidação com reteste do ataque.</p>
+            <div class="project-stack"><span>eth1 → eth0</span><span>suricata.yaml</span><span>af-packet</span></div>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-sliders card-icon"></i> Falso positivo — SCA/SecEdit (rule 92205)</h3>
+            <p>Regra nativa <strong>92205</strong> (nível 9) disparou para uma execução legítima do módulo SCA do próprio Wazuh — <code style="color:var(--primary);font-family:monospace;">SecEdit.exe</code> exportando política de segurança local. Falso positivo confirmado por análise de <code style="color:var(--primary);font-family:monospace;">parentImage</code>, <code style="color:var(--primary);font-family:monospace;">currentDirectory</code> e hash do binário. Regra de exceção criada no <code style="color:var(--primary);font-family:monospace;">local_rules.xml</code> com nível rebaixado para 3.</p>
+            <div class="project-stack"><span>Rule ID 100205</span><span>local_rules.xml</span><span>if_sid: 92205</span></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- COMPETÊNCIAS -->
+      <section id="competencias" class="section">
+        <p class="section-label">Competências desenvolvidas</p>
+        <h2>O que este laboratório construiu na prática.</h2>
+        <div class="skills-grid">
+          <article class="skill-card">
+            <h3><i class="fa-brands fa-windows"></i> Windows Telemetry</h3>
+            <p>Configuração de Sysmon com config da comunidade, habilitação de políticas de auditoria avançada via GPO e PowerShell Script Block Logging — base da detecção de endpoint em ambientes Windows corporativos.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-shield-halved"></i> SIEM Integration</h3>
+            <p>Deploy de agente Wazuh em Windows Server, configuração de canais de evento customizados no ossec.conf e validação de ingestão no dashboard. Tuning de regras com criação de exceção no local_rules.xml.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-skull"></i> Red Team Fundamentals</h3>
+            <p>Reconhecimento com nmap, exploração de CVE via Metasploit Framework, obtenção de shell reversa. SQL Injection e DOM XSS contra aplicação web moderna. Cadeia completa de comprometimento documentada.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-magnifying-glass"></i> Blue Team Analysis</h3>
+            <p>Correlação de eventos de host (Sysmon) e rede (Suricata) para reconstrução de ataque no SIEM. Análise de falso positivo com identificação de processo pai, hash e integridade. Gap analysis de visibilidade.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-pen-ruler"></i> Detection Engineering</h3>
+            <p>Criação de regras Suricata customizadas para cobrir gap real do ET Open contra APIs JSON modernas. Uso de <code style="color:var(--primary);font-family:monospace;">http.request_body</code> e <code style="color:var(--primary);font-family:monospace;">pcre</code> para inspecção de body de POST e URI.</p>
+          </article>
+          <article class="skill-card">
+            <h3><i class="fa-solid fa-wrench"></i> Infrastructure Troubleshooting</h3>
+            <p>Diagnóstico de IP estático não persistido (GUI vs PowerShell), identificação de sensor de rede mal posicionado (interface errada no af-packet) e correção com revalidação ativa — processo documentado como lição aprendida.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- RESULTADOS -->
+      <section id="resultados" class="section">
+        <p class="section-label">Resultados</p>
+        <h2>O que foi entregue neste laboratório.</h2>
+        <div class="stats-grid">
+          <div class="stat-card"><strong>3</strong><span>Canais de telemetria Windows</span></div>
+          <div class="stat-card"><strong>2</strong><span>Ataques reais executados</span></div>
+          <div class="stat-card"><strong>2</strong><span>Regras customizadas criadas</span></div>
+          <div class="stat-card"><strong>100%</strong><span>Detecção validada no SIEM</span></div>
+        </div>
+      </section>
+
+      <!-- CONCLUSÃO -->
+      <section id="conclusao" class="section cta-premium">
+        <p class="section-label">Conclusão</p>
+        <h2>Endpoint monitorado. Ataques detectados. Pipeline validado.</h2>
+        <p class="section-text">
+          Este laboratório fechou o eixo Windows do ambiente de SOC — adicionando a telemetria
+          de host mais relevante para o mercado ao pipeline já existente de Suricata e Wazuh.
+          Os exercícios de Red Team não foram apenas execução de exploits: cada ataque foi
+          acompanhado de análise de detecção, diagnóstico de gaps e, quando possível,
+          criação de cobertura customizada. O resultado é um ciclo completo de
+          detecção, resposta e documentação — do ataque ao alerta no SIEM.
+        </p>
+        <div class="hero-actions">
+          <a href="https://github.com/gabrielzaccaferreira/windows-server-soc-lab" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <i class="fa-brands fa-github"></i> Ver repositório →
+          </a>
+          <a href="suricata.html" class="btn btn-secondary">
+            <i class="fa-solid fa-network-wired"></i> Ver laboratório Suricata
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- MODAIS -->
+    <div id="ws-modal-vm" class="lab-modal" onclick="closeModalOutside(event,'ws-modal-vm')">
+      <div class="lab-modal-content">
+        <button class="modal-close" onclick="closeModal('ws-modal-vm')">✕</button>
+        <h3>Provisionamento da VM</h3>
+        <p>Download do ISO via <a href="https://www.microsoft.com/en-us/evalcenter/download-windows-server-2025" target="_blank">Microsoft Evaluation Center</a> — avaliação gratuita de 180 dias, sem necessidade de product key.</p>
+        <p style="margin-top:16px;">Parâmetros da VM no VMware Workstation:</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">vCPU: 2 | RAM: 4GB | Disco: 60GB NVMe (thin)
+Firmware: UEFI + Secure Boot
+Rede: Custom → VMnet1 (LAN do pfSense)
+Edição: Standard com Desktop Experience</pre>
+        <p style="margin-top:16px;">⚠️ O wizard do VMware só oferece Bridged/NAT/Host-only durante a criação. A opção <strong>Custom: VMnet1</strong> só aparece em <em>Edit VM Settings → Network Adapter</em> — ajuste obrigatório antes do primeiro boot.</p>
+      </div>
+    </div>
+
+    <div id="ws-modal-rede" class="lab-modal" onclick="closeModalOutside(event,'ws-modal-rede')">
+      <div class="lab-modal-content">
+        <button class="modal-close" onclick="closeModal('ws-modal-rede')">✕</button>
+        <h3>Configuração de rede estática</h3>
+        <p>A configuração via GUI (Painel de Controle → Propriedades do adaptador) foi aplicada, mas o DHCP continuou ativo silenciosamente. Diagnóstico:</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">Get-NetIPInterface -InterfaceAlias "Ethernet0" -AddressFamily IPv4 `
+  | Select-Object InterfaceAlias, Dhcp
+# Resultado: Dhcp → Enabled  ← nunca desabilitado</pre>
+        <p style="margin-top:16px;">Correção via PowerShell (reproduzível e auditável):</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">Remove-NetIPAddress -InterfaceAlias "Ethernet0" -Confirm:$false
+Remove-NetRoute -InterfaceAlias "Ethernet0" -Confirm:$false -ErrorAction SilentlyContinue
+Set-NetIPInterface -InterfaceAlias "Ethernet0" -Dhcp Disabled
+New-NetIPAddress -InterfaceAlias "Ethernet0" -IPAddress 192.168.220.50 -PrefixLength 24 -DefaultGateway 192.168.220.254
+Set-DnsClientServerAddress -InterfaceAlias "Ethernet0" -ServerAddresses 192.168.220.254</pre>
+      </div>
+    </div>
+
+    <div id="ws-modal-sysmon" class="lab-modal" onclick="closeModalOutside(event,'ws-modal-sysmon')">
+      <div class="lab-modal-content">
+        <button class="modal-close" onclick="closeModal('ws-modal-sysmon')">✕</button>
+        <h3>Sysmon + Auditoria avançada</h3>
+        <p>Instalação do Sysmon com a config da <a href="https://github.com/SwiftOnSecurity/sysmon-config" target="_blank">SwiftOnSecurity</a>:</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">.\Sysmon64.exe -i sysmonconfig-export.xml -accepteula
+Get-Service sysmon64   # Status: Running</pre>
+        <p style="margin-top:16px;">Três políticas habilitadas via <strong>gpedit.msc</strong> e aplicadas com <code>gpupdate /force</code>:</p>
+        <ul style="margin-top:12px;color:var(--text-soft);font-size:14px;line-height:2;">
+          <li>Config. do Computador → Modelos Administrativos → Sistema → Auditoria de Criação de Processo → <strong>Incluir linha de comando</strong></li>
+          <li>Config. Avançada de Política de Auditoria → Monitoração Detalhada → <strong>Auditar Criação de Processo (Êxito)</strong></li>
+          <li>Modelos Administrativos → Windows PowerShell → <strong>Ativar Log de Bloco de Script</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="ws-modal-wazuh" class="lab-modal" onclick="closeModalOutside(event,'ws-modal-wazuh')">
+      <div class="lab-modal-content">
+        <button class="modal-close" onclick="closeModal('ws-modal-wazuh')">✕</button>
+        <h3>Agente Wazuh + ossec.conf</h3>
+        <p>Comando gerado pelo dashboard (Agents Management → Deploy new agent → Windows):</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.5-1.msi `
+  -OutFile $env:tmp\wazuh-agent.msi
+msiexec.exe /i $env:tmp\wazuh-agent.msi /q `
+  WAZUH_MANAGER='192.168.220.103' `
+  WAZUH_AGENT_NAME='win-srv01'
+NET START WazuhSvc</pre>
+        <p style="margin-top:16px;">Blocos adicionados ao <code>ossec.conf</code> para monitorar Sysmon e PowerShell:</p>
+        <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">&lt;localfile&gt;
+  &lt;location&gt;Microsoft-Windows-Sysmon/Operational&lt;/location&gt;
+  &lt;log_format&gt;eventchannel&lt;/log_format&gt;
+&lt;/localfile&gt;
+
+&lt;localfile&gt;
+  &lt;location&gt;Microsoft-Windows-PowerShell/Operational&lt;/location&gt;
+  &lt;log_format&gt;eventchannel&lt;/log_format&gt;
+&lt;/localfile&gt;</pre>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>Portfólio técnico em Redes, Infraestrutura, Cloud Computing e Cibersegurança.</p>
+      <nav class="footer-nav" aria-label="Navegação do rodapé">
+        <a href="../index.html">Home</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="projetos.html">Projetos</a>
+        <a href="guia.html">Guia</a>
+        <a href="blog.html">Blog</a>
+        <a href="roadmap.html">Roadmap</a>
+      </nav>
+      <div class="footer-links">
+        <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a href="mailto:gabrielzaccaferreira@gmail.com"><i class="fa-solid fa-envelope"></i> E-mail</a>
+        <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-lines"></i> Currículo</a>
+      </div>
+      <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
+    </footer>
+
+    <script>
+      function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden';}
+      function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
+      function closeModalOutside(e,id){if(e.target===document.getElementById(id))closeModal(id);}
+      document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.lab-modal.open').forEach(m=>{m.classList.remove('open');document.body.style.overflow='';});});
+    </script>
+  </body>
+</html>
