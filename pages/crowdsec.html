@@ -102,6 +102,7 @@
           <a href="#implementacao"><span>Implementação</span></a>
           <a href="#configuracao"><span>Configuração</span></a>
           <a href="#competencias"><span>Competências</span></a>
+          <div style="width:100%;height:8px;"></div>
           <a href="#resultados"><span>Resultados</span></a>
           <a href="#evidencias"><span>Evidências</span></a>
           <a href="#conclusao"><span>Conclusão</span></a>
@@ -366,32 +367,43 @@ labels:
           uma abordagem diferente do Suricata (tráfego de rede) e do Wazuh (eventos do sistema),
           complementando o ecossistema de segurança do laboratório.
         </p>
-        <div class="skills-grid">
-          <article class="skill-card">
+        <div class="carousel-wrapper">
+          <button class="carousel-btn carousel-prev" onclick="moveCrowdsecCarousel(-1)" aria-label="Anterior">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <div class="carousel-track-container">
+            <div class="carousel-track" id="crowdsecCarousel">
+          <article class="carousel-card skill-card">
             <h3><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec</h3>
             <p>Instalação, configuração e operação do CrowdSec — compreendendo a arquitetura modular com acquisition files, parsers, scenarios, bouncers e a inteligência colaborativa da plataforma.</p>
           </article>
-          <article class="skill-card">
+          <article class="carousel-card skill-card">
             <h3><i class="fa-solid fa-crosshairs"></i> Brute Force Detection</h3>
             <p>Configuração de scenarios para detectar tentativas de brute force SSH — entendendo threshold, janela de tempo e como o comportamento de múltiplas falhas de login gera um alerta.</p>
           </article>
-          <article class="skill-card">
+          <article class="carousel-card skill-card">
             <h3><i class="fa-solid fa-scroll"></i> Análise de logs SSH</h3>
             <p>Monitoramento de eventos de autenticação SSH via journalctl, interpretação dos campos extraídos pelos parsers e correlação entre tentativas de login e alertas gerados.</p>
           </article>
-          <article class="skill-card">
+          <article class="carousel-card skill-card">
             <h3><i class="fa-solid fa-chart-bar"></i> Métricas e alertas</h3>
             <p>Uso do <code style="color:var(--primary);font-family:monospace;">cscli metrics</code> para validar o pipeline de processamento e <code style="color:var(--primary);font-family:monospace;">cscli alerts list</code> para analisar detecções — ferramentas essenciais para operar o CrowdSec.</p>
           </article>
-          <article class="skill-card">
+          <article class="carousel-card skill-card">
             <h3><i class="fa-brands fa-linux"></i> Linux Administration</h3>
             <p>Gerenciamento do serviço CrowdSec via systemctl, edição de arquivos YAML de configuração, troubleshooting via logs do sistema e uso do CLI cscli para administração.</p>
           </article>
-          <article class="skill-card">
+          <article class="carousel-card skill-card">
             <h3><i class="fa-brands fa-github"></i> Documentação técnica</h3>
             <p>Organização do laboratório em repositório GitHub com estrutura profissional — configs, notes e screenshots documentando o processo completo de implementação.</p>
           </article>
         </div>
+          </div>
+          <button class="carousel-btn carousel-next" onclick="moveCrowdsecCarousel(1)" aria-label="Próximo">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+        <div class="carousel-dots" id="crowdsecDots"></div>
       </section>
 
       <!-- RESULTADOS -->
@@ -551,5 +563,38 @@ labels:
       </div>
       <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
     </footer>
+    <script>
+      (() => {
+        const track = document.getElementById('crowdsecCarousel');
+        const dotsContainer = document.getElementById('crowdsecDots');
+        if (!track || !dotsContainer) return;
+        const cards = track.querySelectorAll('.carousel-card');
+        const total = cards.length;
+        let current = 0;
+        function getVisible() {
+          return window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
+        }
+        cards.forEach((_, i) => {
+          const dot = document.createElement('button');
+          dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+          dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+          dot.addEventListener('click', () => goTo(i));
+          dotsContainer.appendChild(dot);
+        });
+        function goTo(index) {
+          const max = Math.max(0, total - getVisible());
+          current = Math.max(0, Math.min(index, max));
+          track.style.transform = `translateX(-${current * (cards[0].offsetWidth + 24)}px)`;
+          dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+        }
+        window.moveCrowdsecCarousel = (dir) => goTo(current + dir);
+        window.addEventListener('resize', () => goTo(current));
+        let startX = 0;
+        track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+        track.addEventListener('touchend', e => { if (Math.abs(startX - e.changedTouches[0].clientX) > 50) window.moveCrowdsecCarousel(startX > e.changedTouches[0].clientX ? 1 : -1); });
+      })();
+    </script>
+  </body>
+</html>
   </body>
 </html>
