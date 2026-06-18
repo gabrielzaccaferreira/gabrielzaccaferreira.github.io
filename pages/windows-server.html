@@ -456,32 +456,43 @@
       <section id="competencias" class="section">
         <p class="section-label">Competências desenvolvidas</p>
         <h2>O que este laboratório construiu na prática.</h2>
-        <div class="skills-grid">
-          <article class="skill-card">
-            <h3><i class="fa-brands fa-windows"></i> Windows Telemetry</h3>
-            <p>Configuração de Sysmon com config da comunidade, habilitação de políticas de auditoria avançada via GPO e PowerShell Script Block Logging — base da detecção de endpoint em ambientes Windows corporativos.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-shield-halved"></i> SIEM Integration</h3>
-            <p>Deploy de agente Wazuh em Windows Server, configuração de canais de evento customizados no ossec.conf e validação de ingestão no dashboard. Tuning de regras com criação de exceção no local_rules.xml.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-skull"></i> Red Team Fundamentals</h3>
-            <p>Reconhecimento com nmap, exploração de CVE via Metasploit Framework, obtenção de shell reversa. SQL Injection e DOM XSS contra aplicação web moderna. Cadeia completa de comprometimento documentada.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-magnifying-glass"></i> Blue Team Analysis</h3>
-            <p>Correlação de eventos de host (Sysmon) e rede (Suricata) para reconstrução de ataque no SIEM. Análise de falso positivo com identificação de processo pai, hash e integridade. Gap analysis de visibilidade.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-pen-ruler"></i> Detection Engineering</h3>
-            <p>Criação de regras Suricata customizadas para cobrir gap real do ET Open contra APIs JSON modernas. Uso de <code style="color:var(--primary);font-family:monospace;">http.request_body</code> e <code style="color:var(--primary);font-family:monospace;">pcre</code> para inspecção de body de POST e URI.</p>
-          </article>
-          <article class="skill-card">
-            <h3><i class="fa-solid fa-wrench"></i> Infrastructure Troubleshooting</h3>
-            <p>Diagnóstico de IP estático não persistido (GUI vs PowerShell), identificação de sensor de rede mal posicionado (interface errada no af-packet) e correção com revalidação ativa — processo documentado como lição aprendida.</p>
-          </article>
+        <div class="carousel-wrapper">
+          <button class="carousel-btn carousel-prev" onclick="moveWindowsCarousel(-1)" aria-label="Anterior">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <div class="carousel-track-container">
+            <div class="carousel-track" id="windowsCarousel">
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-brands fa-windows"></i> Windows Telemetry</h3>
+                <p>Configuração de Sysmon com config da comunidade, habilitação de políticas de auditoria avançada via GPO e PowerShell Script Block Logging — base da detecção de endpoint em ambientes Windows corporativos.</p>
+              </article>
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-shield-halved"></i> SIEM Integration</h3>
+                <p>Deploy de agente Wazuh em Windows Server, configuração de canais de evento customizados no ossec.conf e validação de ingestão no dashboard. Tuning de regras com criação de exceção no local_rules.xml.</p>
+              </article>
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-skull"></i> Red Team Fundamentals</h3>
+                <p>Reconhecimento com nmap, exploração de CVE via Metasploit Framework, obtenção de shell reversa. SQL Injection e DOM XSS contra aplicação web moderna. Cadeia completa de comprometimento documentada.</p>
+              </article>
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-magnifying-glass"></i> Blue Team Analysis</h3>
+                <p>Correlação de eventos de host (Sysmon) e rede (Suricata) para reconstrução de ataque no SIEM. Análise de falso positivo com identificação de processo pai, hash e integridade. Gap analysis de visibilidade.</p>
+              </article>
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-pen-ruler"></i> Detection Engineering</h3>
+                <p>Criação de regras Suricata customizadas para cobrir gap real do ET Open contra APIs JSON modernas. Uso de <code style="color:var(--primary);font-family:monospace;">http.request_body</code> e <code style="color:var(--primary);font-family:monospace;">pcre</code> para inspecção de body de POST e URI.</p>
+              </article>
+              <article class="carousel-card skill-card">
+                <h3><i class="fa-solid fa-wrench"></i> Infrastructure Troubleshooting</h3>
+                <p>Diagnóstico de IP estático não persistido (GUI vs PowerShell), identificação de sensor de rede mal posicionado (interface errada no af-packet) e correção com revalidação ativa — processo documentado como lição aprendida.</p>
+              </article>
+            </div>
+          </div>
+          <button class="carousel-btn carousel-next" onclick="moveWindowsCarousel(1)" aria-label="Próximo">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
         </div>
+        <div class="carousel-dots" id="windowsDots"></div>
       </section>
 
       <!-- RESULTADOS -->
@@ -612,10 +623,79 @@ NET START WazuhSvc</pre>
     </footer>
 
     <script>
+      (() => {
+        const track = document.getElementById('windowsCarousel');
+        const dotsContainer = document.getElementById('windowsDots');
+        if (!track || !dotsContainer) return;
+        const cards = track.querySelectorAll('.carousel-card');
+        const total = cards.length;
+        let current = 0;
+        function getVisible() {
+          return window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
+        }
+        cards.forEach((_, i) => {
+          const dot = document.createElement('button');
+          dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+          dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+          dot.addEventListener('click', () => goTo(i));
+          dotsContainer.appendChild(dot);
+        });
+        function goTo(index) {
+          const max = Math.max(0, total - getVisible());
+          current = Math.max(0, Math.min(index, max));
+          track.style.transform = `translateX(-${current * (cards[0].offsetWidth + 24)}px)`;
+          dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+        }
+        window.moveWindowsCarousel = (dir) => goTo(current + dir);
+        window.addEventListener('resize', () => goTo(current));
+        let startX = 0;
+        track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+        track.addEventListener('touchend', e => { if (Math.abs(startX - e.changedTouches[0].clientX) > 50) window.moveWindowsCarousel(startX > e.changedTouches[0].clientX ? 1 : -1); });
+      })();
+    </script>
+    <script>
       function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden';}
       function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
       function closeModalOutside(e,id){if(e.target===document.getElementById(id))closeModal(id);}
       document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.lab-modal.open').forEach(m=>{m.classList.remove('open');document.body.style.overflow='';});});
     </script>
+    <script>
+      (() => {
+        const track = document.getElementById('windowsCarousel');
+        const dotsContainer = document.getElementById('windowsDots');
+        if (!track || !dotsContainer) return;
+        const cards = track.querySelectorAll('.carousel-card');
+        const total = cards.length;
+        let current = 0;
+        function getVisible() {
+          return window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
+        }
+        cards.forEach((_, i) => {
+          const dot = document.createElement('button');
+          dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+          dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+          dot.addEventListener('click', () => goTo(i));
+          dotsContainer.appendChild(dot);
+        });
+        function goTo(index) {
+          const max = Math.max(0, total - getVisible());
+          current = Math.max(0, Math.min(index, max));
+          track.style.transform = `translateX(-${current * (cards[0].offsetWidth + 24)}px)`;
+          dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+        }
+        window.moveWindowsCarousel = (dir) => goTo(current + dir);
+        window.addEventListener('resize', () => goTo(current));
+        let startX = 0;
+        track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+        track.addEventListener('touchend', e => { if (Math.abs(startX - e.changedTouches[0].clientX) > 50) window.moveWindowsCarousel(startX > e.changedTouches[0].clientX ? 1 : -1); });
+      })();
+    </script>
+    <script>
+      function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden';}
+      function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
+      function closeModalOutside(e,id){if(e.target===document.getElementById(id))closeModal(id);}
+      document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.lab-modal.open').forEach(m=>{m.classList.remove('open');document.body.style.overflow='';});});
+    </script>
+    
   </body>
 </html>
