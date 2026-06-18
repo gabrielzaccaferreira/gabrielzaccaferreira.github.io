@@ -592,34 +592,33 @@
         <h2>Registros do laboratório.</h2>
         <div class="profile-tags" style="margin-bottom:32px;">
           <span><i class="fa-solid fa-circle-check"></i> Suricata active (running)</span>
-          <span><i class="fa-solid fa-file-lines"></i> eve.json — 272MB+ de eventos</span>
-          <span><i class="fa-solid fa-bell"></i> Alertas reais no Wazuh dashboard</span>
-          <span><i class="fa-solid fa-pen-ruler"></i> Regras customizadas validadas</span>
+          <span><i class="fa-solid fa-bell"></i> 813+ alertas no Wazuh</span>
+          <span><i class="fa-solid fa-code"></i> eve.json — alerta real SQLi capturado</span>
+          <span><i class="fa-solid fa-pen-ruler"></i> Regra customizada SID 9000001</span>
         </div>
-        <div style="text-align:center;margin-top:16px;">
+        <div class="evidence-grid">
+          <figure class="evidence-image">
+            <a href="https://github.com/gabrielzaccaferreira/suricata-lab/blob/main/screenshots/01-suricata-status.png" target="_blank" rel="noopener noreferrer">
+              <img src="https://github.com/gabrielzaccaferreira/suricata-lab/raw/main/screenshots/01-suricata-status.png" alt="Status do Suricata" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>Suricata 8.0.5 — active (running), modo AF-PACKET, interface eth0.</figcaption>
+          </figure>
+          <figure class="evidence-image">
+            <a href="https://github.com/gabrielzaccaferreira/suricata-lab/blob/main/screenshots/02-suricata-wazuh-alerts.png" target="_blank" rel="noopener noreferrer">
+              <img src="https://github.com/gabrielzaccaferreira/suricata-lab/raw/main/screenshots/02-suricata-wazuh-alerts.png" alt="Alertas do Suricata no Wazuh" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>Wazuh Threat Hunting — 813 alertas do Suricata nos últimos 7 dias.</figcaption>
+          </figure>
+          <figure class="evidence-image evidence-image-wide">
+            <a href="https://github.com/gabrielzaccaferreira/suricata-lab/blob/main/screenshots/03-sqli-eve-json.png" target="_blank" rel="noopener noreferrer">
+              <img src="https://github.com/gabrielzaccaferreira/suricata-lab/raw/main/screenshots/03-sqli-eve-json.png" alt="SQLi detectado no eve.json" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>eve.json — LOCAL SQLi Attempt detectado (SID 9000001, severity 1, POST /rest/user/login).</figcaption>
+          </figure>
+        </div>
+        <div style="margin-top:32px;text-align:center;">
           <a href="https://github.com/gabrielzaccaferreira/suricata-lab" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
             <i class="fa-brands fa-github"></i> Ver repositório completo no GitHub
-          </a>
-        </div>
-      </section>
-
-      <!-- CONCLUSÃO -->
-      <section id="conclusao" class="section cta-premium">
-        <p class="section-label">Conclusão</p>
-        <h2>Sensor calibrado. Gaps identificados. Detecção real validada.</h2>
-        <p class="section-text">
-          Este laboratório foi além de "instalar e rodar" — envolveu diagnóstico de infraestrutura
-          (sensor mal posicionado), análise crítica das regras disponíveis (gap do ET Open contra APIs
-          modernas), criação de assinaturas próprias e validação com ataques reais executados de ponta
-          a ponta. O resultado é um NIDS calibrado e documentado, com cobertura de detecção estendida
-          além do que vem out-of-the-box.
-        </p>
-        <div class="hero-actions">
-          <a href="windows-server.html" class="btn btn-primary">
-            <i class="fa-brands fa-windows"></i> Ver laboratório Windows Server →
-          </a>
-          <a href="wazuh.html" class="btn btn-secondary">
-            <i class="fa-solid fa-shield-halved"></i> Ver laboratório Wazuh
           </a>
         </div>
       </section>
