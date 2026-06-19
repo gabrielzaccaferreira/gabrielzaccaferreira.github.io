@@ -28,6 +28,7 @@ Este documento controla títulos, descrições, URLs canônicas e imagens sociai
 
 | Jornada | Jornada Profissional \\| Gabriel Zacca Ferreira | https://gabrielzacca.com.br/pages/jornada.html |
 
+| Recrutadores | Para Recrutadores \| Gabriel Zacca Ferreira | https://gabrielzacca.com.br/pages/recrutadores.html |
 
 
 \## Laboratórios
