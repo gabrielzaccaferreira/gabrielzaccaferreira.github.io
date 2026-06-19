@@ -1,5 +1,4 @@
 User-agent: *
-
 Allow: /
 
-Sitemap: https://gabrielzaccaferreira.github.io
+Sitemap: https://gabrielzacca.com.br/sitemap.xml
