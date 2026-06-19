@@ -690,7 +690,6 @@
         <p class="section-text">
           A documentação completa do laboratório está disponível no repositório GitHub,
           incluindo toda a configuração de SSH, XRDP, Bridge e acesso remoto.
-          Os prints do ambiente serão adicionados em breve.
         </p>
         <div class="profile-tags" style="margin-bottom:32px;">
           <span><i class="fa-solid fa-terminal"></i> Terminal SSH</span>
@@ -700,9 +699,33 @@
           <span><i class="fa-solid fa-network-wired"></i> Bridge configurado</span>
           <span><i class="fa-solid fa-shield-halved"></i> Agente Wazuh ativo</span>
         </div>
-        <div style="margin-top:16px;padding:40px;border:1px dashed var(--border-light);border-radius:20px;text-align:center;">
-          <i class="fa-solid fa-images" style="font-size:48px;opacity:0.6;margin-bottom:16px;display:block;"></i>
-          <p style="color:var(--text-muted);font-size:16px;margin:0 0 24px;">Prints serão adicionados em breve.</p>
+        <div class="evidence-grid">
+          <figure class="evidence-image">
+            <a href="https://github.com/gabrielzaccaferreira/kali-remote-access-lab/blob/main/screenshots/01-ssh-access.png" target="_blank" rel="noopener noreferrer">
+              <img src="https://github.com/gabrielzaccaferreira/kali-remote-access-lab/raw/main/screenshots/01-ssh-access.png" alt="Acesso SSH ao Kali" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>Acesso SSH remoto — whoami, hostname e kernel confirmados.</figcaption>
+          </figure>
+          <figure class="evidence-image">
+            <a href="https://github.com/gabrielzaccaferreira/kali-remote-access-lab/blob/main/screenshots/02-services-active.png" target="_blank" rel="noopener noreferrer">
+              <img src="https://github.com/gabrielzaccaferreira/kali-remote-access-lab/raw/main/screenshots/02-services-active.png" alt="Serviços ativos no Kali" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>Serviços ativos — SSH, Suricata, Wazuh Agent e Docker rodando simultaneamente.</figcaption>
+          </figure>
+          <figure class="evidence-image">
+            <a href="https://github.com/gabrielzaccaferreira/kali-remote-access-lab/blob/main/screenshots/03-lab-overview-vmware.png" target="_blank" rel="noopener noreferrer">
+              <img src="https://github.com/gabrielzaccaferreira/kali-remote-access-lab/raw/main/screenshots/03-lab-overview-vmware.png" alt="Visão geral do lab no VMware" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>VMware Workstation — as 5 VMs do laboratório (Kali, Ubuntu, pfSense, win-srv01, Metasploitable2).</figcaption>
+          </figure>
+          <figure class="evidence-image">
+            <a href="https://github.com/gabrielzaccaferreira/kali-remote-access-lab/blob/main/screenshots/04-vscode-remote-ssh.png" target="_blank" rel="noopener noreferrer">
+              <img src="https://github.com/gabrielzaccaferreira/kali-remote-access-lab/raw/main/screenshots/04-vscode-remote-ssh.png" alt="VS Code Remote-SSH conectado ao Kali" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>VS Code Remote-SSH — conectado ao Kali (192.168.220.130) para desenvolvimento remoto.</figcaption>
+          </figure>
+        </div>
+        <div style="margin-top:32px;text-align:center;">
           <a href="https://github.com/gabrielzaccaferreira/kali-remote-access-lab" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
             <i class="fa-brands fa-github"></i> Ver documentação no GitHub
           </a>
