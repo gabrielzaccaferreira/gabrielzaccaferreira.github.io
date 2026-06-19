@@ -622,6 +622,61 @@ main {
   font-size: 12px;
 }
 
+
+.hero-card-role {
+  color: var(--primary) !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  line-height: 1.6 !important;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.availability-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  color: var(--text-soft);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.6;
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  border-radius: 18px;
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.availability-card i {
+  margin-top: 3px;
+  color: var(--primary);
+}
+
+.profile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.profile-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 12px;
+  color: var(--text-soft);
+  font-size: 13px;
+  font-weight: 800;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  background: rgba(2, 6, 23, 0.45);
+  transition: var(--transition);
+}
+
+.profile-actions a:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
 /* =========================
    07. METRICS SECTION
 ========================= */
