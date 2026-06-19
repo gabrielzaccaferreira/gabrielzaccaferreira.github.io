@@ -609,12 +609,30 @@
             />
             <figcaption>VM pfSense-CE no VMware Workstation — 3.9 GB RAM, 2 vCPUs, 20 GB disco e 2 interfaces de rede.</figcaption>
           </figure>
-        </div>
-
-        <div style="margin-top:40px;padding:32px;border:1px dashed var(--border-light);border-radius:20px;text-align:center;">
-          <i class="fa-solid fa-globe" style="font-size:40px;opacity:0.6;margin-bottom:16px;display:block;"></i>
-          <p style="color:var(--text-muted);font-size:16px;margin:0 0 8px;">Prints da interface web (WebGUI) serão adicionados em breve.</p>
-          <p style="color:var(--text-muted);font-size:14px;margin:0;">Dashboard, regras de firewall, NAT, DHCP e logs do sistema.</p>
+        <figure class="evidence-image">
+            <a href="https://github.com/gabrielzaccaferreira/pfsense-lab/blob/main/screenshots/01-pfsense-dashboard.png" target="_blank" rel="noopener noreferrer">
+              <img src="https://github.com/gabrielzaccaferreira/pfsense-lab/raw/main/screenshots/01-pfsense-dashboard.png" alt="Dashboard do pfSense" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>Dashboard — soc-fw01.home.lab, pfSense 2.8.1-RELEASE, interfaces WAN e LAN ativas.</figcaption>
+          </figure>
+          <figure class="evidence-image">
+            <a href="https://github.com/gabrielzaccaferreira/pfsense-lab/blob/main/screenshots/02-pfsense-firewall-rules.png" target="_blank" rel="noopener noreferrer">
+              <img src="https://github.com/gabrielzaccaferreira/pfsense-lab/raw/main/screenshots/02-pfsense-firewall-rules.png" alt="Regras de firewall do pfSense" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>Firewall Rules (LAN) — regras com states ativos e tráfego real passando.</figcaption>
+          </figure>
+          <figure class="evidence-image">
+            <a href="https://github.com/gabrielzaccaferreira/pfsense-lab/blob/main/screenshots/03-pfsense-dhcp-server.png" target="_blank" rel="noopener noreferrer">
+              <img src="https://github.com/gabrielzaccaferreira/pfsense-lab/raw/main/screenshots/03-pfsense-dhcp-server.png" alt="DHCP Server do pfSense" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>DHCP Server — range 192.168.220.150-199, gateway e DNS configurados.</figcaption>
+          </figure>
+          <figure class="evidence-image">
+            <a href="https://github.com/gabrielzaccaferreira/pfsense-lab/blob/main/screenshots/04-pfsense-nat-outbound.png" target="_blank" rel="noopener noreferrer">
+              <img src="https://github.com/gabrielzaccaferreira/pfsense-lab/raw/main/screenshots/04-pfsense-nat-outbound.png" alt="NAT Outbound do pfSense" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>NAT Outbound — modo automático traduzindo a LAN (192.168.220.0/24) para o IP da WAN.</figcaption>
+          </figure>
         </div>
       </section>
 
