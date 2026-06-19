@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
@@ -11,7 +11,7 @@
     <meta property="og:title" content="Windows Server + Sysmon | Gabriel Zacca Ferreira" />
     <meta property="og:description" content="Telemetria avançada em Windows Server, Sysmon, Red Team vs Blue Team com Metasploitable2 e OWASP Juice Shop." />
     <meta property="og:url" content="https://gabrielzacca.com.br/pages/windows-server.html" />
-    <meta property="og:image" content="https://gabrielzaccaferreira.github.io/assets/images/og-image.png" />
+    <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png" />
     <link rel="canonical" href="https://gabrielzacca.com.br/pages/windows-server.html" />
     <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
     <link rel="manifest" href="../manifest.webmanifest" />
@@ -700,38 +700,8 @@ NET START WazuhSvc</pre>
       function closeModalOutside(e,id){if(e.target===document.getElementById(id))closeModal(id);}
       document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.lab-modal.open').forEach(m=>{m.classList.remove('open');document.body.style.overflow='';});});
     </script>
-    <script>
-      (() => {
-        const track = document.getElementById('windowsCarousel');
-        const dotsContainer = document.getElementById('windowsDots');
-        if (!track || !dotsContainer) return;
-        const cards = track.querySelectorAll('.carousel-card');
-        const total = cards.length;
-        let current = 0;
-        function getVisible() {
-          return window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
-        }
-        cards.forEach((_, i) => {
-          const dot = document.createElement('button');
-          dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-          dot.setAttribute('aria-label', 'Slide ' + (i + 1));
-          dot.addEventListener('click', () => goTo(i));
-          dotsContainer.appendChild(dot);
-        });
-        function goTo(index) {
-          const max = Math.max(0, total - getVisible());
-          current = Math.max(0, Math.min(index, max));
-          track.style.transform = `translateX(-${current * (cards[0].offsetWidth + 24)}px)`;
-          dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
-        }
-        window.moveWindowsCarousel = (dir) => goTo(current + dir);
-        window.addEventListener('resize', () => goTo(current));
-        let startX = 0;
-        track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-        track.addEventListener('touchend', e => { if (Math.abs(startX - e.changedTouches[0].clientX) > 50) window.moveWindowsCarousel(startX > e.changedTouches[0].clientX ? 1 : -1); });
-      })();
-    </script>
-    <script>
+
+<script>
       function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden';}
       function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
       function closeModalOutside(e,id){if(e.target===document.getElementById(id))closeModal(id);}

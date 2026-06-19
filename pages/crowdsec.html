@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
@@ -10,9 +10,9 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="CrowdSec | Gabriel Zacca Ferreira" />
     <meta property="og:description" content="Monitoramento de logs SSH, detecção de brute force e análise de alertas com CrowdSec no Kali Linux." />
-    <meta property="og:url" content="https://gabrielzaccaferreira.github.io/pages/crowdsec.html" />
-    <meta property="og:image" content="https://gabrielzaccaferreira.github.io/assets/images/og-image.png" />
-    <link rel="canonical" href="https://gabrielzaccaferreira.github.io/pages/crowdsec.html" />
+    <meta property="og:url" content="https://gabrielzacca.com.br/pages/crowdsec.html" />
+    <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png" />
+    <link rel="canonical" href="https://gabrielzacca.com.br/pages/crowdsec.html" />
     <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
     <link rel="manifest" href="../manifest.webmanifest" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
@@ -483,7 +483,7 @@ labels:
             <figcaption>Alertas gerados — IPs e scenarios ativados pelo CrowdSec.</figcaption>
           </figure>
 
-          <figure class="evidence-image evidence-image-wide">
+          <figure class="evidence-image">
             <a href="https://github.com/gabrielzaccaferreira/soc-lab-crowdsec-kali/blob/main/screenshots/ssh-scenarios.png" target="_blank" rel="noopener noreferrer">
               <img
                 src="https://github.com/gabrielzaccaferreira/soc-lab-crowdsec-kali/raw/main/screenshots/ssh-scenarios.png"
@@ -599,123 +599,6 @@ labels:
         track.addEventListener('touchend', e => { if (Math.abs(startX - e.changedTouches[0].clientX) > 50) window.moveCrowdsecCarousel(startX > e.changedTouches[0].clientX ? 1 : -1); });
       })();
     </script>
-
-    <!-- MODAIS CROWDSEC -->
-    <div id="cs-modal-install" class="lab-modal" onclick="closeModalOutside(event,'cs-modal-install')">
-      <div class="lab-modal-box">
-        <button class="lab-modal-close" onclick="closeModal('cs-modal-install')"><i class="fa-solid fa-xmark"></i></button>
-        <p class="section-label">Etapa 01</p>
-        <h2>Instalação do CrowdSec</h2>
-        <p class="module-text">O CrowdSec está disponível nos repositórios oficiais do Kali Linux. A instalação é direta via apt.</p>
-        <div class="concept-block">
-          <h4><i class="fa-solid fa-terminal"></i> Comandos de instalação</h4>
-          <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
-            curl -s https://packagecloud.io/install/repositories/crowdsec/crowdsec/script.deb.sh | sudo bash<br>
-            sudo apt install crowdsec -y
-          </div>
-        </div>
-        <div class="concept-block">
-          <h4><i class="fa-solid fa-circle-check"></i> Validação</h4>
-          <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
-            sudo systemctl status crowdsec<br>
-            <span style="color:#4ade80;">● crowdsec.service - CrowdSec agent<br>
-            &nbsp;&nbsp;&nbsp;Active: active (running)</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="cs-modal-acquis" class="lab-modal" onclick="closeModalOutside(event,'cs-modal-acquis')">
-      <div class="lab-modal-box">
-        <button class="lab-modal-close" onclick="closeModal('cs-modal-acquis')"><i class="fa-solid fa-xmark"></i></button>
-        <p class="section-label">Etapa 02</p>
-        <h2>Configuração do arquivo de aquisição</h2>
-        <p class="module-text">O <code style="color:var(--primary);font-family:monospace;">acquis.yaml</code> define quais fontes de log o CrowdSec vai monitorar. Para SSH, a fonte é o journalctl com o serviço sshd.</p>
-        <div class="concept-block">
-          <h4><i class="fa-solid fa-file-code"></i> Conteúdo do acquis.yaml</h4>
-          <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
-            source: journalctl<br>
-            journalctl_filter:<br>
-            &nbsp;&nbsp;- "_SYSTEMD_UNIT=ssh.service"<br>
-            labels:<br>
-            &nbsp;&nbsp;type: sshd
-          </div>
-        </div>
-        <div class="concept-block">
-          <h4><i class="fa-solid fa-circle-info"></i> Localização</h4>
-          <p>O arquivo fica em <code style="color:var(--primary);font-family:monospace;">/etc/crowdsec/acquis.yaml</code>. Após editar, reiniciar o serviço com <code style="color:var(--primary);font-family:monospace;">sudo systemctl restart crowdsec</code>.</p>
-        </div>
-      </div>
-    </div>
-
-    <div id="cs-modal-collection" class="lab-modal" onclick="closeModalOutside(event,'cs-modal-collection')">
-      <div class="lab-modal-box">
-        <button class="lab-modal-close" onclick="closeModal('cs-modal-collection')"><i class="fa-solid fa-xmark"></i></button>
-        <p class="section-label">Etapa 03</p>
-        <h2>Instalação da collection SSH</h2>
-        <p class="module-text">As collections do CrowdSec agrupam parsers e scenarios relacionados. A collection <code style="color:var(--primary);font-family:monospace;">crowdsecurity/sshd</code> inclui tudo necessário para detecção de brute force SSH.</p>
-        <div class="concept-block">
-          <h4><i class="fa-solid fa-terminal"></i> Comando</h4>
-          <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
-            sudo cscli collections install crowdsecurity/sshd<br>
-            sudo systemctl restart crowdsec
-          </div>
-        </div>
-        <div class="concept-block">
-          <h4><i class="fa-solid fa-layer-group"></i> O que inclui</h4>
-          <p><strong>Parser:</strong> <code style="color:var(--primary);font-family:monospace;">crowdsecurity/sshd-logs</code> — lê e estrutura os logs do SSH.<br>
-          <strong>Scenario:</strong> <code style="color:var(--primary);font-family:monospace;">crowdsecurity/ssh-bf</code> — detecta múltiplas falhas de login (brute force).</p>
-        </div>
-      </div>
-    </div>
-
-    <div id="cs-modal-metrics" class="lab-modal" onclick="closeModalOutside(event,'cs-modal-metrics')">
-      <div class="lab-modal-box">
-        <button class="lab-modal-close" onclick="closeModal('cs-modal-metrics')"><i class="fa-solid fa-xmark"></i></button>
-        <p class="section-label">Etapa 04</p>
-        <h2>Verificação de métricas</h2>
-        <p class="module-text">O <code style="color:var(--primary);font-family:monospace;">cscli metrics</code> mostra o estado interno do pipeline de processamento — quantas linhas foram lidas, parseadas e quantos eventos foram avaliados pelos scenarios.</p>
-        <div class="concept-block">
-          <h4><i class="fa-solid fa-terminal"></i> Comando</h4>
-          <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
-            sudo cscli metrics
-          </div>
-        </div>
-        <div class="concept-block">
-          <h4><i class="fa-solid fa-circle-check"></i> O que validar</h4>
-          <p>Na tabela de parsers, confirmar que <code style="color:var(--primary);font-family:monospace;">crowdsecurity/sshd-logs</code> está com linhas processadas. Na tabela de buckets, confirmar que <code style="color:var(--primary);font-family:monospace;">crowdsecurity/ssh-bf</code> está sendo avaliado.</p>
-        </div>
-      </div>
-    </div>
-
-    <div id="cs-modal-alerts" class="lab-modal" onclick="closeModalOutside(event,'cs-modal-alerts')">
-      <div class="lab-modal-box">
-        <button class="lab-modal-close" onclick="closeModal('cs-modal-alerts')"><i class="fa-solid fa-xmark"></i></button>
-        <p class="section-label">Etapa 05</p>
-        <h2>Análise de alertas gerados</h2>
-        <p class="module-text">Após o CrowdSec processar os logs e detectar padrões suspeitos, os alertas ficam disponíveis via <code style="color:var(--primary);font-family:monospace;">cscli alerts list</code>.</p>
-        <div class="concept-block">
-          <h4><i class="fa-solid fa-terminal"></i> Comandos de análise</h4>
-          <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
-            sudo cscli alerts list<br>
-            sudo cscli decisions list
-          </div>
-        </div>
-        <div class="concept-block">
-          <h4><i class="fa-solid fa-circle-info"></i> Campos do alerta</h4>
-          <p>Cada alerta mostra: IP origem, scenario ativado (<code style="color:var(--primary);font-family:monospace;">crowdsecurity/ssh-bf</code>), número de eventos que ativaram o threshold, data/hora e decisão tomada (ban ou simonly).</p>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden';}
-      function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
-      function closeModalOutside(e,id){if(e.target===document.getElementById(id))closeModal(id);}
-      document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.lab-modal.open').forEach(m=>{m.classList.remove('open');document.body.style.overflow='';});});
-    </script>
-  </body>
-</html>
 
     <!-- MODAIS CROWDSEC -->
     <div id="cs-modal-install" class="lab-modal" onclick="closeModalOutside(event,'cs-modal-install')">
