@@ -112,11 +112,11 @@
         </div>
       </section>
 
-      <section id="artigos" class="section">
+      <section id="artigos" class="section blog-side-carousel">
         <p class="section-label">Últimos registros</p>
         <h2>Publicações do diário técnico.</h2>
         <p class="section-text">A ideia deste blog é registrar o que foi estudado, implementado e aprendido ao longo da minha evolução profissional.</p>
-        <div class="blog-carousel-controls" aria-label="Controle do carrossel de publicações">
+        <div class="carousel-controls blog-side-controls" aria-label="Controle do carrossel de publicações">
           <button class="carousel-arrow" type="button" aria-label="Ver registros anteriores" data-carousel-target="blog-posts-carousel" data-carousel-direction="-1">
             <i class="fa-solid fa-chevron-left"></i>
           </button>
@@ -124,7 +124,7 @@
             <i class="fa-solid fa-chevron-right"></i>
           </button>
         </div>
-        <div class="blog-grid blog-posts-carousel" id="blog-posts-carousel">
+        <div class="blog-grid blog-posts-carousel card-carousel blog-side-track" id="blog-posts-carousel" data-carousel-dots="true">
           <article class="blog-post-card featured-post">
             <p class="post-date">LABORATÓRIO • 20 JUN 2026</p>
             <h3>Como o Suricata detecta uma tentativa de SQL Injection</h3>
@@ -219,26 +219,15 @@
       </div>
       <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
     </footer>
-    <script>
-      document.querySelectorAll("[data-carousel-target]").forEach((button) => {
-        button.addEventListener("click", () => {
-          const targetId = button.getAttribute("data-carousel-target");
-          const direction = Number(button.getAttribute("data-carousel-direction")) || 1;
-          const carousel = document.getElementById(targetId);
-
-          if (!carousel) return;
-
-          const scrollAmount = Math.max(300, carousel.clientWidth * 0.85);
-
-          carousel.scrollBy({
-            left: scrollAmount * direction,
-            behavior: "smooth"
-          });
-        });
-      });
-    </script>
+    <script src="../assets/js/carousel.js"></script>
   </body>
 </html>
+
+
+
+
+
+
 
 
 
