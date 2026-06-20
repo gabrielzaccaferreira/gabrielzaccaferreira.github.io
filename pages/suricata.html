@@ -654,8 +654,48 @@
           </a>
         </div>
       </section>
+      <section class="section suricata-flow">
+        <p class="section-label">Fluxo da detecção</p>
+        <h2>Como o Suricata transformou uma tentativa de ataque em evidência de segurança.</h2>
+        <p>
+          Neste laboratório, o Suricata foi utilizado para identificar uma tentativa de SQL Injection em uma requisição HTTP.
+          A partir dessa atividade suspeita, o IDS gerou um alerta, registrou o evento no arquivo <code>eve.json</code> e permitiu
+          que a evidência fosse analisada dentro do fluxo de monitoramento de segurança.
+        </p>
 
-    </main>
+        <div class="timeline-grid">
+          <article class="timeline-card">
+            <span class="timeline-step">01</span>
+            <h3>Requisição suspeita</h3>
+            <p>Uma tentativa de SQL Injection foi simulada contra uma aplicação web, gerando tráfego malicioso na rede.</p>
+          </article>
+
+          <article class="timeline-card">
+            <span class="timeline-step">02</span>
+            <h3>Análise pelo Suricata</h3>
+            <p>O Suricata inspecionou o tráfego em tempo real e comparou o comportamento observado com regras de detecção.</p>
+          </article>
+
+          <article class="timeline-card">
+            <span class="timeline-step">03</span>
+            <h3>Geração do alerta</h3>
+            <p>Ao identificar o padrão suspeito, o Suricata gerou um alerta contendo assinatura, severidade, origem, destino e contexto.</p>
+          </article>
+
+          <article class="timeline-card">
+            <span class="timeline-step">04</span>
+            <h3>Registro no eve.json</h3>
+            <p>O evento foi registrado em formato JSON, permitindo análise estruturada, correlação e integração com outras ferramentas.</p>
+          </article>
+
+          <article class="timeline-card">
+            <span class="timeline-step">05</span>
+            <h3>Visualização no SIEM</h3>
+            <p>O alerta pôde ser utilizado como evidência para investigação, documentação e entendimento do fluxo de detecção.</p>
+          </article>
+        </div>
+      </section>
+      </main>
 
     <!-- MODAIS -->
     <div id="suri-modal-install" class="lab-modal" onclick="closeModalOutside(event,'suri-modal-install')">
@@ -822,6 +862,8 @@ sudo systemctl restart suricata</pre>
     </script>
   </body>
 </html>
+
+
 
 
 
