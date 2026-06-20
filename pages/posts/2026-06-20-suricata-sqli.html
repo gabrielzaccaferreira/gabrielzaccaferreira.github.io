@@ -1,0 +1,214 @@
+﻿<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Como o Suricata detecta SQL Injection | Gabriel Zacca Ferreira</title>
+    <meta name="description" content="Artigo técnico sobre como o Suricata detecta uma tentativa de SQL Injection, gera alertas e registra evidências no eve.json para análise em segurança." />
+    <meta name="author" content="Gabriel Zacca Ferreira" />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Como o Suricata detecta SQL Injection | Gabriel Zacca Ferreira" />
+    <meta property="og:description" content="Entenda o fluxo de detecção do Suricata: requisição suspeita, regra IDS, alerta, eve.json e análise em SIEM." />
+    <meta property="og:url" content="https://gabrielzacca.com.br/pages/posts/2026-06-20-suricata-sqli.html" />
+    <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png" />
+    <link rel="canonical" href="https://gabrielzacca.com.br/pages/posts/2026-06-20-suricata-sqli.html" />
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+    <link rel="manifest" href="../../manifest.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navbar" aria-label="Navegação principal">
+        <a href="../../index.html" class="logo">GZF</a>
+        <div class="nav-links">
+          <a href="../../index.html">Home</a>
+          <a href="../sobre.html">Sobre</a>
+          <a href="../projetos.html">Projetos</a>
+          <a href="../blog.html">Blog</a>
+          <a href="../roadmap.html">Roadmap</a>
+        </div>
+        <div class="nav-actions">
+          <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="../../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer" class="nav-cv">Currículo</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <article class="blog-article">
+        <a href="../blog.html" class="blog-back-link">&larr; Voltar para o blog</a>
+
+        <header class="article-header">
+          <p class="section-label"><i class="fa-solid fa-shield-halved"></i> Laboratório Suricata</p>
+
+          <div class="article-meta">
+            <span>20 Junho 2026</span>
+            <span>8 min de leitura</span>
+            <span>Blue Team</span>
+          </div>
+
+          <h1>Como o Suricata detecta uma tentativa de SQL Injection</h1>
+
+          <p class="article-lead">
+            Neste artigo, documento um estudo prático sobre como o Suricata identifica uma tentativa de SQL Injection,
+            gera alertas e transforma tráfego suspeito em evidência técnica para análise de segurança.
+          </p>
+
+          <div class="project-stack">
+            <span>Suricata</span>
+            <span>IDS</span>
+            <span>SQL Injection</span>
+            <span>eve.json</span>
+            <span>Blue Team</span>
+          </div>
+        </header>
+
+        <aside class="article-info-box">
+          <h2>Sobre este artigo</h2>
+          <div>
+            <strong>Publicado:</strong>
+            <span>20 Junho 2026</span>
+          </div>
+          <div>
+            <strong>Categoria:</strong>
+            <span>Laboratório técnico</span>
+          </div>
+          <div>
+            <strong>Objetivo:</strong>
+            <span>Explicar o fluxo de detecção de uma tentativa de SQL Injection usando Suricata.</span>
+          </div>
+        </aside>
+
+        <nav class="article-index" aria-label="Índice do artigo">
+          <h2>Neste artigo</h2>
+          <a href="#contexto">Contexto do laboratório</a>
+          <a href="#o-que-e-sqli">O que é SQL Injection</a>
+          <a href="#fluxo">Fluxo da detecção</a>
+          <a href="#evidencias">Evidências do laboratório</a>
+          <a href="#aprendizados">Principais aprendizados</a>
+          <a href="#conclusao">Conclusão</a>
+        </nav>
+
+        <section id="contexto">
+          <h2>Contexto do laboratório</h2>
+          <p>
+            O objetivo deste estudo foi entender, na prática, como um IDS de rede consegue identificar uma atividade suspeita.
+            Para isso, utilizei o Suricata em um ambiente de laboratório, analisando tráfego HTTP e validando a geração de alertas.
+          </p>
+          <p>
+            O foco não foi apenas executar uma ferramenta, mas compreender o caminho completo da detecção: tráfego de rede,
+            regra de assinatura, alerta gerado, registro em log e análise da evidência.
+          </p>
+        </section>
+
+        <section id="o-que-e-sqli">
+          <h2>O que é SQL Injection</h2>
+          <p>
+            SQL Injection é uma técnica de ataque em que comandos SQL maliciosos são inseridos em campos ou parâmetros de uma aplicação.
+            Quando uma aplicação não valida corretamente as entradas do usuário, esse tipo de ataque pode tentar manipular consultas ao banco de dados.
+          </p>
+          <p>
+            Em um cenário real, uma tentativa de SQL Injection pode indicar exploração de vulnerabilidade, reconhecimento ofensivo
+            ou tentativa de acesso indevido a informações sensíveis.
+          </p>
+        </section>
+
+        <section id="fluxo">
+          <h2>Fluxo da detecção</h2>
+          <p>
+            Durante o laboratório, o Suricata atuou como sensor de rede. Ele analisou o tráfego, identificou o padrão suspeito
+            e gerou um evento estruturado para investigação.
+          </p>
+
+          <ol>
+            <li><strong>Requisição suspeita:</strong> uma tentativa de SQL Injection foi enviada contra uma aplicação web.</li>
+            <li><strong>Análise do tráfego:</strong> o Suricata inspecionou os pacotes em tempo real.</li>
+            <li><strong>Regra de detecção:</strong> o comportamento foi comparado com assinaturas configuradas no IDS.</li>
+            <li><strong>Geração do alerta:</strong> o Suricata registrou assinatura, severidade, origem, destino e contexto.</li>
+            <li><strong>Registro no eve.json:</strong> o evento foi salvo em formato JSON para análise e integração.</li>
+          </ol>
+        </section>
+
+        <section id="evidencias">
+          <h2>Evidências do laboratório</h2>
+          <p>
+            As evidências abaixo mostram o Suricata em execução e o alerta gerado no arquivo <code>eve.json</code>.
+            Esses registros são importantes porque conectam a teoria com a prática de investigação.
+          </p>
+
+          <figure class="evidence-image evidence-image-wide">
+            <a href="../../assets/images/suricata/01-suricata-status.png" target="_blank" rel="noopener noreferrer">
+              <img src="../../assets/images/suricata/01-suricata-status.png" alt="Status do Suricata em execução" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>Suricata em execução no ambiente de laboratório.</figcaption>
+          </figure>
+
+          <figure class="evidence-image evidence-image-wide">
+            <a href="../../assets/images/suricata/03-sqli-eve-json.png" target="_blank" rel="noopener noreferrer">
+              <img src="../../assets/images/suricata/03-sqli-eve-json.png" alt="Alerta de SQL Injection registrado no eve.json" loading="lazy" width="800" height="450" />
+            </a>
+            <figcaption>Evento de SQL Injection registrado no <code>eve.json</code>.</figcaption>
+          </figure>
+        </section>
+
+        <section id="aprendizados">
+          <h2>Principais aprendizados</h2>
+          <p>
+            Este laboratório reforçou que um alerta de segurança precisa ser analisado dentro de um contexto.
+            Não basta ver que uma ferramenta gerou uma detecção; é necessário entender origem, destino, assinatura,
+            severidade e evidência registrada.
+          </p>
+          <p>
+            Também ficou claro como ferramentas de IDS, logs estruturados e SIEM se conectam em um fluxo de Blue Team.
+            O Suricata detecta, o <code>eve.json</code> registra e uma solução como o Wazuh pode centralizar e facilitar a análise.
+          </p>
+        </section>
+
+        <section id="conclusao">
+          <h2>Conclusão</h2>
+          <p>
+            O estudo mostrou como o Suricata pode transformar tráfego suspeito em evidência de segurança.
+            A tentativa de SQL Injection saiu de uma simples requisição HTTP e se tornou um alerta documentado,
+            pronto para investigação e correlação.
+          </p>
+          <p>
+            Esse tipo de prática fortalece minha base em Redes, Segurança da Informação, SOC e Blue Team, pois conecta
+            conceitos técnicos com situações reais de monitoramento.
+          </p>
+        </section>
+
+        <footer class="article-footer">
+          <address class="article-signature">
+            <strong>Gabriel Zacca Ferreira</strong>
+            <span>Diário Técnico</span>
+            <span>Redes &bull; Infraestrutura &bull; Cloud &bull; Cibersegurança</span>
+          </address>
+          <a href="../blog.html" class="btn btn-primary">Voltar para o blog &rarr;</a>
+        </footer>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p class="footer-title">Gabriel Zacca Ferreira</p>
+      <p>Portfólio técnico em Redes, Infraestrutura, Cloud Computing e Cibersegurança.</p>
+      <nav class="footer-nav" aria-label="Navegação do rodapé">
+        <a href="../../index.html">Home</a>
+        <a href="../sobre.html">Sobre</a>
+        <a href="../projetos.html">Projetos</a>
+        <a href="../blog.html">Blog</a>
+        <a href="../roadmap.html">Roadmap</a>
+      </nav>
+      <div class="footer-links">
+        <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a href="mailto:gabrielzaccaferreira@gmail.com"><i class="fa-solid fa-envelope"></i> E-mail</a>
+        <a href="../../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-lines"></i> Currículo</a>
+      </div>
+      <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
+    </footer>
+  </body>
+</html>
+
