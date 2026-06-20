@@ -1,233 +1,136 @@
-# 👋 Olá, eu sou Gabriel Zacca Ferreira
-
-![Linux](https://img.shields.io/badge/Linux-Admin-black?logo=linux)
-![Networking](https://img.shields.io/badge/Networking-Study-blue?logo=cisco)
-![Cybersecurity](https://img.shields.io/badge/Cybersecurity-Blue%20Team-red)
-![Cloud](https://img.shields.io/badge/Cloud-Azure-0078D4?logo=microsoftazure)
-![Git](https://img.shields.io/badge/Git-Version%20Control-F05032?logo=git)
-![GitHub](https://img.shields.io/badge/GitHub-Portfolio-181717?logo=github)
-![HTML5](https://img.shields.io/badge/HTML5-Portfolio-E34F26?logo=html5)
-![CSS3](https://img.shields.io/badge/CSS3-Styling-1572B6?logo=css3)
-
-## 🌐 Redes | 🖥️ Infraestrutura | ☁️ Cloud | 🛡️ Cibersegurança
-
-Estou construindo minha carreira em Tecnologia da Informação através de estudos práticos, laboratórios documentados e projetos voltados para Redes de Computadores, Infraestrutura, Linux, Cloud Computing e Segurança da Informação.
-
-Meu objetivo é transformar conhecimento em experiência prática, documentando cada etapa da minha evolução técnica.
-
----
-
-# 🚀 Portfólio
-
-Este repositório reúne:
-
-- ✅ Portfólio profissional
-- ✅ Laboratórios práticos
-- ✅ Documentação técnica
-- ✅ Projetos em desenvolvimento
-- ✅ Roadmap de aprendizado
-- ✅ Estudos em Redes e Cibersegurança
-
----
-
-# 🎯 Objetivo Profissional
-
-Atuar nas áreas de:
-
-- 🌐 Redes de Computadores
-- 🖥️ Infraestrutura
-- ☁️ Cloud Computing
-- 🛡️ Segurança da Informação
-- 📊 SOC / Blue Team
-
----
-
-# 📚 Atualmente estudando
-
-- Linux Administration
-- Redes de Computadores
-- Wazuh SIEM/XDR
-- Suricata IDS/IPS
-- CrowdSec
-- Docker
-- Microsoft Azure
-
----
-
-# 💻 Tecnologias
-
-- HTML5
-- CSS3
-- Git
-- GitHub
-- Linux
-- VMware Workstation
-- Wazuh
-- Kali Linux
-
----
-
-# 📂 Principais Projetos
-
-## 🛡️ Wazuh SIEM/XDR
-
-Laboratório completo de monitoramento e detecção de ameaças utilizando:
-
-- Ubuntu Server
-- VMware Workstation
-- Kali Linux
-- Wazuh Manager
-- Wazuh Dashboard
-- Wazuh Indexer
-- Filebeat
-
-**Competências desenvolvidas:**
-
-- ✅ SIEM
-- ✅ Blue Team
-- ✅ Linux
-- ✅ Virtualização
-- ✅ Monitoramento
-- ✅ Troubleshooting
-
----
-
-## 🌐 Suricata IDS/IPS
-
-Laboratório voltado para detecção de intrusão e análise de tráfego de rede.
-
-**Competências:**
-
-- ✅ IDS/IPS
-- ✅ Network Security
-- ✅ Regras
-- ✅ Análise de Pacotes
-
----
-
-## 🔥 CrowdSec
-
-Implementação de um ambiente para proteção colaborativa baseada em logs e comportamento.
-
-**Competências:**
-
-- ✅ Threat Detection
-- ✅ Log Analysis
-- ✅ Linux
-- ✅ Security Automation
-
----
-
-# 🚀 Minha Jornada
-
-### 🛠️ Experiência com suporte e tecnologia
-
-Atuação com atendimento ao cliente, diagnóstico e resolução de problemas técnicos, instalação e configuração de sistemas, manutenção de computadores e suporte ao usuário.
-
-⬇️
-
-### 📈 Desenvolvimento de disciplina e capacidade analítica
-
-Experiência no mercado financeiro desenvolvendo organização, tomada de decisão sob pressão, gestão de risco e pensamento analítico.
-
-⬇️
-
-### 🎯 Transição definitiva para Tecnologia da Informação
-
-Decisão de construir uma carreira sólida em:
-
-- 🌐 Redes de Computadores
-- 🖥️ Infraestrutura
-- ☁️ Cloud Computing
-- 🛡️ Cibersegurança
-
-⬇️
-
-### 🧪 Construção de laboratórios
-
-- ✅ Wazuh SIEM/XDR
-- ✅ Kali Linux
-- 🔄 Suricata
-- 🔄 CrowdSec
-
-⬇️
-
-### 🎓 Objetivo
-
-Atuar profissionalmente em:
-
-- Redes
-- Infraestrutura
-- Cloud
-- SOC
-- Blue Team
-
----
-
-# 🎓 Formação e Certificações
-
-## 🎓 Graduação
-
-- Redes de Computadores
-- Instituto Infnet
-
----
-
-## 📚 Cursos
-
-- ✅ IBM - Artificial Intelligence Fundamentals
-- ✅ Alura - Redes de Computadores
-- 🔄 Cisco Networking Academy
-- 🔄 Estudos contínuos em Linux e Segurança
-
----
-
-## 📖 Filosofia de aprendizado
-
-Acredito que conhecimento só gera valor quando é aplicado na prática.
-
-Por isso, cada tecnologia estudada é transformada em:
-
-- Laboratórios
-- Documentação
-- Projetos
-- Portfólio
-
----
-
-## 🌍 Portfólio Técnico
-
-Projeto desenvolvido em HTML5 e CSS3 para documentar minha evolução profissional.
-
-Inclui:
-
-- ✅ Home Premium
-- ✅ Sobre
-- ✅ Jornada
-- ✅ Roadmap
-- ✅ Projetos
-- ✅ Blog Técnico
-- ✅ Case Wazuh
-- ✅ SEO
-
----
-
-# 📈 Filosofia
-
-> "Aprender, documentar, aplicar e evoluir continuamente."
-
----
-
-# 📬 Contato
-
-- 💼 LinkedIn:
-  
-  https://linkedin.com/in/gabrielzaccaferreira
-
-- 🚀 GitHub:
-  
-  https://github.com/gabrielzaccaferreira
-
-- ✉️ E-mail:
-  
-  gabrielzaccaferreira@gmail.com
+# Gabriel Zacca Ferreira — Portfólio Técnico
+
+Portfólio técnico desenvolvido para documentar minha evolução prática em **Redes de Computadores, Infraestrutura, Linux, Cloud Computing, Segurança da Informação e fundamentos de SOC/Blue Team**.
+
+O objetivo deste projeto é centralizar meus estudos, laboratórios, evidências técnicas e aprendizados em um site profissional, acessível e organizado para consulta por recrutadores, profissionais de tecnologia e demais pessoas interessadas na minha jornada em TI.
+
+## Acesse o portfólio
+
+**Site:** https://gabrielzacca.com.br
+
+## Sobre o projeto
+
+Este repositório contém o código-fonte do meu portfólio técnico publicado com GitHub Pages.
+
+O site reúne páginas institucionais, trilha de estudos, laboratórios práticos, documentação técnica e uma página específica para recrutadores, com foco em apresentar minhas competências de forma objetiva e profissional.
+
+## Áreas de estudo e atuação
+
+* Suporte Técnico
+* Redes de Computadores
+* Infraestrutura de TI
+* Linux
+* Windows Server
+* Virtualização
+* Cloud Computing
+* Segurança da Informação
+* SIEM/XDR
+* IDS/IPS
+* SOC e Blue Team
+
+## Laboratórios documentados
+
+| Laboratório             | Tema principal                                      | Página                                                           |
+| ----------------------- | --------------------------------------------------- | ---------------------------------------------------------------- |
+| Wazuh SIEM/XDR          | Monitoramento, agentes, logs e eventos de segurança | [Acessar](https://gabrielzacca.com.br/pages/wazuh.html)          |
+| Kali Linux              | Ambiente de estudos, SSH, XRDP e acesso remoto      | [Acessar](https://gabrielzacca.com.br/pages/kali-linux.html)     |
+| Suricata IDS/IPS        | Detecção de intrusão e análise de tráfego           | [Acessar](https://gabrielzacca.com.br/pages/suricata.html)       |
+| CrowdSec                | Análise de logs e proteção contra brute force       | [Acessar](https://gabrielzacca.com.br/pages/crowdsec.html)       |
+| Wireshark               | Análise de protocolos e troubleshooting de rede     | [Acessar](https://gabrielzacca.com.br/pages/wireshark.html)      |
+| pfSense                 | Firewall, NAT, DHCP, WAN/LAN e regras de rede       | [Acessar](https://gabrielzacca.com.br/pages/pfsense.html)        |
+| Windows Server + Sysmon | Telemetria Windows, eventos e integração com Wazuh  | [Acessar](https://gabrielzacca.com.br/pages/windows-server.html) |
+
+## Páginas principais
+
+| Página            | Descrição                                               |
+| ----------------- | ------------------------------------------------------- |
+| Home              | Apresentação geral do portfólio técnico                 |
+| Sobre             | Minha trajetória profissional e transição para TI       |
+| Para Recrutadores | Resumo objetivo para oportunidades profissionais        |
+| Projetos          | Lista dos principais laboratórios e projetos            |
+| Guia              | Guia de estudos em Redes de Computadores                |
+| Blog              | Registros técnicos, aprendizados e estudos              |
+| Roadmap           | Trilha de evolução em Redes, Infraestrutura e Segurança |
+| Jornada           | Registro da minha evolução profissional                 |
+
+## Tecnologias utilizadas
+
+* HTML5
+* CSS3
+* Git
+* GitHub
+* GitHub Pages
+* Font Awesome
+* Estrutura estática com boas práticas de SEO, acessibilidade e organização de conteúdo
+
+## Melhorias implementadas
+
+Este portfólio foi revisado com foco em qualidade profissional, incluindo:
+
+* Metadados SEO por página
+* Open Graph e Twitter Cards
+* Sitemap atualizado
+* Arquivo `robots.txt`
+* Página específica para recrutadores
+* Avisos de ambiente controlado nos laboratórios
+* Política de segurança
+* Disclaimer educacional
+* Política de evidências
+* Link de acessibilidade “Pular para o conteúdo”
+* Foco visível para navegação por teclado
+* Imagens responsivas
+* Validação de links internos
+* Organização do currículo em `assets/curriculo.pdf`
+
+## Segurança e ética
+
+Todos os laboratórios documentados neste portfólio foram realizados em ambiente local, controlado e autorizado.
+
+Os conteúdos publicados têm finalidade exclusivamente educacional e profissional. Nenhuma credencial real, token, chave privada, dado sensível ou informação de terceiros deve ser publicada neste repositório.
+
+Documentos relacionados:
+
+* [Security Policy](./SECURITY.md)
+* [Disclaimer](./DISCLAIMER.md)
+* [Evidence Policy](./docs/evidence-policy.md)
+
+## Estrutura do projeto
+
+```txt
+gabrielzaccaferreira.github.io/
+├── assets/
+│   ├── curriculo.pdf
+│   └── images/
+├── docs/
+│   └── evidence-policy.md
+├── pages/
+│   ├── recrutadores.html
+│   ├── projetos.html
+│   ├── wazuh.html
+│   ├── kali-linux.html
+│   ├── suricata.html
+│   ├── crowdsec.html
+│   ├── wireshark.html
+│   ├── pfsense.html
+│   └── windows-server.html
+├── index.html
+├── style.css
+├── sitemap.xml
+├── robots.txt
+├── SECURITY.md
+├── DISCLAIMER.md
+├── SEO.md
+└── README.md
+```
+
+## Objetivo profissional
+
+Meu objetivo é construir uma base sólida para atuar em áreas como **Suporte Técnico, Redes, Infraestrutura, Cloud Computing, Segurança da Informação e futuramente SOC/Blue Team**.
+
+Este portfólio representa minha evolução prática, minha capacidade de documentação, meu raciocínio técnico e meu compromisso com aprendizado contínuo.
+
+## Contato
+
+* **GitHub:** [github.com/gabrielzaccaferreira](https://github.com/gabrielzaccaferreira)
+* **LinkedIn:** [linkedin.com/in/gabrielzaccaferreira](https://linkedin.com/in/gabrielzaccaferreira)
+* **Portfólio:** [gabrielzacca.com.br](https://gabrielzacca.com.br)
