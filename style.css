@@ -3799,3 +3799,130 @@ section.blog-side-carousel #blog-posts-carousel > .blog-post-card {
   }
 }
 
+/* BEGIN: Wazuh compact hero typography */
+
+/* Container do texto do hero */
+.hero-content {
+  max-width: 840px !important;
+}
+
+/* Título principal no padrão Wazuh, porém menor */
+.hero h1,
+.hero-title,
+.projects-hero h1,
+.blog-hero h1,
+.hero.recruiters-hero h1 {
+  gap: 12px !important;
+  max-width: 840px !important;
+  margin-bottom: 20px !important;
+  color: var(--text-light) !important;
+  font-size: clamp(2.25rem, 4.1vw, 4.15rem) !important;
+  font-weight: 900 !important;
+  line-height: 1.06 !important;
+  letter-spacing: -0.042em !important;
+}
+
+/* Segunda linha do título */
+.hero h1 span,
+.hero-title span,
+.projects-hero h1 span,
+.blog-hero h1 span {
+  max-width: 720px !important;
+  color: var(--primary) !important;
+  font-size: clamp(1rem, 1.45vw, 1.25rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.45 !important;
+  letter-spacing: 0.02em !important;
+}
+
+/* Subtítulo técnico */
+.hero-tagline,
+.hero-subtitle,
+.hero.recruiters-hero .hero-subtitle {
+  max-width: 780px !important;
+  margin-bottom: 16px !important;
+  color: var(--primary) !important;
+  font-size: clamp(1rem, 1.15vw, 1.12rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.55 !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* Descrição */
+.hero-description,
+.hero-lead,
+.hero-summary,
+.projects-hero .hero-description,
+.blog-hero > div > p:not(.eyebrow) {
+  max-width: 760px !important;
+  color: var(--text-muted) !important;
+  font-size: clamp(0.96rem, 1vw, 1.03rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.72 !important;
+}
+
+/* Recrutadores: mantém os chips e o card da descrição organizados */
+.hero-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 22px 0 24px;
+}
+
+.hero-highlights span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 13px;
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.72);
+  color: #bfdbfe;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.hero-highlights i {
+  color: #38bdf8;
+}
+
+.hero.recruiters-hero .hero-summary {
+  margin-top: 0 !important;
+  padding: 20px 22px !important;
+  border: 1px solid rgba(148, 163, 184, 0.18) !important;
+  border-radius: 20px !important;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.84), rgba(2, 6, 23, 0.7)) !important;
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+  .hero h1,
+  .hero-title,
+  .projects-hero h1,
+  .blog-hero h1,
+  .hero.recruiters-hero h1 {
+    font-size: clamp(2rem, 9.5vw, 3.2rem) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.035em !important;
+  }
+
+  .hero h1 span,
+  .hero-title span,
+  .projects-hero h1 span,
+  .blog-hero h1 span {
+    font-size: clamp(0.95rem, 4vw, 1.15rem) !important;
+    line-height: 1.45 !important;
+  }
+
+  .hero-tagline,
+  .hero-subtitle,
+  .hero-description,
+  .hero-lead,
+  .hero-summary,
+  .blog-hero > div > p:not(.eyebrow) {
+    font-size: 0.98rem !important;
+  }
+}
+
+/* END: Wazuh compact hero typography */
+
