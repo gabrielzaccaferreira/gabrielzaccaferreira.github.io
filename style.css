@@ -1,4 +1,4 @@
-/* =========================
+﻿/* =========================
    01. RESET / VARIABLES
 ========================= */
 
@@ -3449,4 +3449,72 @@ button:focus-visible,
 img {
   max-width: 100%;
   height: auto;
+}
+/* Blog category tags */
+.blog-tags.blog-category-tags span::before {
+  content: none !important;
+}
+
+.blog-category-tags span i {
+  margin-right: 8px;
+  color: var(--primary);
+}
+
+
+
+/* Blog tags icons */
+.blog-tags span i {
+  margin-right: 8px;
+  color: var(--primary);
+}
+
+/* Fix: remove hashtag from blog category tags */
+section#categorias .blog-tags > span::before,
+section#categorias .blog-tags > span::after {
+  content: "" !important;
+  display: none !important;
+}
+
+section#categorias .blog-tags > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+section#categorias .blog-tags > span i {
+  margin-right: 0 !important;
+  color: var(--primary);
+}
+
+/* Blog category icon colors */
+section#categorias .blog-tags > span i.icon-redes {
+  color: #22c55e !important;
+}
+
+section#categorias .blog-tags > span i.icon-linux {
+  color: #a78bfa !important;
+}
+
+section#categorias .blog-tags > span i.icon-wazuh {
+  color: #38bdf8 !important;
+}
+
+section#categorias .blog-tags > span i.icon-blue-team {
+  color: #0ea5e9 !important;
+}
+
+section#categorias .blog-tags > span i.icon-cloud {
+  color: #38bdf8 !important;
+}
+
+section#categorias .blog-tags > span i.icon-github {
+  color: #e5e7eb !important;
+}
+
+section#categorias .blog-tags > span i.icon-vmware {
+  color: #60a5fa !important;
+}
+
+section#categorias .blog-tags > span i.icon-security {
+  color: #2dd4bf !important;
 }
