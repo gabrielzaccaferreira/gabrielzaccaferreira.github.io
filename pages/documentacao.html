@@ -1,0 +1,304 @@
+﻿<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Padrões de Documentação Técnica</title>
+    <meta name="description" content="Padrões utilizados para documentar laboratórios técnicos, evidências, troubleshooting, aprendizados e boas práticas no portfólio.">
+    <meta name="author" content="Gabriel Zacca Ferreira">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://gabrielzacca.com.br/pages/documentacao.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Padrões de Documentação Técnica">
+    <meta property="og:description" content="Padrões utilizados para documentar laboratórios técnicos, evidências, troubleshooting, aprendizados e boas práticas no portfólio.">
+    <meta property="og:url" content="https://gabrielzacca.com.br/pages/documentacao.html">
+    <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+    <meta property="og:site_name" content="Portfólio Técnico">
+    <meta property="og:locale" content="pt_BR">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Padrões de Documentação Técnica">
+    <meta name="twitter:description" content="Padrões utilizados para documentar laboratórios técnicos, evidências, troubleshooting, aprendizados e boas práticas no portfólio.">
+    <meta name="twitter:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="../manifest.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+  </head>
+
+  <body>
+    <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
+
+    <header class="site-header">
+      <nav class="navbar" aria-label="Navegação principal">
+        <a href="../index.html" class="logo">GZF</a>
+
+        <div class="nav-links">
+          <a href="../index.html">Home</a>
+          <a href="sobre.html">Sobre</a>
+          <a href="recrutadores.html">Recrutadores</a>
+          <a href="projetos.html">Projetos</a>
+          <a href="guia.html">Guia</a>
+          <a href="documentacao.html" style="color:var(--primary);">Documentação</a>
+          <a href="blog.html">Blog</a>
+          <a href="roadmap.html">Roadmap</a>
+        </div>
+
+        <div class="nav-actions">
+          <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer" class="nav-cv">Currículo</a>
+        </div>
+      </nav>
+
+      <div class="labs-bar">
+        <div class="labs-bar-inner">
+          <span class="labs-bar-label">Labs</span>
+          <a href="wazuh.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-shield-halved"></i> Wazuh SIEM/XDR</a>
+          <a href="kali-linux.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-brands fa-linux"></i> Kali Linux</a>
+          <a href="suricata.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-network-wired"></i> Suricata IDS/IPS</a>
+          <a href="crowdsec.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec</a>
+          <a href="wireshark.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-magnifying-glass-chart"></i> Wireshark</a>
+          <a href="pfsense.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-fire"></i> pfSense</a>
+          <a href="windows-server.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-brands fa-windows"></i> Windows Server</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <section id="hero" class="projects-hero hero">
+        <div class="hero-content">
+          <p class="eyebrow">Documentação • Evidências • Troubleshooting • Boas práticas</p>
+
+          <h1>
+            Padrões de documentação
+            <span>técnica.</span>
+          </h1>
+
+          <p class="hero-description">
+            Esta página reúne os padrões utilizados para documentar laboratórios técnicos do portfólio,
+            incluindo estrutura de README, evidências, troubleshooting, aprendizados, próximos passos
+            e aviso de uso educacional.
+          </p>
+
+          <div class="hero-actions">
+            <a href="../docs/lab-readme-template.md" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-file-lines"></i> Ver template de README
+            </a>
+
+            <a href="../docs/lab-documentation-standard.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-book-open"></i> Ver padrão completo
+            </a>
+          </div>
+        </div>
+
+        <div class="profile-card">
+          <div class="profile-avatar"><i class="fa-solid fa-clipboard-check"></i></div>
+          <p class="section-label">DOCUMENTAÇÃO TÉCNICA</p>
+          <h2>Estudo registrado com método.</h2>
+          <p>
+            Cada laboratório deve demonstrar objetivo, ambiente, execução, validação,
+            evidências, problemas encontrados e aprendizados.
+          </p>
+
+          <div class="profile-tags">
+            <span><i class="fa-solid fa-list-check"></i> README</span>
+            <span><i class="fa-solid fa-camera"></i> Evidências</span>
+            <span><i class="fa-solid fa-wrench"></i> Troubleshooting</span>
+            <span><i class="fa-solid fa-shield-halved"></i> Uso educacional</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="visao-geral" class="section">
+        <p class="section-label">VISÃO GERAL</p>
+        <h2>Como os laboratórios são organizados.</h2>
+
+        <p class="section-text">
+          A documentação dos laboratórios segue um padrão pensado para facilitar estudo,
+          revisão técnica e apresentação profissional. A ideia é mostrar não apenas o resultado,
+          mas também o processo de investigação, configuração, validação e aprendizado.
+        </p>
+
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title">
+              <i class="fa-solid fa-bullseye card-icon"></i> Objetivo
+            </h3>
+            <p>
+              Cada laboratório começa explicando o que será estudado, qual problema técnico
+              será explorado e quais habilidades serão desenvolvidas.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">
+              <i class="fa-solid fa-diagram-project card-icon"></i> Ambiente
+            </h3>
+            <p>
+              O ambiente utilizado é documentado com host, hypervisor, máquinas virtuais,
+              rede, ferramentas e recursos aplicados.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">
+              <i class="fa-solid fa-terminal card-icon"></i> Execução
+            </h3>
+            <p>
+              As etapas são registradas em ordem lógica: planejamento, instalação,
+              configuração, testes, validação e documentação.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">
+              <i class="fa-solid fa-magnifying-glass-chart card-icon"></i> Evidências
+            </h3>
+            <p>
+              Prints, comandos, logs, status de serviços, alertas e dashboards ajudam
+              a comprovar que o laboratório foi executado e validado.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="documentos" class="section">
+        <p class="section-label">DOCUMENTOS</p>
+        <h2>Arquivos de referência disponíveis.</h2>
+
+        <div class="cards-grid">
+          <article class="card highlight">
+            <h3 class="card-title">
+              <i class="fa-solid fa-file-lines card-icon"></i> Template de README
+            </h3>
+            <p>
+              Modelo reutilizável para criar READMEs de laboratórios com objetivo,
+              ambiente, tecnologias, arquitetura, etapas, evidências, aprendizados e próximos passos.
+            </p>
+            <div class="project-stack">
+              <span>README</span>
+              <span>Laboratórios</span>
+              <span>GitHub</span>
+            </div>
+            <a href="../docs/lab-readme-template.md" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+              Abrir template
+            </a>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">
+              <i class="fa-solid fa-book-open card-icon"></i> Padrão de Documentação
+            </h3>
+            <p>
+              Documento que define a estrutura recomendada para registrar laboratórios técnicos,
+              evidências, troubleshooting, boas práticas e aviso de uso educacional.
+            </p>
+            <div class="project-stack">
+              <span>Padrão</span>
+              <span>Boas práticas</span>
+              <span>Documentação</span>
+            </div>
+            <a href="../docs/lab-documentation-standard.md" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+              Abrir padrão
+            </a>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">
+              <i class="fa-solid fa-shield-halved card-icon"></i> Política de Evidências
+            </h3>
+            <p>
+              Referência para tratar evidências de laboratório com cuidado, evitando exposição
+              de credenciais, dados sensíveis, tokens, chaves privadas ou informações indevidas.
+            </p>
+            <div class="project-stack">
+              <span>Evidências</span>
+              <span>Segurança</span>
+              <span>Boas práticas</span>
+            </div>
+            <a href="../docs/evidence-policy.md" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+              Abrir política
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <section id="metodologia" class="section">
+        <p class="section-label">METODOLOGIA</p>
+        <h2>O ciclo utilizado nos estudos práticos.</h2>
+
+        <div class="roadmap-timeline">
+          <article class="roadmap-item">
+            <span class="roadmap-status">Etapa 01</span>
+            <h3>Planejar</h3>
+            <p>Definir objetivo, ambiente, ferramentas, topologia e escopo do laboratório.</p>
+          </article>
+
+          <article class="roadmap-item">
+            <span class="roadmap-status">Etapa 02</span>
+            <h3>Implementar</h3>
+            <p>Instalar, configurar serviços, ajustar rede, criar regras e preparar validações.</p>
+          </article>
+
+          <article class="roadmap-item">
+            <span class="roadmap-status">Etapa 03</span>
+            <h3>Validar</h3>
+            <p>Executar testes, verificar logs, gerar evidências e confirmar funcionamento.</p>
+          </article>
+
+          <article class="roadmap-item">
+            <span class="roadmap-status">Etapa 04</span>
+            <h3>Documentar</h3>
+            <p>Registrar comandos, problemas, soluções, prints, aprendizados e próximos passos.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="cta" class="section cta-premium">
+        <p class="section-label">PORTFÓLIO EM EVOLUÇÃO</p>
+        <h2>Documentar também é demonstrar conhecimento.</h2>
+
+        <p class="section-text">
+          A documentação técnica transforma estudo em evidência. Por isso, cada laboratório
+          do portfólio é tratado como um projeto real: com objetivo, execução, validação,
+          troubleshooting e aprendizados registrados.
+        </p>
+
+        <div class="hero-actions">
+          <a href="projetos.html" class="btn btn-primary">
+            <i class="fa-solid fa-folder-open"></i> Ver projetos técnicos
+          </a>
+
+          <a href="recrutadores.html" class="btn btn-secondary">
+            <i class="fa-solid fa-briefcase"></i> Perfil para recrutadores
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <nav class="footer-nav">
+        <a href="../index.html">Home</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="projetos.html">Projetos</a>
+        <a href="guia.html">Guia</a>
+        <a href="documentacao.html">Documentação</a>
+        <a href="blog.html">Blog</a>
+      </nav>
+
+      <div class="footer-links">
+        <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a href="mailto:gabrielzaccaferreira@gmail.com"><i class="fa-solid fa-envelope"></i> E-mail</a>
+        <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-lines"></i> Currículo</a>
+      </div>
+
+      <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
+    </footer>
+  </body>
+</html>
