@@ -488,16 +488,14 @@ main {
 }
 
 .tags,
-.profile-tags,
-.project-stack {
+.profile-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
 .tags span,
-.profile-tags span,
-.project-stack span {
+.profile-tags span {
   padding: 8px 12px;
   color: var(--text-soft);
   font-size: 13px;
@@ -541,9 +539,13 @@ main {
   padding: 100px 0 80px;
 }
 
-.hero-premium,
+.hero-premium {
+  position: relative;
+}
+
 .hero-content {
   position: relative;
+  max-width: 840px;
 }
 
 .hero-premium::before {
@@ -557,10 +559,6 @@ main {
   border-radius: 50%;
   background: radial-gradient(circle, rgba(56, 189, 248, 0.18), transparent 65%);
   filter: blur(46px);
-}
-
-.hero-content {
-  max-width: 840px;
 }
 
 .hero h1,
@@ -2894,21 +2892,6 @@ main {
   text-transform: uppercase;
 }
 
-.sidebar-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 9px 20px;
-  color: var(--text-muted);
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1.4;
-  transition: var(--transition);
-  cursor: pointer;
-  border-left: 2px solid transparent;
-  text-decoration: none;
-}
-
 .sidebar-item:hover {
   color: var(--text-light);
   background: rgba(56, 189, 248, 0.05);
@@ -3314,30 +3297,6 @@ body.has-sidebar main {
   border-color: var(--primary);
   color: var(--primary);
   background: rgba(56,189,248,0.08);
-}
-
-.carousel-dots {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 24px;
-}
-
-.carousel-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  border: none;
-  background: var(--border-light);
-  cursor: pointer;
-  transition: var(--transition);
-  padding: 0;
-}
-
-.carousel-dot.active {
-  background: var(--primary);
-  width: 24px;
-  border-radius: 4px;
 }
 
 @media (max-width: 1024px) {
