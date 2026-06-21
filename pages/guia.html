@@ -1,14 +1,14 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Guia de Redes de Computadores</title>
+    <title>Guia de Redes de Computadores | Gabriel Zacca</title>
     <meta name="description" content="Guia de estudos em Redes com TCP/IP, DNS, DHCP, NAT, troubleshooting, Wireshark, pfSense e laboratórios práticos." />
     <meta name="author" content="Gabriel Zacca Ferreira" />
     <meta name="robots" content="index,follow" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Guia de Redes de Computadores" />
+    <meta property="og:title" content="Guia de Redes de Computadores | Gabriel Zacca" />
     <meta property="og:description" content="Guia de estudos em Redes com TCP/IP, DNS, DHCP, NAT, troubleshooting, Wireshark, pfSense e laboratórios práticos." />
     <meta property="og:url" content="https://gabrielzacca.com.br/pages/guia.html" />
     <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png" />
@@ -169,17 +169,17 @@
             </p>
 
             <div class="concept-block">
-              <h4><i class="fa-solid fa-bullseye"></i> Para quem é este guia</h4>
+              <h2><i class="fa-solid fa-bullseye"></i> Para quem é este guia</h2>
               <p>Para quem quer entender redes de verdade — não só decorar para prova. Para estudantes, curiosos, profissionais de TI que querem preencher lacunas e para quem quer ver a teoria conectada a ferramentas reais como Wazuh, Suricata, pfSense, CrowdSec e Wireshark.</p>
             </div>
 
             <div class="concept-block">
-              <h4><i class="fa-solid fa-layer-group"></i> O que você vai encontrar aqui</h4>
+              <h2><i class="fa-solid fa-layer-group"></i> O que você vai encontrar aqui</h2>
               <p>O conteúdo segue a trilha do curso <strong>Conceitos Básicos de Redes</strong> — 17 módulos do zero ao diagnóstico de problemas — mas escrito com minhas palavras, meus exemplos e conectado aos laboratórios reais que construí e documentei neste portfólio.</p>
             </div>
 
             <div class="concept-block">
-              <h4><i class="fa-solid fa-flask"></i> Teoria + Prática</h4>
+              <h2><i class="fa-solid fa-flask"></i> Teoria + Prática</h2>
               <p>Cada módulo termina com um card apontando para o laboratório real onde aquele conceito foi aplicado. Ler sobre TCP/IP é bom. Ver o Three-Way Handshake capturado no Wireshark é diferente. Configurar NAT no pfSense é diferente. Este guia faz essa ponte.</p>
             </div>
 
@@ -238,7 +238,7 @@
             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Comunicação em Rede</h2>
             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">Toda tecnologia que usamos hoje depende de redes. Antes de entrar em protocolos e configurações, preciso entender o que é comunicação em rede — o conceito que está por baixo de tudo.</p>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Tipos de rede</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Tipos de rede</h3>
             <p class="module-text">Redes são classificadas pelo tamanho da área que cobrem. Cada tipo tem características diferentes de velocidade, alcance e tecnologia utilizada.</p>
 
             <div class="concept-block">
@@ -258,7 +258,7 @@
               <p>A maior de todas — cobre países e continentes. A internet é a maior WAN existente. Velocidades são menores e latências maiores que em LANs devido às distâncias envolvidas.</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Transmissão de dados</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Transmissão de dados</h3>
             <p class="module-text">Dados em uma rede são transmitidos de três formas diferentes, dependendo de quantos dispositivos precisam receber a informação ao mesmo tempo:</p>
 
             <div class="concept-block">
@@ -274,7 +274,7 @@
               <p>Um dispositivo envia para um grupo específico de receptores que se inscreveram para receber aquele tráfego. Usado em streaming de vídeo, videoconferência e protocolos de roteamento dinâmico como OSPF. Mais eficiente que broadcast em redes grandes.</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Largura de banda e throughput</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Largura de banda e throughput</h3>
             <p class="module-text">Dois termos frequentemente confundidos, mas com significados distintos:</p>
 
             <div class="concept-block">
@@ -312,7 +312,7 @@
             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Componentes e Conexões de Rede</h2>
             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">Uma rede não existe sem os dispositivos que a compõem. Entender o papel de cada componente — cliente, servidor, switch, roteador — é entender como os dados chegam até você.</p>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Clientes e Servidores</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Clientes e Servidores</h3>
             <p class="module-text">Todo dispositivo em uma rede desempenha um papel na comunicação. O modelo mais fundamental é o cliente-servidor:</p>
 
             <div class="concept-block">
@@ -328,7 +328,7 @@
               <p>Um dispositivo pode ser cliente e servidor ao mesmo tempo. Em redes P2P — como torrents, Skype ou algumas redes domésticas — cada nó compartilha recursos diretamente com os outros, sem um servidor central.</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Componentes de rede</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Componentes de rede</h3>
 
             <div class="concept-block">
               <h4><i class="fa-solid fa-network-wired"></i> Switch</h4>
@@ -347,7 +347,7 @@
               <p>A placa de rede — o hardware que permite ao dispositivo se conectar à rede. Cada NIC tem um endereço MAC único gravado pelo fabricante. No VMware, cada VM tem NICs virtuais (vmnet) que simulam placas de rede físicas.</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Opções de conectividade com a Internet</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Opções de conectividade com a Internet</h3>
 
             <div class="concept-block">
               <h4><i class="fa-solid fa-cable-car"></i> Fibra óptica</h4>
@@ -379,7 +379,7 @@
             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Redes Sem Fio e Móveis</h2>
             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">Wi-Fi e redes móveis são hoje tão fundamentais quanto o cabo. Entender como funcionam — e quais são seus limites — é essencial para diagnosticar problemas e projetar redes seguras.</p>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Redes Wi-Fi — IEEE 802.11</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Redes Wi-Fi — IEEE 802.11</h3>
             <p class="module-text">O Wi-Fi é definido pelo padrão IEEE 802.11. Cada versão traz melhorias em velocidade, alcance e eficiência. Os dispositivos negociam automaticamente o melhor padrão suportado por ambos.</p>
 
             <div class="concept-block">
@@ -396,7 +396,7 @@
               <strong>WPA3:</strong> mais seguro — usa SAE (Simultaneous Authentication of Equals) no lugar do PSK tradicional, resistente a ataques de dicionário offline.</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Conectividade de dispositivos móveis</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Conectividade de dispositivos móveis</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-mobile-screen"></i> Bluetooth</h4>
               <p>Tecnologia de curto alcance (até 100m em versões recentes) para conexão entre dispositivos próximos. Usa a faixa de 2,4 GHz como o Wi-Fi, mas com técnica de frequency hopping para evitar interferência. Versões 4.x e 5.x são as mais comuns hoje.</p>
@@ -420,7 +420,7 @@
             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Montando uma Rede</h2>
             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">Teoria vira prática quando você conecta os primeiros dispositivos. Entender como uma rede doméstica funciona é o ponto de partida para entender redes corporativas e laboratórios mais complexos.</p>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Fundamentos da rede doméstica</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Fundamentos da rede doméstica</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-router"></i> O roteador doméstico — tudo em um</h4>
               <p>O roteador que a operadora instala na sua casa geralmente é um dispositivo que faz várias coisas ao mesmo tempo: roteador (conecta sua LAN à internet), switch (conecta dispositivos com fio), access point (Wi-Fi), servidor DHCP (distribui IPs) e firewall NAT (protege a rede interna).</p>
@@ -430,7 +430,7 @@
               <p>Em uma rede doméstica, todos os dispositivos se conectam a um ponto central — o roteador ou switch. Se o roteador falha, toda a rede para. Mas se um cabo ou dispositivo falha, apenas aquele dispositivo perde conexão.</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Padrões de redes sem fio domésticas</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Padrões de redes sem fio domésticas</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-list-check"></i> Escolhendo o padrão certo</h4>
               <p><strong>802.11n (Wi-Fi 4):</strong> 2,4 e 5 GHz, até 600 Mbps. Ainda muito presente em dispositivos antigos.<br>
@@ -438,7 +438,7 @@
               <strong>802.11ax (Wi-Fi 6/6E):</strong> 2,4, 5 e 6 GHz. Melhor em ambientes com muitos dispositivos conectados simultaneamente.</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Configurando um roteador doméstico</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Configurando um roteador doméstico</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-gears"></i> Configurações essenciais</h4>
               <p><strong>SSID:</strong> o nome da rede Wi-Fi. Pode ser ocultado (hidden SSID) mas não oferece segurança real — ferramentas capturam o SSID mesmo quando oculto.<br><br>
@@ -469,7 +469,7 @@
             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Princípios de Comunicação</h2>
             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">Para dois dispositivos se comunicarem, precisam seguir as mesmas regras. Essas regras se chamam protocolos — e os modelos OSI e TCP/IP organizam como elas se encaixam.</p>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Protocolos de comunicação</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Protocolos de comunicação</h3>
             <p class="module-text">Um protocolo é um conjunto de regras que define como a comunicação acontece. Assim como humanos precisam de um idioma em comum para conversar, dispositivos precisam de protocolos.</p>
 
             <div class="concept-block">
@@ -481,7 +481,7 @@
               <strong>Encapsulamento:</strong> como dados de uma camada são embrulhados em uma camada inferior — cada camada adiciona seu cabeçalho.</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Padrões de rede</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Padrões de rede</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-certificate"></i> Por que padrões abertos importam</h4>
               <p>Padrões abertos garantem interoperabilidade — um switch Cisco consegue se comunicar com um switch HP porque ambos implementam o mesmo padrão Ethernet. As principais organizações de padronização:<br><br>
@@ -491,7 +491,7 @@
               <strong>IANA:</strong> gerencia espaço de endereços IP e números de porta.</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Modelos de comunicação — OSI e TCP/IP</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Modelos de comunicação — OSI e TCP/IP</h3>
 
             <div class="diagram-block">
               <pre>
@@ -527,7 +527,7 @@
             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">Os dados precisam viajar por algum meio físico. O tipo de meio determina velocidade, alcance, custo e resistência a interferências — decisões práticas de infraestrutura que afetam toda a rede.</p>
 
             <div class="concept-block">
-              <h4><i class="fa-solid fa-ethernet"></i> Cabo de par trançado (UTP/STP)</h4>
+              <h3><i class="fa-solid fa-ethernet"></i> Cabo de par trançado (UTP/STP)</h3>
               <p>O cabo Ethernet mais comum. Pares de fios trançados entre si para reduzir interferência eletromagnética. Categorias:<br><br>
               <strong>Cat5e:</strong> até 1 Gbps a 100 metros. Ainda muito usado.<br>
               <strong>Cat6:</strong> até 10 Gbps a 55 metros, 1 Gbps a 100 metros. Padrão atual.<br>
@@ -535,14 +535,14 @@
               O STP (Shielded) tem uma camada extra de blindagem — usado em ambientes com muita interferência eletromagnética (próximos a motores, por exemplo).</p>
             </div>
             <div class="concept-block">
-              <h4><i class="fa-solid fa-circle-dot"></i> Fibra óptica</h4>
+              <h3><i class="fa-solid fa-circle-dot"></i> Fibra óptica</h3>
               <p>Transmite dados como pulsos de luz. Dois tipos:<br><br>
               <strong>Monomodo (SMF):</strong> núcleo menor (~9 microns), transmite um único raio de luz. Alcance de dezenas de quilômetros. Usada em links entre cidades e provedores.<br><br>
               <strong>Multimodo (MMF):</strong> núcleo maior (~50-62,5 microns), transmite múltiplos raios. Alcance menor (300-550m). Usada em data centers e campus.<br><br>
               Vantagens: imune a interferência eletromagnética, sem atenuação por distância, muito mais rápida que cobre.</p>
             </div>
             <div class="concept-block">
-              <h4><i class="fa-solid fa-wifi"></i> Sem fio (Wireless)</h4>
+              <h3><i class="fa-solid fa-wifi"></i> Sem fio (Wireless)</h3>
               <p>Dados transmitidos como ondas eletromagnéticas no espectro de rádio frequência. Não requer infraestrutura física de cabos, mas sofre com interferência, obstáculos físicos e competição por espectro.<br><br>
               Frequências comuns: 2,4 GHz (Wi-Fi, Bluetooth), 5 GHz (Wi-Fi), 60 GHz (Wi-Fi 6E, WiGig), bandas celulares (700 MHz a 39 GHz no 5G mmWave).</p>
             </div>
@@ -572,7 +572,7 @@
             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">A Camada de Acesso</h2>
             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">A camada de acesso é onde os dispositivos finais se conectam à rede. É aqui que o Ethernet Frame é montado, o MAC address entra em cena e o switch decide para onde enviar os dados.</p>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Encapsulamento e o Frame Ethernet</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Encapsulamento e o Frame Ethernet</h3>
             <p class="module-text">Quando dados precisam ser enviados pela rede local, eles são encapsulados em um frame Ethernet — uma estrutura com cabeçalho, dados e trailer.</p>
 
             <div class="diagram-block">
@@ -596,7 +596,7 @@
               MACs são usados apenas dentro da mesma rede local. A cada salto de roteador, os MACs de origem e destino mudam — mas o IP permanece o mesmo.</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Como o switch aprende e encaminha</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Como o switch aprende e encaminha</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-table"></i> Tabela de endereços MAC (CAM Table)</h4>
               <p>O switch aprende os MACs observando os frames que chegam:<br><br>
@@ -628,7 +628,7 @@
             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">O Protocolo IP</h2>
             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">O IP é o protocolo que permite comunicação entre redes diferentes. Sem ele, dois dispositivos em redes separadas não conseguiriam se comunicar — e a internet não existiria.</p>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Propósito do endereço IPv4</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Propósito do endereço IPv4</h3>
             <p class="module-text">O endereço IP tem duas funções: identificar o dispositivo e indicar em qual rede ele está. Essa segunda função é o que permite o roteamento — saber para qual rede encaminhar cada pacote.</p>
 
             <div class="concept-block">
@@ -657,7 +657,7 @@
   Hosts válidos: 192.168.1.1 a 192.168.1.254 (254 hosts)</pre>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Cabeçalho IPv4</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Cabeçalho IPv4</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-file-code"></i> Campos importantes do cabeçalho IP</h4>
               <p><strong>Version (4 bits):</strong> versão do IP (4 para IPv4, 6 para IPv6).<br>
@@ -681,7 +681,7 @@
             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">IPv4 e Segmentação de Redes</h2>
             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">Unicast, broadcast, multicast — como os dados são endereçados muda tudo sobre como a rede se comporta. E dividir redes em sub-redes é uma das habilidades mais práticas de quem trabalha com infraestrutura.</p>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Tipos de endereços IPv4</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Tipos de endereços IPv4</h3>
 
             <div class="concept-block">
               <h4><i class="fa-solid fa-arrow-right"></i> Unicast</h4>
@@ -697,7 +697,7 @@
               <p>Enviado para um grupo específico de hosts. Faixa reservada: 224.0.0.0 a 239.255.255.255. Mais eficiente que broadcast em redes grandes — só quem se inscreveu recebe. Usado em OSPF (224.0.0.5), streaming de vídeo corporativo e IPTV.</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Endereços privados e públicos</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Endereços privados e públicos</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-house-lock"></i> RFC 1918 — Endereços privados</h4>
               <p>Faixas reservadas para uso em redes internas — não roteáveis na internet:<br><br>
@@ -707,7 +707,7 @@
               Para sair para a internet, dispositivos com IP privado usam NAT — o roteador traduz o IP privado para o IP público.</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Segmentação e sub-redes</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Segmentação e sub-redes</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-scissors"></i> Por que segmentar?</h4>
               <p>Dividir uma rede grande em sub-redes menores traz benefícios de segurança, desempenho e organização:<br><br>
@@ -729,14 +729,14 @@
             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Endereçamento IPv6</h2>
             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">O IPv4 acabou. Literalmente — todos os blocos foram alocados. O IPv6 é a solução e já está rodando em paralelo na maior parte da internet. Entender seu formato e regras é cada vez mais necessário.</p>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">O problema do IPv4 e a solução IPv6</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">O problema do IPv4 e a solução IPv6</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-circle-exclamation"></i> Esgotamento do IPv4</h4>
               <p>O IPv4 tem 32 bits — aproximadamente 4,3 bilhões de endereços. Parecia suficiente nos anos 70, quando a internet tinha poucos computadores. Hoje, com smartphones, IoT e bilhões de dispositivos conectados, os endereços acabaram.<br><br>
               O NAT foi uma solução paliativa — permitiu que múltiplos dispositivos compartilhassem um único IP público. Mas complica aplicações, quebra o modelo fim-a-fim da internet e adiciona complexidade.</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Formato IPv6</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Formato IPv6</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-hashtag"></i> 128 bits em hexadecimal</h4>
               <p>O IPv6 usa 128 bits — escritos como 8 grupos de 4 dígitos hexadecimais separados por dois-pontos:<br><br>
@@ -784,7 +784,7 @@
             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">DHCP e Endereçamento Dinâmico</h2>
             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">Sem DHCP, cada dispositivo precisaria ser configurado manualmente com IP, máscara, gateway e DNS. Em uma empresa com centenas de dispositivos, isso seria inviável. O DHCP automatiza tudo isso.</p>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Endereçamento estático vs dinâmico</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Endereçamento estático vs dinâmico</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-hand"></i> IP estático</h4>
               <p>Configurado manualmente no dispositivo — não muda. Usado para servidores, impressoras, câmeras IP, roteadores e qualquer dispositivo que precisa sempre ter o mesmo endereço. Se o servidor muda de IP, todas as configurações que apontam para ele precisam ser atualizadas.</p>
@@ -794,7 +794,7 @@
               <p>Atribuído automaticamente pelo servidor DHCP por um período definido (lease time). Quando o lease expira, o dispositivo renova ou obtém um novo IP. Ideal para dispositivos de usuário — computadores, smartphones, laptops.</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">O processo DORA</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">O processo DORA</h3>
             <div class="diagram-block">
               <pre>
   DORA — como o DHCP negocia um endereço
@@ -849,7 +849,7 @@
             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Gateways e NAT</h2>
             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">O gateway é a porta de saída da sua rede. E o NAT é o mecanismo que permite que dezenas de dispositivos com IPs privados compartilhem um único endereço público para acessar a internet.</p>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Fronteiras de rede</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Fronteiras de rede</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-door-open"></i> Gateway padrão</h4>
               <p>Quando um dispositivo precisa enviar um pacote para uma rede diferente da sua, ele envia para o <strong>gateway padrão</strong> — o roteador responsável por encaminhar o tráfego para fora da rede local.<br><br>
@@ -862,7 +862,7 @@
               <strong>NÃO</strong> → envia para o gateway padrão, que decide o próximo salto.</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">NAT — Tradução de Endereços de Rede</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">NAT — Tradução de Endereços de Rede</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-arrows-left-right"></i> O que é e por que existe</h4>
               <p>O NAT (Network Address Translation) surgiu como solução para o esgotamento de endereços IPv4. Ele permite que vários dispositivos com IPs privados compartilhem um único IP público para acessar a internet.<br><br>
@@ -903,7 +903,7 @@
             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">ARP — Resolvendo MAC a partir do IP</h2>
             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">O IP identifica o dispositivo na rede. Mas para entregar o pacote dentro da LAN, preciso do endereço MAC. O ARP é o protocolo que faz essa ponte entre as camadas 2 e 3.</p>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">MAC e IP — dois endereços, dois propósitos</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">MAC e IP — dois endereços, dois propósitos</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-layer-group"></i> Por que precisamos dos dois</h4>
               <p>O endereço <strong>MAC</strong> é o endereço físico — fixo no hardware, usado na camada 2 para entregar frames dentro da mesma rede local. O switch usa MAC.<br><br>
@@ -911,7 +911,7 @@
               Quando envio um pacote para um host na minha LAN, o IP diz para quem vai, mas o frame Ethernet precisa do MAC para chegar lá. O ARP descobre o MAC a partir do IP.</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Como o ARP funciona</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Como o ARP funciona</h3>
             <div class="diagram-block">
               <pre>
   ARP — "qual é o MAC de x.x.x.20?"
@@ -965,13 +965,13 @@
             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Roteamento entre Redes</h2>
             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">O roteamento é o processo que permite a comunicação entre redes diferentes. Sem ele, a internet não existiria — cada rede seria uma ilha isolada. O roteador é o dispositivo que toma essas decisões.</p>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">A necessidade do roteamento</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">A necessidade do roteamento</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-route"></i> Quando o destino não está na rede local</h4>
               <p>Quando envio um pacote para um IP fora da minha sub-rede, meu dispositivo percebe que não pode entregar diretamente e encaminha para o gateway padrão. O gateway (roteador) recebe o pacote, consulta sua tabela de roteamento e decide o próximo salto.</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">A tabela de roteamento</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">A tabela de roteamento</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-table"></i> Estrutura da tabela</h4>
               <p>Cada entrada na tabela de roteamento tem:<br><br>
@@ -997,7 +997,7 @@
   Pacote para IP da LAN → casa /24 → vai direto pela em1</pre>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Criando uma LAN — o processo completo</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Criando uma LAN — o processo completo</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-diagram-project"></i> Do início ao ping funcionando</h4>
               <p>Para que dois dispositivos em redes diferentes se comuniquem:<br><br>
@@ -1030,7 +1030,7 @@
             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Camada de Transporte</h2>
             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">O IP leva o pacote até o dispositivo. A camada de transporte garante que ele chegue ao <strong>processo correto</strong> dentro desse dispositivo — usando portas. TCP e UDP são os dois protocolos desta camada.</p>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">TCP — Entrega confiável</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">TCP — Entrega confiável</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-handshake"></i> TCP — Transmission Control Protocol</h4>
               <p>Orientado a conexão — antes de enviar dados, estabelece uma conexão com o Three-Way Handshake. Garante entrega ordenada e retransmite pacotes perdidos.<br><br>
@@ -1041,14 +1041,14 @@
               Após a conexão, cada segmento enviado é confirmado com um ACK. Se o ACK não chega dentro do timeout, o segmento é retransmitido. O TCP também controla o fluxo (flow control) e o congestionamento.</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">UDP — Entrega rápida</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">UDP — Entrega rápida</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-paper-plane"></i> UDP — User Datagram Protocol</h4>
               <p>Sem conexão — envia e não espera confirmação. Se um pacote se perde, não é retransmitido. Mais rápido e com menos overhead que o TCP.<br><br>
               Usado quando velocidade importa mais que perfeição: streaming de vídeo (um frame perdido é melhor que travar), jogos online, chamadas VoIP, DNS (consultas rápidas).</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Portas — o endereço do processo</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Portas — o endereço do processo</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-door-open"></i> Como as portas funcionam</h4>
               <p>Um servidor pode ter dezenas de serviços rodando ao mesmo tempo. A porta identifica qual serviço receber o pacote.<br><br>
@@ -1096,14 +1096,14 @@
             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Serviços de Aplicação</h2>
             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">A camada de aplicação é onde os serviços que usamos no dia a dia vivem — DNS, HTTP, FTP, e-mail, SSH. Cada um tem um protocolo próprio que define exatamente como a comunicação acontece.</p>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Modelo cliente-servidor na aplicação</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Modelo cliente-servidor na aplicação</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-arrows-left-right"></i> Como os serviços de rede funcionam</h4>
               <p>Todo serviço de rede segue o mesmo padrão: um <strong>servidor</strong> escuta em uma porta específica aguardando conexões, e um <strong>cliente</strong> inicia a conexão para aquela porta.<br><br>
               O servidor web escuta na porta 80 (HTTP) e 443 (HTTPS). O servidor SSH escuta na porta 22. O servidor DNS escuta na porta 53. O cliente sempre inicia — usando uma porta efêmera como origem.</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">DNS — Sistema de Nomes de Domínio</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">DNS — Sistema de Nomes de Domínio</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-globe"></i> Resolvendo nomes em IPs</h4>
               <p>O DNS é a agenda telefônica da internet — traduz nomes legíveis (google.com) em IPs usáveis pelos computadores. Sem DNS, você teria que memorizar o IP de cada site.<br><br>
@@ -1114,7 +1114,7 @@
               CNAME → alias | MX → servidor de e-mail | PTR → IP para nome</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">HTTP e HTTPS</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">HTTP e HTTPS</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-browser"></i> HyperText Transfer Protocol</h4>
               <p>Protocolo de camada de aplicação para transferência de documentos web. Opera sobre TCP porta 80 (HTTP) ou 443 (HTTPS).<br><br>
@@ -1122,7 +1122,7 @@
               <strong>HTTPS:</strong> HTTP com TLS — uma camada de criptografia que protege o conteúdo da comunicação. O TLS Handshake acontece antes de qualquer dado HTTP ser trocado — negociando algoritmos, trocando certificados e estabelecendo chaves de sessão.</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">FTP, SSH, E-mail e Syslog</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">FTP, SSH, E-mail e Syslog</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-list"></i> Outros protocolos de aplicação importantes</h4>
               <p><strong>FTP (porta 21/20):</strong> transferência de arquivos. Texto em claro — substituído pelo SFTP (SSH) e FTPS (TLS) em ambientes seguros.<br><br>
@@ -1152,7 +1152,7 @@
             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Diagnóstico e Resolução de Problemas</h2>
             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">Redes quebram. Serviços param. Conexões falham. Saber diagnosticar problemas de forma sistemática — usando os comandos certos na ordem certa — é uma das habilidades mais valiosas de qualquer profissional de redes.</p>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Metodologia de troubleshooting</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Metodologia de troubleshooting</h3>
             <div class="concept-block">
               <h4><i class="fa-solid fa-list-ol"></i> Abordagem por camadas — bottom-up</h4>
               <p>A abordagem mais confiável é verificar camada por camada, de baixo para cima. Não faz sentido testar DNS (camada 7) se a camada física (camada 1) está com problema.<br><br>
@@ -1163,7 +1163,7 @@
               <strong>5. Aplicação:</strong> o serviço responde corretamente?</p>
             </div>
 
-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Comandos essenciais de diagnóstico</h2>
+            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Comandos essenciais de diagnóstico</h3>
 
             <div class="concept-block">
               <h4><i class="fa-solid fa-terminal"></i> ping — testando conectividade</h4>

@@ -1,0 +1,1721 @@
+diff --git a/404.html b/404.html
+index d34c0cd..a099144 100644
+--- a/404.html
++++ b/404.html
+@@ -1,4 +1,4 @@
+-﻿<!doctype html>
++<!doctype html>
+ <html lang="pt-BR">
+   <head>
+     <meta charset="UTF-8">
+diff --git a/index.html b/index.html
+index abf89f9..c9e143d 100644
+--- a/index.html
++++ b/index.html
+@@ -1,4 +1,4 @@
+-﻿<!doctype html>
++<!doctype html>
+ <html lang="pt-BR">
+   <head>
+   <meta charset="UTF-8">
+@@ -111,6 +111,8 @@
+               alt="Foto de Gabriel Zacca Ferreira"
+               class="profile-photo"
+               loading="lazy"
++              width="460"
++              height="460"
+             />
+           </div>
+ 
+diff --git a/pages/blog.html b/pages/blog.html
+index 15a9e0f..8b841b1 100644
+--- a/pages/blog.html
++++ b/pages/blog.html
+@@ -1,10 +1,10 @@
+-﻿<!doctype html>
++<!doctype html>
+ <html lang="pt-BR">
+   <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+-  <title>Blog Técnico</title>
++  <title>Blog Técnico | Gabriel Zacca</title>
+   <meta name="description" content="Registros técnicos, estudos, troubleshooting e aprendizados em Redes, Infraestrutura e Cibersegurança.">
+   <meta name="author" content="Gabriel Zacca Ferreira">
+   <meta name="robots" content="index, follow">
+@@ -12,7 +12,7 @@
+   <link rel="canonical" href="https://gabrielzacca.com.br/pages/blog.html">
+ 
+   <meta property="og:type" content="blog">
+-  <meta property="og:title" content="Blog Técnico">
++  <meta property="og:title" content="Blog Técnico | Gabriel Zacca">
+   <meta property="og:description" content="Registros técnicos, estudos, troubleshooting e aprendizados em Redes, Infraestrutura e Cibersegurança.">
+   <meta property="og:url" content="https://gabrielzacca.com.br/pages/blog.html">
+   <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+@@ -20,7 +20,7 @@
+   <meta property="og:locale" content="pt_BR">
+ 
+   <meta name="twitter:card" content="summary_large_image">
+-  <meta name="twitter:title" content="Blog Técnico">
++  <meta name="twitter:title" content="Blog Técnico | Gabriel Zacca">
+   <meta name="twitter:description" content="Registros técnicos, estudos, troubleshooting e aprendizados em Redes, Infraestrutura e Cibersegurança.">
+   <meta name="twitter:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+ 
+diff --git a/pages/crowdsec.html b/pages/crowdsec.html
+index b7cb16b..8d02db3 100644
+--- a/pages/crowdsec.html
++++ b/pages/crowdsec.html
+@@ -1,10 +1,10 @@
+-﻿<!doctype html>
++<!doctype html>
+ <html lang="pt-BR">
+   <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+-  <title>Laboratório CrowdSec</title>
++  <title>Laboratório CrowdSec | Gabriel Zacca</title>
+   <meta name="description" content="Laboratório com CrowdSec para análise de logs SSH, brute force, parsers, scenarios e alertas.">
+   <meta name="author" content="Gabriel Zacca Ferreira">
+   <meta name="robots" content="index, follow">
+@@ -12,7 +12,7 @@
+   <link rel="canonical" href="https://gabrielzacca.com.br/pages/crowdsec.html">
+ 
+   <meta property="og:type" content="article">
+-  <meta property="og:title" content="Laboratório CrowdSec">
++  <meta property="og:title" content="Laboratório CrowdSec | Gabriel Zacca">
+   <meta property="og:description" content="Laboratório com CrowdSec para análise de logs SSH, brute force, parsers, scenarios e alertas.">
+   <meta property="og:url" content="https://gabrielzacca.com.br/pages/crowdsec.html">
+   <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+@@ -20,7 +20,7 @@
+   <meta property="og:locale" content="pt_BR">
+ 
+   <meta name="twitter:card" content="summary_large_image">
+-  <meta name="twitter:title" content="Laboratório CrowdSec">
++  <meta name="twitter:title" content="Laboratório CrowdSec | Gabriel Zacca">
+   <meta name="twitter:description" content="Laboratório com CrowdSec para análise de logs SSH, brute force, parsers, scenarios e alertas.">
+   <meta name="twitter:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+ 
+@@ -641,14 +641,14 @@ labels:
+         <h2>Instalação do CrowdSec</h2>
+         <p class="module-text">O CrowdSec está disponível nos repositórios oficiais do Kali Linux. A instalação é direta via apt.</p>
+         <div class="concept-block">
+-          <h4><i class="fa-solid fa-terminal"></i> Comandos de instalação</h4>
++          <h3><i class="fa-solid fa-terminal"></i> Comandos de instalação</h3>
+           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
+             curl -s https://packagecloud.io/install/repositories/crowdsec/crowdsec/script.deb.sh | sudo bash<br>
+             sudo apt install crowdsec -y
+           </div>
+         </div>
+         <div class="concept-block">
+-          <h4><i class="fa-solid fa-circle-check"></i> Validação</h4>
++          <h3><i class="fa-solid fa-circle-check"></i> Validação</h3>
+           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
+             sudo systemctl status crowdsec<br>
+             <span style="color:#4ade80;">● crowdsec.service - CrowdSec agent<br>
+@@ -665,7 +665,7 @@ labels:
+         <h2>Configuração do arquivo de aquisição</h2>
+         <p class="module-text">O <code style="color:var(--primary);font-family:monospace;">acquis.yaml</code> define quais fontes de log o CrowdSec vai monitorar. Para SSH, a fonte é o journalctl com o serviço sshd.</p>
+         <div class="concept-block">
+-          <h4><i class="fa-solid fa-file-code"></i> Conteúdo do acquis.yaml</h4>
++          <h3><i class="fa-solid fa-file-code"></i> Conteúdo do acquis.yaml</h3>
+           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
+             source: journalctl<br>
+             journalctl_filter:<br>
+@@ -675,7 +675,7 @@ labels:
+           </div>
+         </div>
+         <div class="concept-block">
+-          <h4><i class="fa-solid fa-circle-info"></i> Localização</h4>
++          <h3><i class="fa-solid fa-circle-info"></i> Localização</h3>
+           <p>O arquivo fica em <code style="color:var(--primary);font-family:monospace;">/etc/crowdsec/acquis.yaml</code>. Após editar, reiniciar o serviço com <code style="color:var(--primary);font-family:monospace;">sudo systemctl restart crowdsec</code>.</p>
+         </div>
+       </div>
+@@ -688,14 +688,14 @@ labels:
+         <h2>Instalação da collection SSH</h2>
+         <p class="module-text">As collections do CrowdSec agrupam parsers e scenarios relacionados. A collection <code style="color:var(--primary);font-family:monospace;">crowdsecurity/sshd</code> inclui tudo necessário para detecção de brute force SSH.</p>
+         <div class="concept-block">
+-          <h4><i class="fa-solid fa-terminal"></i> Comando</h4>
++          <h3><i class="fa-solid fa-terminal"></i> Comando</h3>
+           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
+             sudo cscli collections install crowdsecurity/sshd<br>
+             sudo systemctl restart crowdsec
+           </div>
+         </div>
+         <div class="concept-block">
+-          <h4><i class="fa-solid fa-layer-group"></i> O que inclui</h4>
++          <h3><i class="fa-solid fa-layer-group"></i> O que inclui</h3>
+           <p><strong>Parser:</strong> <code style="color:var(--primary);font-family:monospace;">crowdsecurity/sshd-logs</code> — lê e estrutura os logs do SSH.<br>
+           <strong>Scenario:</strong> <code style="color:var(--primary);font-family:monospace;">crowdsecurity/ssh-bf</code> — detecta múltiplas falhas de login (brute force).</p>
+         </div>
+@@ -709,13 +709,13 @@ labels:
+         <h2>Verificação de métricas</h2>
+         <p class="module-text">O <code style="color:var(--primary);font-family:monospace;">cscli metrics</code> mostra o estado interno do pipeline de processamento — quantas linhas foram lidas, parseadas e quantos eventos foram avaliados pelos scenarios.</p>
+         <div class="concept-block">
+-          <h4><i class="fa-solid fa-terminal"></i> Comando</h4>
++          <h3><i class="fa-solid fa-terminal"></i> Comando</h3>
+           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
+             sudo cscli metrics
+           </div>
+         </div>
+         <div class="concept-block">
+-          <h4><i class="fa-solid fa-circle-check"></i> O que validar</h4>
++          <h3><i class="fa-solid fa-circle-check"></i> O que validar</h3>
+           <p>Na tabela de parsers, confirmar que <code style="color:var(--primary);font-family:monospace;">crowdsecurity/sshd-logs</code> está com linhas processadas. Na tabela de buckets, confirmar que <code style="color:var(--primary);font-family:monospace;">crowdsecurity/ssh-bf</code> está sendo avaliado.</p>
+         </div>
+       </div>
+@@ -728,14 +728,14 @@ labels:
+         <h2>Análise de alertas gerados</h2>
+         <p class="module-text">Após o CrowdSec processar os logs e detectar padrões suspeitos, os alertas ficam disponíveis via <code style="color:var(--primary);font-family:monospace;">cscli alerts list</code>.</p>
+         <div class="concept-block">
+-          <h4><i class="fa-solid fa-terminal"></i> Comandos de análise</h4>
++          <h3><i class="fa-solid fa-terminal"></i> Comandos de análise</h3>
+           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
+             sudo cscli alerts list<br>
+             sudo cscli decisions list
+           </div>
+         </div>
+         <div class="concept-block">
+-          <h4><i class="fa-solid fa-circle-info"></i> Campos do alerta</h4>
++          <h3><i class="fa-solid fa-circle-info"></i> Campos do alerta</h3>
+           <p>Cada alerta mostra: IP origem, scenario ativado (<code style="color:var(--primary);font-family:monospace;">crowdsecurity/ssh-bf</code>), número de eventos que ativaram o threshold, data/hora e decisão tomada (ban ou simonly).</p>
+         </div>
+       </div>
+diff --git a/pages/documentacao.html b/pages/documentacao.html
+index e5bc3f5..73ce43c 100644
+--- a/pages/documentacao.html
++++ b/pages/documentacao.html
+@@ -1,10 +1,10 @@
+-﻿<!doctype html>
++<!doctype html>
+ <html lang="pt-BR">
+   <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+-    <title>Padrões de Documentação Técnica</title>
++    <title>Padrões de Documentação Técnica | Gabriel Zacca</title>
+     <meta name="description" content="Padrões utilizados para documentar laboratórios técnicos, evidências, troubleshooting, aprendizados e boas práticas no portfólio.">
+     <meta name="author" content="Gabriel Zacca Ferreira">
+     <meta name="robots" content="index, follow">
+@@ -12,7 +12,7 @@
+     <link rel="canonical" href="https://gabrielzacca.com.br/pages/documentacao.html">
+ 
+     <meta property="og:type" content="website">
+-    <meta property="og:title" content="Padrões de Documentação Técnica">
++    <meta property="og:title" content="Padrões de Documentação Técnica | Gabriel Zacca">
+     <meta property="og:description" content="Padrões utilizados para documentar laboratórios técnicos, evidências, troubleshooting, aprendizados e boas práticas no portfólio.">
+     <meta property="og:url" content="https://gabrielzacca.com.br/pages/documentacao.html">
+     <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+@@ -20,7 +20,7 @@
+     <meta property="og:locale" content="pt_BR">
+ 
+     <meta name="twitter:card" content="summary_large_image">
+-    <meta name="twitter:title" content="Padrões de Documentação Técnica">
++    <meta name="twitter:title" content="Padrões de Documentação Técnica | Gabriel Zacca">
+     <meta name="twitter:description" content="Padrões utilizados para documentar laboratórios técnicos, evidências, troubleshooting, aprendizados e boas práticas no portfólio.">
+     <meta name="twitter:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+ 
+diff --git a/pages/guia.html b/pages/guia.html
+index aad339f..9ecb500 100644
+--- a/pages/guia.html
++++ b/pages/guia.html
+@@ -1,14 +1,14 @@
+-﻿<!doctype html>
++<!doctype html>
+ <html lang="pt-BR">
+   <head>
+     <meta charset="UTF-8" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <title>Guia de Redes de Computadores</title>
++    <title>Guia de Redes de Computadores | Gabriel Zacca</title>
+     <meta name="description" content="Guia de estudos em Redes com TCP/IP, DNS, DHCP, NAT, troubleshooting, Wireshark, pfSense e laboratórios práticos." />
+     <meta name="author" content="Gabriel Zacca Ferreira" />
+     <meta name="robots" content="index,follow" />
+     <meta property="og:type" content="website" />
+-    <meta property="og:title" content="Guia de Redes de Computadores" />
++    <meta property="og:title" content="Guia de Redes de Computadores | Gabriel Zacca" />
+     <meta property="og:description" content="Guia de estudos em Redes com TCP/IP, DNS, DHCP, NAT, troubleshooting, Wireshark, pfSense e laboratórios práticos." />
+     <meta property="og:url" content="https://gabrielzacca.com.br/pages/guia.html" />
+     <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png" />
+@@ -169,17 +169,17 @@
+             </p>
+ 
+             <div class="concept-block">
+-              <h4><i class="fa-solid fa-bullseye"></i> Para quem é este guia</h4>
++              <h2><i class="fa-solid fa-bullseye"></i> Para quem é este guia</h2>
+               <p>Para quem quer entender redes de verdade — não só decorar para prova. Para estudantes, curiosos, profissionais de TI que querem preencher lacunas e para quem quer ver a teoria conectada a ferramentas reais como Wazuh, Suricata, pfSense, CrowdSec e Wireshark.</p>
+             </div>
+ 
+             <div class="concept-block">
+-              <h4><i class="fa-solid fa-layer-group"></i> O que você vai encontrar aqui</h4>
++              <h2><i class="fa-solid fa-layer-group"></i> O que você vai encontrar aqui</h2>
+               <p>O conteúdo segue a trilha do curso <strong>Conceitos Básicos de Redes</strong> — 17 módulos do zero ao diagnóstico de problemas — mas escrito com minhas palavras, meus exemplos e conectado aos laboratórios reais que construí e documentei neste portfólio.</p>
+             </div>
+ 
+             <div class="concept-block">
+-              <h4><i class="fa-solid fa-flask"></i> Teoria + Prática</h4>
++              <h2><i class="fa-solid fa-flask"></i> Teoria + Prática</h2>
+               <p>Cada módulo termina com um card apontando para o laboratório real onde aquele conceito foi aplicado. Ler sobre TCP/IP é bom. Ver o Three-Way Handshake capturado no Wireshark é diferente. Configurar NAT no pfSense é diferente. Este guia faz essa ponte.</p>
+             </div>
+ 
+@@ -238,7 +238,7 @@
+             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Comunicação em Rede</h2>
+             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">Toda tecnologia que usamos hoje depende de redes. Antes de entrar em protocolos e configurações, preciso entender o que é comunicação em rede — o conceito que está por baixo de tudo.</p>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Tipos de rede</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Tipos de rede</h3>
+             <p class="module-text">Redes são classificadas pelo tamanho da área que cobrem. Cada tipo tem características diferentes de velocidade, alcance e tecnologia utilizada.</p>
+ 
+             <div class="concept-block">
+@@ -258,7 +258,7 @@
+               <p>A maior de todas — cobre países e continentes. A internet é a maior WAN existente. Velocidades são menores e latências maiores que em LANs devido às distâncias envolvidas.</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Transmissão de dados</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Transmissão de dados</h3>
+             <p class="module-text">Dados em uma rede são transmitidos de três formas diferentes, dependendo de quantos dispositivos precisam receber a informação ao mesmo tempo:</p>
+ 
+             <div class="concept-block">
+@@ -274,7 +274,7 @@
+               <p>Um dispositivo envia para um grupo específico de receptores que se inscreveram para receber aquele tráfego. Usado em streaming de vídeo, videoconferência e protocolos de roteamento dinâmico como OSPF. Mais eficiente que broadcast em redes grandes.</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Largura de banda e throughput</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Largura de banda e throughput</h3>
+             <p class="module-text">Dois termos frequentemente confundidos, mas com significados distintos:</p>
+ 
+             <div class="concept-block">
+@@ -312,7 +312,7 @@
+             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Componentes e Conexões de Rede</h2>
+             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">Uma rede não existe sem os dispositivos que a compõem. Entender o papel de cada componente — cliente, servidor, switch, roteador — é entender como os dados chegam até você.</p>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Clientes e Servidores</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Clientes e Servidores</h3>
+             <p class="module-text">Todo dispositivo em uma rede desempenha um papel na comunicação. O modelo mais fundamental é o cliente-servidor:</p>
+ 
+             <div class="concept-block">
+@@ -328,7 +328,7 @@
+               <p>Um dispositivo pode ser cliente e servidor ao mesmo tempo. Em redes P2P — como torrents, Skype ou algumas redes domésticas — cada nó compartilha recursos diretamente com os outros, sem um servidor central.</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Componentes de rede</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Componentes de rede</h3>
+ 
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-network-wired"></i> Switch</h4>
+@@ -347,7 +347,7 @@
+               <p>A placa de rede — o hardware que permite ao dispositivo se conectar à rede. Cada NIC tem um endereço MAC único gravado pelo fabricante. No VMware, cada VM tem NICs virtuais (vmnet) que simulam placas de rede físicas.</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Opções de conectividade com a Internet</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Opções de conectividade com a Internet</h3>
+ 
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-cable-car"></i> Fibra óptica</h4>
+@@ -379,7 +379,7 @@
+             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Redes Sem Fio e Móveis</h2>
+             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">Wi-Fi e redes móveis são hoje tão fundamentais quanto o cabo. Entender como funcionam — e quais são seus limites — é essencial para diagnosticar problemas e projetar redes seguras.</p>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Redes Wi-Fi — IEEE 802.11</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Redes Wi-Fi — IEEE 802.11</h3>
+             <p class="module-text">O Wi-Fi é definido pelo padrão IEEE 802.11. Cada versão traz melhorias em velocidade, alcance e eficiência. Os dispositivos negociam automaticamente o melhor padrão suportado por ambos.</p>
+ 
+             <div class="concept-block">
+@@ -396,7 +396,7 @@
+               <strong>WPA3:</strong> mais seguro — usa SAE (Simultaneous Authentication of Equals) no lugar do PSK tradicional, resistente a ataques de dicionário offline.</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Conectividade de dispositivos móveis</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Conectividade de dispositivos móveis</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-mobile-screen"></i> Bluetooth</h4>
+               <p>Tecnologia de curto alcance (até 100m em versões recentes) para conexão entre dispositivos próximos. Usa a faixa de 2,4 GHz como o Wi-Fi, mas com técnica de frequency hopping para evitar interferência. Versões 4.x e 5.x são as mais comuns hoje.</p>
+@@ -420,7 +420,7 @@
+             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Montando uma Rede</h2>
+             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">Teoria vira prática quando você conecta os primeiros dispositivos. Entender como uma rede doméstica funciona é o ponto de partida para entender redes corporativas e laboratórios mais complexos.</p>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Fundamentos da rede doméstica</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Fundamentos da rede doméstica</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-router"></i> O roteador doméstico — tudo em um</h4>
+               <p>O roteador que a operadora instala na sua casa geralmente é um dispositivo que faz várias coisas ao mesmo tempo: roteador (conecta sua LAN à internet), switch (conecta dispositivos com fio), access point (Wi-Fi), servidor DHCP (distribui IPs) e firewall NAT (protege a rede interna).</p>
+@@ -430,7 +430,7 @@
+               <p>Em uma rede doméstica, todos os dispositivos se conectam a um ponto central — o roteador ou switch. Se o roteador falha, toda a rede para. Mas se um cabo ou dispositivo falha, apenas aquele dispositivo perde conexão.</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Padrões de redes sem fio domésticas</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Padrões de redes sem fio domésticas</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-list-check"></i> Escolhendo o padrão certo</h4>
+               <p><strong>802.11n (Wi-Fi 4):</strong> 2,4 e 5 GHz, até 600 Mbps. Ainda muito presente em dispositivos antigos.<br>
+@@ -438,7 +438,7 @@
+               <strong>802.11ax (Wi-Fi 6/6E):</strong> 2,4, 5 e 6 GHz. Melhor em ambientes com muitos dispositivos conectados simultaneamente.</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Configurando um roteador doméstico</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Configurando um roteador doméstico</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-gears"></i> Configurações essenciais</h4>
+               <p><strong>SSID:</strong> o nome da rede Wi-Fi. Pode ser ocultado (hidden SSID) mas não oferece segurança real — ferramentas capturam o SSID mesmo quando oculto.<br><br>
+@@ -469,7 +469,7 @@
+             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Princípios de Comunicação</h2>
+             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">Para dois dispositivos se comunicarem, precisam seguir as mesmas regras. Essas regras se chamam protocolos — e os modelos OSI e TCP/IP organizam como elas se encaixam.</p>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Protocolos de comunicação</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Protocolos de comunicação</h3>
+             <p class="module-text">Um protocolo é um conjunto de regras que define como a comunicação acontece. Assim como humanos precisam de um idioma em comum para conversar, dispositivos precisam de protocolos.</p>
+ 
+             <div class="concept-block">
+@@ -481,7 +481,7 @@
+               <strong>Encapsulamento:</strong> como dados de uma camada são embrulhados em uma camada inferior — cada camada adiciona seu cabeçalho.</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Padrões de rede</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Padrões de rede</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-certificate"></i> Por que padrões abertos importam</h4>
+               <p>Padrões abertos garantem interoperabilidade — um switch Cisco consegue se comunicar com um switch HP porque ambos implementam o mesmo padrão Ethernet. As principais organizações de padronização:<br><br>
+@@ -491,7 +491,7 @@
+               <strong>IANA:</strong> gerencia espaço de endereços IP e números de porta.</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Modelos de comunicação — OSI e TCP/IP</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Modelos de comunicação — OSI e TCP/IP</h3>
+ 
+             <div class="diagram-block">
+               <pre>
+@@ -527,7 +527,7 @@
+             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">Os dados precisam viajar por algum meio físico. O tipo de meio determina velocidade, alcance, custo e resistência a interferências — decisões práticas de infraestrutura que afetam toda a rede.</p>
+ 
+             <div class="concept-block">
+-              <h4><i class="fa-solid fa-ethernet"></i> Cabo de par trançado (UTP/STP)</h4>
++              <h3><i class="fa-solid fa-ethernet"></i> Cabo de par trançado (UTP/STP)</h3>
+               <p>O cabo Ethernet mais comum. Pares de fios trançados entre si para reduzir interferência eletromagnética. Categorias:<br><br>
+               <strong>Cat5e:</strong> até 1 Gbps a 100 metros. Ainda muito usado.<br>
+               <strong>Cat6:</strong> até 10 Gbps a 55 metros, 1 Gbps a 100 metros. Padrão atual.<br>
+@@ -535,14 +535,14 @@
+               O STP (Shielded) tem uma camada extra de blindagem — usado em ambientes com muita interferência eletromagnética (próximos a motores, por exemplo).</p>
+             </div>
+             <div class="concept-block">
+-              <h4><i class="fa-solid fa-circle-dot"></i> Fibra óptica</h4>
++              <h3><i class="fa-solid fa-circle-dot"></i> Fibra óptica</h3>
+               <p>Transmite dados como pulsos de luz. Dois tipos:<br><br>
+               <strong>Monomodo (SMF):</strong> núcleo menor (~9 microns), transmite um único raio de luz. Alcance de dezenas de quilômetros. Usada em links entre cidades e provedores.<br><br>
+               <strong>Multimodo (MMF):</strong> núcleo maior (~50-62,5 microns), transmite múltiplos raios. Alcance menor (300-550m). Usada em data centers e campus.<br><br>
+               Vantagens: imune a interferência eletromagnética, sem atenuação por distância, muito mais rápida que cobre.</p>
+             </div>
+             <div class="concept-block">
+-              <h4><i class="fa-solid fa-wifi"></i> Sem fio (Wireless)</h4>
++              <h3><i class="fa-solid fa-wifi"></i> Sem fio (Wireless)</h3>
+               <p>Dados transmitidos como ondas eletromagnéticas no espectro de rádio frequência. Não requer infraestrutura física de cabos, mas sofre com interferência, obstáculos físicos e competição por espectro.<br><br>
+               Frequências comuns: 2,4 GHz (Wi-Fi, Bluetooth), 5 GHz (Wi-Fi), 60 GHz (Wi-Fi 6E, WiGig), bandas celulares (700 MHz a 39 GHz no 5G mmWave).</p>
+             </div>
+@@ -572,7 +572,7 @@
+             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">A Camada de Acesso</h2>
+             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">A camada de acesso é onde os dispositivos finais se conectam à rede. É aqui que o Ethernet Frame é montado, o MAC address entra em cena e o switch decide para onde enviar os dados.</p>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Encapsulamento e o Frame Ethernet</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Encapsulamento e o Frame Ethernet</h3>
+             <p class="module-text">Quando dados precisam ser enviados pela rede local, eles são encapsulados em um frame Ethernet — uma estrutura com cabeçalho, dados e trailer.</p>
+ 
+             <div class="diagram-block">
+@@ -596,7 +596,7 @@
+               MACs são usados apenas dentro da mesma rede local. A cada salto de roteador, os MACs de origem e destino mudam — mas o IP permanece o mesmo.</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Como o switch aprende e encaminha</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Como o switch aprende e encaminha</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-table"></i> Tabela de endereços MAC (CAM Table)</h4>
+               <p>O switch aprende os MACs observando os frames que chegam:<br><br>
+@@ -628,7 +628,7 @@
+             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">O Protocolo IP</h2>
+             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">O IP é o protocolo que permite comunicação entre redes diferentes. Sem ele, dois dispositivos em redes separadas não conseguiriam se comunicar — e a internet não existiria.</p>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Propósito do endereço IPv4</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Propósito do endereço IPv4</h3>
+             <p class="module-text">O endereço IP tem duas funções: identificar o dispositivo e indicar em qual rede ele está. Essa segunda função é o que permite o roteamento — saber para qual rede encaminhar cada pacote.</p>
+ 
+             <div class="concept-block">
+@@ -657,7 +657,7 @@
+   Hosts válidos: 192.168.1.1 a 192.168.1.254 (254 hosts)</pre>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Cabeçalho IPv4</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Cabeçalho IPv4</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-file-code"></i> Campos importantes do cabeçalho IP</h4>
+               <p><strong>Version (4 bits):</strong> versão do IP (4 para IPv4, 6 para IPv6).<br>
+@@ -681,7 +681,7 @@
+             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">IPv4 e Segmentação de Redes</h2>
+             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">Unicast, broadcast, multicast — como os dados são endereçados muda tudo sobre como a rede se comporta. E dividir redes em sub-redes é uma das habilidades mais práticas de quem trabalha com infraestrutura.</p>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Tipos de endereços IPv4</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Tipos de endereços IPv4</h3>
+ 
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-arrow-right"></i> Unicast</h4>
+@@ -697,7 +697,7 @@
+               <p>Enviado para um grupo específico de hosts. Faixa reservada: 224.0.0.0 a 239.255.255.255. Mais eficiente que broadcast em redes grandes — só quem se inscreveu recebe. Usado em OSPF (224.0.0.5), streaming de vídeo corporativo e IPTV.</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Endereços privados e públicos</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Endereços privados e públicos</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-house-lock"></i> RFC 1918 — Endereços privados</h4>
+               <p>Faixas reservadas para uso em redes internas — não roteáveis na internet:<br><br>
+@@ -707,7 +707,7 @@
+               Para sair para a internet, dispositivos com IP privado usam NAT — o roteador traduz o IP privado para o IP público.</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Segmentação e sub-redes</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Segmentação e sub-redes</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-scissors"></i> Por que segmentar?</h4>
+               <p>Dividir uma rede grande em sub-redes menores traz benefícios de segurança, desempenho e organização:<br><br>
+@@ -729,14 +729,14 @@
+             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Endereçamento IPv6</h2>
+             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">O IPv4 acabou. Literalmente — todos os blocos foram alocados. O IPv6 é a solução e já está rodando em paralelo na maior parte da internet. Entender seu formato e regras é cada vez mais necessário.</p>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">O problema do IPv4 e a solução IPv6</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">O problema do IPv4 e a solução IPv6</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-circle-exclamation"></i> Esgotamento do IPv4</h4>
+               <p>O IPv4 tem 32 bits — aproximadamente 4,3 bilhões de endereços. Parecia suficiente nos anos 70, quando a internet tinha poucos computadores. Hoje, com smartphones, IoT e bilhões de dispositivos conectados, os endereços acabaram.<br><br>
+               O NAT foi uma solução paliativa — permitiu que múltiplos dispositivos compartilhassem um único IP público. Mas complica aplicações, quebra o modelo fim-a-fim da internet e adiciona complexidade.</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Formato IPv6</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Formato IPv6</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-hashtag"></i> 128 bits em hexadecimal</h4>
+               <p>O IPv6 usa 128 bits — escritos como 8 grupos de 4 dígitos hexadecimais separados por dois-pontos:<br><br>
+@@ -784,7 +784,7 @@
+             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">DHCP e Endereçamento Dinâmico</h2>
+             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">Sem DHCP, cada dispositivo precisaria ser configurado manualmente com IP, máscara, gateway e DNS. Em uma empresa com centenas de dispositivos, isso seria inviável. O DHCP automatiza tudo isso.</p>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Endereçamento estático vs dinâmico</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Endereçamento estático vs dinâmico</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-hand"></i> IP estático</h4>
+               <p>Configurado manualmente no dispositivo — não muda. Usado para servidores, impressoras, câmeras IP, roteadores e qualquer dispositivo que precisa sempre ter o mesmo endereço. Se o servidor muda de IP, todas as configurações que apontam para ele precisam ser atualizadas.</p>
+@@ -794,7 +794,7 @@
+               <p>Atribuído automaticamente pelo servidor DHCP por um período definido (lease time). Quando o lease expira, o dispositivo renova ou obtém um novo IP. Ideal para dispositivos de usuário — computadores, smartphones, laptops.</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">O processo DORA</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">O processo DORA</h3>
+             <div class="diagram-block">
+               <pre>
+   DORA — como o DHCP negocia um endereço
+@@ -849,7 +849,7 @@
+             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Gateways e NAT</h2>
+             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">O gateway é a porta de saída da sua rede. E o NAT é o mecanismo que permite que dezenas de dispositivos com IPs privados compartilhem um único endereço público para acessar a internet.</p>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Fronteiras de rede</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Fronteiras de rede</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-door-open"></i> Gateway padrão</h4>
+               <p>Quando um dispositivo precisa enviar um pacote para uma rede diferente da sua, ele envia para o <strong>gateway padrão</strong> — o roteador responsável por encaminhar o tráfego para fora da rede local.<br><br>
+@@ -862,7 +862,7 @@
+               <strong>NÃO</strong> → envia para o gateway padrão, que decide o próximo salto.</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">NAT — Tradução de Endereços de Rede</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">NAT — Tradução de Endereços de Rede</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-arrows-left-right"></i> O que é e por que existe</h4>
+               <p>O NAT (Network Address Translation) surgiu como solução para o esgotamento de endereços IPv4. Ele permite que vários dispositivos com IPs privados compartilhem um único IP público para acessar a internet.<br><br>
+@@ -903,7 +903,7 @@
+             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">ARP — Resolvendo MAC a partir do IP</h2>
+             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">O IP identifica o dispositivo na rede. Mas para entregar o pacote dentro da LAN, preciso do endereço MAC. O ARP é o protocolo que faz essa ponte entre as camadas 2 e 3.</p>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">MAC e IP — dois endereços, dois propósitos</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">MAC e IP — dois endereços, dois propósitos</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-layer-group"></i> Por que precisamos dos dois</h4>
+               <p>O endereço <strong>MAC</strong> é o endereço físico — fixo no hardware, usado na camada 2 para entregar frames dentro da mesma rede local. O switch usa MAC.<br><br>
+@@ -911,7 +911,7 @@
+               Quando envio um pacote para um host na minha LAN, o IP diz para quem vai, mas o frame Ethernet precisa do MAC para chegar lá. O ARP descobre o MAC a partir do IP.</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Como o ARP funciona</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Como o ARP funciona</h3>
+             <div class="diagram-block">
+               <pre>
+   ARP — "qual é o MAC de x.x.x.20?"
+@@ -965,13 +965,13 @@
+             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Roteamento entre Redes</h2>
+             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">O roteamento é o processo que permite a comunicação entre redes diferentes. Sem ele, a internet não existiria — cada rede seria uma ilha isolada. O roteador é o dispositivo que toma essas decisões.</p>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">A necessidade do roteamento</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">A necessidade do roteamento</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-route"></i> Quando o destino não está na rede local</h4>
+               <p>Quando envio um pacote para um IP fora da minha sub-rede, meu dispositivo percebe que não pode entregar diretamente e encaminha para o gateway padrão. O gateway (roteador) recebe o pacote, consulta sua tabela de roteamento e decide o próximo salto.</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">A tabela de roteamento</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">A tabela de roteamento</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-table"></i> Estrutura da tabela</h4>
+               <p>Cada entrada na tabela de roteamento tem:<br><br>
+@@ -997,7 +997,7 @@
+   Pacote para IP da LAN → casa /24 → vai direto pela em1</pre>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Criando uma LAN — o processo completo</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Criando uma LAN — o processo completo</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-diagram-project"></i> Do início ao ping funcionando</h4>
+               <p>Para que dois dispositivos em redes diferentes se comuniquem:<br><br>
+@@ -1030,7 +1030,7 @@
+             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Camada de Transporte</h2>
+             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">O IP leva o pacote até o dispositivo. A camada de transporte garante que ele chegue ao <strong>processo correto</strong> dentro desse dispositivo — usando portas. TCP e UDP são os dois protocolos desta camada.</p>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">TCP — Entrega confiável</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">TCP — Entrega confiável</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-handshake"></i> TCP — Transmission Control Protocol</h4>
+               <p>Orientado a conexão — antes de enviar dados, estabelece uma conexão com o Three-Way Handshake. Garante entrega ordenada e retransmite pacotes perdidos.<br><br>
+@@ -1041,14 +1041,14 @@
+               Após a conexão, cada segmento enviado é confirmado com um ACK. Se o ACK não chega dentro do timeout, o segmento é retransmitido. O TCP também controla o fluxo (flow control) e o congestionamento.</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">UDP — Entrega rápida</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">UDP — Entrega rápida</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-paper-plane"></i> UDP — User Datagram Protocol</h4>
+               <p>Sem conexão — envia e não espera confirmação. Se um pacote se perde, não é retransmitido. Mais rápido e com menos overhead que o TCP.<br><br>
+               Usado quando velocidade importa mais que perfeição: streaming de vídeo (um frame perdido é melhor que travar), jogos online, chamadas VoIP, DNS (consultas rápidas).</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Portas — o endereço do processo</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Portas — o endereço do processo</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-door-open"></i> Como as portas funcionam</h4>
+               <p>Um servidor pode ter dezenas de serviços rodando ao mesmo tempo. A porta identifica qual serviço receber o pacote.<br><br>
+@@ -1096,14 +1096,14 @@
+             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Serviços de Aplicação</h2>
+             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">A camada de aplicação é onde os serviços que usamos no dia a dia vivem — DNS, HTTP, FTP, e-mail, SSH. Cada um tem um protocolo próprio que define exatamente como a comunicação acontece.</p>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Modelo cliente-servidor na aplicação</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Modelo cliente-servidor na aplicação</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-arrows-left-right"></i> Como os serviços de rede funcionam</h4>
+               <p>Todo serviço de rede segue o mesmo padrão: um <strong>servidor</strong> escuta em uma porta específica aguardando conexões, e um <strong>cliente</strong> inicia a conexão para aquela porta.<br><br>
+               O servidor web escuta na porta 80 (HTTP) e 443 (HTTPS). O servidor SSH escuta na porta 22. O servidor DNS escuta na porta 53. O cliente sempre inicia — usando uma porta efêmera como origem.</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">DNS — Sistema de Nomes de Domínio</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">DNS — Sistema de Nomes de Domínio</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-globe"></i> Resolvendo nomes em IPs</h4>
+               <p>O DNS é a agenda telefônica da internet — traduz nomes legíveis (google.com) em IPs usáveis pelos computadores. Sem DNS, você teria que memorizar o IP de cada site.<br><br>
+@@ -1114,7 +1114,7 @@
+               CNAME → alias | MX → servidor de e-mail | PTR → IP para nome</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">HTTP e HTTPS</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">HTTP e HTTPS</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-browser"></i> HyperText Transfer Protocol</h4>
+               <p>Protocolo de camada de aplicação para transferência de documentos web. Opera sobre TCP porta 80 (HTTP) ou 443 (HTTPS).<br><br>
+@@ -1122,7 +1122,7 @@
+               <strong>HTTPS:</strong> HTTP com TLS — uma camada de criptografia que protege o conteúdo da comunicação. O TLS Handshake acontece antes de qualquer dado HTTP ser trocado — negociando algoritmos, trocando certificados e estabelecendo chaves de sessão.</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">FTP, SSH, E-mail e Syslog</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">FTP, SSH, E-mail e Syslog</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-list"></i> Outros protocolos de aplicação importantes</h4>
+               <p><strong>FTP (porta 21/20):</strong> transferência de arquivos. Texto em claro — substituído pelo SFTP (SSH) e FTPS (TLS) em ambientes seguros.<br><br>
+@@ -1152,7 +1152,7 @@
+             <h2 style="color:var(--text-light);font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1px;margin-bottom:12px;">Diagnóstico e Resolução de Problemas</h2>
+             <p style="color:var(--text-muted);font-size:17px;line-height:1.8;max-width:680px;margin-bottom:40px;">Redes quebram. Serviços param. Conexões falham. Saber diagnosticar problemas de forma sistemática — usando os comandos certos na ordem certa — é uma das habilidades mais valiosas de qualquer profissional de redes.</p>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Metodologia de troubleshooting</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin-bottom:14px;">Metodologia de troubleshooting</h3>
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-list-ol"></i> Abordagem por camadas — bottom-up</h4>
+               <p>A abordagem mais confiável é verificar camada por camada, de baixo para cima. Não faz sentido testar DNS (camada 7) se a camada física (camada 1) está com problema.<br><br>
+@@ -1163,7 +1163,7 @@
+               <strong>5. Aplicação:</strong> o serviço responde corretamente?</p>
+             </div>
+ 
+-            <h2 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Comandos essenciais de diagnóstico</h2>
++            <h3 style="color:var(--text-light);font-size:24px;font-weight:800;margin:40px 0 14px;">Comandos essenciais de diagnóstico</h3>
+ 
+             <div class="concept-block">
+               <h4><i class="fa-solid fa-terminal"></i> ping — testando conectividade</h4>
+diff --git a/pages/jornada.html b/pages/jornada.html
+index 6ad3d2d..4a0db9d 100644
+--- a/pages/jornada.html
++++ b/pages/jornada.html
+@@ -1,10 +1,10 @@
+-﻿<!doctype html>
++<!doctype html>
+ <html lang="pt-BR">
+   <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+-  <title>Jornada Profissional</title>
++  <title>Jornada Profissional | Gabriel Zacca</title>
+   <meta name="description" content="Evolução profissional e transição para TI com foco em Redes, Infraestrutura, Cloud e Segurança da Informação.">
+   <meta name="author" content="Gabriel Zacca Ferreira">
+   <meta name="robots" content="index, follow">
+@@ -12,7 +12,7 @@
+   <link rel="canonical" href="https://gabrielzacca.com.br/pages/jornada.html">
+ 
+   <meta property="og:type" content="article">
+-  <meta property="og:title" content="Jornada Profissional">
++  <meta property="og:title" content="Jornada Profissional | Gabriel Zacca">
+   <meta property="og:description" content="Evolução profissional e transição para TI com foco em Redes, Infraestrutura, Cloud e Segurança da Informação.">
+   <meta property="og:url" content="https://gabrielzacca.com.br/pages/jornada.html">
+   <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+@@ -20,7 +20,7 @@
+   <meta property="og:locale" content="pt_BR">
+ 
+   <meta name="twitter:card" content="summary_large_image">
+-  <meta name="twitter:title" content="Jornada Profissional">
++  <meta name="twitter:title" content="Jornada Profissional | Gabriel Zacca">
+   <meta name="twitter:description" content="Evolução profissional e transição para TI com foco em Redes, Infraestrutura, Cloud e Segurança da Informação.">
+   <meta name="twitter:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+ 
+diff --git a/pages/kali-linux.html b/pages/kali-linux.html
+index e89e844..314801b 100644
+--- a/pages/kali-linux.html
++++ b/pages/kali-linux.html
+@@ -1,10 +1,10 @@
+-﻿<!doctype html>
++<!doctype html>
+ <html lang="pt-BR">
+   <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+-  <title>Laboratório Kali Linux</title>
++  <title>Laboratório Kali Linux | Gabriel Zacca</title>
+   <meta name="description" content="Laboratório com Kali Linux, VMware, SSH, XRDP, acesso remoto e troubleshooting em ambiente Linux.">
+   <meta name="author" content="Gabriel Zacca Ferreira">
+   <meta name="robots" content="index, follow">
+@@ -12,7 +12,7 @@
+   <link rel="canonical" href="https://gabrielzacca.com.br/pages/kali-linux.html">
+ 
+   <meta property="og:type" content="article">
+-  <meta property="og:title" content="Laboratório Kali Linux">
++  <meta property="og:title" content="Laboratório Kali Linux | Gabriel Zacca">
+   <meta property="og:description" content="Laboratório com Kali Linux, VMware, SSH, XRDP, acesso remoto e troubleshooting em ambiente Linux.">
+   <meta property="og:url" content="https://gabrielzacca.com.br/pages/kali-linux.html">
+   <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+@@ -20,7 +20,7 @@
+   <meta property="og:locale" content="pt_BR">
+ 
+   <meta name="twitter:card" content="summary_large_image">
+-  <meta name="twitter:title" content="Laboratório Kali Linux">
++  <meta name="twitter:title" content="Laboratório Kali Linux | Gabriel Zacca">
+   <meta name="twitter:description" content="Laboratório com Kali Linux, VMware, SSH, XRDP, acesso remoto e troubleshooting em ambiente Linux.">
+   <meta name="twitter:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+ 
+@@ -329,15 +329,15 @@
+           <p class="module-text">O VMware Workstation é o hypervisor tipo 2 escolhido para o laboratório — roda sobre o Windows 11 do host e permite criar múltiplas VMs isoladas compartilhando o hardware físico.</p>
+ 
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-download"></i> Download e instalação</h4>
++            <h3><i class="fa-solid fa-download"></i> Download e instalação</h3>
+             <p>O instalador foi baixado diretamente do site oficial da Broadcom (atual proprietária do VMware). A versão Workstation Pro passou a ser gratuita para uso pessoal a partir de 2024. O processo de instalação é padrão — next, next, finish — sem customizações necessárias para o laboratório.</p>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-gears"></i> Configuração inicial</h4>
++            <h3><i class="fa-solid fa-gears"></i> Configuração inicial</h3>
+             <p>Após a instalação, o Virtual Network Editor foi verificado para confirmar as redes virtuais disponíveis. As duas redes relevantes para o laboratório são a <strong>VMnet1 (Host-only)</strong> e a <strong>VMnet8 (NAT)</strong>. A rede Bridge não aparece listada pois usa diretamente a placa física do host.</p>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-circle-check"></i> Validação</h4>
++            <h3><i class="fa-solid fa-circle-check"></i> Validação</h3>
+             <p>Com o VMware instalado e rodando, o próximo passo foi criar a primeira VM. A interface do Workstation lista todas as VMs criadas na biblioteca lateral — Kali Linux, Ubuntu Server e pfSense foram adicionados ao longo do projeto.</p>
+           </div>
+         </div>
+@@ -352,18 +352,18 @@
+           <p class="module-text">A VM foi criada usando o assistente do VMware Workstation com a ISO oficial do Kali Linux 2026.2 (amd64). As decisões de alocação de recursos foram baseadas na capacidade do host e na quantidade de VMs que rodariam simultaneamente.</p>
+ 
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-microchip"></i> Recursos alocados</h4>
++            <h3><i class="fa-solid fa-microchip"></i> Recursos alocados</h3>
+             <p><strong>RAM:</strong> 4 GB — suficiente para o Kali com XFCE e as ferramentas de segurança.<br>
+             <strong>CPUs:</strong> 2 vCPUs — balanceado para não sobrecarregar o host i7-10700T.<br>
+             <strong>Disco:</strong> 60 GB — espaço para o sistema, ferramentas e logs dos laboratórios.<br>
+             <strong>Interface gráfica:</strong> XFCE — leve e eficiente, ideal para ambiente virtualizado.</p>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-compact-disc"></i> Instalação do sistema</h4>
++            <h3><i class="fa-solid fa-compact-disc"></i> Instalação do sistema</h3>
+             <p>A instalação seguiu o processo padrão do Kali Linux com instalação gráfica. Usuário <code style="color:var(--primary);font-family:monospace;">kali</code> criado com senha definida. Após a instalação, o sistema foi atualizado com <code style="color:var(--primary);font-family:monospace;">sudo apt update && sudo apt upgrade -y</code> antes de qualquer outra configuração.</p>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-camera"></i> Snapshot pós-instalação</h4>
++            <h3><i class="fa-solid fa-camera"></i> Snapshot pós-instalação</h3>
+             <p>Antes de qualquer configuração adicional, um snapshot inicial foi criado — <strong>"Kali-Limpo"</strong> — como ponto de restauração caso algo saísse errado nas etapas seguintes. Boa prática que salvou tempo em alguns momentos do laboratório.</p>
+           </div>
+         </div>
+@@ -378,17 +378,17 @@
+           <p class="module-text">Por padrão o VMware cria VMs em modo NAT — a VM acessa a internet através do IP do host, mas outros dispositivos da rede não conseguem alcançá-la diretamente. Para o laboratório, isso era um problema: o Ubuntu Server precisava se comunicar com o Kali como se fossem máquinas reais na mesma rede.</p>
+ 
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-network-wired"></i> NAT vs Bridge — a diferença prática</h4>
++            <h3><i class="fa-solid fa-network-wired"></i> NAT vs Bridge — a diferença prática</h3>
+             <p><strong>NAT:</strong> a VM fica "atrás" do host. IP atribuído pelo VMware (ex: 192.168.x.x vmware). Outros dispositivos da rede física não enxergam a VM.<br><br>
+             <strong>Bridge:</strong> a VM se conecta diretamente à rede física através da placa de rede do host. Recebe IP do roteador/DHCP da rede real. Qualquer dispositivo na LAN consegue se comunicar com ela como se fosse uma máquina física.</p>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-gears"></i> Como foi feito</h4>
++            <h3><i class="fa-solid fa-gears"></i> Como foi feito</h3>
+             <p>Nas configurações da VM (VM → Settings → Network Adapter), o modo foi alterado de <strong>NAT</strong> para <strong>Bridged</strong>. A opção "Replicate physical network connection state" foi marcada para que a VM responda às mudanças de conexão do host.<br><br>
+             Após reiniciar a VM, o Kali recebeu automaticamente um IP da rede local via DHCP do roteador — na mesma subnet do host Windows e do Ubuntu Server.</p>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-circle-check"></i> Validação</h4>
++            <h3><i class="fa-solid fa-circle-check"></i> Validação</h3>
+             <p>Validado com <code style="color:var(--primary);font-family:monospace;">ip addr</code> para confirmar o IP atribuído e <code style="color:var(--primary);font-family:monospace;">ping</code> bidirecional entre o Kali e o host Windows. A partir desse momento, os dispositivos do laboratório podiam se comunicar diretamente.</p>
+           </div>
+         </div>
+@@ -403,7 +403,7 @@
+           <p class="module-text">Com o Bridge configurado e o Kali acessível na rede, o próximo passo foi habilitar o acesso SSH — permitindo gerenciar a VM via terminal sem precisar abrir a janela do VMware.</p>
+ 
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-terminal"></i> Habilitando o servidor SSH</h4>
++            <h3><i class="fa-solid fa-terminal"></i> Habilitando o servidor SSH</h3>
+             <p>O OpenSSH já vem instalado no Kali Linux. Foi necessário apenas iniciar o serviço e habilitá-lo para iniciar automaticamente com o sistema:</p>
+             <div style="margin-top:12px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
+               sudo systemctl start ssh<br>
+@@ -412,14 +412,14 @@
+             </div>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-key"></i> Configuração de chaves SSH</h4>
++            <h3><i class="fa-solid fa-key"></i> Configuração de chaves SSH</h3>
+             <p>Para eliminar a necessidade de digitar senha a cada conexão, foi configurada autenticação por chave pública:<br><br>
+             1. Geração do par de chaves no Windows: <code style="color:var(--primary);font-family:monospace;">ssh-keygen -t rsa -b 4096</code><br>
+             2. Cópia da chave pública para o Kali: <code style="color:var(--primary);font-family:monospace;">ssh-copy-id kali@IP_DO_KALI</code><br>
+             3. Teste da conexão sem senha: <code style="color:var(--primary);font-family:monospace;">ssh kali@IP_DO_KALI</code></p>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-circle-check"></i> Resultado</h4>
++            <h3><i class="fa-solid fa-circle-check"></i> Resultado</h3>
+             <p>A partir desse momento, qualquer terminal no Windows (PowerShell, Windows Terminal, Git Bash) passou a ter acesso direto ao Kali Linux com um simples <code style="color:var(--primary);font-family:monospace;">ssh kali@IP</code> — sem senha, instantâneo.</p>
+           </div>
+         </div>
+@@ -434,11 +434,11 @@
+           <p class="module-text">Com SSH funcionando, foi possível conectar o VS Code diretamente ao Kali Linux — transformando o editor do Windows em uma interface completa para o sistema remoto. Isso foi especialmente útil para editar arquivos de configuração, escrever scripts e organizar os repositórios dos laboratórios.</p>
+ 
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-puzzle-piece"></i> Instalação da extensão</h4>
++            <h3><i class="fa-solid fa-puzzle-piece"></i> Instalação da extensão</h3>
+             <p>No VS Code, a extensão <strong>Remote - SSH</strong> (publicada pela Microsoft) foi instalada pelo marketplace. Ela adiciona um ícone de conexão remota na barra lateral e permite conectar a qualquer host SSH configurado.</p>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-gears"></i> Configuração do host</h4>
++            <h3><i class="fa-solid fa-gears"></i> Configuração do host</h3>
+             <p>O host SSH foi adicionado ao arquivo de configuração do SSH do Windows (<code style="color:var(--primary);font-family:monospace;">~/.ssh/config</code>):</p>
+             <div style="margin-top:12px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
+               Host kali-lab<br>
+@@ -448,7 +448,7 @@
+             </div>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-folder-open"></i> O que isso permitiu</h4>
++            <h3><i class="fa-solid fa-folder-open"></i> O que isso permitiu</h3>
+             <p>Com a conexão estabelecida, o VS Code abre o sistema de arquivos do Kali no Explorer lateral. É possível editar qualquer arquivo — <code style="color:var(--primary);font-family:monospace;">ossec.conf</code>, <code style="color:var(--primary);font-family:monospace;">suricata.yaml</code>, scripts Bash — com syntax highlight, autocomplete e terminal integrado rodando diretamente no Kali.</p>
+           </div>
+         </div>
+@@ -463,7 +463,7 @@
+           <p class="module-text">O SSH cobre bem o acesso via terminal. Mas algumas situações exigem interface gráfica — abrir o Wireshark, por exemplo, ou navegar em arquivos visualmente. O XRDP resolve isso: permite acessar o desktop completo do Kali via RDP, o mesmo protocolo usado no Windows.</p>
+ 
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-download"></i> Instalação</h4>
++            <h3><i class="fa-solid fa-download"></i> Instalação</h3>
+             <p>Instalação do XRDP e do servidor de sessão XFCE:</p>
+             <div style="margin-top:12px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
+               sudo apt install xrdp -y<br>
+@@ -472,15 +472,15 @@
+             </div>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-desktop"></i> Configuração do XFCE como sessão padrão</h4>
++            <h3><i class="fa-solid fa-desktop"></i> Configuração do XFCE como sessão padrão</h3>
+             <p>O XRDP precisa saber qual ambiente gráfico iniciar. Foi criado o arquivo <code style="color:var(--primary);font-family:monospace;">~/.xsession</code> com o conteúdo <code style="color:var(--primary);font-family:monospace;">xfce4-session</code> para que o XFCE seja carregado a cada conexão RDP.</p>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-triangle-exclamation"></i> Problema: loop de login</h4>
++            <h3><i class="fa-solid fa-triangle-exclamation"></i> Problema: loop de login</h3>
+             <p>O problema mais comum com XRDP: múltiplas sessões abertas do mesmo usuário causam um loop onde a tela aceita as credenciais mas retorna imediatamente para o login. O diagnóstico foi feito com <code style="color:var(--primary);font-family:monospace;">loginctl</code> — que revelou sessões presas — e a solução com <code style="color:var(--primary);font-family:monospace;">sudo pkill -u kali</code> seguido de reinício do LightDM e XRDP. Esse processo virou o script <code style="color:var(--primary);font-family:monospace;">reiniciar-rdp.sh</code>.</p>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-circle-check"></i> Acesso pelo Windows</h4>
++            <h3><i class="fa-solid fa-circle-check"></i> Acesso pelo Windows</h3>
+             <p>Com o XRDP funcionando, o acesso é feito pelo <strong>mstsc</strong> (Conexão de Área de Trabalho Remota) nativo do Windows — digitando o IP do Kali e as credenciais. O desktop XFCE completo abre em uma janela no Windows.</p>
+           </div>
+         </div>
+@@ -495,11 +495,11 @@
+           <p class="module-text">Com todas as configurações validadas — Bridge, SSH, VS Code Remote e XRDP funcionando — foi criado o snapshot definitivo do ambiente base. Esse snapshot é o ponto de restauração confiável para todo o laboratório.</p>
+ 
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-camera"></i> O que é um snapshot</h4>
++            <h3><i class="fa-solid fa-camera"></i> O que é um snapshot</h3>
+             <p>Um snapshot captura o estado completo da VM em um momento específico — disco, memória, configurações. Se algo quebrar nos laboratórios seguintes (Wazuh, Suricata, CrowdSec), é possível restaurar o ambiente base em segundos sem reinstalar nada.</p>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-list-check"></i> Checklist antes do snapshot</h4>
++            <h3><i class="fa-solid fa-list-check"></i> Checklist antes do snapshot</h3>
+             <p>Antes de criar o snapshot, todos os serviços foram validados:<br><br>
+             ✓ <code style="color:var(--primary);font-family:monospace;">ip addr</code> — IP Bridge ativo na rede local<br>
+             ✓ <code style="color:var(--primary);font-family:monospace;">ssh kali@IP</code> do Windows — acesso sem senha<br>
+@@ -508,7 +508,7 @@
+             ✓ <code style="color:var(--primary);font-family:monospace;">systemctl status ssh xrdp</code> — ambos active (running)</p>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-floppy-disk"></i> Criação do snapshot</h4>
++            <h3><i class="fa-solid fa-floppy-disk"></i> Criação do snapshot</h3>
+             <p>No VMware Workstation: VM → Snapshot → Take Snapshot. Nome definido como <strong>Kali-Remoto-Completo-v1</strong> com descrição do estado. A partir desse ponto, todos os outros laboratórios foram construídos sobre essa base — com a segurança de poder voltar a qualquer momento.</p>
+           </div>
+         </div>
+diff --git a/pages/pfsense.html b/pages/pfsense.html
+index 5cf910f..19b3361 100644
+--- a/pages/pfsense.html
++++ b/pages/pfsense.html
+@@ -1,10 +1,10 @@
+-﻿<!doctype html>
++<!doctype html>
+ <html lang="pt-BR">
+   <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+-  <title>Laboratório pfSense Firewall</title>
++  <title>Laboratório pfSense Firewall | Gabriel Zacca</title>
+   <meta name="description" content="Laboratório com pfSense para firewall, NAT, DHCP, WAN, LAN, regras de acesso e redes.">
+   <meta name="author" content="Gabriel Zacca Ferreira">
+   <meta name="robots" content="index, follow">
+@@ -12,7 +12,7 @@
+   <link rel="canonical" href="https://gabrielzacca.com.br/pages/pfsense.html">
+ 
+   <meta property="og:type" content="article">
+-  <meta property="og:title" content="Laboratório pfSense Firewall">
++  <meta property="og:title" content="Laboratório pfSense Firewall | Gabriel Zacca">
+   <meta property="og:description" content="Laboratório com pfSense para firewall, NAT, DHCP, WAN, LAN, regras de acesso e redes.">
+   <meta property="og:url" content="https://gabrielzacca.com.br/pages/pfsense.html">
+   <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+@@ -20,7 +20,7 @@
+   <meta property="og:locale" content="pt_BR">
+ 
+   <meta name="twitter:card" content="summary_large_image">
+-  <meta name="twitter:title" content="Laboratório pfSense Firewall">
++  <meta name="twitter:title" content="Laboratório pfSense Firewall | Gabriel Zacca">
+   <meta name="twitter:description" content="Laboratório com pfSense para firewall, NAT, DHCP, WAN, LAN, regras de acesso e redes.">
+   <meta name="twitter:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+ 
+@@ -341,14 +341,14 @@
+           <h2>Criação da VM no VMware</h2>
+           <p class="module-text">O pfSense é baseado em FreeBSD — por isso a VM foi criada com o tipo "FreeBSD 64-bit" no VMware, o que garante as configurações padrão corretas de hardware virtual.</p>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-microchip"></i> Recursos alocados</h4>
++            <h3><i class="fa-solid fa-microchip"></i> Recursos alocados</h3>
+             <p><strong>RAM:</strong> 3.9 GB — suficiente para o firewall com inspeção de estado ativa.<br>
+             <strong>CPUs:</strong> 2 vCPUs — para processar regras e NAT sem gargalo.<br>
+             <strong>Disco:</strong> 20 GB — espaço para o sistema, logs e configurações.<br>
+             <strong>NICs:</strong> 2 interfaces — VMnet8 (WAN) e VMnet1 (LAN).</p>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-ethernet"></i> Por que duas interfaces?</h4>
++            <h3><i class="fa-solid fa-ethernet"></i> Por que duas interfaces?</h3>
+             <p>O pfSense precisa de pelo menos duas interfaces para funcionar como firewall: uma para receber tráfego externo (WAN) e outra para distribuir para a rede interna (LAN). Sem isso, não há separação de redes — que é exatamente o objetivo do lab.</p>
+           </div>
+         </div>
+@@ -361,11 +361,11 @@
+           <h2>Instalação do pfSense 2.8.1-RELEASE</h2>
+           <p class="module-text">A ISO foi baixada do site oficial da Netgate (fabricante do pfSense). A versão Community Edition é gratuita e inclui todas as funcionalidades necessárias para o laboratório.</p>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-compact-disc"></i> Processo de instalação</h4>
++            <h3><i class="fa-solid fa-compact-disc"></i> Processo de instalação</h3>
+             <p>A instalação via console é guiada — Accept, Install, Auto (UFS), Reboot. O pfSense não tem instalação gráfica; tudo é feito via menu de texto. Após o primeiro boot, o console exibiu as interfaces detectadas e o menu principal confirmando que o sistema estava pronto.</p>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-tag"></i> Hostname soc-fw01.home.lab</h4>
++            <h3><i class="fa-solid fa-tag"></i> Hostname soc-fw01.home.lab</h3>
+             <p>O hostname foi definido durante a configuração inicial para refletir o papel do dispositivo no laboratório — <strong>soc-fw01</strong> indica o primeiro firewall do ambiente SOC, e <strong>home.lab</strong> é o domínio interno do laboratório.</p>
+           </div>
+         </div>
+@@ -378,12 +378,12 @@
+           <h2>Configuração das interfaces WAN e LAN</h2>
+           <p class="module-text">A primeira configuração importante do pfSense é atribuir quais interfaces físicas serão WAN e LAN. Isso é feito via menu do console — opção 1 (Assign Interfaces).</p>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-network-wired"></i> Atribuição das interfaces</h4>
++            <h3><i class="fa-solid fa-network-wired"></i> Atribuição das interfaces</h3>
+             <p><strong>em0 → WAN:</strong> conectada ao VMnet8, recebe IP via DHCP da rede física do laboratório. É a interface "externa" do firewall.<br><br>
+             <strong>em1 → LAN:</strong> conectada ao VMnet1, configurada com IP estático como gateway da rede interna. É a interface "interna" pela qual os clientes da LAN acessam a internet.</p>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-circle-check"></i> Confirmação no console</h4>
++            <h3><i class="fa-solid fa-circle-check"></i> Confirmação no console</h3>
+             <p>Após a atribuição, o console exibiu o status das interfaces com os IPs confirmados — WAN com IP do DHCP da rede física e LAN com o IP estático configurado manualmente via opção 2 do menu.</p>
+           </div>
+         </div>
+@@ -396,11 +396,11 @@
+           <h2>Acesso à interface web (WebGUI)</h2>
+           <p class="module-text">Com as interfaces configuradas, o pfSense já serve a WebGUI pelo IP da LAN. O acesso é feito de qualquer dispositivo na rede LAN abrindo o browser e digitando o IP do pfSense.</p>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-browser"></i> Primeiro acesso</h4>
++            <h3><i class="fa-solid fa-browser"></i> Primeiro acesso</h3>
+             <p>O browser exibe um aviso de certificado autoassinado — normal para um ambiente interno. Após aceitar, a tela de login do pfSense aparece. Credenciais padrão: <code style="color:var(--primary);font-family:monospace;">admin</code> / <code style="color:var(--primary);font-family:monospace;">pfsense</code>. A senha foi alterada imediatamente no primeiro acesso.</p>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-gauge-high"></i> Setup Wizard</h4>
++            <h3><i class="fa-solid fa-gauge-high"></i> Setup Wizard</h3>
+             <p>O pfSense exibe um wizard de configuração inicial no primeiro login — hostname, DNS, timezone, senha do admin. Após o wizard, o dashboard principal exibe o status das interfaces, tráfego em tempo real e alertas do sistema.</p>
+           </div>
+         </div>
+@@ -413,11 +413,11 @@
+           <h2>Configuração de regras de Firewall</h2>
+           <p class="module-text">As regras de firewall são o coração do pfSense. Elas definem o que pode ou não passar entre as interfaces — avaliadas de cima para baixo, a primeira regra que casar é aplicada.</p>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-list-check"></i> Regras LAN (padrão)</h4>
++            <h3><i class="fa-solid fa-list-check"></i> Regras LAN (padrão)</h3>
+             <p>Por padrão o pfSense cria uma regra na LAN que permite <strong>todo tráfego de saída</strong> — qualquer dispositivo da LAN consegue acessar a WAN. Essa regra foi mantida para o laboratório e refinada conforme necessário.</p>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-ban"></i> Regras WAN</h4>
++            <h3><i class="fa-solid fa-ban"></i> Regras WAN</h3>
+             <p>Na WAN, o comportamento padrão é <strong>bloquear tudo</strong> que chega da internet sem ter sido iniciado por alguém na LAN. O firewall stateful do pfSense rastreia as conexões — respostas a conexões iniciadas internamente passam automaticamente.</p>
+           </div>
+         </div>
+@@ -430,7 +430,7 @@
+           <h2>Configuração de NAT</h2>
+           <p class="module-text">O NAT Outbound foi configurado no modo automático — o pfSense gera automaticamente as regras de mascaramento para qualquer rede LAN cadastrada. Isso permite que todos os dispositivos da LAN saiam pela WAN usando o IP público do pfSense.</p>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-arrows-left-right"></i> Como funciona no lab</h4>
++            <h3><i class="fa-solid fa-arrows-left-right"></i> Como funciona no lab</h3>
+             <p>Quando um dispositivo da LAN faz uma requisição para a internet:<br><br>
+             1. O pfSense recebe o pacote com IP de origem da LAN<br>
+             2. Substitui o IP de origem pelo IP da interface WAN<br>
+@@ -447,14 +447,14 @@
+           <h2>Configuração de DHCP Server</h2>
+           <p class="module-text">O servidor DHCP do pfSense distribui IPs automaticamente para os dispositivos da rede LAN. É configurado em Services → DHCP Server → LAN.</p>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-server"></i> Parâmetros configurados</h4>
++            <h3><i class="fa-solid fa-server"></i> Parâmetros configurados</h3>
+             <p><strong>Range:</strong> faixa de IPs disponíveis para distribuição automática.<br>
+             <strong>Gateway:</strong> aponta para o próprio pfSense (IP da interface LAN).<br>
+             <strong>DNS:</strong> servidor DNS configurado para resolução de nomes.<br>
+             <strong>Lease time:</strong> tempo de validade do IP atribuído — padrão 24 horas.</p>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-thumbtack"></i> Reservas estáticas</h4>
++            <h3><i class="fa-solid fa-thumbtack"></i> Reservas estáticas</h3>
+             <p>Para dispositivos que precisam sempre do mesmo IP (servidores do laboratório), foram criadas reservas DHCP — associando um MAC específico a um IP fixo. Combina a praticidade do DHCP com a previsibilidade do IP estático.</p>
+           </div>
+         </div>
+@@ -467,11 +467,11 @@
+           <h2>Integração com Wazuh via Syslog</h2>
+           <p class="module-text">O pfSense pode enviar seus logs para um servidor remoto via protocolo Syslog — o padrão da indústria para envio de logs de rede. O Wazuh Manager recebe esses logs e os processa como eventos de segurança.</p>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-gears"></i> Configuração no pfSense</h4>
++            <h3><i class="fa-solid fa-gears"></i> Configuração no pfSense</h3>
+             <p>Em Status → System Logs → Settings, a opção "Enable Remote Logging" foi ativada com o IP do servidor Wazuh e porta UDP 514. Os tipos de log habilitados: <strong>Firewall Events</strong>, <strong>System Events</strong> e <strong>Authentication</strong>.</p>
+           </div>
+           <div class="concept-block">
+-            <h4><i class="fa-solid fa-circle-check"></i> Pipeline completo</h4>
++            <h3><i class="fa-solid fa-circle-check"></i> Pipeline completo</h3>
+             <p>Com o syslog configurado, cada pacote bloqueado pelo firewall, cada login na WebGUI e cada evento do sistema do pfSense é enviado em tempo real ao Wazuh Manager, que os correlaciona com os eventos dos outros laboratórios no dashboard centralizado.</p>
+           </div>
+         </div>
+diff --git a/pages/posts/2026-06-20-suricata-sqli.html b/pages/posts/2026-06-20-suricata-sqli.html
+index da5bea4..8671c26 100644
+--- a/pages/posts/2026-06-20-suricata-sqli.html
++++ b/pages/posts/2026-06-20-suricata-sqli.html
+@@ -1,4 +1,4 @@
+-﻿<!doctype html>
++<!doctype html>
+ <html lang="pt-BR">
+   <head>
+     <meta charset="UTF-8" />
+diff --git a/pages/projetos.html b/pages/projetos.html
+index a95785b..94eb023 100644
+--- a/pages/projetos.html
++++ b/pages/projetos.html
+@@ -1,10 +1,10 @@
+-﻿<!doctype html>
++<!doctype html>
+ <html lang="pt-BR">
+   <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+-  <title>Projetos Técnicos</title>
++  <title>Projetos Técnicos | Gabriel Zacca</title>
+   <meta name="description" content="Laboratórios práticos com Wazuh, Suricata, pfSense, Wireshark, CrowdSec, Kali Linux e Windows Server.">
+   <meta name="author" content="Gabriel Zacca Ferreira">
+   <meta name="robots" content="index, follow">
+@@ -12,7 +12,7 @@
+   <link rel="canonical" href="https://gabrielzacca.com.br/pages/projetos.html">
+ 
+   <meta property="og:type" content="website">
+-  <meta property="og:title" content="Projetos Técnicos">
++  <meta property="og:title" content="Projetos Técnicos | Gabriel Zacca">
+   <meta property="og:description" content="Laboratórios práticos com Wazuh, Suricata, pfSense, Wireshark, CrowdSec, Kali Linux e Windows Server.">
+   <meta property="og:url" content="https://gabrielzacca.com.br/pages/projetos.html">
+   <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+@@ -20,7 +20,7 @@
+   <meta property="og:locale" content="pt_BR">
+ 
+   <meta name="twitter:card" content="summary_large_image">
+-  <meta name="twitter:title" content="Projetos Técnicos">
++  <meta name="twitter:title" content="Projetos Técnicos | Gabriel Zacca">
+   <meta name="twitter:description" content="Laboratórios práticos com Wazuh, Suricata, pfSense, Wireshark, CrowdSec, Kali Linux e Windows Server.">
+   <meta name="twitter:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+ 
+diff --git a/pages/recrutadores.html b/pages/recrutadores.html
+index a70e18d..aa35992 100644
+--- a/pages/recrutadores.html
++++ b/pages/recrutadores.html
+@@ -1,4 +1,4 @@
+-﻿<!doctype html>
++<!doctype html>
+ <html lang="pt-BR">
+   <head>
+   <meta charset="UTF-8">
+diff --git a/pages/roadmap.html b/pages/roadmap.html
+index 1548a95..a1c9dcd 100644
+--- a/pages/roadmap.html
++++ b/pages/roadmap.html
+@@ -1,10 +1,10 @@
+-﻿<!doctype html>
++<!doctype html>
+ <html lang="pt-BR">
+   <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+-  <title>Roadmap de Estudos</title>
++  <title>Roadmap de Estudos | Gabriel Zacca</title>
+   <meta name="description" content="Trilha de estudos em Redes, Infraestrutura, Cloud Computing, Segurança da Informação e SOC/Blue Team.">
+   <meta name="author" content="Gabriel Zacca Ferreira">
+   <meta name="robots" content="index, follow">
+@@ -12,7 +12,7 @@
+   <link rel="canonical" href="https://gabrielzacca.com.br/pages/roadmap.html">
+ 
+   <meta property="og:type" content="article">
+-  <meta property="og:title" content="Roadmap de Estudos">
++  <meta property="og:title" content="Roadmap de Estudos | Gabriel Zacca">
+   <meta property="og:description" content="Trilha de estudos em Redes, Infraestrutura, Cloud Computing, Segurança da Informação e SOC/Blue Team.">
+   <meta property="og:url" content="https://gabrielzacca.com.br/pages/roadmap.html">
+   <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+@@ -20,7 +20,7 @@
+   <meta property="og:locale" content="pt_BR">
+ 
+   <meta name="twitter:card" content="summary_large_image">
+-  <meta name="twitter:title" content="Roadmap de Estudos">
++  <meta name="twitter:title" content="Roadmap de Estudos | Gabriel Zacca">
+   <meta name="twitter:description" content="Trilha de estudos em Redes, Infraestrutura, Cloud Computing, Segurança da Informação e SOC/Blue Team.">
+   <meta name="twitter:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+ 
+diff --git a/pages/sobre.html b/pages/sobre.html
+index 4c89f79..290415e 100644
+--- a/pages/sobre.html
++++ b/pages/sobre.html
+@@ -1,10 +1,10 @@
+-﻿<!doctype html>
++<!doctype html>
+ <html lang="pt-BR">
+   <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+-  <title>Sobre o Profissional</title>
++  <title>Sobre o Profissional | Gabriel Zacca</title>
+   <meta name="description" content="Trajetória profissional, estudos em Redes de Computadores e evolução em Infraestrutura, Cloud e Segurança da Informação.">
+   <meta name="author" content="Gabriel Zacca Ferreira">
+   <meta name="robots" content="index, follow">
+@@ -12,7 +12,7 @@
+   <link rel="canonical" href="https://gabrielzacca.com.br/pages/sobre.html">
+ 
+   <meta property="og:type" content="profile">
+-  <meta property="og:title" content="Sobre o Profissional">
++  <meta property="og:title" content="Sobre o Profissional | Gabriel Zacca">
+   <meta property="og:description" content="Trajetória profissional, estudos em Redes de Computadores e evolução em Infraestrutura, Cloud e Segurança da Informação.">
+   <meta property="og:url" content="https://gabrielzacca.com.br/pages/sobre.html">
+   <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+@@ -20,7 +20,7 @@
+   <meta property="og:locale" content="pt_BR">
+ 
+   <meta name="twitter:card" content="summary_large_image">
+-  <meta name="twitter:title" content="Sobre o Profissional">
++  <meta name="twitter:title" content="Sobre o Profissional | Gabriel Zacca">
+   <meta name="twitter:description" content="Trajetória profissional, estudos em Redes de Computadores e evolução em Infraestrutura, Cloud e Segurança da Informação.">
+   <meta name="twitter:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+ 
+@@ -90,6 +90,8 @@
+               alt="Foto de Gabriel Zacca Ferreira"
+               class="profile-photo"
+               loading="lazy"
++              width="460"
++              height="460"
+             />
+           </div>
+           <h2>Perfil técnico</h2>
+diff --git a/pages/suricata.html b/pages/suricata.html
+index eb834c2..afa2622 100644
+--- a/pages/suricata.html
++++ b/pages/suricata.html
+@@ -1,10 +1,10 @@
+-﻿<!doctype html>
++<!doctype html>
+ <html lang="pt-BR">
+   <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+-  <title>Laboratório Suricata IDS/IPS</title>
++  <title>Laboratório Suricata IDS/IPS | Gabriel Zacca</title>
+   <meta name="description" content="Laboratório de IDS/IPS com Suricata, análise de tráfego, fast.log, eve.json e regras customizadas.">
+   <meta name="author" content="Gabriel Zacca Ferreira">
+   <meta name="robots" content="index, follow">
+@@ -12,7 +12,7 @@
+   <link rel="canonical" href="https://gabrielzacca.com.br/pages/suricata.html">
+ 
+   <meta property="og:type" content="article">
+-  <meta property="og:title" content="Laboratório Suricata IDS/IPS">
++  <meta property="og:title" content="Laboratório Suricata IDS/IPS | Gabriel Zacca">
+   <meta property="og:description" content="Laboratório de IDS/IPS com Suricata, análise de tráfego, fast.log, eve.json e regras customizadas.">
+   <meta property="og:url" content="https://gabrielzacca.com.br/pages/suricata.html">
+   <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+@@ -20,7 +20,7 @@
+   <meta property="og:locale" content="pt_BR">
+ 
+   <meta name="twitter:card" content="summary_large_image">
+-  <meta name="twitter:title" content="Laboratório Suricata IDS/IPS">
++  <meta name="twitter:title" content="Laboratório Suricata IDS/IPS | Gabriel Zacca">
+   <meta name="twitter:description" content="Laboratório de IDS/IPS com Suricata, análise de tráfego, fast.log, eve.json e regras customizadas.">
+   <meta name="twitter:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+ 
+diff --git a/pages/wazuh.html b/pages/wazuh.html
+index cf1cca2..85b9c3a 100644
+--- a/pages/wazuh.html
++++ b/pages/wazuh.html
+@@ -1,10 +1,10 @@
+-﻿<!doctype html>
++<!doctype html>
+ <html lang="pt-BR">
+   <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+-  <title>Laboratório Wazuh SIEM/XDR</title>
++  <title>Laboratório Wazuh SIEM/XDR | Gabriel Zacca</title>
+   <meta name="description" content="Laboratório de SIEM/XDR com Wazuh, agentes, logs, eventos de segurança e fundamentos de SOC/Blue Team.">
+   <meta name="author" content="Gabriel Zacca Ferreira">
+   <meta name="robots" content="index, follow">
+@@ -12,7 +12,7 @@
+   <link rel="canonical" href="https://gabrielzacca.com.br/pages/wazuh.html">
+ 
+   <meta property="og:type" content="article">
+-  <meta property="og:title" content="Laboratório Wazuh SIEM/XDR">
++  <meta property="og:title" content="Laboratório Wazuh SIEM/XDR | Gabriel Zacca">
+   <meta property="og:description" content="Laboratório de SIEM/XDR com Wazuh, agentes, logs, eventos de segurança e fundamentos de SOC/Blue Team.">
+   <meta property="og:url" content="https://gabrielzacca.com.br/pages/wazuh.html">
+   <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+@@ -20,7 +20,7 @@
+   <meta property="og:locale" content="pt_BR">
+ 
+   <meta name="twitter:card" content="summary_large_image">
+-  <meta name="twitter:title" content="Laboratório Wazuh SIEM/XDR">
++  <meta name="twitter:title" content="Laboratório Wazuh SIEM/XDR | Gabriel Zacca">
+   <meta name="twitter:description" content="Laboratório de SIEM/XDR com Wazuh, agentes, logs, eventos de segurança e fundamentos de SOC/Blue Team.">
+   <meta name="twitter:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+ 
+diff --git a/pages/windows-server.html b/pages/windows-server.html
+index 87fac1e..7e25e10 100644
+--- a/pages/windows-server.html
++++ b/pages/windows-server.html
+@@ -1,10 +1,10 @@
+-﻿<!doctype html>
++<!doctype html>
+ <html lang="pt-BR">
+   <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+-  <title>Laboratório Windows Server + Sysmon</title>
++  <title>Laboratório Windows Server + Sysmon | Gabriel Zacca</title>
+   <meta name="description" content="Laboratório de telemetria Windows com Sysmon, auditoria, PowerShell logging, Wazuh e análise de eventos.">
+   <meta name="author" content="Gabriel Zacca Ferreira">
+   <meta name="robots" content="index, follow">
+@@ -12,7 +12,7 @@
+   <link rel="canonical" href="https://gabrielzacca.com.br/pages/windows-server.html">
+ 
+   <meta property="og:type" content="article">
+-  <meta property="og:title" content="Laboratório Windows Server + Sysmon">
++  <meta property="og:title" content="Laboratório Windows Server + Sysmon | Gabriel Zacca">
+   <meta property="og:description" content="Laboratório de telemetria Windows com Sysmon, auditoria, PowerShell logging, Wazuh e análise de eventos.">
+   <meta property="og:url" content="https://gabrielzacca.com.br/pages/windows-server.html">
+   <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+@@ -20,7 +20,7 @@
+   <meta property="og:locale" content="pt_BR">
+ 
+   <meta name="twitter:card" content="summary_large_image">
+-  <meta name="twitter:title" content="Laboratório Windows Server + Sysmon">
++  <meta name="twitter:title" content="Laboratório Windows Server + Sysmon | Gabriel Zacca">
+   <meta name="twitter:description" content="Laboratório de telemetria Windows com Sysmon, auditoria, PowerShell logging, Wazuh e análise de eventos.">
+   <meta name="twitter:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+ 
+@@ -608,7 +608,7 @@
+       <div class="lab-modal-box">
+         <button class="lab-modal-close" onclick="closeModal('ws-modal-vm')"><i class="fa-solid fa-xmark"></i></button>
+         <h3>Provisionamento da VM</h3>
+-        <p>Download do ISO via <a href="https://www.microsoft.com/en-us/evalcenter/download-windows-server-2025" target="_blank">Microsoft Evaluation Center</a> — avaliação gratuita de 180 dias, sem necessidade de product key.</p>
++        <p>Download do ISO via <a href="https://www.microsoft.com/en-us/evalcenter/download-windows-server-2025" target="_blank" rel="noopener noreferrer">Microsoft Evaluation Center</a> — avaliação gratuita de 180 dias, sem necessidade de product key.</p>
+         <p style="margin-top:16px;">Parâmetros da VM no VMware Workstation:</p>
+         <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">vCPU: 2 | RAM: 4GB | Disco: 60GB NVMe (thin)
+ Firmware: UEFI + Secure Boot
+@@ -639,7 +639,7 @@ Set-DnsClientServerAddress -InterfaceAlias "Ethernet0" -ServerAddresses 10.10.10
+       <div class="lab-modal-box">
+         <button class="lab-modal-close" onclick="closeModal('ws-modal-sysmon')"><i class="fa-solid fa-xmark"></i></button>
+         <h3>Sysmon + Auditoria avançada</h3>
+-        <p>Instalação do Sysmon com a config da <a href="https://github.com/SwiftOnSecurity/sysmon-config" target="_blank">SwiftOnSecurity</a>:</p>
++        <p>Instalação do Sysmon com a config da <a href="https://github.com/SwiftOnSecurity/sysmon-config" target="_blank" rel="noopener noreferrer">SwiftOnSecurity</a>:</p>
+         <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">.\Sysmon64.exe -i sysmonconfig-export.xml -accepteula
+ Get-Service sysmon64   # Status: Running</pre>
+         <p style="margin-top:16px;">Três políticas habilitadas via <strong>gpedit.msc</strong> e aplicadas com <code>gpupdate /force</code>:</p>
+diff --git a/pages/wireshark.html b/pages/wireshark.html
+index 86f17cb..2d12094 100644
+--- a/pages/wireshark.html
++++ b/pages/wireshark.html
+@@ -1,10 +1,10 @@
+-﻿<!doctype html>
++<!doctype html>
+ <html lang="pt-BR">
+   <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+-  <title>Laboratório Wireshark</title>
++  <title>Laboratório Wireshark | Gabriel Zacca</title>
+   <meta name="description" content="Laboratório de análise de pacotes com Wireshark, DNS, ARP, ICMP, TCP, HTTPS/TLS e troubleshooting.">
+   <meta name="author" content="Gabriel Zacca Ferreira">
+   <meta name="robots" content="index, follow">
+@@ -12,7 +12,7 @@
+   <link rel="canonical" href="https://gabrielzacca.com.br/pages/wireshark.html">
+ 
+   <meta property="og:type" content="article">
+-  <meta property="og:title" content="Laboratório Wireshark">
++  <meta property="og:title" content="Laboratório Wireshark | Gabriel Zacca">
+   <meta property="og:description" content="Laboratório de análise de pacotes com Wireshark, DNS, ARP, ICMP, TCP, HTTPS/TLS e troubleshooting.">
+   <meta property="og:url" content="https://gabrielzacca.com.br/pages/wireshark.html">
+   <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+@@ -20,7 +20,7 @@
+   <meta property="og:locale" content="pt_BR">
+ 
+   <meta name="twitter:card" content="summary_large_image">
+-  <meta name="twitter:title" content="Laboratório Wireshark">
++  <meta name="twitter:title" content="Laboratório Wireshark | Gabriel Zacca">
+   <meta name="twitter:description" content="Laboratório de análise de pacotes com Wireshark, DNS, ARP, ICMP, TCP, HTTPS/TLS e troubleshooting.">
+   <meta name="twitter:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+ 
+@@ -519,11 +519,11 @@
+         <h2>DNS — Domain Name System</h2>
+         <p class="module-text">O DNS traduz nomes de domínio em endereços IP. É o primeiro protocolo a ser ativado quando você acessa qualquer site — antes do TCP, antes do TLS.</p>
+         <div class="concept-block">
+-          <h4><i class="fa-solid fa-filter"></i> Filtro Wireshark</h4>
++          <h3><i class="fa-solid fa-filter"></i> Filtro Wireshark</h3>
+           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">dns</div>
+         </div>
+         <div class="concept-block">
+-          <h4><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h4>
++          <h3><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h3>
+           <p><strong>Query:</strong> pacote UDP enviado pelo cliente na porta 53 perguntando o IP de um domínio. Campo <code style="color:var(--primary);font-family:monospace;">Questions</code> mostra o nome buscado.<br><br>
+           <strong>Response:</strong> resposta do servidor DNS com o IP resolvido. Campo <code style="color:var(--primary);font-family:monospace;">Answers</code> mostra o registro A com o IP.<br><br>
+           <strong>Flags:</strong> bit QR=0 na query (Question), QR=1 na response (Response).</p>
+@@ -538,11 +538,11 @@
+         <h2>ARP — Address Resolution Protocol</h2>
+         <p class="module-text">O ARP opera na camada 2 e resolve endereços IP em endereços MAC — necessário para que pacotes sejam entregues na rede local antes de qualquer roteamento.</p>
+         <div class="concept-block">
+-          <h4><i class="fa-solid fa-filter"></i> Filtro Wireshark</h4>
++          <h3><i class="fa-solid fa-filter"></i> Filtro Wireshark</h3>
+           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">arp</div>
+         </div>
+         <div class="concept-block">
+-          <h4><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h4>
++          <h3><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h3>
+           <p><strong>ARP Request:</strong> broadcast enviado para ff:ff:ff:ff:ff:ff perguntando "Who has IP X? Tell IP Y".<br><br>
+           <strong>ARP Reply:</strong> resposta unicast do dispositivo dono do IP com seu MAC address.<br><br>
+           <strong>Opcode:</strong> campo que diferencia Request (1) de Reply (2).</p>
+@@ -557,11 +557,11 @@
+         <h2>ICMP — Internet Control Message Protocol</h2>
+         <p class="module-text">O ICMP é usado para diagnóstico de rede. O <code style="color:var(--primary);font-family:monospace;">ping</code> usa Echo Request e Echo Reply para testar conectividade e medir latência.</p>
+         <div class="concept-block">
+-          <h4><i class="fa-solid fa-filter"></i> Filtro Wireshark</h4>
++          <h3><i class="fa-solid fa-filter"></i> Filtro Wireshark</h3>
+           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">icmp</div>
+         </div>
+         <div class="concept-block">
+-          <h4><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h4>
++          <h3><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h3>
+           <p><strong>Echo Request (Type 8):</strong> pacote enviado pelo cliente com um identificador e número de sequência.<br><br>
+           <strong>Echo Reply (Type 0):</strong> resposta do destino com os mesmos campos — confirmando que o host está ativo.<br><br>
+           <strong>TTL:</strong> campo que indica quantos saltos o pacote pode fazer antes de ser descartado.</p>
+@@ -576,11 +576,11 @@
+         <h2>TCP — Three-Way Handshake</h2>
+         <p class="module-text">O TCP estabelece conexões confiáveis. O Three-Way Handshake (SYN → SYN-ACK → ACK) é o processo de negociação antes de qualquer dado ser trocado.</p>
+         <div class="concept-block">
+-          <h4><i class="fa-solid fa-filter"></i> Filtro Wireshark</h4>
++          <h3><i class="fa-solid fa-filter"></i> Filtro Wireshark</h3>
+           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">tcp.flags.syn==1</div>
+         </div>
+         <div class="concept-block">
+-          <h4><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h4>
++          <h3><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h3>
+           <p><strong>SYN:</strong> cliente envia pacote com flag SYN=1, escolhendo um número de sequência inicial.<br><br>
+           <strong>SYN-ACK:</strong> servidor responde com SYN=1 e ACK=1, confirmando e escolhendo seu próprio número de sequência.<br><br>
+           <strong>ACK:</strong> cliente confirma com ACK=1 — conexão estabelecida, dados podem fluir.</p>
+@@ -595,11 +595,11 @@
+         <h2>HTTPS / TLS — Comunicação criptografada</h2>
+         <p class="module-text">O TLS criptografa a comunicação HTTPS. No Wireshark é possível ver o handshake — antes dos dados ficarem ilegíveis — demonstrando na prática o que a criptografia faz.</p>
+         <div class="concept-block">
+-          <h4><i class="fa-solid fa-filter"></i> Filtro Wireshark</h4>
++          <h3><i class="fa-solid fa-filter"></i> Filtro Wireshark</h3>
+           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">tls</div>
+         </div>
+         <div class="concept-block">
+-          <h4><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h4>
++          <h3><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h3>
+           <p><strong>Client Hello:</strong> cliente anuncia versões TLS suportadas e cipher suites.<br><br>
+           <strong>Server Hello:</strong> servidor escolhe a versão e cipher suite, envia o certificado.<br><br>
+           <strong>Application Data:</strong> após o handshake, todos os dados aparecem como bytes criptografados — ilegíveis mesmo para o Wireshark.</p>
+diff --git a/style.css b/style.css
+index f9290de..5713c75 100644
+--- a/style.css
++++ b/style.css
+@@ -1,4 +1,4 @@
+-﻿/* =========================
++/* =========================
+    01. RESET / VARIABLES
+ ========================= */
+ 
+@@ -412,53 +412,126 @@ main {
+ }
+ 
+ .hero-content {
+-  max-width: 900px;
++  max-width: 840px;
+ }
+ 
+ .hero h1,
+-.hero-title {
++.hero-title,
++.projects-hero h1,
++.blog-hero h1,
++.hero.recruiters-hero h1 {
+   display: flex;
+   flex-direction: column;
+-  gap: 18px;
+-  margin-bottom: 30px;
++  gap: 12px;
++  max-width: 840px;
++  margin-bottom: 20px;
+   color: var(--text-light);
+-  font-size: clamp(54px, 6.8vw, 94px);
++  font-size: clamp(2.25rem, 4.1vw, 4.15rem);
+   font-weight: 900;
+-  line-height: 0.98;
+-  letter-spacing: -4px;
++  line-height: 1.06;
++  letter-spacing: -0.042em;
+ }
+ 
+ .hero h1 span,
+-.hero-title span {
++.hero-title span,
++.projects-hero h1 span,
++.blog-hero h1 span {
+   display: block;
+-  max-width: 820px;
++  max-width: 720px;
+   color: var(--primary);
+-  font-size: 0.28em;
++  font-size: clamp(1rem, 1.45vw, 1.25rem);
+   font-weight: 800;
+-  letter-spacing: 4px;
+-  line-height: 1.5;
++  letter-spacing: 0.02em;
++  line-height: 1.45;
+   text-transform: uppercase;
+ }
+ 
+ .hero-lead,
+-.hero-description {
+-  max-width: 720px;
++.hero-description,
++.hero-summary,
++.projects-hero .hero-description,
++.blog-hero > div > p:not(.eyebrow) {
++  max-width: 760px;
+   color: var(--text-muted);
+-  font-size: 1.15rem;
+-  line-height: 1.8;
++  font-size: clamp(0.96rem, 1vw, 1.03rem);
++  line-height: 1.72;
+   font-weight: 400;
+ }
+ 
+-.hero-tagline {
+-  max-width: 820px;
+-  margin-bottom: 20px;
++.hero-tagline,
++.hero-subtitle,
++.hero.recruiters-hero .hero-subtitle {
++  max-width: 780px;
++  margin-bottom: 16px;
+   color: var(--primary);
+-  font-size: clamp(16px, 1.6vw, 22px);
++  font-size: clamp(1rem, 1.15vw, 1.12rem);
+   font-weight: 800;
+-  letter-spacing: 3px;
++  letter-spacing: 0.01em;
++  line-height: 1.55;
+   text-transform: uppercase;
+ }
+ 
++.hero-highlights {
++  display: flex;
++  flex-wrap: wrap;
++  gap: 10px;
++  margin: 22px 0 24px;
++}
++
++.hero-highlights span {
++  display: inline-flex;
++  align-items: center;
++  gap: 8px;
++  padding: 9px 13px;
++  border: 1px solid rgba(56, 189, 248, 0.28);
++  border-radius: 999px;
++  background: rgba(15, 23, 42, 0.72);
++  color: #bfdbfe;
++  font-size: 0.88rem;
++  font-weight: 700;
++}
++
++.hero-highlights i {
++  color: #38bdf8;
++}
++
++.hero.recruiters-hero .hero-summary {
++  margin-top: 0;
++  padding: 20px 22px;
++  border: 1px solid rgba(148, 163, 184, 0.18);
++  border-radius: 20px;
++  background: linear-gradient(135deg, rgba(15, 23, 42, 0.84), rgba(2, 6, 23, 0.7));
++}
++
++@media (max-width: 760px) {
++  .hero h1,
++  .hero-title,
++  .projects-hero h1,
++  .blog-hero h1,
++  .hero.recruiters-hero h1 {
++    font-size: clamp(2rem, 9.5vw, 3.2rem);
++    line-height: 1.08;
++    letter-spacing: -0.035em;
++  }
++
++  .hero h1 span,
++  .hero-title span,
++  .projects-hero h1 span,
++  .blog-hero h1 span {
++    font-size: clamp(0.95rem, 4vw, 1.15rem);
++    line-height: 1.45;
++  }
++
++  .hero-tagline,
++  .hero-subtitle,
++  .hero-description,
++  .hero-lead,
++  .hero-summary,
++  .blog-hero > div > p:not(.eyebrow) {
++    font-size: 0.98rem;
++  }
++}
++
+ .hero-actions,
+ .section-actions {
+   display: flex;
+@@ -3420,36 +3493,6 @@ img {
+   height: auto;
+ }
+ 
+-/* Acessibilidade básica */
+-.skip-link {
+-  position: absolute;
+-  top: -48px;
+-  left: 16px;
+-  z-index: 9999;
+-  padding: 0.75rem 1rem;
+-  border-radius: 10px;
+-  background: var(--primary);
+-  color: #020617;
+-  font-weight: 700;
+-  text-decoration: none;
+-  transition: top 0.2s ease;
+-}
+-
+-.skip-link:focus {
+-  top: 16px;
+-}
+-
+-a:focus-visible,
+-button:focus-visible,
+-.btn:focus-visible {
+-  outline: 3px solid var(--primary);
+-  outline-offset: 4px;
+-}
+-
+-img {
+-  max-width: 100%;
+-  height: auto;
+-}
+ /* Blog category tags */
+ .blog-tags.blog-category-tags span::before {
+   content: none !important;
+@@ -3799,130 +3842,4 @@ section.blog-side-carousel #blog-posts-carousel > .blog-post-card {
+   }
+ }
+ 
+-/* BEGIN: Wazuh compact hero typography */
+-
+-/* Container do texto do hero */
+-.hero-content {
+-  max-width: 840px !important;
+-}
+-
+-/* Título principal no padrão Wazuh, porém menor */
+-.hero h1,
+-.hero-title,
+-.projects-hero h1,
+-.blog-hero h1,
+-.hero.recruiters-hero h1 {
+-  gap: 12px !important;
+-  max-width: 840px !important;
+-  margin-bottom: 20px !important;
+-  color: var(--text-light) !important;
+-  font-size: clamp(2.25rem, 4.1vw, 4.15rem) !important;
+-  font-weight: 900 !important;
+-  line-height: 1.06 !important;
+-  letter-spacing: -0.042em !important;
+-}
+-
+-/* Segunda linha do título */
+-.hero h1 span,
+-.hero-title span,
+-.projects-hero h1 span,
+-.blog-hero h1 span {
+-  max-width: 720px !important;
+-  color: var(--primary) !important;
+-  font-size: clamp(1rem, 1.45vw, 1.25rem) !important;
+-  font-weight: 800 !important;
+-  line-height: 1.45 !important;
+-  letter-spacing: 0.02em !important;
+-}
+-
+-/* Subtítulo técnico */
+-.hero-tagline,
+-.hero-subtitle,
+-.hero.recruiters-hero .hero-subtitle {
+-  max-width: 780px !important;
+-  margin-bottom: 16px !important;
+-  color: var(--primary) !important;
+-  font-size: clamp(1rem, 1.15vw, 1.12rem) !important;
+-  font-weight: 800 !important;
+-  line-height: 1.55 !important;
+-  letter-spacing: 0.01em !important;
+-}
+-
+-/* Descrição */
+-.hero-description,
+-.hero-lead,
+-.hero-summary,
+-.projects-hero .hero-description,
+-.blog-hero > div > p:not(.eyebrow) {
+-  max-width: 760px !important;
+-  color: var(--text-muted) !important;
+-  font-size: clamp(0.96rem, 1vw, 1.03rem) !important;
+-  font-weight: 400 !important;
+-  line-height: 1.72 !important;
+-}
+-
+-/* Recrutadores: mantém os chips e o card da descrição organizados */
+-.hero-highlights {
+-  display: flex;
+-  flex-wrap: wrap;
+-  gap: 10px;
+-  margin: 22px 0 24px;
+-}
+-
+-.hero-highlights span {
+-  display: inline-flex;
+-  align-items: center;
+-  gap: 8px;
+-  padding: 9px 13px;
+-  border: 1px solid rgba(56, 189, 248, 0.28);
+-  border-radius: 999px;
+-  background: rgba(15, 23, 42, 0.72);
+-  color: #bfdbfe;
+-  font-size: 0.88rem;
+-  font-weight: 700;
+-}
+-
+-.hero-highlights i {
+-  color: #38bdf8;
+-}
+-
+-.hero.recruiters-hero .hero-summary {
+-  margin-top: 0 !important;
+-  padding: 20px 22px !important;
+-  border: 1px solid rgba(148, 163, 184, 0.18) !important;
+-  border-radius: 20px !important;
+-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.84), rgba(2, 6, 23, 0.7)) !important;
+-}
+-
+-/* Mobile */
+-@media (max-width: 760px) {
+-  .hero h1,
+-  .hero-title,
+-  .projects-hero h1,
+-  .blog-hero h1,
+-  .hero.recruiters-hero h1 {
+-    font-size: clamp(2rem, 9.5vw, 3.2rem) !important;
+-    line-height: 1.08 !important;
+-    letter-spacing: -0.035em !important;
+-  }
+-
+-  .hero h1 span,
+-  .hero-title span,
+-  .projects-hero h1 span,
+-  .blog-hero h1 span {
+-    font-size: clamp(0.95rem, 4vw, 1.15rem) !important;
+-    line-height: 1.45 !important;
+-  }
+-
+-  .hero-tagline,
+-  .hero-subtitle,
+-  .hero-description,
+-  .hero-lead,
+-  .hero-summary,
+-  .blog-hero > div > p:not(.eyebrow) {
+-    font-size: 0.98rem !important;
+-  }
+-}
+-
+-/* END: Wazuh compact hero typography */
+ 

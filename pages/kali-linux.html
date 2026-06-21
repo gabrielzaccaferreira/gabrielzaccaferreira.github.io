@@ -1,10 +1,10 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Laboratório Kali Linux</title>
+  <title>Laboratório Kali Linux | Gabriel Zacca</title>
   <meta name="description" content="Laboratório com Kali Linux, VMware, SSH, XRDP, acesso remoto e troubleshooting em ambiente Linux.">
   <meta name="author" content="Gabriel Zacca Ferreira">
   <meta name="robots" content="index, follow">
@@ -12,7 +12,7 @@
   <link rel="canonical" href="https://gabrielzacca.com.br/pages/kali-linux.html">
 
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Laboratório Kali Linux">
+  <meta property="og:title" content="Laboratório Kali Linux | Gabriel Zacca">
   <meta property="og:description" content="Laboratório com Kali Linux, VMware, SSH, XRDP, acesso remoto e troubleshooting em ambiente Linux.">
   <meta property="og:url" content="https://gabrielzacca.com.br/pages/kali-linux.html">
   <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
@@ -20,7 +20,7 @@
   <meta property="og:locale" content="pt_BR">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Laboratório Kali Linux">
+  <meta name="twitter:title" content="Laboratório Kali Linux | Gabriel Zacca">
   <meta name="twitter:description" content="Laboratório com Kali Linux, VMware, SSH, XRDP, acesso remoto e troubleshooting em ambiente Linux.">
   <meta name="twitter:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
 
@@ -329,15 +329,15 @@
           <p class="module-text">O VMware Workstation é o hypervisor tipo 2 escolhido para o laboratório — roda sobre o Windows 11 do host e permite criar múltiplas VMs isoladas compartilhando o hardware físico.</p>
 
           <div class="concept-block">
-            <h4><i class="fa-solid fa-download"></i> Download e instalação</h4>
+            <h3><i class="fa-solid fa-download"></i> Download e instalação</h3>
             <p>O instalador foi baixado diretamente do site oficial da Broadcom (atual proprietária do VMware). A versão Workstation Pro passou a ser gratuita para uso pessoal a partir de 2024. O processo de instalação é padrão — next, next, finish — sem customizações necessárias para o laboratório.</p>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-gears"></i> Configuração inicial</h4>
+            <h3><i class="fa-solid fa-gears"></i> Configuração inicial</h3>
             <p>Após a instalação, o Virtual Network Editor foi verificado para confirmar as redes virtuais disponíveis. As duas redes relevantes para o laboratório são a <strong>VMnet1 (Host-only)</strong> e a <strong>VMnet8 (NAT)</strong>. A rede Bridge não aparece listada pois usa diretamente a placa física do host.</p>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-circle-check"></i> Validação</h4>
+            <h3><i class="fa-solid fa-circle-check"></i> Validação</h3>
             <p>Com o VMware instalado e rodando, o próximo passo foi criar a primeira VM. A interface do Workstation lista todas as VMs criadas na biblioteca lateral — Kali Linux, Ubuntu Server e pfSense foram adicionados ao longo do projeto.</p>
           </div>
         </div>
@@ -352,18 +352,18 @@
           <p class="module-text">A VM foi criada usando o assistente do VMware Workstation com a ISO oficial do Kali Linux 2026.2 (amd64). As decisões de alocação de recursos foram baseadas na capacidade do host e na quantidade de VMs que rodariam simultaneamente.</p>
 
           <div class="concept-block">
-            <h4><i class="fa-solid fa-microchip"></i> Recursos alocados</h4>
+            <h3><i class="fa-solid fa-microchip"></i> Recursos alocados</h3>
             <p><strong>RAM:</strong> 4 GB — suficiente para o Kali com XFCE e as ferramentas de segurança.<br>
             <strong>CPUs:</strong> 2 vCPUs — balanceado para não sobrecarregar o host i7-10700T.<br>
             <strong>Disco:</strong> 60 GB — espaço para o sistema, ferramentas e logs dos laboratórios.<br>
             <strong>Interface gráfica:</strong> XFCE — leve e eficiente, ideal para ambiente virtualizado.</p>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-compact-disc"></i> Instalação do sistema</h4>
+            <h3><i class="fa-solid fa-compact-disc"></i> Instalação do sistema</h3>
             <p>A instalação seguiu o processo padrão do Kali Linux com instalação gráfica. Usuário <code style="color:var(--primary);font-family:monospace;">kali</code> criado com senha definida. Após a instalação, o sistema foi atualizado com <code style="color:var(--primary);font-family:monospace;">sudo apt update && sudo apt upgrade -y</code> antes de qualquer outra configuração.</p>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-camera"></i> Snapshot pós-instalação</h4>
+            <h3><i class="fa-solid fa-camera"></i> Snapshot pós-instalação</h3>
             <p>Antes de qualquer configuração adicional, um snapshot inicial foi criado — <strong>"Kali-Limpo"</strong> — como ponto de restauração caso algo saísse errado nas etapas seguintes. Boa prática que salvou tempo em alguns momentos do laboratório.</p>
           </div>
         </div>
@@ -378,17 +378,17 @@
           <p class="module-text">Por padrão o VMware cria VMs em modo NAT — a VM acessa a internet através do IP do host, mas outros dispositivos da rede não conseguem alcançá-la diretamente. Para o laboratório, isso era um problema: o Ubuntu Server precisava se comunicar com o Kali como se fossem máquinas reais na mesma rede.</p>
 
           <div class="concept-block">
-            <h4><i class="fa-solid fa-network-wired"></i> NAT vs Bridge — a diferença prática</h4>
+            <h3><i class="fa-solid fa-network-wired"></i> NAT vs Bridge — a diferença prática</h3>
             <p><strong>NAT:</strong> a VM fica "atrás" do host. IP atribuído pelo VMware (ex: 192.168.x.x vmware). Outros dispositivos da rede física não enxergam a VM.<br><br>
             <strong>Bridge:</strong> a VM se conecta diretamente à rede física através da placa de rede do host. Recebe IP do roteador/DHCP da rede real. Qualquer dispositivo na LAN consegue se comunicar com ela como se fosse uma máquina física.</p>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-gears"></i> Como foi feito</h4>
+            <h3><i class="fa-solid fa-gears"></i> Como foi feito</h3>
             <p>Nas configurações da VM (VM → Settings → Network Adapter), o modo foi alterado de <strong>NAT</strong> para <strong>Bridged</strong>. A opção "Replicate physical network connection state" foi marcada para que a VM responda às mudanças de conexão do host.<br><br>
             Após reiniciar a VM, o Kali recebeu automaticamente um IP da rede local via DHCP do roteador — na mesma subnet do host Windows e do Ubuntu Server.</p>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-circle-check"></i> Validação</h4>
+            <h3><i class="fa-solid fa-circle-check"></i> Validação</h3>
             <p>Validado com <code style="color:var(--primary);font-family:monospace;">ip addr</code> para confirmar o IP atribuído e <code style="color:var(--primary);font-family:monospace;">ping</code> bidirecional entre o Kali e o host Windows. A partir desse momento, os dispositivos do laboratório podiam se comunicar diretamente.</p>
           </div>
         </div>
@@ -403,7 +403,7 @@
           <p class="module-text">Com o Bridge configurado e o Kali acessível na rede, o próximo passo foi habilitar o acesso SSH — permitindo gerenciar a VM via terminal sem precisar abrir a janela do VMware.</p>
 
           <div class="concept-block">
-            <h4><i class="fa-solid fa-terminal"></i> Habilitando o servidor SSH</h4>
+            <h3><i class="fa-solid fa-terminal"></i> Habilitando o servidor SSH</h3>
             <p>O OpenSSH já vem instalado no Kali Linux. Foi necessário apenas iniciar o serviço e habilitá-lo para iniciar automaticamente com o sistema:</p>
             <div style="margin-top:12px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
               sudo systemctl start ssh<br>
@@ -412,14 +412,14 @@
             </div>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-key"></i> Configuração de chaves SSH</h4>
+            <h3><i class="fa-solid fa-key"></i> Configuração de chaves SSH</h3>
             <p>Para eliminar a necessidade de digitar senha a cada conexão, foi configurada autenticação por chave pública:<br><br>
             1. Geração do par de chaves no Windows: <code style="color:var(--primary);font-family:monospace;">ssh-keygen -t rsa -b 4096</code><br>
             2. Cópia da chave pública para o Kali: <code style="color:var(--primary);font-family:monospace;">ssh-copy-id kali@IP_DO_KALI</code><br>
             3. Teste da conexão sem senha: <code style="color:var(--primary);font-family:monospace;">ssh kali@IP_DO_KALI</code></p>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-circle-check"></i> Resultado</h4>
+            <h3><i class="fa-solid fa-circle-check"></i> Resultado</h3>
             <p>A partir desse momento, qualquer terminal no Windows (PowerShell, Windows Terminal, Git Bash) passou a ter acesso direto ao Kali Linux com um simples <code style="color:var(--primary);font-family:monospace;">ssh kali@IP</code> — sem senha, instantâneo.</p>
           </div>
         </div>
@@ -434,11 +434,11 @@
           <p class="module-text">Com SSH funcionando, foi possível conectar o VS Code diretamente ao Kali Linux — transformando o editor do Windows em uma interface completa para o sistema remoto. Isso foi especialmente útil para editar arquivos de configuração, escrever scripts e organizar os repositórios dos laboratórios.</p>
 
           <div class="concept-block">
-            <h4><i class="fa-solid fa-puzzle-piece"></i> Instalação da extensão</h4>
+            <h3><i class="fa-solid fa-puzzle-piece"></i> Instalação da extensão</h3>
             <p>No VS Code, a extensão <strong>Remote - SSH</strong> (publicada pela Microsoft) foi instalada pelo marketplace. Ela adiciona um ícone de conexão remota na barra lateral e permite conectar a qualquer host SSH configurado.</p>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-gears"></i> Configuração do host</h4>
+            <h3><i class="fa-solid fa-gears"></i> Configuração do host</h3>
             <p>O host SSH foi adicionado ao arquivo de configuração do SSH do Windows (<code style="color:var(--primary);font-family:monospace;">~/.ssh/config</code>):</p>
             <div style="margin-top:12px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
               Host kali-lab<br>
@@ -448,7 +448,7 @@
             </div>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-folder-open"></i> O que isso permitiu</h4>
+            <h3><i class="fa-solid fa-folder-open"></i> O que isso permitiu</h3>
             <p>Com a conexão estabelecida, o VS Code abre o sistema de arquivos do Kali no Explorer lateral. É possível editar qualquer arquivo — <code style="color:var(--primary);font-family:monospace;">ossec.conf</code>, <code style="color:var(--primary);font-family:monospace;">suricata.yaml</code>, scripts Bash — com syntax highlight, autocomplete e terminal integrado rodando diretamente no Kali.</p>
           </div>
         </div>
@@ -463,7 +463,7 @@
           <p class="module-text">O SSH cobre bem o acesso via terminal. Mas algumas situações exigem interface gráfica — abrir o Wireshark, por exemplo, ou navegar em arquivos visualmente. O XRDP resolve isso: permite acessar o desktop completo do Kali via RDP, o mesmo protocolo usado no Windows.</p>
 
           <div class="concept-block">
-            <h4><i class="fa-solid fa-download"></i> Instalação</h4>
+            <h3><i class="fa-solid fa-download"></i> Instalação</h3>
             <p>Instalação do XRDP e do servidor de sessão XFCE:</p>
             <div style="margin-top:12px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
               sudo apt install xrdp -y<br>
@@ -472,15 +472,15 @@
             </div>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-desktop"></i> Configuração do XFCE como sessão padrão</h4>
+            <h3><i class="fa-solid fa-desktop"></i> Configuração do XFCE como sessão padrão</h3>
             <p>O XRDP precisa saber qual ambiente gráfico iniciar. Foi criado o arquivo <code style="color:var(--primary);font-family:monospace;">~/.xsession</code> com o conteúdo <code style="color:var(--primary);font-family:monospace;">xfce4-session</code> para que o XFCE seja carregado a cada conexão RDP.</p>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-triangle-exclamation"></i> Problema: loop de login</h4>
+            <h3><i class="fa-solid fa-triangle-exclamation"></i> Problema: loop de login</h3>
             <p>O problema mais comum com XRDP: múltiplas sessões abertas do mesmo usuário causam um loop onde a tela aceita as credenciais mas retorna imediatamente para o login. O diagnóstico foi feito com <code style="color:var(--primary);font-family:monospace;">loginctl</code> — que revelou sessões presas — e a solução com <code style="color:var(--primary);font-family:monospace;">sudo pkill -u kali</code> seguido de reinício do LightDM e XRDP. Esse processo virou o script <code style="color:var(--primary);font-family:monospace;">reiniciar-rdp.sh</code>.</p>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-circle-check"></i> Acesso pelo Windows</h4>
+            <h3><i class="fa-solid fa-circle-check"></i> Acesso pelo Windows</h3>
             <p>Com o XRDP funcionando, o acesso é feito pelo <strong>mstsc</strong> (Conexão de Área de Trabalho Remota) nativo do Windows — digitando o IP do Kali e as credenciais. O desktop XFCE completo abre em uma janela no Windows.</p>
           </div>
         </div>
@@ -495,11 +495,11 @@
           <p class="module-text">Com todas as configurações validadas — Bridge, SSH, VS Code Remote e XRDP funcionando — foi criado o snapshot definitivo do ambiente base. Esse snapshot é o ponto de restauração confiável para todo o laboratório.</p>
 
           <div class="concept-block">
-            <h4><i class="fa-solid fa-camera"></i> O que é um snapshot</h4>
+            <h3><i class="fa-solid fa-camera"></i> O que é um snapshot</h3>
             <p>Um snapshot captura o estado completo da VM em um momento específico — disco, memória, configurações. Se algo quebrar nos laboratórios seguintes (Wazuh, Suricata, CrowdSec), é possível restaurar o ambiente base em segundos sem reinstalar nada.</p>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-list-check"></i> Checklist antes do snapshot</h4>
+            <h3><i class="fa-solid fa-list-check"></i> Checklist antes do snapshot</h3>
             <p>Antes de criar o snapshot, todos os serviços foram validados:<br><br>
             ✓ <code style="color:var(--primary);font-family:monospace;">ip addr</code> — IP Bridge ativo na rede local<br>
             ✓ <code style="color:var(--primary);font-family:monospace;">ssh kali@IP</code> do Windows — acesso sem senha<br>
@@ -508,7 +508,7 @@
             ✓ <code style="color:var(--primary);font-family:monospace;">systemctl status ssh xrdp</code> — ambos active (running)</p>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-floppy-disk"></i> Criação do snapshot</h4>
+            <h3><i class="fa-solid fa-floppy-disk"></i> Criação do snapshot</h3>
             <p>No VMware Workstation: VM → Snapshot → Take Snapshot. Nome definido como <strong>Kali-Remoto-Completo-v1</strong> com descrição do estado. A partir desse ponto, todos os outros laboratórios foram construídos sobre essa base — com a segurança de poder voltar a qualquer momento.</p>
           </div>
         </div>

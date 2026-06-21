@@ -1,10 +1,10 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Laboratório Wireshark</title>
+  <title>Laboratório Wireshark | Gabriel Zacca</title>
   <meta name="description" content="Laboratório de análise de pacotes com Wireshark, DNS, ARP, ICMP, TCP, HTTPS/TLS e troubleshooting.">
   <meta name="author" content="Gabriel Zacca Ferreira">
   <meta name="robots" content="index, follow">
@@ -12,7 +12,7 @@
   <link rel="canonical" href="https://gabrielzacca.com.br/pages/wireshark.html">
 
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Laboratório Wireshark">
+  <meta property="og:title" content="Laboratório Wireshark | Gabriel Zacca">
   <meta property="og:description" content="Laboratório de análise de pacotes com Wireshark, DNS, ARP, ICMP, TCP, HTTPS/TLS e troubleshooting.">
   <meta property="og:url" content="https://gabrielzacca.com.br/pages/wireshark.html">
   <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
@@ -20,7 +20,7 @@
   <meta property="og:locale" content="pt_BR">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Laboratório Wireshark">
+  <meta name="twitter:title" content="Laboratório Wireshark | Gabriel Zacca">
   <meta name="twitter:description" content="Laboratório de análise de pacotes com Wireshark, DNS, ARP, ICMP, TCP, HTTPS/TLS e troubleshooting.">
   <meta name="twitter:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
 
@@ -519,11 +519,11 @@
         <h2>DNS — Domain Name System</h2>
         <p class="module-text">O DNS traduz nomes de domínio em endereços IP. É o primeiro protocolo a ser ativado quando você acessa qualquer site — antes do TCP, antes do TLS.</p>
         <div class="concept-block">
-          <h4><i class="fa-solid fa-filter"></i> Filtro Wireshark</h4>
+          <h3><i class="fa-solid fa-filter"></i> Filtro Wireshark</h3>
           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">dns</div>
         </div>
         <div class="concept-block">
-          <h4><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h4>
+          <h3><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h3>
           <p><strong>Query:</strong> pacote UDP enviado pelo cliente na porta 53 perguntando o IP de um domínio. Campo <code style="color:var(--primary);font-family:monospace;">Questions</code> mostra o nome buscado.<br><br>
           <strong>Response:</strong> resposta do servidor DNS com o IP resolvido. Campo <code style="color:var(--primary);font-family:monospace;">Answers</code> mostra o registro A com o IP.<br><br>
           <strong>Flags:</strong> bit QR=0 na query (Question), QR=1 na response (Response).</p>
@@ -538,11 +538,11 @@
         <h2>ARP — Address Resolution Protocol</h2>
         <p class="module-text">O ARP opera na camada 2 e resolve endereços IP em endereços MAC — necessário para que pacotes sejam entregues na rede local antes de qualquer roteamento.</p>
         <div class="concept-block">
-          <h4><i class="fa-solid fa-filter"></i> Filtro Wireshark</h4>
+          <h3><i class="fa-solid fa-filter"></i> Filtro Wireshark</h3>
           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">arp</div>
         </div>
         <div class="concept-block">
-          <h4><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h4>
+          <h3><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h3>
           <p><strong>ARP Request:</strong> broadcast enviado para ff:ff:ff:ff:ff:ff perguntando "Who has IP X? Tell IP Y".<br><br>
           <strong>ARP Reply:</strong> resposta unicast do dispositivo dono do IP com seu MAC address.<br><br>
           <strong>Opcode:</strong> campo que diferencia Request (1) de Reply (2).</p>
@@ -557,11 +557,11 @@
         <h2>ICMP — Internet Control Message Protocol</h2>
         <p class="module-text">O ICMP é usado para diagnóstico de rede. O <code style="color:var(--primary);font-family:monospace;">ping</code> usa Echo Request e Echo Reply para testar conectividade e medir latência.</p>
         <div class="concept-block">
-          <h4><i class="fa-solid fa-filter"></i> Filtro Wireshark</h4>
+          <h3><i class="fa-solid fa-filter"></i> Filtro Wireshark</h3>
           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">icmp</div>
         </div>
         <div class="concept-block">
-          <h4><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h4>
+          <h3><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h3>
           <p><strong>Echo Request (Type 8):</strong> pacote enviado pelo cliente com um identificador e número de sequência.<br><br>
           <strong>Echo Reply (Type 0):</strong> resposta do destino com os mesmos campos — confirmando que o host está ativo.<br><br>
           <strong>TTL:</strong> campo que indica quantos saltos o pacote pode fazer antes de ser descartado.</p>
@@ -576,11 +576,11 @@
         <h2>TCP — Three-Way Handshake</h2>
         <p class="module-text">O TCP estabelece conexões confiáveis. O Three-Way Handshake (SYN → SYN-ACK → ACK) é o processo de negociação antes de qualquer dado ser trocado.</p>
         <div class="concept-block">
-          <h4><i class="fa-solid fa-filter"></i> Filtro Wireshark</h4>
+          <h3><i class="fa-solid fa-filter"></i> Filtro Wireshark</h3>
           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">tcp.flags.syn==1</div>
         </div>
         <div class="concept-block">
-          <h4><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h4>
+          <h3><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h3>
           <p><strong>SYN:</strong> cliente envia pacote com flag SYN=1, escolhendo um número de sequência inicial.<br><br>
           <strong>SYN-ACK:</strong> servidor responde com SYN=1 e ACK=1, confirmando e escolhendo seu próprio número de sequência.<br><br>
           <strong>ACK:</strong> cliente confirma com ACK=1 — conexão estabelecida, dados podem fluir.</p>
@@ -595,11 +595,11 @@
         <h2>HTTPS / TLS — Comunicação criptografada</h2>
         <p class="module-text">O TLS criptografa a comunicação HTTPS. No Wireshark é possível ver o handshake — antes dos dados ficarem ilegíveis — demonstrando na prática o que a criptografia faz.</p>
         <div class="concept-block">
-          <h4><i class="fa-solid fa-filter"></i> Filtro Wireshark</h4>
+          <h3><i class="fa-solid fa-filter"></i> Filtro Wireshark</h3>
           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">tls</div>
         </div>
         <div class="concept-block">
-          <h4><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h4>
+          <h3><i class="fa-solid fa-magnifying-glass"></i> O que observar na captura</h3>
           <p><strong>Client Hello:</strong> cliente anuncia versões TLS suportadas e cipher suites.<br><br>
           <strong>Server Hello:</strong> servidor escolhe a versão e cipher suite, envia o certificado.<br><br>
           <strong>Application Data:</strong> após o handshake, todos os dados aparecem como bytes criptografados — ilegíveis mesmo para o Wireshark.</p>

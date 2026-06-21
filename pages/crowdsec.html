@@ -1,10 +1,10 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Laboratório CrowdSec</title>
+  <title>Laboratório CrowdSec | Gabriel Zacca</title>
   <meta name="description" content="Laboratório com CrowdSec para análise de logs SSH, brute force, parsers, scenarios e alertas.">
   <meta name="author" content="Gabriel Zacca Ferreira">
   <meta name="robots" content="index, follow">
@@ -12,7 +12,7 @@
   <link rel="canonical" href="https://gabrielzacca.com.br/pages/crowdsec.html">
 
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Laboratório CrowdSec">
+  <meta property="og:title" content="Laboratório CrowdSec | Gabriel Zacca">
   <meta property="og:description" content="Laboratório com CrowdSec para análise de logs SSH, brute force, parsers, scenarios e alertas.">
   <meta property="og:url" content="https://gabrielzacca.com.br/pages/crowdsec.html">
   <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
@@ -20,7 +20,7 @@
   <meta property="og:locale" content="pt_BR">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Laboratório CrowdSec">
+  <meta name="twitter:title" content="Laboratório CrowdSec | Gabriel Zacca">
   <meta name="twitter:description" content="Laboratório com CrowdSec para análise de logs SSH, brute force, parsers, scenarios e alertas.">
   <meta name="twitter:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
 
@@ -641,14 +641,14 @@ labels:
         <h2>Instalação do CrowdSec</h2>
         <p class="module-text">O CrowdSec está disponível nos repositórios oficiais do Kali Linux. A instalação é direta via apt.</p>
         <div class="concept-block">
-          <h4><i class="fa-solid fa-terminal"></i> Comandos de instalação</h4>
+          <h3><i class="fa-solid fa-terminal"></i> Comandos de instalação</h3>
           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
             curl -s https://packagecloud.io/install/repositories/crowdsec/crowdsec/script.deb.sh | sudo bash<br>
             sudo apt install crowdsec -y
           </div>
         </div>
         <div class="concept-block">
-          <h4><i class="fa-solid fa-circle-check"></i> Validação</h4>
+          <h3><i class="fa-solid fa-circle-check"></i> Validação</h3>
           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
             sudo systemctl status crowdsec<br>
             <span style="color:#4ade80;">● crowdsec.service - CrowdSec agent<br>
@@ -665,7 +665,7 @@ labels:
         <h2>Configuração do arquivo de aquisição</h2>
         <p class="module-text">O <code style="color:var(--primary);font-family:monospace;">acquis.yaml</code> define quais fontes de log o CrowdSec vai monitorar. Para SSH, a fonte é o journalctl com o serviço sshd.</p>
         <div class="concept-block">
-          <h4><i class="fa-solid fa-file-code"></i> Conteúdo do acquis.yaml</h4>
+          <h3><i class="fa-solid fa-file-code"></i> Conteúdo do acquis.yaml</h3>
           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
             source: journalctl<br>
             journalctl_filter:<br>
@@ -675,7 +675,7 @@ labels:
           </div>
         </div>
         <div class="concept-block">
-          <h4><i class="fa-solid fa-circle-info"></i> Localização</h4>
+          <h3><i class="fa-solid fa-circle-info"></i> Localização</h3>
           <p>O arquivo fica em <code style="color:var(--primary);font-family:monospace;">/etc/crowdsec/acquis.yaml</code>. Após editar, reiniciar o serviço com <code style="color:var(--primary);font-family:monospace;">sudo systemctl restart crowdsec</code>.</p>
         </div>
       </div>
@@ -688,14 +688,14 @@ labels:
         <h2>Instalação da collection SSH</h2>
         <p class="module-text">As collections do CrowdSec agrupam parsers e scenarios relacionados. A collection <code style="color:var(--primary);font-family:monospace;">crowdsecurity/sshd</code> inclui tudo necessário para detecção de brute force SSH.</p>
         <div class="concept-block">
-          <h4><i class="fa-solid fa-terminal"></i> Comando</h4>
+          <h3><i class="fa-solid fa-terminal"></i> Comando</h3>
           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
             sudo cscli collections install crowdsecurity/sshd<br>
             sudo systemctl restart crowdsec
           </div>
         </div>
         <div class="concept-block">
-          <h4><i class="fa-solid fa-layer-group"></i> O que inclui</h4>
+          <h3><i class="fa-solid fa-layer-group"></i> O que inclui</h3>
           <p><strong>Parser:</strong> <code style="color:var(--primary);font-family:monospace;">crowdsecurity/sshd-logs</code> — lê e estrutura os logs do SSH.<br>
           <strong>Scenario:</strong> <code style="color:var(--primary);font-family:monospace;">crowdsecurity/ssh-bf</code> — detecta múltiplas falhas de login (brute force).</p>
         </div>
@@ -709,13 +709,13 @@ labels:
         <h2>Verificação de métricas</h2>
         <p class="module-text">O <code style="color:var(--primary);font-family:monospace;">cscli metrics</code> mostra o estado interno do pipeline de processamento — quantas linhas foram lidas, parseadas e quantos eventos foram avaliados pelos scenarios.</p>
         <div class="concept-block">
-          <h4><i class="fa-solid fa-terminal"></i> Comando</h4>
+          <h3><i class="fa-solid fa-terminal"></i> Comando</h3>
           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
             sudo cscli metrics
           </div>
         </div>
         <div class="concept-block">
-          <h4><i class="fa-solid fa-circle-check"></i> O que validar</h4>
+          <h3><i class="fa-solid fa-circle-check"></i> O que validar</h3>
           <p>Na tabela de parsers, confirmar que <code style="color:var(--primary);font-family:monospace;">crowdsecurity/sshd-logs</code> está com linhas processadas. Na tabela de buckets, confirmar que <code style="color:var(--primary);font-family:monospace;">crowdsecurity/ssh-bf</code> está sendo avaliado.</p>
         </div>
       </div>
@@ -728,14 +728,14 @@ labels:
         <h2>Análise de alertas gerados</h2>
         <p class="module-text">Após o CrowdSec processar os logs e detectar padrões suspeitos, os alertas ficam disponíveis via <code style="color:var(--primary);font-family:monospace;">cscli alerts list</code>.</p>
         <div class="concept-block">
-          <h4><i class="fa-solid fa-terminal"></i> Comandos de análise</h4>
+          <h3><i class="fa-solid fa-terminal"></i> Comandos de análise</h3>
           <div style="margin-top:10px;padding:16px;background:rgba(2,6,23,0.8);border-radius:12px;font-family:monospace;font-size:13px;color:var(--text-soft);">
             sudo cscli alerts list<br>
             sudo cscli decisions list
           </div>
         </div>
         <div class="concept-block">
-          <h4><i class="fa-solid fa-circle-info"></i> Campos do alerta</h4>
+          <h3><i class="fa-solid fa-circle-info"></i> Campos do alerta</h3>
           <p>Cada alerta mostra: IP origem, scenario ativado (<code style="color:var(--primary);font-family:monospace;">crowdsecurity/ssh-bf</code>), número de eventos que ativaram o threshold, data/hora e decisão tomada (ban ou simonly).</p>
         </div>
       </div>

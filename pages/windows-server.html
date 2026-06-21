@@ -1,10 +1,10 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Laboratório Windows Server + Sysmon</title>
+  <title>Laboratório Windows Server + Sysmon | Gabriel Zacca</title>
   <meta name="description" content="Laboratório de telemetria Windows com Sysmon, auditoria, PowerShell logging, Wazuh e análise de eventos.">
   <meta name="author" content="Gabriel Zacca Ferreira">
   <meta name="robots" content="index, follow">
@@ -12,7 +12,7 @@
   <link rel="canonical" href="https://gabrielzacca.com.br/pages/windows-server.html">
 
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Laboratório Windows Server + Sysmon">
+  <meta property="og:title" content="Laboratório Windows Server + Sysmon | Gabriel Zacca">
   <meta property="og:description" content="Laboratório de telemetria Windows com Sysmon, auditoria, PowerShell logging, Wazuh e análise de eventos.">
   <meta property="og:url" content="https://gabrielzacca.com.br/pages/windows-server.html">
   <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
@@ -20,7 +20,7 @@
   <meta property="og:locale" content="pt_BR">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Laboratório Windows Server + Sysmon">
+  <meta name="twitter:title" content="Laboratório Windows Server + Sysmon | Gabriel Zacca">
   <meta name="twitter:description" content="Laboratório de telemetria Windows com Sysmon, auditoria, PowerShell logging, Wazuh e análise de eventos.">
   <meta name="twitter:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
 
@@ -608,7 +608,7 @@
       <div class="lab-modal-box">
         <button class="lab-modal-close" onclick="closeModal('ws-modal-vm')"><i class="fa-solid fa-xmark"></i></button>
         <h3>Provisionamento da VM</h3>
-        <p>Download do ISO via <a href="https://www.microsoft.com/en-us/evalcenter/download-windows-server-2025" target="_blank">Microsoft Evaluation Center</a> — avaliação gratuita de 180 dias, sem necessidade de product key.</p>
+        <p>Download do ISO via <a href="https://www.microsoft.com/en-us/evalcenter/download-windows-server-2025" target="_blank" rel="noopener noreferrer">Microsoft Evaluation Center</a> — avaliação gratuita de 180 dias, sem necessidade de product key.</p>
         <p style="margin-top:16px;">Parâmetros da VM no VMware Workstation:</p>
         <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">vCPU: 2 | RAM: 4GB | Disco: 60GB NVMe (thin)
 Firmware: UEFI + Secure Boot
@@ -639,7 +639,7 @@ Set-DnsClientServerAddress -InterfaceAlias "Ethernet0" -ServerAddresses 10.10.10
       <div class="lab-modal-box">
         <button class="lab-modal-close" onclick="closeModal('ws-modal-sysmon')"><i class="fa-solid fa-xmark"></i></button>
         <h3>Sysmon + Auditoria avançada</h3>
-        <p>Instalação do Sysmon com a config da <a href="https://github.com/SwiftOnSecurity/sysmon-config" target="_blank">SwiftOnSecurity</a>:</p>
+        <p>Instalação do Sysmon com a config da <a href="https://github.com/SwiftOnSecurity/sysmon-config" target="_blank" rel="noopener noreferrer">SwiftOnSecurity</a>:</p>
         <pre style="margin-top:12px;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;font-size:13px;color:var(--text-soft);white-space:pre-wrap;">.\Sysmon64.exe -i sysmonconfig-export.xml -accepteula
 Get-Service sysmon64   # Status: Running</pre>
         <p style="margin-top:16px;">Três políticas habilitadas via <strong>gpedit.msc</strong> e aplicadas com <code>gpupdate /force</code>:</p>

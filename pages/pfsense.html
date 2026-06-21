@@ -1,10 +1,10 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Laboratório pfSense Firewall</title>
+  <title>Laboratório pfSense Firewall | Gabriel Zacca</title>
   <meta name="description" content="Laboratório com pfSense para firewall, NAT, DHCP, WAN, LAN, regras de acesso e redes.">
   <meta name="author" content="Gabriel Zacca Ferreira">
   <meta name="robots" content="index, follow">
@@ -12,7 +12,7 @@
   <link rel="canonical" href="https://gabrielzacca.com.br/pages/pfsense.html">
 
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Laboratório pfSense Firewall">
+  <meta property="og:title" content="Laboratório pfSense Firewall | Gabriel Zacca">
   <meta property="og:description" content="Laboratório com pfSense para firewall, NAT, DHCP, WAN, LAN, regras de acesso e redes.">
   <meta property="og:url" content="https://gabrielzacca.com.br/pages/pfsense.html">
   <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
@@ -20,7 +20,7 @@
   <meta property="og:locale" content="pt_BR">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Laboratório pfSense Firewall">
+  <meta name="twitter:title" content="Laboratório pfSense Firewall | Gabriel Zacca">
   <meta name="twitter:description" content="Laboratório com pfSense para firewall, NAT, DHCP, WAN, LAN, regras de acesso e redes.">
   <meta name="twitter:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
 
@@ -341,14 +341,14 @@
           <h2>Criação da VM no VMware</h2>
           <p class="module-text">O pfSense é baseado em FreeBSD — por isso a VM foi criada com o tipo "FreeBSD 64-bit" no VMware, o que garante as configurações padrão corretas de hardware virtual.</p>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-microchip"></i> Recursos alocados</h4>
+            <h3><i class="fa-solid fa-microchip"></i> Recursos alocados</h3>
             <p><strong>RAM:</strong> 3.9 GB — suficiente para o firewall com inspeção de estado ativa.<br>
             <strong>CPUs:</strong> 2 vCPUs — para processar regras e NAT sem gargalo.<br>
             <strong>Disco:</strong> 20 GB — espaço para o sistema, logs e configurações.<br>
             <strong>NICs:</strong> 2 interfaces — VMnet8 (WAN) e VMnet1 (LAN).</p>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-ethernet"></i> Por que duas interfaces?</h4>
+            <h3><i class="fa-solid fa-ethernet"></i> Por que duas interfaces?</h3>
             <p>O pfSense precisa de pelo menos duas interfaces para funcionar como firewall: uma para receber tráfego externo (WAN) e outra para distribuir para a rede interna (LAN). Sem isso, não há separação de redes — que é exatamente o objetivo do lab.</p>
           </div>
         </div>
@@ -361,11 +361,11 @@
           <h2>Instalação do pfSense 2.8.1-RELEASE</h2>
           <p class="module-text">A ISO foi baixada do site oficial da Netgate (fabricante do pfSense). A versão Community Edition é gratuita e inclui todas as funcionalidades necessárias para o laboratório.</p>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-compact-disc"></i> Processo de instalação</h4>
+            <h3><i class="fa-solid fa-compact-disc"></i> Processo de instalação</h3>
             <p>A instalação via console é guiada — Accept, Install, Auto (UFS), Reboot. O pfSense não tem instalação gráfica; tudo é feito via menu de texto. Após o primeiro boot, o console exibiu as interfaces detectadas e o menu principal confirmando que o sistema estava pronto.</p>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-tag"></i> Hostname soc-fw01.home.lab</h4>
+            <h3><i class="fa-solid fa-tag"></i> Hostname soc-fw01.home.lab</h3>
             <p>O hostname foi definido durante a configuração inicial para refletir o papel do dispositivo no laboratório — <strong>soc-fw01</strong> indica o primeiro firewall do ambiente SOC, e <strong>home.lab</strong> é o domínio interno do laboratório.</p>
           </div>
         </div>
@@ -378,12 +378,12 @@
           <h2>Configuração das interfaces WAN e LAN</h2>
           <p class="module-text">A primeira configuração importante do pfSense é atribuir quais interfaces físicas serão WAN e LAN. Isso é feito via menu do console — opção 1 (Assign Interfaces).</p>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-network-wired"></i> Atribuição das interfaces</h4>
+            <h3><i class="fa-solid fa-network-wired"></i> Atribuição das interfaces</h3>
             <p><strong>em0 → WAN:</strong> conectada ao VMnet8, recebe IP via DHCP da rede física do laboratório. É a interface "externa" do firewall.<br><br>
             <strong>em1 → LAN:</strong> conectada ao VMnet1, configurada com IP estático como gateway da rede interna. É a interface "interna" pela qual os clientes da LAN acessam a internet.</p>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-circle-check"></i> Confirmação no console</h4>
+            <h3><i class="fa-solid fa-circle-check"></i> Confirmação no console</h3>
             <p>Após a atribuição, o console exibiu o status das interfaces com os IPs confirmados — WAN com IP do DHCP da rede física e LAN com o IP estático configurado manualmente via opção 2 do menu.</p>
           </div>
         </div>
@@ -396,11 +396,11 @@
           <h2>Acesso à interface web (WebGUI)</h2>
           <p class="module-text">Com as interfaces configuradas, o pfSense já serve a WebGUI pelo IP da LAN. O acesso é feito de qualquer dispositivo na rede LAN abrindo o browser e digitando o IP do pfSense.</p>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-browser"></i> Primeiro acesso</h4>
+            <h3><i class="fa-solid fa-browser"></i> Primeiro acesso</h3>
             <p>O browser exibe um aviso de certificado autoassinado — normal para um ambiente interno. Após aceitar, a tela de login do pfSense aparece. Credenciais padrão: <code style="color:var(--primary);font-family:monospace;">admin</code> / <code style="color:var(--primary);font-family:monospace;">pfsense</code>. A senha foi alterada imediatamente no primeiro acesso.</p>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-gauge-high"></i> Setup Wizard</h4>
+            <h3><i class="fa-solid fa-gauge-high"></i> Setup Wizard</h3>
             <p>O pfSense exibe um wizard de configuração inicial no primeiro login — hostname, DNS, timezone, senha do admin. Após o wizard, o dashboard principal exibe o status das interfaces, tráfego em tempo real e alertas do sistema.</p>
           </div>
         </div>
@@ -413,11 +413,11 @@
           <h2>Configuração de regras de Firewall</h2>
           <p class="module-text">As regras de firewall são o coração do pfSense. Elas definem o que pode ou não passar entre as interfaces — avaliadas de cima para baixo, a primeira regra que casar é aplicada.</p>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-list-check"></i> Regras LAN (padrão)</h4>
+            <h3><i class="fa-solid fa-list-check"></i> Regras LAN (padrão)</h3>
             <p>Por padrão o pfSense cria uma regra na LAN que permite <strong>todo tráfego de saída</strong> — qualquer dispositivo da LAN consegue acessar a WAN. Essa regra foi mantida para o laboratório e refinada conforme necessário.</p>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-ban"></i> Regras WAN</h4>
+            <h3><i class="fa-solid fa-ban"></i> Regras WAN</h3>
             <p>Na WAN, o comportamento padrão é <strong>bloquear tudo</strong> que chega da internet sem ter sido iniciado por alguém na LAN. O firewall stateful do pfSense rastreia as conexões — respostas a conexões iniciadas internamente passam automaticamente.</p>
           </div>
         </div>
@@ -430,7 +430,7 @@
           <h2>Configuração de NAT</h2>
           <p class="module-text">O NAT Outbound foi configurado no modo automático — o pfSense gera automaticamente as regras de mascaramento para qualquer rede LAN cadastrada. Isso permite que todos os dispositivos da LAN saiam pela WAN usando o IP público do pfSense.</p>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-arrows-left-right"></i> Como funciona no lab</h4>
+            <h3><i class="fa-solid fa-arrows-left-right"></i> Como funciona no lab</h3>
             <p>Quando um dispositivo da LAN faz uma requisição para a internet:<br><br>
             1. O pfSense recebe o pacote com IP de origem da LAN<br>
             2. Substitui o IP de origem pelo IP da interface WAN<br>
@@ -447,14 +447,14 @@
           <h2>Configuração de DHCP Server</h2>
           <p class="module-text">O servidor DHCP do pfSense distribui IPs automaticamente para os dispositivos da rede LAN. É configurado em Services → DHCP Server → LAN.</p>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-server"></i> Parâmetros configurados</h4>
+            <h3><i class="fa-solid fa-server"></i> Parâmetros configurados</h3>
             <p><strong>Range:</strong> faixa de IPs disponíveis para distribuição automática.<br>
             <strong>Gateway:</strong> aponta para o próprio pfSense (IP da interface LAN).<br>
             <strong>DNS:</strong> servidor DNS configurado para resolução de nomes.<br>
             <strong>Lease time:</strong> tempo de validade do IP atribuído — padrão 24 horas.</p>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-thumbtack"></i> Reservas estáticas</h4>
+            <h3><i class="fa-solid fa-thumbtack"></i> Reservas estáticas</h3>
             <p>Para dispositivos que precisam sempre do mesmo IP (servidores do laboratório), foram criadas reservas DHCP — associando um MAC específico a um IP fixo. Combina a praticidade do DHCP com a previsibilidade do IP estático.</p>
           </div>
         </div>
@@ -467,11 +467,11 @@
           <h2>Integração com Wazuh via Syslog</h2>
           <p class="module-text">O pfSense pode enviar seus logs para um servidor remoto via protocolo Syslog — o padrão da indústria para envio de logs de rede. O Wazuh Manager recebe esses logs e os processa como eventos de segurança.</p>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-gears"></i> Configuração no pfSense</h4>
+            <h3><i class="fa-solid fa-gears"></i> Configuração no pfSense</h3>
             <p>Em Status → System Logs → Settings, a opção "Enable Remote Logging" foi ativada com o IP do servidor Wazuh e porta UDP 514. Os tipos de log habilitados: <strong>Firewall Events</strong>, <strong>System Events</strong> e <strong>Authentication</strong>.</p>
           </div>
           <div class="concept-block">
-            <h4><i class="fa-solid fa-circle-check"></i> Pipeline completo</h4>
+            <h3><i class="fa-solid fa-circle-check"></i> Pipeline completo</h3>
             <p>Com o syslog configurado, cada pacote bloqueado pelo firewall, cada login na WebGUI e cada evento do sistema do pfSense é enviado em tempo real ao Wazuh Manager, que os correlaciona com os eventos dos outros laboratórios no dashboard centralizado.</p>
           </div>
         </div>
