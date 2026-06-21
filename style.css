@@ -303,6 +303,149 @@ main {
 }
 
 /* =========================
+   03B. MOBILE MENU (HAMBURGER + DRAWER)
+========================= */
+
+/* Botão hamburger toggle — escondido em desktop, aparece em mobile (<900px) */
+.nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1001;
+}
+
+.nav-toggle:hover .hamburger span {
+  background: var(--primary-strong);
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 2.4px;
+  background: var(--primary);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* Animação do hamburger → X quando ativo */
+.nav-toggle.active .hamburger span:nth-child(1) {
+  transform: rotate(45deg) translate(10px, 10px);
+}
+
+.nav-toggle.active .hamburger span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.active .hamburger span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Mobile menu drawer — desliza em overlay */
+.nav-drawer {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  max-width: 320px;
+  height: 100vh;
+  background: var(--bg);
+  border-left: 1px solid rgba(56, 189, 248, 0.15);
+  padding: 80px 24px 24px;
+  overflow-y: auto;
+  transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+}
+
+.nav-drawer.active {
+  right: 0;
+}
+
+.nav-drawer a {
+  display: block;
+  padding: 14px 0;
+  color: var(--text-soft);
+  font-size: 15px;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+  transition: var(--transition);
+}
+
+.nav-drawer a:hover {
+  color: var(--primary);
+  padding-left: 8px;
+}
+
+.nav-drawer-section {
+  margin: 24px 0;
+}
+
+.nav-drawer-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 12px;
+  padding: 0 8px;
+}
+
+/* Overlay escuro quando drawer ativo */
+.nav-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.nav-overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* Em desktop (>900px), hamburger/drawer fica escondido */
+@media (min-width: 901px) {
+  .nav-toggle,
+  .nav-drawer,
+  .nav-overlay {
+    display: none !important;
+  }
+}
+
+/* Em mobile (<900px), hamburger/drawer aparece */
+@media (max-width: 900px) {
+  .nav-toggle {
+    display: flex;
+  }
+  
+  .nav-drawer {
+    display: block;
+  }
+  
+  .nav-overlay {
+    cursor: pointer;
+  }
+}
+
+/* =========================
    04. BUTTONS / TAGS
 ========================= */
 
