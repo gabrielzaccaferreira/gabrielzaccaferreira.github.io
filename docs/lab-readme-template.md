@@ -1,4 +1,4 @@
-﻿# Nome do Laboratório
+# Nome do Laboratório
 
 ## Objetivo
 

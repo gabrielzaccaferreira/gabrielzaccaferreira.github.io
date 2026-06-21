@@ -1,4 +1,4 @@
-﻿# Padrão de Documentação para Laboratórios Técnicos
+# Padrão de Documentação para Laboratórios Técnicos
 
 Este documento define o padrão recomendado para documentar laboratórios técnicos do portfólio.
 
