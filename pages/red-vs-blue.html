@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Red Team vs Blue Team | Gabriel Zacca</title>
+  <meta name="description" content="Exercício prático de Red Team vs Blue Team com Metasploitable2, OWASP Juice Shop, Wazuh, Suricata e Windows Server + Sysmon.">
+  <meta name="author" content="Gabriel Zacca Ferreira">
+  <meta name="robots" content="noindex, follow">
+
+  <link rel="canonical" href="https://gabrielzacca.com.br/pages/red-vs-blue.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Red Team vs Blue Team | Gabriel Zacca">
+  <meta property="og:description" content="Exercício prático de Red Team vs Blue Team com Metasploitable2, OWASP Juice Shop, Wazuh, Suricata e Windows Server + Sysmon.">
+  <meta property="og:url" content="https://gabrielzacca.com.br/pages/red-vs-blue.html">
+  <meta property="og:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+  <meta property="og:site_name" content="Portfólio Técnico">
+  <meta property="og:locale" content="pt_BR">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Red Team vs Blue Team | Gabriel Zacca">
+  <meta name="twitter:description" content="Exercício prático de Red Team vs Blue Team com Metasploitable2, OWASP Juice Shop, Wazuh, Suricata e Windows Server + Sysmon.">
+  <meta name="twitter:image" content="https://gabrielzacca.com.br/assets/images/og-image.png">
+
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="../style.css">
+</head>
+  <body>
+  <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
+    <header class="site-header">
+      <nav class="navbar" aria-label="Navegação principal">
+        <a href="../index.html" class="logo">GZF</a>
+        <div class="nav-links">
+          <a href="../index.html">Home</a>
+          <a href="sobre.html">Sobre</a>
+          <a href="recrutadores.html">Recrutadores</a>
+          <a href="projetos.html">Projetos</a>
+          <a href="red-vs-blue.html">Red vs Blue</a>
+          <a href="guia.html">Guia</a>
+          <a href="documentacao.html">Documentação</a>
+          <a href="blog.html">Blog</a>
+          <a href="roadmap.html">Roadmap</a>
+        </div>
+        <div class="nav-actions">
+          <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer" class="nav-cv">Currículo</a>
+        </div>
+      </nav>
+      <div class="labs-bar">
+        <div class="labs-bar-inner">
+          <span class="labs-bar-label">Labs</span>
+          <a href="wazuh.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-shield-halved"></i> Wazuh SIEM/XDR</a>
+          <a href="kali-linux.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-brands fa-linux"></i> Kali Linux</a>
+          <a href="suricata.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-network-wired"></i> Suricata IDS/IPS</a>
+          <a href="crowdsec.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-fire-flame-curved"></i> CrowdSec</a>
+          <a href="wireshark.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-magnifying-glass-chart"></i> Wireshark</a>
+          <a href="pfsense.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-solid fa-fire"></i> pfSense</a>
+          <a href="windows-server.html" class="labs-bar-link"><span class="lab-dot"></span><i class="fa-brands fa-windows"></i> Windows Server</a>
+          <a href="red-vs-blue.html" class="labs-bar-link active"><span class="lab-dot"></span><i class="fa-solid fa-crosshairs"></i> Red vs Blue Team</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo">
+
+      <!-- HERO -->
+      <section id="hero" class="hero">
+        <div class="hero-content">
+          <p class="eyebrow">Red Team • Blue Team • Detecção • Análise de Incidente</p>
+          <h1>
+            Red Team vs Blue Team
+            <span>Ataque simulado, detecção real</span>
+          </h1>
+          <p class="hero-description">
+            Exercício prático cruzando ofensiva e defesa: exploração de vulnerabilidades conhecidas
+            em ambiente controlado (Metasploitable2, OWASP Juice Shop) e análise da detecção
+            correspondente no Wazuh, Suricata e Sysmon — incluindo o que foi detectado, o que não foi,
+            e por quê.
+          </p>
+          <div class="hero-actions">
+            <a href="#cenario-01" class="btn btn-primary">Ver os cenários →</a>
+          </div>
+        </div>
+
+        <div class="architecture-card">
+          <p class="section-label">Topologia</p>
+          <h2>Fluxo do exercício</h2>
+          <div class="architecture-flow">
+            <span>Kali Linux — Red Team</span>
+            <span>Metasploitable2 / Juice Shop — Alvo</span>
+            <span>Suricata + Wazuh — Blue Team</span>
+            <span>Windows Server + Sysmon — Telemetria</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- NAVEGAÇÃO INTERNA -->
+      <section class="section">
+        <p class="section-label">NESTA PÁGINA</p>
+        <h2>Navegue pelos cenários documentados.</h2>
+        <div class="cards-grid">
+          <a href="#cenario-01" class="card">
+            <h3 class="card-title"><i class="fa-solid fa-bug card-icon"></i> Cenário 01</h3>
+            <p>CVE-2007-2447 — RCE via Samba usermap script no Metasploitable2.</p>
+          </a>
+          <a href="#cenario-02" class="card">
+            <h3 class="card-title"><i class="fa-solid fa-database card-icon"></i> Cenário 02</h3>
+            <p>SQL Injection no formulário de login do OWASP Juice Shop.</p>
+          </a>
+          <a href="#cenario-03" class="card">
+            <h3 class="card-title"><i class="fa-solid fa-code card-icon"></i> Cenário 03</h3>
+            <p>Cross-Site Scripting (XSS) refletido no OWASP Juice Shop.</p>
+          </a>
+          <a href="#cenario-04" class="card">
+            <h3 class="card-title"><i class="fa-brands fa-windows card-icon"></i> Cenário 04</h3>
+            <p>Telemetria de processo via Sysmon no Windows Server.</p>
+          </a>
+        </div>
+      </section>
+
+      <!-- OBJETIVO -->
+      <section id="sobre" class="section">
+        <p class="section-label">OBJETIVO</p>
+        <h2>Por que cruzar ataque e detecção no mesmo laboratório.</h2>
+        <p class="section-text">
+          [INSERIR: 2-3 frases explicando o que você queria aprender com esse exercício especificamente —
+          ex: entender a perspectiva do analista que recebe o alerta, sem saber de antemão o que foi feito;
+          testar se as regras configuradas nos labs anteriores (Wazuh, Suricata) realmente capturam um
+          ataque ponta a ponta, não só em teoria.]
+        </p>
+      </section>
+
+      <!-- AMBIENTE -->
+      <section id="ambiente" class="section">
+        <p class="section-label">AMBIENTE TÉCNICO</p>
+        <h2>Onde o ataque aconteceu e quem observou.</h2>
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title"><i class="fa-brands fa-linux card-icon"></i> Atacante (Red Team)</h3>
+            <p>Kali Linux — Metasploit Framework, navegador para payloads de aplicação web.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-bullseye card-icon"></i> Alvos</h3>
+            <p>Metasploitable2 (CVE-2007-2447) e OWASP Juice Shop (SQLi, XSS) — ambos em rede isolada de laboratório.</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-shield-halved card-icon"></i> Blue Team</h3>
+            <p>Wazuh SIEM/XDR + Suricata IDS/IPS, com correlação de eventos via eve.json. Windows Server 2025 com Sysmon para telemetria de processo.</p>
+          </article>
+        </div>
+        <p class="section-text" style="margin-top:24px;">
+          [INSERIR: IPs de laboratório (não públicos), topologia de rede usada (mesma do home lab já
+          documentado?), e se este exercício usou o mesmo pfSense/segmentação dos outros labs.]
+        </p>
+      </section>
+
+      <!-- ===================== CENÁRIO 01 ===================== -->
+      <section id="cenario-01" class="section">
+        <p class="section-label">CENÁRIO 01 — EXPLORAÇÃO</p>
+        <h2>CVE-2007-2447 — RCE via Samba usermap script.</h2>
+
+        <div class="concept-block">
+          <h3><i class="fa-solid fa-magnifying-glass"></i> Reconhecimento</h3>
+          <p>[INSERIR: comando nmap usado e o que ele revelou sobre a versão vulnerável do Samba.]</p>
+          <!-- 📸 PRINT: nmap mostrando a porta/versão do Samba -->
+          <div class="evidence-image-placeholder">[INSERIR PRINT — reconhecimento nmap]</div>
+        </div>
+
+        <div class="concept-block">
+          <h3><i class="fa-solid fa-terminal"></i> Exploração</h3>
+          <p>[INSERIR: módulo do Metasploit usado, payload configurado, e o resultado obtido (shell, nível de acesso).]</p>
+          <!-- 📸 PRINT: comando do exploit configurado no msfconsole -->
+          <div class="evidence-image-placeholder">[INSERIR PRINT — exploit configurado]</div>
+          <!-- 📸 PRINT: shell aberto, whoami/id confirmando acesso -->
+          <div class="evidence-image-placeholder">[INSERIR PRINT — shell confirmado]</div>
+        </div>
+
+        <div class="concept-block">
+          <h3><i class="fa-solid fa-shield-halved"></i> Detecção (Blue Team)</h3>
+          <p>[INSERIR: o que o Wazuh/Suricata mostrou — nome da regra/alerta, timestamp, e se bateu com o
+          horário real do ataque.]</p>
+          <!-- 📸 PRINT: alerta no painel do Wazuh ou Suricata, timestamp visível -->
+          <div class="evidence-image-placeholder">[INSERIR PRINT — alerta no Blue Team]</div>
+          <!-- 📸 PRINT (opcional): trecho do eve.json com o campo que disparou a regra -->
+          <div class="evidence-image-placeholder">[INSERIR PRINT — eve.json, opcional]</div>
+        </div>
+
+        <div class="concept-block">
+          <h3><i class="fa-solid fa-lightbulb"></i> Análise</h3>
+          <p>[INSERIR: sua nota de analista — o que esse alerta sozinho diria a alguém que não sabia que
+          foi um exercício; o que você faria a seguir (isolar host, bloquear IP, etc).]</p>
+        </div>
+      </section>
+
+      <!-- ===================== CENÁRIO 02 ===================== -->
+      <section id="cenario-02" class="section">
+        <p class="section-label">CENÁRIO 02 — EXPLORAÇÃO</p>
+        <h2>SQL Injection no login do OWASP Juice Shop.</h2>
+
+        <div class="concept-block">
+          <h3><i class="fa-solid fa-keyboard"></i> Payload e execução</h3>
+          <p>[INSERIR: payload exato usado no campo de login e o que ele explorou na query.]</p>
+          <!-- 📸 PRINT: payload digitado no campo, antes de enviar -->
+          <div class="evidence-image-placeholder">[INSERIR PRINT — payload no formulário]</div>
+          <!-- 📸 PRINT: confirmação do bypass/erro de SQL -->
+          <div class="evidence-image-placeholder">[INSERIR PRINT — bypass confirmado]</div>
+        </div>
+
+        <div class="concept-block">
+          <h3><i class="fa-solid fa-shield-halved"></i> Detecção (Blue Team)</h3>
+          <p>[INSERIR: regra do Suricata que classificou o payload como SQLi, e se o Wazuh correlacionou
+          o mesmo evento via integração.]</p>
+          <!-- 📸 PRINT: alerta do Suricata com classificação e payload capturado -->
+          <div class="evidence-image-placeholder">[INSERIR PRINT — alerta Suricata]</div>
+          <!-- 📸 PRINT: trecho do eve.json com o payload malicioso no campo do evento -->
+          <div class="evidence-image-placeholder">[INSERIR PRINT — eve.json com payload]</div>
+          <!-- 📸 PRINT: mesmo evento correlacionado no Wazuh -->
+          <div class="evidence-image-placeholder">[INSERIR PRINT — correlação no Wazuh]</div>
+        </div>
+
+        <div class="concept-block">
+          <h3><i class="fa-solid fa-lightbulb"></i> Análise</h3>
+          <p>[INSERIR: a regra pegou pela sintaxe SQL ou outro heurístico? Que tipo de tráfego legítimo
+          poderia gerar falso positivo nessa mesma regra?]</p>
+        </div>
+      </section>
+
+      <!-- ===================== CENÁRIO 03 ===================== -->
+      <section id="cenario-03" class="section">
+        <p class="section-label">CENÁRIO 03 — EXPLORAÇÃO</p>
+        <h2>Cross-Site Scripting (XSS) refletido.</h2>
+
+        <div class="concept-block">
+          <h3><i class="fa-solid fa-keyboard"></i> Payload e execução</h3>
+          <p>[INSERIR: campo vulnerável usado e o payload exato.]</p>
+          <!-- 📸 PRINT: payload no campo -->
+          <div class="evidence-image-placeholder">[INSERIR PRINT — payload XSS]</div>
+          <!-- 📸 PRINT: alert() disparando, confirmando execução -->
+          <div class="evidence-image-placeholder">[INSERIR PRINT — execução confirmada]</div>
+        </div>
+
+        <div class="concept-block">
+          <h3><i class="fa-solid fa-shield-halved"></i> Detecção (Blue Team)</h3>
+          <p>[INSERIR: o que apareceu (ou não) no Suricata/Wazuh para esse evento.]</p>
+          <!-- 📸 PRINT: painel do Suricata/Wazuh — com ou sem alerta correspondente -->
+          <div class="evidence-image-placeholder">[INSERIR PRINT — painel Blue Team]</div>
+        </div>
+
+        <div class="concept-block">
+          <h3><i class="fa-solid fa-lightbulb"></i> Análise — por que XSS é mais difícil de detectar via IDS de rede</h3>
+          <p>[INSERIR: sua explicação de por que uma assinatura de rede tem mais dificuldade em pegar XSS
+          do que SQLi, e o que de fato detectaria isso na prática — CSP, WAF, sanitização client-side,
+          log de aplicação. Documentar essa lacuna com entendimento é mais valioso do que fingir que
+          tudo foi detectado.]</p>
+        </div>
+      </section>
+
+      <!-- ===================== CENÁRIO 04 ===================== -->
+      <section id="cenario-04" class="section">
+        <p class="section-label">CENÁRIO 04 — TELEMETRIA</p>
+        <h2>Sysmon e PowerShell logging no Windows Server.</h2>
+
+        <div class="concept-block">
+          <h3><i class="fa-solid fa-terminal"></i> Processo gerado</h3>
+          <p>[INSERIR: o que foi executado no Windows Server (ex: comando remoto, PsExec) para gerar o
+          evento observado.]</p>
+        </div>
+
+        <div class="concept-block">
+          <h3><i class="fa-solid fa-shield-halved"></i> Detecção (Blue Team)</h3>
+          <p>[INSERIR: Event ID do Sysmon (geralmente 1, criação de processo) ou 4688, e se o
+          PowerShell Script Block Logging (4104) também capturou.]</p>
+          <!-- 📸 PRINT: evento no Visualizador de Eventos, linha de comando visível -->
+          <div class="evidence-image-placeholder">[INSERIR PRINT — evento Sysmon/4688]</div>
+          <!-- 📸 PRINT (se aplicável): log do PowerShell 4104 -->
+          <div class="evidence-image-placeholder">[INSERIR PRINT — PowerShell logging, opcional]</div>
+          <!-- 📸 PRINT: evento correlacionado no Wazuh -->
+          <div class="evidence-image-placeholder">[INSERIR PRINT — correlação no Wazuh]</div>
+        </div>
+
+        <div class="concept-block">
+          <h3><i class="fa-solid fa-lightbulb"></i> Análise</h3>
+          <p>[INSERIR: o Event ID sozinho, sem linha de comando, seria suficiente para detectar isso?
+          Por que o Sysmon agrega valor aqui em relação ao log nativo do Windows?]</p>
+        </div>
+      </section>
+
+      <!-- TROUBLESHOOTING -->
+      <section id="troubleshooting" class="section">
+        <p class="section-label">TROUBLESHOOTING</p>
+        <h2>Problemas reais encontrados durante o exercício.</h2>
+        <p class="section-text">
+          [INSERIR ou REMOVER esta seção se não houve troubleshooting relevante. Formato sugerido por
+          item: Problema → Causa provável → Comandos usados → Solução → Aprendizado.]
+        </p>
+      </section>
+
+      <!-- APRENDIZADOS -->
+      <section id="aprendizados" class="section">
+        <p class="section-label">PRINCIPAIS APRENDIZADOS</p>
+        <h2>O que esse exercício realmente ensinou.</h2>
+        <p class="section-text">
+          [INSERIR: 2-4 frases de síntese — não repetir o que já foi dito em cada cenário, e sim a visão
+          geral. Ex: a diferença entre ter uma regra configurada e ver ela disparar com um ataque real;
+          a diferença de visibilidade entre ataques de rede (SQLi, RCE) e ataques client-side (XSS).]
+        </p>
+      </section>
+
+      <!-- PRÓXIMOS PASSOS -->
+      <section id="proximos-passos" class="section">
+        <p class="section-label">PRÓXIMOS PASSOS</p>
+        <h2>Como este exercício pode evoluir.</h2>
+        <div class="cards-grid">
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-arrow-up-right-dots card-icon"></i> Cobrir a lacuna de XSS</h3>
+            <p>[INSERIR ou ajustar: testar uma regra customizada no Suricata para padrões de XSS refletido, ou avaliar um WAF simples na frente do Juice Shop.]</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title"><i class="fa-solid fa-route card-icon"></i> Cadeia de ataque completa</h3>
+            <p>[INSERIR ou ajustar: encadear os cenários — ex: RCE no Metasploitable2 como pivô para o Windows Server, observando a telemetria em cada salto.]</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- AVISO EDUCACIONAL -->
+      <section id="aviso" class="section">
+        <div class="lab-notice">
+          <p>
+            <i class="fa-solid fa-circle-info"></i>
+            Este laboratório foi desenvolvido exclusivamente para fins educacionais, em ambiente local,
+            controlado e autorizado. Nenhuma técnica deve ser reproduzida contra sistemas de terceiros
+            sem autorização explícita. Endereços IP, hostnames e evidências exibidos pertencem a
+            ambiente de laboratório.
+          </p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <p>Portfólio técnico em Redes, Infraestrutura, Cloud Computing e Cibersegurança.</p>
+      <nav class="footer-nav" aria-label="Navegação do rodapé">
+        <a href="../index.html">Home</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="projetos.html">Projetos</a>
+        <a href="guia.html">Guia</a>
+        <a href="documentacao.html">Documentação</a>
+        <a href="blog.html">Blog</a>
+        <a href="roadmap.html">Roadmap</a>
+      </nav>
+      <div class="footer-links">
+        <a href="https://github.com/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/gabrielzaccaferreira" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a href="mailto:gabrielzaccaferreira@gmail.com"><i class="fa-solid fa-envelope"></i> E-mail</a>
+        <a href="../assets/curriculo.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-lines"></i> Currículo</a>
+      </div>
+      <p class="footer-copy">© 2026 Gabriel Zacca Ferreira • Desenvolvido com HTML5, CSS3 e GitHub Pages.</p>
+    </footer>
+  </body>
+</html>

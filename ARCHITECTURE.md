@@ -37,36 +37,30 @@ Visitante
 
 ↓
 
-Home
+Home (visão geral + atalhos para Labs e Recrutadores)
 
 ↓
 
-Sobre
+Sobre · Recrutadores · Projetos
 
 ↓
 
-Minha Jornada
+Guia de Estudos · Documentação
 
 ↓
 
-Laboratórios
+Laboratórios (Wazuh, Kali Linux, Suricata, CrowdSec, Wireshark, pfSense, Windows Server)
 
 ↓
 
-Blog
+Blog (Diário Técnico)
 
 ↓
 
-Projetos
-
-↓
-
-Certificações
-
-↓
-
-Contato
+Roadmap
 ```
+
+Certificações e Contato hoje vivem como seções dentro da Home, não como páginas independentes — mantém a navegação mais curta sem perder a informação.
 
 ---
 
@@ -79,25 +73,21 @@ gabrielzaccaferreira.github.io
 
 ├── assets
 
-│      ├── css
+│      ├── images        (screenshots de evidência por lab, foto de perfil, og-image)
 
-│      ├── images
+│      ├── js             (carousel.js)
 
-│      ├── icons
-
-│      └── logos
+│      └── curriculo.pdf
 
 │
 
-├── blog
+├── pages                 (todas as páginas internas: labs, sobre, jornada, blog, guia, etc.)
 
-├── certificados
+│      └── posts          (artigos do Diário Técnico / blog)
 
-├── labs
+│
 
-├── pages
-
-├── projetos
+├── docs                  (padrões internos: evidence-policy, lab-documentation-standard)
 
 │
 
@@ -105,14 +95,34 @@ gabrielzaccaferreira.github.io
 
 ├── style.css
 
+├── 404.html
+
+├── manifest.webmanifest
+
+├── robots.txt
+
+├── sitemap.xml
+
+├── CNAME
+
+│
+
 ├── README.md
 
 ├── ROADMAP.md
 
 ├── DESIGN_SYSTEM.md
 
-└── ARCHITECTURE.md
+├── ARCHITECTURE.md
+
+├── SEO.md
+
+├── SECURITY.md
+
+└── DISCLAIMER.md
 ```
+
+Nota: as pastas `blog/`, `certificados/`, `labs/` e `projetos/` planejadas inicialmente foram consolidadas dentro de `pages/`, para manter um único ponto de entrada de navegação e evitar duplicidade de templates. Cada página de laboratório já inclui sua própria seção de evidências, blog e contexto de carreira.
 
 ---
 

@@ -2859,6 +2859,23 @@ main {
   margin-bottom: 12px;
 }
 
+/* Placeholder de evidência pendente — usado em páginas em construção,
+   aguardando print real do laboratório. Visualmente distinto do conteúdo
+   final para não ser confundido com uma evidência publicada. */
+.evidence-image-placeholder {
+  margin-top: 12px;
+  padding: 32px 16px;
+  border: 2px dashed var(--border-light);
+  border-radius: 14px;
+  background: rgba(148, 163, 184, 0.05);
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .concept-block p:last-child { margin-bottom: 0; }
 
 .diagram-block {
